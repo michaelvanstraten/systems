@@ -1,0 +1,7 @@
+[user]
+	name = Michael van Straten 
+    email = michael@vanstraten.de
+[core]
+	excludesFile = ~/.config/git/ignore
+[init]
+	defaultBranch = master

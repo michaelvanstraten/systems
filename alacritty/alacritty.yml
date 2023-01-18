@@ -1,0 +1,49 @@
+# env:
+#   TERM: tmux-256color
+window:
+  # opacity: 0.85
+  dimensions:
+    columns: 128
+    lines: 38
+  padding:
+    x: 5
+    y: 3
+# Colors (Ayu Dark)
+colors:
+  # Default colors
+  primary:
+    background: "#0a0e14"
+    foreground: "#b3b1ad"
+
+  # Normal colors
+  normal:
+    black: "#02060d"
+    red: "#EA6C73"
+    green: "#91B362"
+    yellow: "#ffb454"
+    blue: "#59c2ff"
+    magenta: "#FAE994"
+    cyan: "#95e6cb"
+    white: "#C7C7C7"
+
+  # Bright colors
+  normal:
+    black: "#02060d"
+    red: "#EA6C73"
+    green: "#91B362"
+    yellow: "#ffb454"
+    blue: "#59c2ff"
+    magenta: "#FAE994"
+    cyan: "#95e6cb"
+    white: "#C7C7C7"
+font:
+  size: 16
+  normal:
+    family: "Hack Nerd Font Mono"
+selection:
+  save_to_clipboard: true
+cursor:
+  style:
+    shape: Beam
+
+alt_send_esc: false
