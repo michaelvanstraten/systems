@@ -1,5 +1,3 @@
-# env:
-#   TERM: tmux-256color
 window:
   # opacity: 0.85
   dimensions:
@@ -27,7 +25,7 @@ colors:
     white: "#C7C7C7"
 
   # Bright colors
-  normal:
+  bright:
     black: "#02060d"
     red: "#EA6C73"
     green: "#91B362"
