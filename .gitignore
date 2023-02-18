@@ -1,6 +1,7 @@
-/StardewValley
-/tmux/plugins
-/karabiner/automatic_backups
-/iterm2
-/fish/fish_variables
-/nvim/plugin
+StardewValley/
+tmux/plugins/
+karabiner/automatic_backups/
+iterm2/
+fish/fish_variables/
+nvim/plugin/
+wireshark/
