@@ -2,6 +2,7 @@
 # VERSION: 3.0
 SETUVAR --export ANDROID_HOME:/opt/homebrew/share/android\x2dsdk
 SETUVAR --export ANDROID_SDK_ROOT:/opt/homebrew/share/android\x2dsdk
+SETUVAR --export --path GOPATH:/Users/michaelvanstraten/go
 SETUVAR __fish_initialized:3400
 SETUVAR _fish_abbr_c:clear
 SETUVAR _fish_abbr_l:exa
