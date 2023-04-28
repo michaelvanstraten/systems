@@ -4,6 +4,9 @@ set fish_greeting
 # Convenience abbreviations
 abbr -a c "clear"
 
+# vim to nvim
+abbr -a vim "nvim"
+
 # Replacing "exa" with "ls"
 if command -v exa > /dev/null
 	abbr -a l "exa"
