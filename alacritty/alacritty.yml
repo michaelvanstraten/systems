@@ -31,16 +31,19 @@ cursor:
     shape: Beam
 font:
   normal:
-    family: "Hack Nerd Font Mono"
+    family: "SFMono Nerd Font"
+    style: Medium
   size: 16
 selection:
   save_to_clipboard: true
 window:
-  # opacity: 0.85
   alt_send_esc: false
+  decorations: buttonless
   dimensions:
     columns: 128
     lines: 38
+  dynamic_padding: false
+  opacity: 0.85
   padding:
-    x: 5
-    y: 3
+    x: 18
+    y: 16
