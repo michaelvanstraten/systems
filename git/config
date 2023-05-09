@@ -3,5 +3,6 @@
     email = michael@vanstraten.de
 [core]
 	excludesFile = ~/.config/git/ignore
+    editor = nvim
 [init]
 	defaultBranch = master
