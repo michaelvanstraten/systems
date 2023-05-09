@@ -4,5 +4,6 @@
 [core]
 	excludesFile = ~/.config/git/ignore
     editor = nvim
+    ignorecase = false
 [init]
 	defaultBranch = master
