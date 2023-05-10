@@ -1,4 +1,4 @@
 # dotfiles
 
-![Preview of Terminal](https://imgur.com/a/tShrX2v)
+![Preview of Terminal](./preview_of_terminal.webp)
 
