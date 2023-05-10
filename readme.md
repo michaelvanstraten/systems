@@ -1,4 +1,4 @@
-# .config
+# dotfiles
 
-My `.config` directory.
+![Preview of Terminal](https://imgur.com/a/tShrX2v)
 
