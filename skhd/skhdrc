@@ -1,15 +1,15 @@
 # focus windows using hjkl
-alt - h : yabai -m window --focus west
-alt - l : yabai -m window --focus east
-alt - k : yabai -m window --focus north
-alt - j : yabai -m window --focus south
+alt + ctrl - h : yabai -m window --focus west
+alt + ctrl - l : yabai -m window --focus east
+alt + ctrl - k : yabai -m window --focus north
+alt + ctrl - j : yabai -m window --focus south
 
 # swap windows using hjkl
-shift + alt - h : yabai -m window --swap west
-shift + alt - l : yabai -m window --swap east
-shift + alt - k : yabai -m window --swap north
-shift + alt - j : yabai -m window --swap south
+shift + alt + ctrl - h : yabai -m window --swap west
+shift + alt + ctrl - l : yabai -m window --swap east
+shift + alt + ctrl - k : yabai -m window --swap north
+shift + alt + ctrl - j : yabai -m window --swap south
 
 # balance size of windows
-shift + alt - 0 : yabai -m space --balance
+shift + alt + ctrl - 0 : yabai -m space --balance
 
