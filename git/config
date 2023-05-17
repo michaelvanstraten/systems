@@ -1,9 +1,9 @@
 [user]
 	name = Michael van Straten 
     email = michael@vanstraten.de
-[core]
-	excludesFile = ~/.config/git/ignore
-    editor = nvim
-    ignorecase = false
 [init]
 	defaultBranch = master
+[core]
+    editor = nvim
+	excludesFile = ~/.config/git/ignore
+    ignorecase = false
