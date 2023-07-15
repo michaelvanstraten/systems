@@ -1,0 +1,4 @@
+[submodule "nvim"]
+	path = nvim
+	url = https://github.com/michaelvanstraten/NvChad
+    branch = custom_config
