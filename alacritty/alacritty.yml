@@ -47,3 +47,5 @@ window:
   padding:
     x: 18
     y: 16
+key_bindings:
+  - { key: A, mods: Command, chars: "\x01" } # tmux C-a prefix
