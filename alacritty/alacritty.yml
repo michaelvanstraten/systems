@@ -48,4 +48,5 @@ window:
     x: 18
     y: 16
 key_bindings:
-  - { key: A, mods: Command, chars: "\x01" } # tmux C-a prefix
+  - { key: A, mods: Command, chars: "\x01" } # send tmux C-a prefix
+  - { key: J, mods: Command, chars: "\x01\x54" } # open t - tmux smart session manager

@@ -2,13 +2,16 @@
 set fish_greeting
 
 # Convenience abbreviations
-abbr -a c "clear"
+abbr -a c "clear" 
+abbr -a vim "nvim" # vim to nvim
+abbr -a npm "pnpm" # npm to pnpm
+abbr -a tn "tmux new -s (pwd | sed 's/.*\///g')" # new tmux session with the name of the current dir
 
-# vim to nvim
-abbr -a vim "nvim"
+# Setup zoxide
+zoxide init fish | source 
 
-# npm to pnpm
-abbr -a npm "pnpm"
+# Setup smart tmux session manager
+fish_add_path $HOME/.tmux/plugins/t-smart-tmux-session-manager/bin
 
 # Replacing "exa" with "ls"
 if command -v exa > /dev/null
