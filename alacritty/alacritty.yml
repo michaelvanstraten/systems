@@ -26,18 +26,31 @@ colors:
   primary:
     background: "#0a0e14"
     foreground: "#b3b1ad"
+
 cursor:
   style:
     shape: Beam
+
 font:
   normal:
-    family: "SFMono Nerd Font"
+    family: "JetBrainsMono Nerd Font"
     style: Medium
+  italic:
+    family: "JetBrainsMono Nerd Font"
+    style: Medium Italic
+  bold:
+    family: "JetBrainsMono Nerd Font"
+    style: Heavy
+  bold_italic:
+    family: "JetBrainsMono Nerd Font"
+    style: Heavy Italic
   size: 16
+
 selection:
   save_to_clipboard: true
+
 window:
-  alt_send_esc: false
+  # alt_send_esc: false
   decorations: buttonless
   dimensions:
     columns: 128
@@ -47,6 +60,7 @@ window:
   padding:
     x: 18
     y: 16
+
 key_bindings:
   - { key: A, mods: Command, chars: "\x01" } # send tmux C-a prefix
   - { key: J, mods: Command, chars: "\x01\x54" } # open t - tmux smart session manager
