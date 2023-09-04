@@ -35,3 +35,5 @@ if command -v pyenv 1>/dev/null 2>&1
     pyenv init - | source
 end
 
+# dotfiles git repo alias 
+alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
