@@ -24,6 +24,7 @@ yabai -m rule --add label="Calendar" app="^Calendar$" manage=off
 yabai -m rule --add label="Bitwarden" app="^Bitwarden$" manage=off
 yabai -m rule --add label="WhatsApp" app="^WhatsApp$" manage=off
 yabai -m rule --add label="Mail" app="^Mail$" manage=off
+yabai -m rule --add label="Zulip" app="^Zulip$" manage=off
 yabai -m rule --add label="Messages" app="^Messages$" manage=off
 yabai -m rule --add label="Reminders" app="^Reminders$" manage=off
 yabai -m rule --add label="Dictionary" app="^Dictionary$" manage=off
