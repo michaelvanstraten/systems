@@ -7,3 +7,6 @@
     editor = nvim
 	excludesFile = ~/.config/git/ignore
     ignorecase = false
+
+[pull]
+    rebase = true
