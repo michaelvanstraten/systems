@@ -36,4 +36,6 @@ if command -v pyenv 1>/dev/null 2>&1
 end
 
 # dotfiles git repo alias 
-alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+function dotfiles --wraps git
+    git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $argv
+end
