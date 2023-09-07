@@ -240,8 +240,10 @@ user_pref("findbar.highlightAll", true);
 /****************************************************************************
  * SECTION: SMOOTHFOX                                                       *
 ****************************************************************************/
-// visit https://github.com/yokoffing/Betterfox/blob/main/Smoothfox.js
-// Enter your scrolling prefs below this line:
+user_pref("apz.overscroll.enabled", true); // not DEFAULT on Linux
+user_pref("general.smoothScroll", true); // DEFAULT
+user_pref("general.smoothScroll.msdPhysics.enabled", true);
+user_pref("mousewheel.default.delta_multiplier_y", 250); // 250-400; adjust this number to your liking
 
 /****************************************************************************
  * START: MY OVERRIDES                                                      *
