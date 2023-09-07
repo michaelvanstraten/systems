@@ -248,7 +248,15 @@ user_pref("mousewheel.default.delta_multiplier_y", 250); // 250-400; adjust this
 /****************************************************************************
  * START: MY OVERRIDES                                                      *
 ****************************************************************************/
-// Enter your personal prefs below this line:
+// PREF: clear browsing data on shutdown, while respecting site exceptions
+user_pref("privacy.sanitize.sanitizeOnShutdown", true);
+user_pref("privacy.clearOnShutdown.history", true);
+user_pref("privacy.clearOnShutdown.downloads", true);
+user_pref("privacy.clearOnShutdown.formdata", true);
+user_pref("privacy.clearOnShutdown.sessions", true);
+user_pref("privacy.clearOnShutdown.offlineApps", true);
+user_pref("privacy.clearOnShutdown.siteSettings", false);
+user_pref("browser.sessionstore.privacy_level", 2);
 
 /****************************************************************************
  * END: BETTERFOX                                                           *
