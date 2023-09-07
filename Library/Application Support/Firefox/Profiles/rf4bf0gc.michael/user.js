@@ -248,6 +248,10 @@ user_pref("mousewheel.default.delta_multiplier_y", 250); // 250-400; adjust this
 /****************************************************************************
  * START: MY OVERRIDES                                                      *
 ****************************************************************************/
+// PREF: enable SameSite Cookies
+user_pref("network.cookie.sameSite.laxByDefault", true);
+user_pref("network.cookie.sameSite.noneRequiresSecure", true);
+user_pref("network.cookie.sameSite.schemeful", true);
 // PREF: clear browsing data on shutdown, while respecting site exceptions
 user_pref("privacy.sanitize.sanitizeOnShutdown", true);
 user_pref("privacy.clearOnShutdown.history", true);
