@@ -1,8 +1,0 @@
-[favorites.demo]
-description = "<optional description, visible with --list-favorites>"
-git = "https://github.com/rustwasm/wasm-pack-template"
-branch = "<optional-branch>"
-subfolder = "<optional-subfolder>"
-vcs = "<optional: None|Git>"
-init = optional true|false
-overwrite = optional true|false
