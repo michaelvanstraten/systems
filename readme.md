@@ -7,7 +7,7 @@ Welcome to my dotfiles repository, where I store configuration and setup files f
 ## Installation
 
 ```bash
-curl -fsSL https://github.com/michaelvanstraten/dotfiles/raw/master/.scripts/bootstrap.sh | bash
+sudo curl -fsSL https://github.com/michaelvanstraten/dotfiles/raw/master/.scripts/bootstrap.sh | bash
 ```
 
 I'm currently working on documenting the installation process to make it easier for others to use my dotfiles. Stay tuned for updates!
