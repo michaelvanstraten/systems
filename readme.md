@@ -1,6 +1,6 @@
 # My dotfiles
 
-![Preview of Terminal](./.config/preview_of_terminal.webp)
+![Screenshot of Terminal](./.config/screenshot.png)
 
 Welcome to my dotfiles repository, where I store configuration and setup files from my home directory. These dotfiles help me maintain a consistent and efficient environment across different systems.
 
