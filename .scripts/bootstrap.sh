@@ -90,7 +90,7 @@ if [[ "$(uname -s)" == "Darwin" ]] && [ -f "$BREWFILE" ]; then
     print_message "${YELLOW}" "Installing packages from Brewfile..."
     brew bundle --file "$BREWFILE" &>> "$LOG_FILE"
 elif [[ "$(uname -s)" == "Darwin" ]]; then
-    print_message "${YELLOW}" "Brewfile not found. No packages to install."
+    print_message "${RED}" "Brewfile not found. No packages to install."
 fi
 
 print_message "${GREEN}" "Dotfiles installation completed. Check $LOG_FILE for details."
