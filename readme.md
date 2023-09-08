@@ -14,14 +14,14 @@ I'm currently working on documenting the installation process to make it easier 
 
 Here's a list of the key components and tools in my setup, along with their respective configuration files:
 
-- **macOS Package Manager:** [Homebrew](https://brew.sh) - [Configuration](./.homebrew/Brewfile)
-- **Window Manager:** [Yabai](https://github.com/koekeishiya/yabai) - [Configuration](./.config/yabai/yabairc)
-- **Terminal Emulator:** [Alacritty](https://alacritty.org) - [Configuration](./.config/alacritty/alacritty.yml)
-- **Terminal Multiplexer:** [tmux](https://github.com/tmux/tmux/wiki) - [Configuration](./.config/tmux/tmux.conf)
-- **Shell:** [fish](https://fishshell.com) - [Configuration](./.config/fish)
+- **macOS Package Manager:** [Homebrew](https://brew.sh) - [Configuration](.homebrew/Brewfile)
+- **Window Manager:** [Yabai](https://github.com/koekeishiya/yabai) - [Configuration](.config/yabai/yabairc)
+- **Terminal Emulator:** [Alacritty](https://alacritty.org) - [Configuration](.config/alacritty/alacritty.yml)
+- **Terminal Multiplexer:** [tmux](https://github.com/tmux/tmux/wiki) - [Configuration](.config/tmux/tmux.conf)
+- **Shell:** [fish](https://fishshell.com) - [Configuration](.config/fish)
 - **Editor:** [Neovim](https://neovim.io)
-- **Editor Config:** [NvChad](https://github.com/NvChad/NvChad) - [Configuration](./.config/nvim)
+- **Editor Config:** [NvChad](https://github.com/NvChad/NvChad) - [Configuration](.config/nvim)
 - **Font:** [Jetbrains Mono](https://www.jetbrains.com/lp/mono/)
-- **Keyboard Customization:** [Karabiner-Elements](https://github.com/pqrs-org/Karabiner-Elements) - [Configuration](./.config/karabiner/)
+- **Keyboard Customization:** [Karabiner-Elements](https://github.com/pqrs-org/Karabiner-Elements) - [Configuration](.config/karabiner/)
 
 Feel free to explore these configurations and adapt them to your own preferences. If you have any questions or suggestions, please don't hesitate to reach out!
