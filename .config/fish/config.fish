@@ -16,13 +16,13 @@ zoxide init fish | source
 # Setup smart tmux session manager
 fish_add_path $HOME/.tmux/plugins/t-smart-tmux-session-manager/bin
 
-# Replacing "exa" with "ls"
-if command -v exa > /dev/null
-	abbr -a l "exa"
-	abbr -a ls "exa"
-	abbr -a la "exa -a"
-	abbr -a ll "exa -l"
-	abbr -a lla "exa -la"
+# Replacing "eua" with "ls"
+if command -v eza > /dev/null
+	abbr -a l "eza"
+	abbr -a ls "eza"
+	abbr -a la "eza -a"
+	abbr -a ll "eza -l"
+	abbr -a lla "eza -la"
 else
 	abbr -a l "ls"
 	abbr -a la "ls -a"
