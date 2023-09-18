@@ -261,7 +261,8 @@ user_pref("privacy.clearOnShutdown.sessions", true);
 user_pref("privacy.clearOnShutdown.offlineApps", true);
 user_pref("privacy.clearOnShutdown.siteSettings", false);
 user_pref("browser.sessionstore.privacy_level", 2);
-
+// PREF: CRTL scroll to zoom
+user_pref("mousewheel.with_meta.action", 3)
 /****************************************************************************
  * END: BETTERFOX                                                           *
 ****************************************************************************/
