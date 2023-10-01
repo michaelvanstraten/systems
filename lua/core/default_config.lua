@@ -1,12 +1,7 @@
--- Chadrc overrides this file
-
 local M = {}
 
 M.options = {
-  nvChad = {
-    update_url = "https://github.com/NvChad/NvChad",
-    update_branch = "v2.0",
-  },
+  nvchad_branch = "v3.0",
 }
 
 M.ui = {
@@ -19,6 +14,9 @@ M.ui = {
   theme = "onedark", -- default theme
   transparency = false,
 
+  -- https://github.com/NvChad/base46/tree/v2.0/lua/base46/extended_integrations
+  extended_integrations = {}, -- these aren't compiled by default, ex: "alpha", "notify"
+
   -- cmp themeing
   cmp = {
     icons = true,
@@ -28,9 +26,7 @@ M.ui = {
     selected_item_bg = "colored", -- colored / simple
   },
 
-  telescope = {
-    style = "borderless", -- borderless / bordered
-  },
+  telescope = { style = "borderless" }, -- borderless / bordered
 
   ------------------------------- nvchad_ui modules -----------------------------
   statusline = {
@@ -43,6 +39,7 @@ M.ui = {
 
   -- lazyload it when there are 1+ buffers
   tabufline = {
+    show_numbers = false,
     enabled = true,
     lazyload = true,
     overriden_modules = nil,
@@ -66,32 +63,33 @@ M.ui = {
 
     buttons = {
       { "  Find File", "Spc f f", "Telescope find_files" },
-      { "  Recent Files", "Spc f o", "Telescope oldfiles" },
-      { "  Find Word", "Spc f w", "Telescope live_grep" },
-      { "  Bookmarks", "Spc b m", "Telescope marks" },
+      { "󰈚  Recent Files", "Spc f o", "Telescope oldfiles" },
+      { "󰈭  Find Word", "Spc f w", "Telescope live_grep" },
+      { "  Bookmarks", "Spc m a", "Telescope marks" },
       { "  Themes", "Spc t h", "Telescope themes" },
       { "  Mappings", "Spc c h", "NvCheatsheet" },
     },
   },
 
-  cheatsheet = {
-    theme = "grid", -- simple/grid
-  },
+  cheatsheet = { theme = "grid" }, -- simple/grid
 
   lsp = {
-    -- show function signatures i.e args as you type
-    signature = {
-      disabled = false,
-      silent = true, -- silences 'no signature help available' message from appearing
+    signature = true,
+    semantic_tokens = false,
+  },
+
+  term = {
+    sizes = { sp = 0.3, vsp = 0.2 },
+    behavior = {
+      auto_insert = true,
     },
   },
 }
 
-M.plugins = "" -- path i.e "custom.plugins" -> custom/plugins.lua only and not custom/plugins/init.lua!!!!
+M.plugins = "" -- path i.e "custom.plugins", so make custom/plugins.lua file
 
-M.lazy_nvim = {} -- config for lazy.nvim startup options
+M.lazy_nvim = require "plugins.configs.lazy_nvim" -- config for lazy.nvim startup options
 
--- these are default mappings, check core.mappings for table structure
-M.mappings = {}
+M.mappings = require "core.mappings"
 
 return M
