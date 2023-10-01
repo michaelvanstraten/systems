@@ -16,7 +16,7 @@ local options = {
     adaptive_size = false,
     side = "left",
     width = 30,
-    preserve_window_proportions = true,
+    hide_root_folder = true,
   },
   git = {
     enable = false,
@@ -31,7 +31,6 @@ local options = {
     },
   },
   renderer = {
-    root_folder_label = false,
     highlight_git = false,
     highlight_opened_files = "none",
 
@@ -48,15 +47,15 @@ local options = {
       },
 
       glyphs = {
-        default = "󰈚",
+        default = "",
         symlink = "",
         folder = {
-          default = "",
-          empty = "",
-          empty_open = "",
+          default = "",
+          empty = "",
+          empty_open = "",
           open = "",
-          symlink = "",
-          symlink_open = "",
+          symlink = "",
+          symlink_open = "",
           arrow_open = "",
           arrow_closed = "",
         },
@@ -73,5 +72,7 @@ local options = {
     },
   },
 }
+
+vim.g.nvimtree_side = options.view.side
 
 return options

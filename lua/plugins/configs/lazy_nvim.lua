@@ -5,7 +5,7 @@ return {
   ui = {
     icons = {
       ft = "",
-      lazy = "󰂠 ",
+      lazy = "鈴 ",
       loaded = "",
       not_loaded = "",
     },

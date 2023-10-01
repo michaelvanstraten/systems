@@ -1,60 +1,67 @@
 local M = {}
-local fn = vim.fn
-
-M.echo = function(str)
-  vim.cmd "redraw"
-  vim.api.nvim_echo({ { str, "Bold" } }, true, {})
-end
-
-local function shell_call(args)
-  local output = fn.system(args)
-  assert(vim.v.shell_error == 0, "External call failed with error code: " .. vim.v.shell_error .. "\n" .. output)
-end
 
 M.lazy = function(install_path)
-  ------------- base46 ---------------
-  local lazy_path = fn.stdpath "data" .. "/lazy/base46"
+  print "Bootstrapping lazy.nvim .."
 
-  M.echo "  Compiling base46 theme to bytecode ..."
+  vim.fn.system {
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    install_path,
+  }
 
-  local base46_repo = "https://github.com/NvChad/base46"
-  shell_call { "git", "clone", "--depth", "1", "-b", "v2.0", base46_repo, lazy_path }
-  vim.opt.rtp:prepend(lazy_path)
-
-  require("base46").compile()
-
-  --------- lazy.nvim ---------------
-  M.echo "  Installing lazy.nvim & plugins ..."
-  local repo = "https://github.com/folke/lazy.nvim.git"
-  shell_call { "git", "clone", "--filter=blob:none", "--branch=stable", repo, install_path }
   vim.opt.rtp:prepend(install_path)
 
-  -- install plugins
+  -- install plugins + compile their configs
   require "plugins"
 
-  -- mason packages & show post_boostrap screen
-  require "nvchad.post_install"()
+  vim.api.nvim_buf_delete(0, { force = true }) -- close lazy window
+
+  vim.defer_fn(function()
+    vim.cmd "silent! MasonInstallAll"
+  end, 0)
 end
 
 M.gen_chadrc_template = function()
-  local path = fn.stdpath "config" .. "/lua/custom"
+  if not vim.api.nvim_get_runtime_file("lua/custom/chadrc.lua", false)[1] then
+    local input = vim.fn.input "Do you want to install chadrc template? (y/n) : "
+    vim.cmd "redraw|echo ''"
 
-  if fn.isdirectory(path) ~= 1 then
-    local input = fn.input "Do you want to install example custom config? (y/N): "
+    if input == "y" then
+      print "cloning chadrc starter template repo...."
 
-    if input:lower() == "y" then
-      M.echo "Cloning example custom config repo..."
-      shell_call { "git", "clone", "--depth", "1", "https://github.com/NvChad/example_config", path }
-      fn.delete(path .. "/.git", "rf")
+      vim.fn.system {
+        "git",
+        "clone",
+        "--depth",
+        "1",
+        "https://github.com/NvChad/example_config",
+        vim.fn.stdpath "config" .. "/lua/custom",
+      }
+      print "dont forget to read docs from nvchad.com!"
+      vim.cmd "redraw|echo ''"
+
+      -- delete .git from that repo
+      vim.loop.fs_rmdir(vim.fn.stdpath "config" .. "/lua/custom/.git")
+      vim.notify "successfully installed chadrc template!"
+      vim.cmd "redraw|echo ''"
     else
-      -- use very minimal chadrc
-      fn.mkdir(path, "p")
+      local custom_dir = vim.fn.stdpath "config" .. "/lua/custom/"
+      vim.fn.mkdir(custom_dir, "p")
 
-      local file = io.open(path .. "/chadrc.lua", "w")
-      if file then
-        file:write "---@type ChadrcConfig\nlocal M = {}\n\nM.ui = { theme = 'onedark' }\n\nreturn M"
-        file:close()
-      end
+      local str = [[
+              local M = {}
+                M.ui = {
+                  theme = "onedark",
+               }
+              return M
+           ]]
+
+      local file = io.open(custom_dir .. "chadrc.lua", "w")
+      file:write(str)
+      file:close()
     end
   end
 end
