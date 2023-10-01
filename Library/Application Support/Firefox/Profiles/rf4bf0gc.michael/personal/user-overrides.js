@@ -21,9 +21,10 @@
 //user_pref("dom.ipc.processCount.webIsolated", 2); // process per site
 //user_pref("dom.ipc.processPrelaunch.fission.number", 1); // number of Preallocated processes
 user_pref("browser.sessionstore.restore_pinned_tabs_on_demand", true);
+user_pref("browser.sessionhistory.max_total_viewers", 2); // only remember two pages in Back-Forward cache
 user_pref("network.http.speculative-parallel-limit", 6); // DEFAULT
-user_pref("network.dns.disablePrefetch", false); // DEFAULT; using DoH / ODNS
-user_pref("network.dns.disablePrefetchFromHTTPS", false); // using DoH / ODNS
+user_pref("network.dns.disablePrefetch", false); // DEFAULT
+user_pref("network.dns.disablePrefetchFromHTTPS", false);
 user_pref("browser.urlbar.speculativeConnect.enabled", true); // DEFAULT
 user_pref("browser.places.speculativeConnect.enabled", true); // DEFAULT
 user_pref("network.early-hints.enabled", true); // DEFAULT NIGHTLY
@@ -36,6 +37,7 @@ user_pref("network.predictor.enable-prefetch", false);
 /** SECUREFOX ***/
 //user_pref("urlclassifier.features.socialtracking.skipURLs", "*.twitter.com, *.twimg.com"); // removed *.instagram.com
 user_pref("browser.urlbar.showSearchSuggestionsFirst", false); // unselect "Show search suggestions ahead of browsing history in address bar results" for clean UI
+//user_pref("browser.urlbar.suggest.trending", false); // FF119+ disable showing trending searches; unselect for clean UI
 user_pref("browser.urlbar.groupLabels.enabled", false); // hide Firefox Suggest label in URL dropdown box
 user_pref("signon.management.page.breach-alerts.enabled", false); // extra hardening
 user_pref("signon.autofillForms", false); // unselect "Autofill logins and passwords" for clean UI
@@ -53,6 +55,8 @@ user_pref("browser.search.update", false); // do not update opensearch engines
 user_pref("network.dns.skipTRR-when-parental-control-enabled", false); // bypass parental controls when using DoH
 user_pref("network.trr.confirmationNS", "skip"); // skip TRR confirmation request
 user_pref("extensions.webextensions.restrictedDomains", ""); // remove Mozilla domains so adblocker works on pages
+user_pref("browser.firefox-view.feature-tour", "{\"screen\":\"\",\"complete\":true}"); // disable the Firefox View tour from popping up for new profiles
+user_pref("accessibility.force_disabled", 1); // disable Accessibility features
 
 /** PESKYFOX ***/
 user_pref("devtools.accessibility.enabled", false); // removes un-needed "Inspect Accessibility Properties" on right-click
@@ -75,7 +79,8 @@ user_pref("browser.bookmarks.max_backups", 0); // minimize disk use; manually ba
 user_pref("view_source.wrap_long_lines", true);  // wrap source lines
 user_pref("devtools.debugger.ui.editor-wrapping", true);  // wrap lines in devtools
 user_pref("browser.zoom.full", false); // text-only zoom, not all elements on page
-user_pref("pdfjs.sidebarViewOnLoad", 2); // [HIDDEN] force showing of Table of Contents in sidebar for PDFs (if available)
+//user_pref("pdfjs.sidebarViewOnLoad", 2); // [HIDDEN] force showing of Table of Contents in sidebar for PDFs (if available)
+user_pref("browser.tabs.loadBookmarksInTabs", true); // force bookmarks to open in a new tab, not the current tab
 user_pref("ui.key.menuAccessKey", 0); // remove underlined characters from various settings
 user_pref("general.autoScroll", false); // disable unintentional behavior for middle click
 user_pref("ui.SpellCheckerUnderlineStyle", 1); // dots for spell check errors
@@ -91,11 +96,14 @@ user_pref("privacy.userContext.enabled", false); // disable Containers functiona
 user_pref("browser.crashReports.unsubmittedCheck.enabled", false); // true by default on NIGHTLY
 //user_pref("browser.urlbar.suggest.quickactions", false); // Quick Actions in URL bar
 //user_pref("xpinstall.signatures.required", false); // [ESR/DEV/NIGHTLY]
+user_pref("browser.urlbar.trimHttps", true); // hide https in URL bar [FF119]
 
 /** DELETE IF NOT WINDOWS DESKTOP ***/
 user_pref("network.trr.mode", 3); // enable TRR (without System fallback)
 user_pref("gfx.canvas.accelerated", true); // DEFAULT except on WINDOWS; enable if not using an integrated GPU
+user_pref("browser.startup.preXulSkeletonUI", false); // WINDOWS
 user_pref("default-browser-agent.enabled", false); // deny Mozilla monitoring default browser (breaks "Make Default" button)
+user_pref("geo.provider.ms-windows-location", false); //  [WINDOWS]
 user_pref("pdfjs.defaultZoomValue", "125"); // alt=page-width; PDF zoom level
 user_pref("gfx.font_rendering.cleartype_params.rendering_mode", 5);
 user_pref("gfx.font_rendering.cleartype_params.cleartype_level", 100);
@@ -106,10 +114,10 @@ user_pref("gfx.font_rendering.directwrite.use_gdi_table_loading", false);
 //user_pref("font.name.serif.x-western", "Roboto Slab"); // serif font
 //user_pref("font.name.sans-serif.x-western", "Roboto"); // sans-serif font
 //user_pref("font.name.monospace.x-western", "Fira Code"); // monospace font
-//user_pref("security.family_safety.mode", 0); // disable parental controls [WINDOWS 8-10]
 
 /** DELETE IF NOT macOS LAPTOP ***/
 user_pref("network.trr.mode", 2); // enable TRR (with System fallback)
-user_pref("pdfjs.defaultZoomValue", "page-width"); // LAPTOP; PDF zoom level
+user_pref("geo.provider.use_corelocation", false); // geolocation [MAC]
+user_pref("pdfjs.defaultZoomValue", "page-width"); // PDF zoom level
 user_pref("app.update.auto", false); // disable auto-installing Firefox updates [NON-WINDOWS]
 //user_pref("font.name.monospace.x-western", "SF Mono"); // monospace font
