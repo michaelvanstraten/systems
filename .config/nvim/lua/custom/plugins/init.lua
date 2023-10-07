@@ -50,6 +50,9 @@ local plugins = {
                     min = vim.diagnostic.severity.WARN,
                 },
             },
+            actions = {
+                open_file = {
+                    resize_window = false,
                 },
             },
         },
