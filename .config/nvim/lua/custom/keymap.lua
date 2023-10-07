@@ -77,12 +77,14 @@ M.telescope = {
     },
 }
 
-M.lazygit = {
+M.toggleterm = {
     plugin = true,
 
     n = {
         ["<leader>lg"] = {
-            "<cmd>LazyGit<cr>",
+            function ()
+                require("custom.plugins.configs.lazygit").toggle()
+            end,
             "Open LazyGit",
         },
     },

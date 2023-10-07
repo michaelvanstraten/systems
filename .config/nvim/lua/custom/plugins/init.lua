@@ -1,12 +1,10 @@
 local plugins = {
     {
-        "kdheepak/lazygit.nvim",
+        "akinsho/toggleterm.nvim",
         event = "VeryLazy",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
+        opts = {},
         config = function()
-            require("core.utils").load_mappings "lazygit"
+            require("core.utils").load_mappings "toggleterm"
         end,
     },
     {
