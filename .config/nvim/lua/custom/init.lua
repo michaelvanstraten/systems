@@ -16,9 +16,9 @@ opt.swapfile = false
 -- Hide status line
 -- opt.laststatus = 0
 
+-- Enable spell checking
 opt.spelllang = {
     "en",
-    -- "de_20",
 }
 opt.spell = true
 
