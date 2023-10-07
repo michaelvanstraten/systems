@@ -47,7 +47,9 @@ local plugins = {
             diagnostics = {
                 enable = true,
                 severity = {
-                    min = "WARN",
+                    min = vim.diagnostic.severity.WARN,
+                },
+            },
                 },
             },
         },
