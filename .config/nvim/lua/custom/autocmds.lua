@@ -1,37 +1,38 @@
-local function is_tracked_by_git(path, git_dir, work_tree)
+--- Set `GIT_DIR`, `GIT_WORK_TREE` correctly if in dotfiles repository
+local GIT_DIR = vim.fn.expand "$HOME/.dotfiles/"
+local WORK_TREE = vim.fn.expand "$HOME"
+
+local function is_tracked(path, git_dir, work_tree)
     local cmd = { "git", "--git-dir", git_dir, "--work-tree", work_tree, "ls-files", path }
     local out = vim.fn.system(cmd)
 
     return vim.v.shell_error == 0 and out and #out ~= 0 and not out:match "fatal"
 end
 
-local GIT_DIR = vim.fn.expand "$HOME/.dotfiles/"
-local WORK_TREE = vim.fn.expand "$HOME"
-
-local function set_git_env()
+local function set_env()
     vim.env.GIT_WORK_TREE = WORK_TREE
     vim.env.GIT_DIR = GIT_DIR
 end
 
-local function unset_git_env()
+local function unset_env()
     vim.env.GIT_WORK_TREE = nil
     vim.env.GIT_DIR = nil
 end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
     callback = function(_)
-        if is_tracked_by_git(vim.fn.getcwd(), GIT_DIR, WORK_TREE) then
-            set_git_env()
+        if is_tracked(vim.fn.getcwd(), GIT_DIR, WORK_TREE) then
+            set_env()
         end
     end,
 })
 
 vim.api.nvim_create_autocmd({ "DirChanged" }, {
     callback = function(data)
-        if is_tracked_by_git(data.file, GIT_DIR, WORK_TREE) then
-            set_git_env()
+        if is_tracked(data.file, GIT_DIR, WORK_TREE) then
+            set_env()
         else
-            unset_git_env()
+            unset_env()
         end
     end,
 })
