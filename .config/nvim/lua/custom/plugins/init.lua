@@ -41,6 +41,9 @@ local plugins = {
                     },
                 },
             },
+            view = {
+                centralize_selection = true,
+            },
             filters = {
                 custom = { "^.git$", "^.dotfiles$" },
             },
