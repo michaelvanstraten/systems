@@ -20,8 +20,6 @@ end
 
 vim.api.nvim_create_autocmd({ "VimEnter" }, {
     callback = function(_)
-        print(vim.fn.getcwd())
-
         if is_tracked_by_git(vim.fn.getcwd(), GIT_DIR, WORK_TREE) then
             set_git_env()
         end
