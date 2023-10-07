@@ -1,4 +1,4 @@
---- Set `GIT_DIR`, `GIT_WORK_TREE` correctly if in dotfiles repository
+-- Set `GIT_DIR`, `GIT_WORK_TREE` correctly if in dotfiles repository
 local GIT_DIR = vim.fn.expand "$HOME/.dotfiles/"
 local WORK_TREE = vim.fn.expand "$HOME"
 
@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd({ "DirChanged" }, {
     end,
 })
 
---- Open nvim-tree for directories on startup
+-- Open nvim-tree for directories on startup
 local function open_nvim_tree(data)
     -- buffer is a directory
     local directory = vim.fn.isdirectory(data.file) == 1
