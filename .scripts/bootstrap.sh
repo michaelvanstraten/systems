@@ -71,7 +71,7 @@ install_dotfiles() {
 
     # Handle existing dotfiles backup
     if [ -d "$BACKUP_DIR" ]; then
-        confirm_action "There already exists a backup of your dotfiles, proceeding would delete that backup." || exit_with_error "Backup directory '$BACKUP_DIR' already exists. Aborting to prevent data loss."
+        confirm_action "There already exists a backup of your dotfiles, proceeding would delete that backup." || return
         rm -r "$BACKUP_DIR"
     fi
 
