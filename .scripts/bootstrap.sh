@@ -122,6 +122,11 @@ if [ -z "$BASH_SOURCE" ]; then
         git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
     fi
 
+    os_config="$HOME/.scripts/sys/$(uname | tr '[:upper:]' '[:lower:]').sh"
+    if [ -f "$os_config" ] && confirm_action "Set os specific configuration"; then
+        source $os_config
+    fi
+
     print_message "${GREEN}" "Dotfiles installation completed. Check $LOG_FILE for details."
 
     # Log user out for settings to take effect
