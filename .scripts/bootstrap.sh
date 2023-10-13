@@ -45,6 +45,7 @@ bootstrap_homebrew() {
     if ! command_exists "brew"; then
         print_message "${YELLOW}" "Installing Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' | tee -a "$HOME/.zprofile" "$HOME/.bash_profile" "$HOME/.config/fish/conf.d/homebrew.fish"
         eval "$(/opt/homebrew/bin/brew shellenv)"
     else
         print_message "${GREEN}" "Homebrew is already installed."
