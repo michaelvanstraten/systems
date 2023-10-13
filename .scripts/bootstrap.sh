@@ -123,4 +123,9 @@ if [ -z "$BASH_SOURCE" ]; then
     fi
 
     print_message "${GREEN}" "Dotfiles installation completed. Check $LOG_FILE for details."
+
+    # Log user out for settings to take effect
+    if [ "$(uname -s)" == "Darwin" ] && confirm_action "You may want to logout and log back in for many settings to take effect."; then
+        osascript -e 'tell app "System Events" to log out'
+    fi
 fi
