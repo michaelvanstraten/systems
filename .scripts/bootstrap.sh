@@ -105,6 +105,11 @@ if [ -z "$BASH_SOURCE" ]; then
         print_message "${RED}" "Brewfile not found. No packages to install."
     fi
 
+    if command_exists "fish"; then
+        sudo sh -c 'echo /opt/homebrew/bin/fish >> /etc/shells'
+        chsh -s /opt/homebrew/bin/fish
+    fi
+
     # Install tmux plugin manager (tpm) if tmux is installed
     if command_exists "tmux" && [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
         git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
