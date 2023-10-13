@@ -103,6 +103,7 @@ if [ -z "$BASH_SOURCE" ]; then
 
     # Install Packages using Brewfile
     if [ -f "$BREWFILE" ] && confirm_action "Install homebrew packages from Brewfile"; then
+        EDITOR="${EDITOR:-vi}"
         confirm_action "Edit Brewfile before installing" && $EDITOR "$BREWFILE"
         print_message "${GREEN}" "Installing packages from Brewfile..."
         brew bundle --file "$BREWFILE" >> "$LOG_FILE" 2>&1
