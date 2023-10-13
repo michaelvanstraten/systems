@@ -94,8 +94,6 @@ install_dotfiles() {
     if [ "$(uname -s)" == "Darwin" ]; then
         chflags hidden "$HOME/readme.md"
     fi
-
-    print_message "${GREEN}" "Dotfiles installation completed. Check $LOG_FILE for details."
 }
 
 # Main script
@@ -121,4 +119,8 @@ if [ -z "$BASH_SOURCE" ]; then
     if command_exists "tmux"; then
         git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
     fi
+
+    print_message "${GREEN}" "Dotfiles installation completed. Check $LOG_FILE for details."
+
+
 fi
