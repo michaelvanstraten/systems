@@ -12,11 +12,11 @@
  * "Ad meliora"                                                             *
  * version: 118                                                             *
  * url: https://github.com/yokoffing/Betterfox                              *
-****************************************************************************/
+ ****************************************************************************/
 
 /****************************************************************************
  * SECTION: FASTFOX                                                         *
-****************************************************************************/
+ ****************************************************************************/
 user_pref("nglayout.initialpaint.delay", 0);
 user_pref("nglayout.initialpaint.delay_in_oopif", 0);
 user_pref("content.notify.interval", 100000);
@@ -67,11 +67,17 @@ user_pref("network.predictor.enable-prefetch", false);
 
 /****************************************************************************
  * SECTION: SECUREFOX                                                       *
-****************************************************************************/
+ ****************************************************************************/
 /** TRACKING PROTECTION ***/
 user_pref("browser.contentblocking.category", "strict");
-user_pref("urlclassifier.trackingSkipURLs", "*.reddit.com, *.twitter.com, *.twimg.com, *.tiktok.com");
-user_pref("urlclassifier.features.socialtracking.skipURLs", "*.instagram.com, *.twitter.com, *.twimg.com");
+user_pref(
+  "urlclassifier.trackingSkipURLs",
+  "*.reddit.com, *.twitter.com, *.twimg.com, *.tiktok.com",
+);
+user_pref(
+  "urlclassifier.features.socialtracking.skipURLs",
+  "*.instagram.com, *.twitter.com, *.twimg.com",
+);
 user_pref("privacy.partition.bloburl_per_partition_key", true);
 user_pref("browser.uitour.enabled", false);
 user_pref("privacy.globalprivacycontrol.enabled", true);
@@ -141,7 +147,10 @@ user_pref("identity.fxaccounts.enabled", false);
 user_pref("browser.tabs.firefox-view", false);
 user_pref("permissions.default.desktop-notification", 2);
 user_pref("permissions.default.geo", 2);
-user_pref("geo.provider.network.url", "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%");
+user_pref(
+  "geo.provider.network.url",
+  "https://location.services.mozilla.com/v1/geolocate?key=%MOZILLA_API_KEY%",
+);
 user_pref("permissions.manager.defaultsUrl", "");
 user_pref("webchannel.allowObject.urlWhitelist", "");
 
@@ -175,7 +184,7 @@ user_pref("browser.newtabpage.activity-stream.telemetry", false);
 
 /****************************************************************************
  * SECTION: PESKYFOX                                                        *
-****************************************************************************/
+ ****************************************************************************/
 /** MOZILLA UI ***/
 user_pref("layout.css.prefers-color-scheme.content-override", 2);
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
@@ -185,8 +194,14 @@ user_pref("browser.privatebrowsing.vpnpromourl", "");
 user_pref("extensions.getAddons.showPane", false);
 user_pref("extensions.htmlaboutaddons.recommendations.enabled", false);
 user_pref("browser.shell.checkDefaultBrowser", false);
-user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
-user_pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
+user_pref(
+  "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons",
+  false,
+);
+user_pref(
+  "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features",
+  false,
+);
 user_pref("browser.preferences.moreFromMozilla", false);
 user_pref("browser.tabs.tabmanager.enabled", false);
 user_pref("browser.aboutConfig.showWarning", false);
@@ -235,7 +250,7 @@ user_pref("findbar.highlightAll", true);
 
 /****************************************************************************
  * SECTION: SMOOTHFOX                                                       *
-****************************************************************************/
+ ****************************************************************************/
 user_pref("apz.overscroll.enabled", true); // not DEFAULT on Linux
 user_pref("general.smoothScroll", true); // DEFAULT
 user_pref("general.smoothScroll.msdPhysics.enabled", true);
@@ -243,7 +258,7 @@ user_pref("mousewheel.default.delta_multiplier_y", 250); // 250-400; adjust this
 
 /****************************************************************************
  * START: MY OVERRIDES                                                      *
-****************************************************************************/
+ ****************************************************************************/
 // PREF: enable SameSite Cookies
 user_pref("network.cookie.sameSite.laxByDefault", true);
 user_pref("network.cookie.sameSite.noneRequiresSecure", true);
@@ -258,7 +273,7 @@ user_pref("privacy.clearOnShutdown.offlineApps", true);
 user_pref("privacy.clearOnShutdown.siteSettings", false);
 user_pref("browser.sessionstore.privacy_level", 2);
 // PREF: CRTL scroll to zoom
-user_pref("mousewheel.with_meta.action", 3)
+user_pref("mousewheel.with_meta.action", 3);
 /****************************************************************************
  * END: BETTERFOX                                                           *
-****************************************************************************/
+ ****************************************************************************/
