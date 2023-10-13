@@ -41,8 +41,8 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
 # Don't show removable media on the desktop
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
-# Show mounted servers on the desktop
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
+# Don't show mounted servers on the desktop
+defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
 
 # === Miscellaneous Settings ===
 # Avoid creating .DS_Store files on network volumes
