@@ -1,16 +1,16 @@
 #!/bin/bash
 
-# ANSI escape codes for colors
-GREEN="\033[0;32m"
-YELLOW="\033[1;33m"
-RED="\033[0;31m"
-RESET="\033[0m"
-
 # Configuration options
 DOTFILES_REPO="https://github.com/michaelvanstraten/dotfiles.git"
 BREWFILE="$HOME/.homebrew/Brewfile"
 BACKUP_DIR="$HOME/.dotfiles-backup"
 LOG_FILE="$HOME/.dotfiles-install.log"
+
+# ANSI escape codes for colors
+GREEN="\033[0;32m"
+YELLOW="\033[1;33m"
+RED="\033[0;31m"
+RESET="\033[0m"
 
 # Function to print colored messages
 print_message() {
@@ -19,78 +19,90 @@ print_message() {
     echo -e "${color}${message}${RESET}"
 }
 
+# Function to print an error message and exit
+exit_with_error() {
+    print_message "${RED}" "Error: $1"
+    exit 1
+}
+
 # Function to check if a command is available
 command_exists() {
-    command -v "$1" &> /dev/null
+    command -v "$1" >/dev/null 2>&1
 }
-
-# Check for dependencies
-if ! command_exists "curl" || ! command_exists "awk"; then
-    print_message "${RED}" "Error: Required dependencies (curl and awk) not found. Please install them manually and rerun the script."
-    exit 1
-fi
-
-# Function to install Homebrew on macOS
-install_homebrew() {
-    print_message "${YELLOW}" "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-}
-
-# Function to install Git if not already installed
-install_git() {
-    print_message "${YELLOW}" "Installing Git..."
-    if [[ "$(uname -s)" == "Darwin" ]]; then
-        brew install git
-    else
-        print_message "${RED}" "Error: Git is not installed. Please install Git manually and rerun the script."
-        exit 1
-    fi
-}
-
-# Check if Homebrew is installed (macOS only)
-if [[ "$(uname -s)" == "Darwin" ]]; then
-    if ! command_exists "brew"; then
-        install_homebrew
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-    fi
-fi
-
-# Check if Git is installed
-if ! command_exists "git"; then
-    install_git
-else
-    print_message "${YELLOW}" "Git is already installed."
-fi
-
-# Clone the dotfiles repository
-git clone --bare "$DOTFILES_REPO" "$HOME/.dotfiles" &>> "$LOG_FILE"
 
 # Define a function to work with dotfiles
-function dotfiles {
+dotfiles() {
     git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" "$@"
 }
 
-# Create backup directory if it doesn't exist
-mkdir -p "$BACKUP_DIR"
-
-# Attempt to checkout dotfiles
-dotfiles checkout 2>&1 | while read -r file; do
-    if echo "$file" | grep -q "already exists"; then
-        print_message "${RED}" "Backing up pre-existing dotfiles."
-        dotfiles checkout 2>&1 | awk '/\s+\./ {print $1}' | xargs -I{} mv {} "$BACKUP_DIR/{}"
-        break
+bootstrap_homebrew() {
+    # Check for curl
+    if ! command_exists "curl"; then
+        exit_with_error "Required dependency 'curl' not found. Please install it manually and rerun the script."
     fi
-done
 
-# Set status.showUntrackedFiles to no to ignore untracked files
-dotfiles config status.showUntrackedFiles no
+    # Check if Homebrew is installed
+    if ! command_exists "brew"; then
+        print_message "${YELLOW}" "Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    else
+        print_message "${GREEN}" "Homebrew is already installed."
+    fi
+}
 
-# Install Packages using Brewfile (macOS only)
-if [[ "$(uname -s)" == "Darwin" ]] && [ -f "$BREWFILE" ]; then
-    print_message "${YELLOW}" "Installing packages from Brewfile..."
-    brew bundle --file "$BREWFILE" &>> "$LOG_FILE"
-elif [[ "$(uname -s)" == "Darwin" ]]; then
-    print_message "${RED}" "Brewfile not found. No packages to install."
+bootstrap_dotfiles() {
+    # Clone dotfiles repository
+    if [ -d "$HOME/.dotfiles" ]; then
+        print_message "${YELLOW}" "Dotfiles repository already exists. Skipping clone."
+    else
+        git clone --bare "$DOTFILES_REPO" "$HOME/.dotfiles" >> "$LOG_FILE" 2>&1
+        print_message "${GREEN}" "Dotfiles repository cloned."
+    fi
+
+    # Handle existing dotfiles
+    if [ -d "$BACKUP_DIR" ]; then
+        print_message "${RED}" "Backup directory '$BACKUP_DIR' already exists. Aborting to prevent data loss."
+        exit 1
+    fi
+
+    # Attempt to checkout dotfiles
+    if [ -d "$HOME/.dotfiles" ]; then
+        mkdir -p "$BACKUP_DIR"
+        dotfiles checkout 2>&1 | while read -r file; do
+            if echo "$file" | grep -q "already exists"; then
+                print_message "${RED}" "Backing up pre-existing dotfiles."
+                dotfiles checkout 2>&1 | awk '/\s+\./ {print $1}' | xargs -I{} mv {} "$BACKUP_DIR/{}"
+                break
+            fi
+        done
+    fi
+
+    # Set status.showUntrackedFiles to no to ignore untracked files
+    dotfiles config status.showUntrackedFiles no
+
+    # Hide readme.md if on macOS
+    if [ "$(uname -s)" == "Darwin" ]; then
+        chflags hidden "$HOME/readme.md"
+    fi
+
+    print_message "${GREEN}" "Dotfiles installation completed. Check $LOG_FILE for details."
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    bootstrap_homebrew
+    bootstrap_dotfiles
+
+    # Install Packages using Brewfile
+    if [ -f "$BREWFILE" ]; then
+        print_message "${GREEN}" "Installing packages from Brewfile..."
+        brew bundle --file "$BREWFILE" >> "$LOG_FILE" 2>&1
+    else
+        print_message "${RED}" "Brewfile not found. No packages to install."
+    fi
+
+    # Install tmux plugin manager (tpm) if tmux is installed
+    if command_exists "tmux" && [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+        git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+    fi
 fi
-
-print_message "${GREEN}" "Dotfiles installation completed. Check $LOG_FILE for details."
