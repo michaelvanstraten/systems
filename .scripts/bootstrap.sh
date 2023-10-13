@@ -118,6 +118,7 @@ if [ -z "$BASH_SOURCE" ]; then
 
     # Install tmux plugin manager (tpm) if tmux is installed
     if command_exists "tmux"; then
+        print_message "${YELLOW}" "Installing tmux plugin manager."
         git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
     fi
 
