@@ -124,7 +124,7 @@ if [ -z "$BASH_SOURCE" ]; then
 
     os_config="$HOME/.scripts/sys/$(uname | tr '[:upper:]' '[:lower:]').sh"
     if [ -f "$os_config" ] && confirm_action "Set os specific configuration"; then
-        source $os_config
+        source "$os_config"
     fi
 
     print_message "${GREEN}" "Dotfiles installation completed. Check $LOG_FILE for details."
