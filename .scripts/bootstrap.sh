@@ -53,7 +53,6 @@ install_homebrew() {
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' | tee -a "$HOME/.zprofile" "$HOME/.bash_profile" "$HOME/.config/fish/conf.d/homebrew.fish"
         eval "$(/opt/homebrew/bin/brew shellenv)"
-        print_message "${GREEN}" "Homebrew is installed."
     else
         print_message "${GREEN}" "Homebrew is already installed."
     fi
@@ -63,10 +62,10 @@ install_homebrew() {
 install_dotfiles() {
     # Clone dotfiles repository
     if [ -d "$HOME/.dotfiles" ]; then
-        print_message "${YELLOW}" "Dotfiles repository already exists. Skipping clone."
+        print_message "${GREEN}" "Dotfiles repository already exists. Skipping clone."
     else
+        print_message "${YELLOW}" "Cloning dotfiles repository."
         git clone --bare "$DOTFILES_REPO" "$HOME/.dotfiles" >> "$LOG_FILE" 2>&1
-        print_message "${GREEN}" "Dotfiles repository cloned."
     fi
 
     # Handle existing dotfiles backup
@@ -108,7 +107,7 @@ if [ -z "$BASH_SOURCE" ]; then
         print_message "${GREEN}" "Installing packages from Brewfile..."
         brew bundle --file "$BREWFILE" >> "$LOG_FILE" 2>&1
     else
-        print_message "${RED}" "Brewfile not found. No packages to install."
+        print_message "${YELLOW}" "No packages to install."
     fi
 
     if command_exists "fish" && confirm_action "Set fish as the default shell"; then
@@ -122,6 +121,4 @@ if [ -z "$BASH_SOURCE" ]; then
     fi
 
     print_message "${GREEN}" "Dotfiles installation completed. Check $LOG_FILE for details."
-
-
 fi
