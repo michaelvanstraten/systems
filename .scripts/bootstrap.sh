@@ -35,21 +35,32 @@ dotfiles() {
     git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" "$@"
 }
 
-bootstrap_homebrew() {
-    # Check for curl
-    if ! command_exists "curl"; then
-        exit_with_error "Required dependency 'curl' not found. Please install it manually and rerun the script."
+# Function to confirm actions interactively
+confirm_action() {
+    local prompt="$1"
+    read -r -p "$prompt (y/N): " response
+    if [[ $response =~ ^[Yy]$ ]]; then
+        return 0
+    else
+        return 1
     fi
-
-    # Check if Homebrew is installed
-    print_message "${YELLOW}" "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' | tee -a "$HOME/.zprofile" "$HOME/.bash_profile" "$HOME/.config/fish/conf.d/homebrew.fish"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-    print_message "${GREEN}" "Homebrew is already installed."
 }
 
-bootstrap_dotfiles() {
+# Function to install Homebrew if not installed
+install_homebrew() {
+    if ! command_exists "brew"; then
+        print_message "${YELLOW}" "Installing Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' | tee -a "$HOME/.zprofile" "$HOME/.bash_profile" "$HOME/.config/fish/conf.d/homebrew.fish"
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+        print_message "${GREEN}" "Homebrew is installed."
+    else
+        print_message "${GREEN}" "Homebrew is already installed."
+    fi
+}
+
+# Function to handle dotfiles installation
+install_dotfiles() {
     # Clone dotfiles repository
     if [ -d "$HOME/.dotfiles" ]; then
         print_message "${YELLOW}" "Dotfiles repository already exists. Skipping clone."
@@ -58,10 +69,10 @@ bootstrap_dotfiles() {
         print_message "${GREEN}" "Dotfiles repository cloned."
     fi
 
-    # Handle existing dotfiles
+    # Handle existing dotfiles backup
     if [ -d "$BACKUP_DIR" ]; then
-        print_message "${RED}" "Backup directory '$BACKUP_DIR' already exists. Aborting to prevent data loss."
-        exit 1
+        confirm_action "There already exists a backup of your dotfiles, proceeding would delete that backup." || exit_with_error "Backup directory '$BACKUP_DIR' already exists. Aborting to prevent data loss."
+        rm -r "$BACKUP_DIR"
     fi
 
     # Attempt to checkout dotfiles
@@ -87,25 +98,21 @@ bootstrap_dotfiles() {
     print_message "${GREEN}" "Dotfiles installation completed. Check $LOG_FILE for details."
 }
 
+# Main script
 if [ -z "$BASH_SOURCE" ]; then
-    if ! command_exists "brew"; then
-        bootstrap_homebrew
-    else
-        print_message "${GREEN}" "Homebrew is already installed."
-    fi
-
-    bootstrap_dotfiles
+    install_homebrew
+    install_dotfiles
 
     # Install Packages using Brewfile
-    if [ -f "$BREWFILE" ]; then
-        $EDITOR $BREWFILE
+    if [ -f "$BREWFILE" ] && confirm_action "Install homebrew packages from Brewfile"; then
+        confirm_action "Edit Brewfile before installing" && $EDITOR "$BREWFILE"
         print_message "${GREEN}" "Installing packages from Brewfile..."
         brew bundle --file "$BREWFILE" >> "$LOG_FILE" 2>&1
     else
         print_message "${RED}" "Brewfile not found. No packages to install."
     fi
 
-    if command_exists "fish"; then
+    if command_exists "fish" && confirm_action "Set fish as the default shell"; then
         sudo sh -c 'echo /opt/homebrew/bin/fish >> /etc/shells'
         chsh -s /opt/homebrew/bin/fish
     fi
