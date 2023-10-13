@@ -274,6 +274,8 @@ user_pref("privacy.clearOnShutdown.siteSettings", false);
 user_pref("browser.sessionstore.privacy_level", 2);
 // PREF: CRTL scroll to zoom
 user_pref("mousewheel.with_meta.action", 3);
+// PREF: Disable translations
+user_pref("browser.translations.enable", false);
 /****************************************************************************
  * END: BETTERFOX                                                           *
  ****************************************************************************/
