@@ -89,7 +89,7 @@ bootstrap_dotfiles() {
     print_message "${GREEN}" "Dotfiles installation completed. Check $LOG_FILE for details."
 }
 
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+if [ -z "$BASH_SOURCE" ]; then
     bootstrap_homebrew
     bootstrap_dotfiles
 
