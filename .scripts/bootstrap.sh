@@ -111,6 +111,7 @@ if [ -z "$BASH_SOURCE" ]; then
     fi
 
     if command_exists "fish" && confirm_action "Set fish as the default shell"; then
+        print_message "${YELLOW}" "Changing default shell to fish (You will have to logout and log back in for this to take effect)."
         sudo sh -c 'echo /opt/homebrew/bin/fish >> /etc/shells'
         chsh -s /opt/homebrew/bin/fish
     fi
