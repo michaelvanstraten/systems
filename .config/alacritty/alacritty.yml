@@ -44,7 +44,7 @@ font:
   bold_italic:
     family: "JetBrainsMono Nerd Font"
     style: Heavy Italic
-  size: 16
+  size: 14
 
 selection:
   save_to_clipboard: true
