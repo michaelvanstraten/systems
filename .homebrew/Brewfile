@@ -1,6 +1,4 @@
 # Essentials
-tap "homebrew/core"
-tap "homebrew/bundle"
 tap "homebrew/cask-fonts"
 tap "theseal/ssh-askpass"
 tap "jesseduffield/lazygit"
