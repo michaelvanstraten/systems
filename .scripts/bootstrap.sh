@@ -104,7 +104,7 @@ if [ -z "$BASH_SOURCE" ]; then
         EDITOR="${EDITOR:-vi}"
         confirm_action "Edit Brewfile before installing" && $EDITOR "$BREWFILE"
         print_message "${GREEN}" "Installing packages from Brewfile..."
-        brew bundle --file "$BREWFILE" >> "$LOG_FILE" 2>&1
+        brew bundle --file "$BREWFILE" 2>&1 | tee "$LOG_FILE"
     else
         print_message "${YELLOW}" "No packages to install."
     fi
