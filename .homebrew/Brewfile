@@ -1,5 +1,6 @@
 # Essentials
 tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions"  # Required for firefox-nightly
 tap "theseal/ssh-askpass"
 tap "jesseduffield/lazygit"
 tap "koekeishiya/formulae"
@@ -22,7 +23,7 @@ brew "xz"           # General-purpose data compression with high compression rat
 brew "yabai"        # A tiling window manager for macOS based on binary space partitioning.
 
 cask "alacritty"                        # GPU-accelerated terminal emulator
-cask "firefox"                          # Web browser
+cask "firefox-nightly"                  # Web browser
 cask "rar"                              # Archive manager for data compression and backups
 cask "iina"                             # Free and open-source media player
 cask "karabiner-elements"               # Keyboard customizer
