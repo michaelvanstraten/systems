@@ -2,7 +2,6 @@
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"  # Required for firefox-nightly
 tap "theseal/ssh-askpass"
-tap "jesseduffield/lazygit"
 
 brew "eza"                        # Modern, maintained replacement for ls
 brew "tmux"                       # Terminal multiplexer
