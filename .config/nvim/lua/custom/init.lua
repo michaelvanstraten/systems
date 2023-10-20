@@ -1,6 +1,10 @@
 require "custom.autocmds"
 
+local g = vim.g
 local opt = vim.opt
+
+-- Use latex format for `.tex` files
+g.tex_flavor = "latex"
 
 -- Indenting
 opt.shiftwidth = 4
