@@ -18,8 +18,8 @@ end
 # Setup smart tmux session manager
 fish_add_path $HOME/.tmux/plugins/t-smart-tmux-session-manager/bin
 
-# Replacing "eua" with "ls"
-if command -v eza > /dev/null
+# Replacing "ls" with "eza"
+if command -q eza
 	abbr -a l "eza"
 	abbr -a ls "eza"
 	abbr -a la "eza -a"
@@ -33,7 +33,7 @@ else
 end
 
 # pyenv init
-if command -v pyenv 1>/dev/null 2>&1
+if command -q pyenv
     pyenv init - | source
 end
 
