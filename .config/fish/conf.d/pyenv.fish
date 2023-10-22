@@ -1,1 +1,1 @@
-set --export PYENV_ROOT /Users/michaelvanstraten/.pyenv
+set -x PYENV_ROOT /Users/michaelvanstraten/.pyenv
