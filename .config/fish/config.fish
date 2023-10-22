@@ -11,7 +11,9 @@ abbr -a tn "tmux new -s (pwd | sed 's/.*\///g')" # new tmux session with the nam
 
 
 # Setup zoxide
-zoxide init fish | source 
+if command -q zoxide
+    zoxide init fish | source 
+end
 
 # Setup smart tmux session manager
 fish_add_path $HOME/.tmux/plugins/t-smart-tmux-session-manager/bin
