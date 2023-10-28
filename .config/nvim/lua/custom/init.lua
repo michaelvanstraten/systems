@@ -25,6 +25,7 @@ opt.wrap = false
 -- Enable spell checking
 opt.spelllang = {
     "en",
+    "de",
 }
 opt.spell = true
 
