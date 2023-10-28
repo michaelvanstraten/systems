@@ -18,6 +18,7 @@ require("mason-lspconfig").setup {
             ---@diagnostic disable-next-line: different-requires
             require("lspconfig")[server].setup(load_config(server))
         end,
-        ["lua_ls"] = function() end, -- skip `lua_ls` since it is setup by NvChad since it is setup by NvChad
+        -- skip `lua_ls` since it is setup by NvChad since it is setup by NvChad
+        ["lua_ls"] = function() end,
     },
 }
