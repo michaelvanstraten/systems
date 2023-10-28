@@ -20,6 +20,8 @@ opt.swapfile = false
 -- Hide status line
 -- opt.laststatus = 0
 
+opt.wrap = false
+
 -- Enable spell checking
 opt.spelllang = {
     "en",
