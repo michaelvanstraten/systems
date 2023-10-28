@@ -60,6 +60,32 @@ local plugins = {
             },
         },
     },
+    {
+        "williamboman/mason-lspconfig.nvim",
+        dependencies = {
+            "williamboman/mason.nvim",
+            "neovim/nvim-lspconfig",
+        },
+        init = function()
+            require("core.utils").lazy_load "mason-lspconfig.nvim"
+        end,
+        config = function()
+            require "custom.plugins.configs.lspconfig"
+        end,
+    },
+    {
+        "jay-babu/mason-null-ls.nvim",
+        init = function()
+            require("core.utils").lazy_load "mason-null-ls.nvim"
+        end,
+        dependencies = {
+            "williamboman/mason.nvim",
+            "jose-elias-alvarez/null-ls.nvim",
+        },
+        config = function()
+            require "custom.plugins.configs.null-ls"
+        end,
+    },
 }
 
 return plugins

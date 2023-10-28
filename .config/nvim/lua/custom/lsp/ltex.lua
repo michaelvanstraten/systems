@@ -1,0 +1,5 @@
+return {
+    ltex = {
+        language = "auto",
+    },
+}
