@@ -43,6 +43,11 @@ M.lspconfig = {
             "Goto next",
         },
     },
+    t = {
+        ["<ESC>"] = {
+            "<ESC>",
+        },
+    },
 }
 
 M.telescope = {
