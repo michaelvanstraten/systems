@@ -82,7 +82,7 @@ M.toggleterm = {
 
     n = {
         ["<leader>lg"] = {
-            function ()
+            function()
                 require("custom.plugins.configs.lazygit").toggle()
             end,
             "Open LazyGit",
