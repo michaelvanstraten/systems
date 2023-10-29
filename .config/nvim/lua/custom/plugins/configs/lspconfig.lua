@@ -1,10 +1,18 @@
 local configs = require "plugins.configs.lspconfig"
 
+local function on_attach(client, bufnr)
+    local isFormatingProvider = client.server_capabilities.documentFormattingProvider
+    local isRangeFormatingProvider = client.server_capabilities.documentRangeFormattingProvider
+    configs.on_attach(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = isFormatingProvider
+    client.server_capabilities.documentRangeFormattingProvider = isRangeFormatingProvider
+end
+
 local function load_config(server)
     local require_ok, settings = pcall(require, "custom.lsp." .. server)
 
     return {
-        on_attach = configs.on_attach,
+        on_attach = on_attach,
         capabilities = configs.capabilities,
         settings = require_ok and settings or {},
     }
