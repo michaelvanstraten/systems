@@ -70,6 +70,7 @@ local plugins = {
             require("core.utils").lazy_load "mason-lspconfig.nvim"
         end,
         config = function()
+            ---@diagnostic disable-next-line: different-requires
             require "custom.plugins.configs.lspconfig"
         end,
     },
