@@ -1,7 +1,6 @@
 return {
     texlab = {
         build = {
-            onSave = true,
             executable = "tectonic",
             args = {
                 "-X",
@@ -10,7 +9,10 @@ return {
                 "--synctex",
                 "--keep-logs",
                 "--keep-intermediates",
+                "-Z",
+                "continue-on-errors",
             },
+            onSave = true,
             forwardSearchAfter = true,
         },
         forwardSearch = {
