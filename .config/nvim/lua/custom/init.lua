@@ -20,7 +20,9 @@ opt.swapfile = false
 -- Hide status line
 -- opt.laststatus = 0
 
-opt.wrap = false
+-- Enable smart wrapping
+opt.wrap = true
+opt.breakindent = false
 
 -- Enable spell checking
 opt.spelllang = {
