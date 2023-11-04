@@ -13,7 +13,7 @@ return {
                 "continue-on-errors",
             },
             onSave = true,
-            forwardSearchAfter = true,
+            -- forwardSearchAfter = true,
         },
         forwardSearch = {
             executable = "displayline",
