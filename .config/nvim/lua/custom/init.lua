@@ -21,7 +21,7 @@ opt.swapfile = false
 -- opt.laststatus = 0
 
 -- Enable smart wrapping
-opt.wrap = true
+opt.wrap = false
 opt.breakindent = false
 
 -- Enable spell checking
