@@ -47,6 +47,9 @@ local plugins = {
             filters = {
                 custom = { "^.git$", "^.dotfiles$" },
             },
+            modified = {
+                enable = false,
+            },
             diagnostics = {
                 enable = true,
                 severity = {
