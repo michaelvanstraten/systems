@@ -92,6 +92,14 @@ install_dotfiles() {
     if [ "$(uname -s)" == "Darwin" ]; then
         chflags hidden "$HOME/readme.md"
     fi
+
+    # Add remote sub-tree repositories
+    if ! dotfiles remote | grep -q "NvChad"; then
+        dotfiles remote add NvChad https://github.com/NvChad/NvChad
+    fi
+    if ! dotfiles remote | grep -q "Betterfox"; then
+        dotfiles remote add Betterfox https://github.com/yokoffing/Betterfox
+    fi
 }
 
 # Main script

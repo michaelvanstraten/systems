@@ -36,8 +36,3 @@ end
 if command -q pyenv
     pyenv init - | source
 end
-
-# dotfiles git repo alias 
-function dotfiles --wraps git
-    git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $argv
-end
