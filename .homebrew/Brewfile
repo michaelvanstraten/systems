@@ -29,9 +29,8 @@ cask "unnaturalscrollwheels"            # Tool to invert scroll direction for ph
 cask "font-jetbrains-mono-nerd-font"    # Developer-targeted fonts with a high number of glyphs
 
 # Scholarly writing 
-# tap "zegervdv/zathura"
 # brew "tectonic"     # Modernized, complete, self-contained TeX/LaTeX engine
-# brew "zathura"      # A document viewer
+# cask "skim"         # PDF reader and note-taking application
 
 # Communication Platforms
 # cask "discord"   # Voice and text chat software
