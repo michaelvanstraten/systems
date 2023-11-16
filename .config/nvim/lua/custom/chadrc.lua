@@ -5,7 +5,9 @@ local M = {}
 M.ui = {
     theme = "ayu_dark",
     transparency = true,
-    lsp_semantic_tokens = true,
+    lsp = {
+        semantic_tokens = true,
+    },
     telescope = { style = "bordered" },
     tabufline = {
         enabled = false,

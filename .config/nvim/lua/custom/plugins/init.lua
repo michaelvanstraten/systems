@@ -1,3 +1,5 @@
+local lspconfig = require "custom.plugins.configs.lspconfig"
+
 local plugins = {
     {
         "akinsho/toggleterm.nvim",
@@ -72,6 +74,22 @@ local plugins = {
         end,
     },
     {
+        "Julian/lean.nvim",
+        event = { "BufReadPre *.lean", "BufNewFile *.lean" },
+
+        dependencies = {
+            "hrsh7th/nvim-cmp",
+            "neovim/nvim-lspconfig",
+            "nvim-lua/plenary.nvim",
+        },
+        opts = {
+            lsp = {
+                on_attach = lspconfig.on_attach,
+            },
+            mappings = true,
+        },
+    },
+    {
         "williamboman/mason-lspconfig.nvim",
         dependencies = {
             "williamboman/mason.nvim",
@@ -81,8 +99,7 @@ local plugins = {
             require("core.utils").lazy_load "mason-lspconfig.nvim"
         end,
         config = function()
-            ---@diagnostic disable-next-line: different-requires
-            require "custom.plugins.configs.lspconfig"
+            lspconfig.setup()
         end,
     },
     {
