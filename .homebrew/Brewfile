@@ -29,9 +29,10 @@ cask "unnaturalscrollwheels"            # Tool to invert scroll direction for ph
 cask "font-jetbrains-mono-nerd-font"    # Developer-targeted fonts with a high number of glyphs
 
 # Scholarly writing 
-# brew "pdftk-java"   # Used for client-side scripting or server-side processing of PDFs
-# brew "tectonic"     # Modernized, complete, self-contained TeX/LaTeX engine
-# cask "skim"         # PDF reader and note-taking application
+# brew "pdftk-java"     # Used for client-side scripting or server-side processing of PDFs
+# cask "elan-init"      # Lean Theorem Prover installer and version manager
+# brew "tectonic"       # Modernized, complete, self-contained TeX/LaTeX engine
+# cask "skim"           # PDF reader and note-taking application
 
 # Communication Platforms
 # cask "discord"   # Voice and text chat software
