@@ -22,7 +22,20 @@ end
 
 M.setup = function()
     require("mason-lspconfig").setup {
-        opts = { ensure_installed = { "lua_ls", "rust_analyzer" } },
+        opts = {
+            ensure_installed = {
+                "lua_ls",
+                "stylua",
+                "rust_analyzer",
+                "pyright",
+                "black",
+                "shellcheck",
+                "shfmt",
+                "yamlls",
+                "taplo",
+                "ltex-ls",
+            },
+        },
 
         handlers = {
             function(server)
