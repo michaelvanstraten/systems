@@ -90,6 +90,14 @@ local plugins = {
         },
     },
     {
+        "williamboman/mason.nvim",
+        opts = function()
+            local opts = require "plugins.configs.mason"
+            opts.ui.border = "rounded"
+            return opts
+        end,
+    },
+    {
         "williamboman/mason-lspconfig.nvim",
         dependencies = {
             "williamboman/mason.nvim",
