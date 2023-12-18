@@ -1,4 +1,4 @@
-mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-ff-dbg
+mk_add_options MOZ_OBJDIR=$HOME/.cache/moz_objdir/obj-ff-dbg
 ac_add_options --enable-application=browser
 ac_add_options --enable-debug
 ac_add_options --enable-warnings-as-errors
