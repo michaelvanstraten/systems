@@ -133,7 +133,11 @@ local plugins = {
             lspconfig.setup()
         end,
     },
+
+    -- Disabled
     {
+        "folke/which-key.nvim",
+        enabled = false,
     },
 }
 
