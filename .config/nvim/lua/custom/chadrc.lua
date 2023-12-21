@@ -2,6 +2,12 @@
 ---@type ChadrcConfig
 local M = {}
 
+M.lazy_nvim = {
+    change_detection = {
+        notify = false
+    }
+}
+
 M.ui = {
     theme = "ayu_dark",
     transparency = true,
