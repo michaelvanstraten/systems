@@ -31,6 +31,26 @@ local plugins = {
         },
     },
     {
+        "stevearc/conform.nvim",
+        cmd = { "ConformInfo" },
+        keys = {
+            {
+                "<leader>f",
+                function()
+                    require("conform").format { async = true, lsp_fallback = true }
+                end,
+                desc = "Format buffer",
+            },
+        },
+        opts = {
+            formatters_by_ft = {
+                lua = { "stylua" },
+                python = { "isort", "black" },
+                javascript = { { "prettierd", "prettier" } },
+            },
+        },
+    },
+    {
         "nvim-tree/nvim-tree.lua",
         opts = {
             git = {
@@ -114,17 +134,6 @@ local plugins = {
         end,
     },
     {
-        "jay-babu/mason-null-ls.nvim",
-        init = function()
-            require("core.utils").lazy_load "mason-null-ls.nvim"
-        end,
-        dependencies = {
-            "williamboman/mason.nvim",
-            "jose-elias-alvarez/null-ls.nvim",
-        },
-        config = function()
-            require "custom.plugins.configs.null-ls"
-        end,
     },
 }
 
