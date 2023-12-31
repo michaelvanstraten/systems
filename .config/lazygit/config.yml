@@ -1,0 +1,17 @@
+gui:
+  # stuff relating to the UI
+  windowSize: 'half' # one of 'normal' | 'half' | 'full' default is 'normal'
+  scrollPastBottom: false # enable scrolling past the bottom
+  expandFocusedSidePanel: true
+  showCommandLog: false
+git:
+  paging:
+    useConfig: true
+  autoFetch: false
+  autoRefresh: true
+  fetchAll: true # Pass --all flag when running git fetch. Set to false to fetch only origin (or the current branch's upstream remote if there is one)
+  parseEmoji: true
+os:
+  editPreset: 'nvim'
+disableStartupPopups: true
+notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip' | 'quit'
