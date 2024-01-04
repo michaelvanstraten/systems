@@ -3,6 +3,7 @@ gui:
   scrollPastBottom: false # enable scrolling past the bottom
   expandFocusedSidePanel: true
   showCommandLog: true
+  skipRewordInEditorWarning: true # for skipping the confirmation before launching the reword editor
 git:
   paging:
     useConfig: true
