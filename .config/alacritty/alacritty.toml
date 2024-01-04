@@ -31,6 +31,7 @@ save_to_clipboard = true
 decorations = "buttonless"
 dynamic_padding = false
 opacity = 0.87
+blur = true
 
 [window.dimensions]
 columns = 128
