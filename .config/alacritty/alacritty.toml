@@ -1,6 +1,4 @@
-import = [
-    "~/.config/alacritty/themes/themes/ayu_dark.toml"
-]
+import = ["~/.config/alacritty/themes/themes/ayu_dark.toml"]
 
 [cursor.style]
 shape = "Beam"
@@ -41,7 +39,6 @@ lines = 38
 [window.padding]
 x = 18
 y = 16
-
 
 [keyboard]
 bindings = [
