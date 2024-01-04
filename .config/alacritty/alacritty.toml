@@ -1,27 +1,6 @@
-# Colors (Ayu Dark)
-[colors.bright]
-black = "#02060d"
-blue = "#59c2ff"
-cyan = "#95e6cb"
-green = "#91B362"
-magenta = "#FAE994"
-red = "#EA6C73"
-white = "#C7C7C7"
-yellow = "#ffb454"
-
-[colors.normal]
-black = "#02060d"
-blue = "#59c2ff"
-cyan = "#95e6cb"
-green = "#91B362"
-magenta = "#FAE994"
-red = "#EA6C73"
-white = "#C7C7C7"
-yellow = "#ffb454"
-
-[colors.primary]
-background = "#0a0e14"
-foreground = "#b3b1ad"
+import = [
+    "~/.config/alacritty/themes/themes/ayu_dark.toml"
+]
 
 [cursor.style]
 shape = "Beam"

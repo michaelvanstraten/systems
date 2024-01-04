@@ -1,0 +1,3 @@
+[submodule "/Users/michaelvanstraten/.config/alacritty/themes"]
+	path = /Users/michaelvanstraten/.config/alacritty/themes
+	url = https://github.com/alacritty/alacritty-theme
