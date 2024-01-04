@@ -18,7 +18,7 @@ Here's a list of the key components and tools in my setup, along with their resp
 
 - **macOS Package Manager:** [Homebrew](https://brew.sh) - [Configuration](.homebrew/Brewfile)
 - **Window Manager:** [Yabai](https://github.com/koekeishiya/yabai) - [Configuration](.config/yabai/yabairc)
-- **Terminal Emulator:** [Alacritty](https://alacritty.org) - [Configuration](.config/alacritty/alacritty.yml)
+- **Terminal Emulator:** [Alacritty](https://alacritty.org) - [Configuration](.config/alacritty/alacritty.toml)
 - **Terminal Multiplexer:** [tmux](https://github.com/tmux/tmux/wiki) - [Configuration](.config/tmux/tmux.conf)
 - **Shell:** [fish](https://fishshell.com) - [Configuration](.config/fish)
 - **Editor:** [Neovim](https://neovim.io)
