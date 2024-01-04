@@ -1,7 +1,8 @@
 # Disable welcome message
 set fish_greeting
 
-set -Ux EDITOR nvim # Use neovim as default editor
+set -Ux EDITOR nvim                     # Use neovim as default editor
+set -Ux XDG_CONFIG_HOME "$HOME/.config" # Set to common Linux tools recognise config paths
 
 # Convenience abbreviations
 abbr -a c "clear" 
