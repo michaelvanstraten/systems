@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 # macOS System Customization Script
 # This script configures various system settings in macOS to enhance user experience and customization.
