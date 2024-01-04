@@ -1,6 +1,6 @@
 gui:
   # stuff relating to the UI
-  scrollPastBottom: false # enable scrolling past the bottom
+  scrollPastBottom: false         # disable scrolling past the bottom
   expandFocusedSidePanel: true
   showCommandLog: true
   skipRewordInEditorWarning: true # for skipping the confirmation before launching the reword editor
@@ -9,10 +9,10 @@ git:
     useConfig: true
   autoFetch: false
   autoRefresh: true
-  fetchAll: true # Pass --all flag when running git fetch. Set to false to fetch only origin (or the current branch's upstream remote if there is one)
+  fetchAll: true    # Pass --all flag when running git fetch. Set to false to fetch only origin (or the current branch's upstream remote if there is one)
   parseEmoji: true
 os:
   editPreset: 'nvim'
 disableStartupPopups: true
-notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip' | 'quit'
+notARepository: 'skip'              # one of: 'prompt' | 'create' | 'skip' | 'quit'
 promptToReturnFromSubprocess: false # display confirmation when subprocess terminates
