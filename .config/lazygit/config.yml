@@ -15,3 +15,4 @@ os:
   editPreset: 'nvim'
 disableStartupPopups: true
 notARepository: 'skip' # one of: 'prompt' | 'create' | 'skip' | 'quit'
+promptToReturnFromSubprocess: false # display confirmation when subprocess terminates
