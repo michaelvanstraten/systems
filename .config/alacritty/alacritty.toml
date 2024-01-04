@@ -4,6 +4,7 @@ import = [
 
 [cursor.style]
 shape = "Beam"
+blinking = "Always"
 
 [font]
 size = 14
