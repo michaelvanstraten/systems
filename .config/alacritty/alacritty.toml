@@ -1,0 +1,69 @@
+# Colors (Ayu Dark)
+[colors.bright]
+black = "#02060d"
+blue = "#59c2ff"
+cyan = "#95e6cb"
+green = "#91B362"
+magenta = "#FAE994"
+red = "#EA6C73"
+white = "#C7C7C7"
+yellow = "#ffb454"
+
+[colors.normal]
+black = "#02060d"
+blue = "#59c2ff"
+cyan = "#95e6cb"
+green = "#91B362"
+magenta = "#FAE994"
+red = "#EA6C73"
+white = "#C7C7C7"
+yellow = "#ffb454"
+
+[colors.primary]
+background = "#0a0e14"
+foreground = "#b3b1ad"
+
+[cursor.style]
+shape = "Beam"
+
+[font]
+size = 14
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Medium"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Medium Italic"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Heavy"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Heavy Italic"
+
+[selection]
+save_to_clipboard = true
+
+[window]
+decorations = "buttonless"
+dynamic_padding = false
+opacity = 0.87
+
+[window.dimensions]
+columns = 128
+lines = 38
+
+[window.padding]
+x = 18
+y = 16
+
+
+[keyboard]
+bindings = [
+    { key = "A", mods = "Command", chars = "\u0001" },
+    { key = "J", mods = "Command", chars = "\u0001T" },
+]
