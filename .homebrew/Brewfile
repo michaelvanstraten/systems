@@ -1,3 +1,5 @@
+# vim: set filetype=ruby :
+
 # Essentials
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"  # Required for firefox-nightly
