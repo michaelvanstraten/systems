@@ -38,4 +38,7 @@ if command -q pyenv
     pyenv init - | source
 end
 
-starship init fish | source
+# Setup starship
+if command -q starship
+    starship init fish | source
+end
