@@ -13,6 +13,7 @@ brew "ssh-askpass"                # Passphrase dialog for use with OpenSSH
 brew "neovim"                     # Ambitious Vim-fork focused on extensibility and agility
 brew "webp"                       # Image format providing lossless and lossy compression for web images
 brew "fish"                       # User-friendly command-line shell for UNIX-like operating systems
+brew "starship"                   # Cross-shell prompt for astronauts
 brew "grep"                       # GNU grep, egrep, and fgrep
 brew "skhd"                       # Simple hotkey daemon for macOS
 brew "wget"                       # Internet file retriever

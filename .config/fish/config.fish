@@ -37,3 +37,5 @@ end
 if command -q pyenv
     pyenv init - | source
 end
+
+starship init fish | source
