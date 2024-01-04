@@ -28,8 +28,8 @@ style = "Heavy Italic"
 save_to_clipboard = true
 
 [window]
-decorations = "buttonless"
-dynamic_padding = false
+decorations = "Transparent"
+dynamic_padding = true
 opacity = 0.87
 blur = true
 
