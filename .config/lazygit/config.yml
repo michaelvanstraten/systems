@@ -1,6 +1,5 @@
 gui:
   # stuff relating to the UI
-  windowSize: 'half' # one of 'normal' | 'half' | 'full' default is 'normal'
   scrollPastBottom: false # enable scrolling past the bottom
   expandFocusedSidePanel: true
   showCommandLog: false
