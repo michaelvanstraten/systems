@@ -2,7 +2,7 @@ gui:
   # stuff relating to the UI
   scrollPastBottom: false # enable scrolling past the bottom
   expandFocusedSidePanel: true
-  showCommandLog: false
+  showCommandLog: true
 git:
   paging:
     useConfig: true
