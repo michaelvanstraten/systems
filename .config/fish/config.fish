@@ -9,7 +9,7 @@ abbr -a c clear
 abbr -a vim nvim # vim to nvim
 abbr -a npm pnpm # npm to pnpm
 abbr -a tn "tmux new -s (pwd | sed 's/.*\///g')" # new tmux session with the name of the current dir
-
+abbr -a k kubectl
 
 # Setup zoxide
 if command -q zoxide
