@@ -1,28 +1,31 @@
 # Disable welcome message
 set fish_greeting
 
-set -Ux EDITOR nvim # Use neovim as default editor
-set -Ux XDG_CONFIG_HOME "$HOME/.config" # Set to common Linux tools recognise config paths
+# Set neovim as the default editor
+set -Ux EDITOR nvim
 
-# Convenience abbreviations
+# Set common Linux tools config paths
+set -Ux XDG_CONFIG_HOME "$HOME/.config"
+
+# Basic abbreviations
 abbr -a c clear
 abbr -a b brew
-abbr -a vim nvim # vim to nvim
-abbr -a npm pnpm # npm to pnpm
-abbr -a tn "tmux new -s (pwd | sed 's/.*\///g')" # new tmux session with the name of the current dir
+abbr -a vim nvim 
+abbr -a npm pnpm 
+abbr -a tn 'tmux new -s (pwd | sed "s/.*\///g")' # Create a new tmux session with the name of the current directory
 
-# kubectl abbreviations
+# Kubectl abbreviations
 abbr -a k kubectl
 abbr -a kg "kubectl get"
 abbr -a kl "kubectl logs"
 
-# git abbreviations
+# Git abbreviations
 abbr -a gs "git status"
 abbr -a gl "git log"
 abbr -a gc "git commit"
 abbr -a gr "git rebase"
 
-# Replacing "ls" with "eza"
+# Replace "ls" with "eza" if available
 if command -q eza
     abbr -a l eza
     abbr -a ls eza
@@ -41,12 +44,12 @@ if command -q zoxide
     zoxide init fish | source
 end
 
-# pyenv init
+# Initialize pyenv
 if command -q pyenv
     pyenv init - | source
 end
 
-# Setup starship
+# Initialize starship prompt
 if command -q starship
     starship init fish | source
 end
