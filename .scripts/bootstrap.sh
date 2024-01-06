@@ -52,7 +52,27 @@ install_homebrew() {
     if ! command_exists "brew"; then
         print_message "$YELLOW" "Installing Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+
+        case "$(uname -s)" in
+            Darwin)
+                brew_path="/opt/homebrew/bin/brew"
+                ;;
+            Linux)
+                if [ -d "$HOME/.linuxbrew" ]; then
+                    brew_path="$HOME/.linuxbrew/bin/brew"
+                elif [ -d "/home/linuxbrew/.linuxbrew" ]; then
+                    brew_path="/home/linuxbrew/.linuxbrew/bin/brew"
+                else
+                    exit_with_error "Linuxbrew not found in expected locations."
+                fi
+                ;;
+            *)
+                exit_with_error "Unsupported operating system"
+                ;;
+        esac
+
+        # Set Homebrew environment
+        eval "$("$brew_path" shellenv)"v
     else
         print_message "$GREEN" "Homebrew is already installed."
     fi
