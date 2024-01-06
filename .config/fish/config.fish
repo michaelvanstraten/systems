@@ -11,14 +11,6 @@ abbr -a npm pnpm # npm to pnpm
 abbr -a tn "tmux new -s (pwd | sed 's/.*\///g')" # new tmux session with the name of the current dir
 abbr -a k kubectl
 
-# Setup zoxide
-if command -q zoxide
-    zoxide init fish | source
-end
-
-# Setup smart tmux session manager
-fish_add_path $HOME/.tmux/plugins/t-smart-tmux-session-manager/bin
-
 # Replacing "ls" with "eza"
 if command -q eza
     abbr -a l eza
@@ -33,6 +25,11 @@ else
     abbr -a lla "ls -la"
 end
 
+# Setup zoxide
+if command -q zoxide
+    zoxide init fish | source
+end
+
 # pyenv init
 if command -q pyenv
     pyenv init - | source
@@ -42,3 +39,6 @@ end
 if command -q starship
     starship init fish | source
 end
+
+# Setup smart tmux session manager
+fish_add_path $HOME/.tmux/plugins/t-smart-tmux-session-manager/bin
