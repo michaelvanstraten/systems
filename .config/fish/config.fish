@@ -13,9 +13,11 @@ set -x PYENV_ROOT "$HOME/.pyenv"
 # Basic abbreviations
 abbr -a c clear
 abbr -a b brew
-abbr -a vim nvim 
-abbr -a npm pnpm 
-abbr -a tn 'tmux new -s (pwd | sed "s/.*\///g")' # Create a new tmux session with the name of the current directory
+abbr -a vim nvim
+abbr -a npm pnpm
+
+# Abbreviation for creating a new tmux session with the name of the current directory
+abbr -a tn 'tmux new -s (pwd | sed "s/.*\///g")'
 
 # Kubectl abbreviations
 abbr -a k kubectl
