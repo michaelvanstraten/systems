@@ -16,7 +16,7 @@ RESET="\033[0m"
 print_message() {
     color="$1"
     message="$2"
-    printf "%s%s%s\n" "$color" "$message" "$RESET"
+    printf "%b%b%b\n" "$color" "$message" "$RESET"
 }
 
 # Function to print an error message and exit
