@@ -7,6 +7,9 @@ set -Ux EDITOR nvim
 # Set common Linux tools config paths
 set -Ux XDG_CONFIG_HOME "$HOME/.config"
 
+# Set Pyenv root directory
+set -x PYENV_ROOT "$HOME/.pyenv"
+
 # Basic abbreviations
 abbr -a c clear
 abbr -a b brew
