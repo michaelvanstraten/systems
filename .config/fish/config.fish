@@ -65,6 +65,7 @@ if command -q go
     fish_add_path "$HOME/.go/bin/"
 end
 
+# Add ~/.local/bin to the PATH
 fish_add_path "$HOME/.local/bin"
 
 # Setup smart tmux session manager
