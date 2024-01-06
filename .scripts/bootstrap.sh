@@ -30,6 +30,16 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
+get() {
+    if command_exists "curl";  then
+        curl -fsSL "$1"
+    elif command_exists "wget"; then
+        wget -qO- "$1"
+    else
+        exit_with_error "Please install wget or curl"
+    fi
+}
+
 # Define a function to work with dotfiles
 dotfiles() {
     git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" "$@"
@@ -51,7 +61,7 @@ confirm_action() {
 install_homebrew() {
     if ! command_exists "brew"; then
         print_message "$YELLOW" "Installing Homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        sh -c "$(get https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
         case "$(uname -s)" in
             Darwin)
