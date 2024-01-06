@@ -59,5 +59,11 @@ if command -q starship
     starship init fish | source
 end
 
+# Set Go workspace and add Go binary path to the PATH
+set -gx GOPATH "$HOME/.go"
+if command -q go
+    fish_add_path "$HOME/.go/bin/"
+end
+
 # Setup smart tmux session manager
 fish_add_path $HOME/.tmux/plugins/t-smart-tmux-session-manager/bin
