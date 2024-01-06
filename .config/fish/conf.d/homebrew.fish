@@ -1,8 +1,15 @@
 switch (uname -s)
-    case 'Darwin'
-        set brew_path "/opt/homebrew/bin/brew"
-    case 'Linux'
-        set brew_path "/home/linuxbrew/.linuxbrew/bin/brew"
+    case Darwin
+        set brew_path /opt/homebrew/bin/brew
+    case Linux
+        if test -d ~/.linuxbrew
+            set brew_path ~/.linuxbrew/bin/brew
+        else if test -d /home/linuxbrew/.linuxbrew
+            set brew_path /home/linuxbrew/.linuxbrew/bin/brew
+        else
+            echo "Linuxbrew not found in expected locations."
+            return
+        end
     case '*'
         echo "Unsupported operating system"
         return
