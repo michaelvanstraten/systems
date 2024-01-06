@@ -55,5 +55,5 @@ defaults write com.apple.menuextra.clock DateFormat -string "\"EEE d MMM HH:mm:s
 # === Kill Affected Applications ===
 # Restart applications to apply the changes
 for app in Safari Finder Dock Mail SystemUIServer; do
-	killall "$app" >/dev/null 2>&1
+    killall "$app" >/dev/null 2>&1
 done
