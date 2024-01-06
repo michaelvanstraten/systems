@@ -11,6 +11,12 @@ abbr -a npm pnpm # npm to pnpm
 abbr -a tn "tmux new -s (pwd | sed 's/.*\///g')" # new tmux session with the name of the current dir
 abbr -a k kubectl
 
+# git abbreviations
+abbr -a gs "git status"
+abbr -a gl "git log"
+abbr -a gc "git commit"
+abbr -a gr "git rebase"
+
 # Replacing "ls" with "eza"
 if command -q eza
     abbr -a l eza
