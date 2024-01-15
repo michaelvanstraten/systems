@@ -1,13 +1,13 @@
 # Disable welcome message
 set fish_greeting
 
-# Set neovim as the default editor
+# Set Neovim as the default editor
 set -Ux EDITOR nvim
 
 # Set common Linux tools config paths
 set -Ux XDG_CONFIG_HOME "$HOME/.config"
 
-# Set Pyenv root directory
+# Set pyenv root directory
 set -x PYENV_ROOT "$HOME/.pyenv"
 
 # Basic abbreviations
