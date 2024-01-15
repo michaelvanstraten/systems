@@ -1,3 +1,10 @@
+# Disable auto-update
+set -gx HOMEBREW_NO_AUTO_UPDATE 1
+
+if not status --is-login
+    return
+end
+
 switch (uname -s)
     case Darwin
         set brew_path /opt/homebrew/bin/brew
@@ -17,6 +24,3 @@ end
 
 # Set Homebrew environment
 eval "$($brew_path shellenv)"
-
-# Disable auto-update
-set -gx HOMEBREW_NO_AUTO_UPDATE 1
