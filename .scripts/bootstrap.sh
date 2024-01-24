@@ -146,12 +146,6 @@ else
     print_message "$YELLOW" "No packages to install."
 fi
 
-if command_exists "fish" && confirm_action "Set fish as the default shell"; then
-    print_message "$YELLOW" "Changing default shell to fish (You will have to logout and log back in for this to take effect)."
-    sudo sh -c 'echo /opt/homebrew/bin/fish >> /etc/shells'
-    chsh -s /opt/homebrew/bin/fish
-fi
-
 # Install tmux plugin manager (tpm) if tmux is installed
 if command_exists "tmux"; then
     print_message "$YELLOW" "Installing tmux plugin manager."
