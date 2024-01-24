@@ -1,98 +1,33 @@
-local M = {}
+local util = require("lazyvim.util")
 
-M.general = {
-    i = {
-        ["jk"] = { "<ESC>", "escape insert mode", opts = { nowait = true } },
-    },
+local map = vim.keymap.set
+local unmap = vim.keymap.del
 
-    n = {
-        ["q"] = { "<nop>", "does nothing to disable recording" },
-        ["<C-j>"] = { ":m+<cr>", "move line down" },
-        ["<C-k>"] = { ":m-2<cr>", "move line up" },
-        ["<leader>cs"] = { ":nohlsearch<cr>", "clear search" },
-    },
+-- Press jk to exit insert mode
+map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
+map("i", "kj", "<ESC>", { desc = "Escape insert mode" })
 
-    v = {
-        ["<C-j>"] = { ":m'>+1<cr>gv", "move seleted lines down" },
-        ["<C-k>"] = { ":m'<-2<cr>gv", "move seleted lines up" },
-    },
-}
+-- Disable recording of macros
+map({ "n" }, "q", "<nop>", { desc = "does nothing to disable recording" })
 
-M.lspconfig = {
-    plugin = true,
+-- lazygit
+unmap("n", "<leader>gg")
+unmap("n", "<leader>gG")
+map("n", "<leader>g", function()
+	util.terminal({ "lazygit" }, { cwd = util.root(), esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (root dir)" })
+map("n", "<leader>G", function()
+	util.terminal({ "lazygit" }, { esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Lazygit (cwd)" })
 
-    n = {
-        ["<leader>rn"] = {
-            function()
-                require("nvchad.renamer").open()
-            end,
-            "LSP rename",
-        },
+-- Move Lines
+map("n", "J", "<cmd>m .+1<cr>==", { desc = "Move down" })
+map("n", "K", "<cmd>m .-2<cr>==", { desc = "Move up" })
+map("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move down" })
+map("v", "K", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
-        ["M"] = {
-            function()
-                vim.diagnostic.goto_prev { float = { border = "rounded" } }
-            end,
-            "Goto prev",
-        },
-
-        ["m"] = {
-            function()
-                vim.diagnostic.goto_next { float = { border = "rounded" } }
-            end,
-            "Goto next",
-        },
-    },
-    t = {
-        ["<ESC>"] = {
-            "<ESC>",
-        },
-    },
-}
-
-M.telescope = {
-    plugin = true,
-
-    n = {
-        ["<leader>ss"] = {
-            "<cmd>Telescope spell_suggest<cr>",
-            "Spell suggest",
-        },
-
-        -- lsp
-        ["D"] = {
-            "<cmd>Telescope diagnostics<cr>",
-            "LSP diagnostics",
-        },
-
-        ["gd"] = {
-            "<cmd>Telescope lsp_definitions<cr>",
-            "LSP definition",
-        },
-
-        ["gi"] = {
-            "<cmd>Telescope lsp_implementations<cr>",
-            "LSP implementation",
-        },
-
-        ["gr"] = {
-            "<cmd>Telescope lsp_references<cr>",
-            "LSP references",
-        },
-    },
-}
-
-M.toggleterm = {
-    plugin = true,
-
-    n = {
-        ["<leader>lg"] = {
-            function()
-                require("custom.plugins.configs.lazygit").toggle()
-            end,
-            "Open LazyGit",
-        },
-    },
-}
-
-return M
+-- Format files
+unmap({ "n", "v" }, "<leader>cf")
+map({ "n", "v" }, "<leader>fm", function()
+	util.format({ force = true })
+end, { desc = "Format" })
