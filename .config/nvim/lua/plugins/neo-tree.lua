@@ -68,7 +68,6 @@ return {
 				},
 			},
 			window = {
-				auto_expand_width = true, -- expand the window when file exceeds the window width.
 				insert_as = "sibling", -- Insert nodes  as siblings of the directory under cursor.
 			},
 			filesystem = {
