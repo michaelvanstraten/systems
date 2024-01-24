@@ -27,10 +27,10 @@ opt.breakindent = false
 
 -- Enable spell checking
 opt.spelllang = {
-    "en",
-    "de",
+	"en",
+	"de",
 }
 opt.spell = true
 
 -- Match keywords with hyphen
-opt.iskeyword:append "-"
+opt.iskeyword:append("-")
