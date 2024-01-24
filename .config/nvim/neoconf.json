@@ -1,57 +1,70 @@
 {
-    "ltex": {
-        "language": "auto",
-        "disabledRules": {
-            "de": [
-                "UNPAIRED_BRACKETS"
-            ]
+    "lspconfig": {
+        "ltex": {
+            "ltex": {
+                "language": "auto",
+                "disabledRules": {
+                    "de": [
+                        "UNPAIRED_BRACKETS"
+                    ]
+                },
+                "additionalrules": {
+                    "enablepickyrules": true
+                }
+            }
         },
-        "additionalrules": {
-            "enablepickyrules": true
-        }
-    },
-    "pyright": {
-        "venv": "venv"
-    },
-    "rust-analyzer": {
-        "check": {
-            "features": "all",
-            "command": "clippy"
+        "pyright": {
+            "venv": "venv"
         },
-        "import": {
-            "granularity": {
-                "enforce": true,
-                "group": "module"
+        "rust_analyzer": {
+            "rust-analyzer": {
+                "check": {
+                    "features": "all",
+                    "command": "clippy"
+                },
+                "import": {
+                    "granularity": {
+                        "enforce": true,
+                        "group": "module"
+                    }
+                }
+            }
+        },
+        "texlab": {
+            "texlab": {
+                "build": {
+                    "executable": "tectonic",
+                    "args": [
+                        "-X",
+                        "compile",
+                        "%f",
+                        "--synctex",
+                        "--keep-logs",
+                        "--keep-intermediates",
+                        "-Z",
+                        "continue-on-errors"
+                    ],
+                    "onSave": true,
+                    "forwardSearchAfter": true
+                },
+                "forwardSearch": {
+                    "executable": "displayline",
+                    "args": [
+                        "-g",
+                        "%l",
+                        "%p",
+                        "%f"
+                    ]
+                }
+            }
+        },
+        "yamlls": {
+            "yaml": {
+                "keyOrdering": false,
+                "format": {
+                    "enable": true
+                }
             }
         }
-    },
-    "texlab": {
-        "build": {
-            "executable": "tectonic",
-            "args": [
-                "-X",
-                "compile",
-                "%f",
-                "--synctex",
-                "--keep-logs",
-                "--keep-intermediates",
-                "-Z",
-                "continue-on-errors"
-            ],
-            "onSave": true,
-            "forwardSearchAfter": true
-        },
-        "forwardSearch": {
-            "executable": "displayline",
-            "args": [
-                "-g",
-                "%l",
-                "%p",
-                "%f"
-            ]
-        }
-    },
-    "yamlls": {
-        "keyOrdering": false
     }
 }
