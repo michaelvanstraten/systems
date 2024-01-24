@@ -40,6 +40,7 @@ require("lazy").setup({
         "tutor",
         "zipPlugin",
       },
+        { import = "plugins.lsp" },
     install = { colorscheme = { "catppuccin", "habamax" } },
     },
   },
