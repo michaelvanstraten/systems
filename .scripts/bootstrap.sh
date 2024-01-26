@@ -30,16 +30,6 @@ command_exists() {
 	command -v "$1" >/dev/null 2>&1
 }
 
-get() {
-	if command_exists "curl"; then
-		curl -fsSL "$1"
-	elif command_exists "wget"; then
-		wget -qO- "$1"
-	else
-		exit_with_error "Please install wget or curl"
-	fi
-}
-
 # Define a function to work with dotfiles
 dotfiles() {
 	git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" "$@"
@@ -54,37 +44,6 @@ confirm_action() {
 		return 0
 	else
 		return 1
-	fi
-}
-
-# Function to install Homebrew if not installed
-install_homebrew() {
-	if ! command_exists "brew"; then
-		print_message "$YELLOW" "Installing Homebrew..."
-		sh -c "$(get https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-		case "$(uname -s)" in
-		Darwin)
-			brew_path="/opt/homebrew/bin/brew"
-			;;
-		Linux)
-			if [ -d "$HOME/.linuxbrew" ]; then
-				brew_path="$HOME/.linuxbrew/bin/brew"
-			elif [ -d "/home/linuxbrew/.linuxbrew" ]; then
-				brew_path="/home/linuxbrew/.linuxbrew/bin/brew"
-			else
-				exit_with_error "Linuxbrew not found in expected locations."
-			fi
-			;;
-		*)
-			exit_with_error "Unsupported operating system"
-			;;
-		esac
-
-		# Set Homebrew environment
-		eval "$("$brew_path" shellenv)"v
-	else
-		print_message "$GREEN" "Homebrew is already installed."
 	fi
 }
 
@@ -139,7 +98,39 @@ if [ "${OS}" != "Linux" ] && [ "${OS}" != "Darwin" ]; then
 	exit_with_error "Bootstrap is only supported on macOS and Linux."
 fi
 
-install_homebrew
+# Check if all needed dependencies are available
+if ! command_exists "curl"; then
+	exit_with_error "cURL is a requirement for installing Homebrew, please make sure it is installed."
+elif ! command_exists "bash"; then
+	exit_with_error "Bash is a requirement for installing Homebrew, please make sure it is installed."
+fi
+
+# Install Homebrew if not installed
+if ! command_exists "brew"; then
+	print_message "$YELLOW" "Installing Homebrew..."
+	bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+	case "$(uname -s)" in
+	Darwin)
+		brew_path="/opt/homebrew/bin/brew"
+		;;
+	Linux)
+		if [ -d "$HOME/.linuxbrew" ]; then
+			brew_path="$HOME/.linuxbrew/bin/brew"
+		elif [ -d "/home/linuxbrew/.linuxbrew" ]; then
+			brew_path="/home/linuxbrew/.linuxbrew/bin/brew"
+		else
+			exit_with_error "Linuxbrew not found in expected locations."
+		fi
+		;;
+	esac
+
+	# Set Homebrew environment
+	eval "$("$brew_path" shellenv)"v
+else
+	print_message "$GREEN" "Homebrew is already installed."
+fi
+
 install_dotfiles
 
 # Install Packages using Brewfile
