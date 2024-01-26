@@ -133,6 +133,12 @@ install_dotfiles() {
     fi
 }
 
+# Check if OS is compatible.
+OS="$(uname)"
+if [ "${OS}" != "Linux" ] && [ "${OS}" != "Darwin" ]; then
+	exit_with_error "Bootstrap is only supported on macOS and Linux."
+fi
+
 install_homebrew
 install_dotfiles
 
