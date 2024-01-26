@@ -1,6 +1,6 @@
 [user]
 	name = Michael van Straten 
-    email = michael@vanstraten.de
+    email = mvanstraten@mozilla.com
 [init]
 	defaultBranch = master
 [core]
@@ -12,5 +12,7 @@
     rebase = true
 [push]
 	default = current
+[cinnabar]
+	version-check = 1706007456
 [fetch]
 	prune = true

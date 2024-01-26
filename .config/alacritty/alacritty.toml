@@ -2,7 +2,6 @@ import = ["~/.config/alacritty/themes/themes/ayu_dark.toml"]
 
 [cursor.style]
 shape = "Beam"
-blinking = "Always"
 
 [font]
 size = 14
