@@ -3,8 +3,6 @@
 # Configuration options
 DOTFILES_REPO="https://github.com/michaelvanstraten/dotfiles.git"
 BREWFILE="$HOME/.homebrew/Brewfile"
-BACKUP_DIR="$HOME/.dotfiles-backup"
-LOG_FILE="$HOME/.dotfiles-install.log"
 
 # ANSI escape codes for colors
 GREEN="\033[0;32m"
@@ -30,9 +28,9 @@ command_exists() {
 	command -v "$1" >/dev/null 2>&1
 }
 
-# Define a function to work with dotfiles
+# Interact with dotfiles repository
 dotfiles() {
-	git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" "$@"
+	git --git-dir="$HOME/.git/" --work-tree="$HOME" "$@"
 }
 
 # Function to confirm actions interactively
@@ -44,48 +42,6 @@ confirm_action() {
 		return 0
 	else
 		return 1
-	fi
-}
-
-# Function to handle dotfiles installation
-install_dotfiles() {
-	# Clone dotfiles repository
-	if [ -d "$HOME/.dotfiles" ]; then
-		print_message "$GREEN" "Dotfiles repository already exists. Skipping clone."
-	else
-		print_message "$YELLOW" "Cloning dotfiles repository."
-		git clone --bare "$DOTFILES_REPO" "$HOME/.dotfiles" >>"$LOG_FILE" 2>&1
-	fi
-
-	# Handle existing dotfiles backup
-	if [ -d "$BACKUP_DIR" ]; then
-		confirm_action "There already exists a backup of your dotfiles, proceeding would delete that backup." || return
-		rm -r "$BACKUP_DIR"
-	fi
-
-	# Attempt to checkout dotfiles
-	if [ -d "$HOME/.dotfiles" ]; then
-		mkdir -p "$BACKUP_DIR"
-		dotfiles checkout 2>&1 | while read -r file; do
-			if echo "$file" | grep -q "already exists"; then
-				print_message "$RED" "Backing up pre-existing dotfiles."
-				dotfiles checkout 2>&1 | awk '/\s+\./ {print $1}' | xargs -I{} mv {} "$BACKUP_DIR/{}"
-				break
-			fi
-		done
-	fi
-
-	# Set status.showUntrackedFiles to no to ignore untracked files
-	dotfiles config status.showUntrackedFiles no
-
-	# Hide readme.md if on macOS
-	if [ "$(uname -s)" = "Darwin" ]; then
-		chflags hidden "$HOME/readme.md"
-	fi
-
-	# Add remote sub-tree repositories
-	if ! dotfiles remote | grep -q "Betterfox"; then
-		dotfiles remote add Betterfox https://github.com/yokoffing/Betterfox
 	fi
 }
 
@@ -123,12 +79,33 @@ if ! command_exists "brew"; then
 	esac
 
 	# Set Homebrew environment
-	eval "$("$brew_path" shellenv)"v
+	eval "$("$brew_path" shellenv)"
 else
 	print_message "$GREEN" "Homebrew is already installed."
 fi
 
-install_dotfiles
+# Clone dotfiles repository if not already
+if [ ! -d "$HOME/.git" ]; then
+	print_message "$YELLOW" "Bootstraping dotfiles repository."
+	git clone --config status.showUntrackedFiles=no --bare --verbose --progress "$DOTFILES_REPO" "$HOME/.git" || exit 1
+	dotfiles config --unset core.bare
+fi
+
+# Stash any file that checkout would overwrite
+if confirm_action "Checkout dotfiles (this will stash any local changes)"; then
+	dotfiles diff --quiet HEAD || dotfiles stash push
+	dotfiles checkout --progress --recurse-submodules
+fi
+
+# Hide readme.md if on macOS
+if [ "$(uname -s)" = "Darwin" ]; then
+	chflags hidden "$HOME/readme.md"
+fi
+
+# Add remote sub-tree repositories
+if ! dotfiles remote | grep -q "Betterfox"; then
+	dotfiles remote add Betterfox https://github.com/yokoffing/Betterfox
+fi
 
 # Install Packages using Brewfile
 if [ -f "$BREWFILE" ] && confirm_action "Install homebrew packages from Brewfile"; then
