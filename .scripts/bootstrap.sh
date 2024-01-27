@@ -105,7 +105,7 @@ fi
 # Install Homebrew if not installed
 if ! command_exists "brew"; then
 	print_message "$YELLOW" "Installing Homebrew..."
-	bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || exit 1
 
 	case "$(uname -s)" in
 	Darwin)
