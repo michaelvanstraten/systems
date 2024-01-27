@@ -4,22 +4,29 @@
 DOTFILES_REPO="https://github.com/michaelvanstraten/dotfiles.git"
 BREWFILE="$HOME/.homebrew/Brewfile"
 
-# ANSI escape codes for colors
-GREEN="\033[0;32m"
-YELLOW="\033[1;33m"
-RED="\033[0;31m"
-RESET="\033[0m"
+# String formatters
+if [ -t 1 ]; then
+	tty_escape() { printf "\033[%sm" "$1"; }
+else
+	tty_escape() { :; }
+fi
+tty_mkbold() { tty_escape "1;$1"; }
+tty_blue="$(tty_mkbold 34)"
+tty_yellow="$(tty_mkbold 33)"
+tty_red="$(tty_mkbold 31)"
+tty_bold="$(tty_mkbold 39)"
+tty_reset="$(tty_escape 0)"
 
-# Function to print colored messages
-print_message() {
-	color="$1"
-	message="$2"
-	printf "%b%b%b\n" "$color" "$message" "$RESET"
+print_heading() {
+	printf "${tty_blue}==>${tty_bold} %s${tty_reset}\n" "$@"
 }
 
-# Function to print an error message and exit
-exit_with_error() {
-	print_message "$RED" "Error: $1"
+warn() {
+	printf "${tty_yellow}Warning${tty_reset}: %s\n" "$1" >&2
+}
+
+abort() {
+	printf "${tty_red}Error${tty_reset}: %s\n" "$1" >&2
 	exit 1
 }
 
@@ -35,8 +42,7 @@ dotfiles() {
 
 # Function to confirm actions interactively
 confirm_action() {
-	prompt="$1"
-	printf "%s (y/N): " "$prompt"
+	printf "${tty_blue}Confirm:${tty_reset} %s (y/N): " "$1"
 	read -r response
 	if [ "$response" = "y" ] || [ "$response" = "Y" ]; then
 		return 0
@@ -48,7 +54,7 @@ confirm_action() {
 # Check if OS is compatible.
 OS="$(uname)"
 if [ "${OS}" != "Linux" ] && [ "${OS}" != "Darwin" ]; then
-	exit_with_error "Bootstrap is only supported on macOS and Linux."
+	abort "This script is only supported on macOS and Linux."
 fi
 
 # Check if all needed dependencies are available
@@ -58,10 +64,10 @@ elif ! command_exists "bash"; then
 	exit_with_error "Bash is a requirement for installing Homebrew, please make sure it is installed."
 fi
 
-# Install Homebrew if not installed
+# Install Homebrew if not already installed
 if ! command_exists "brew"; then
-	print_message "$YELLOW" "Installing Homebrew..."
-	bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || exit 1
+	print_heading "Installing Homebrew ..."
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || abort "Failed to install Homebrew."
 
 	case "$(uname -s)" in
 	Darwin)
@@ -73,7 +79,7 @@ if ! command_exists "brew"; then
 		elif [ -d "/home/linuxbrew/.linuxbrew" ]; then
 			brew_path="/home/linuxbrew/.linuxbrew/bin/brew"
 		else
-			exit_with_error "Linuxbrew not found in expected locations."
+			abort "Linuxbrew not found in expected locations."
 		fi
 		;;
 	esac
@@ -81,13 +87,13 @@ if ! command_exists "brew"; then
 	# Set Homebrew environment
 	eval "$("$brew_path" shellenv)"
 else
-	print_message "$GREEN" "Homebrew is already installed."
+	echo "Homebrew is already installed."
 fi
 
 # Clone dotfiles repository if not already
 if [ ! -d "$HOME/.git" ]; then
-	print_message "$YELLOW" "Bootstraping dotfiles repository."
-	git clone --config status.showUntrackedFiles=no --bare --verbose --progress "$DOTFILES_REPO" "$HOME/.git" || exit 1
+	print_heading "Bootstrapping dotfiles repository ..."
+	git clone --config status.showUntrackedFiles=no --bare --verbose --progress "$DOTFILES_REPO" "$HOME/.git" || abort "Failed to clone dotfiles repository."
 	dotfiles config --unset core.bare
 fi
 
@@ -108,23 +114,23 @@ if ! dotfiles remote | grep -q "Betterfox"; then
 fi
 
 # Install Packages using Brewfile
-if [ -f "$BREWFILE" ] && confirm_action "Install homebrew packages from Brewfile"; then
+if [ -f "$BREWFILE" ] && confirm_action "Install Homebrew packages from Brewfile"; then
 	EDITOR="${EDITOR:-vi}"
 	confirm_action "Edit Brewfile before installing" && $EDITOR "$BREWFILE"
-	print_message "$GREEN" "Installing packages from Brewfile..."
-	brew bundle --file "$BREWFILE" 2>&1 | tee "$LOG_FILE"
+	print_heading "Installing packages from Brewfile ..."
+	brew bundle --file "$BREWFILE"
 else
-	print_message "$YELLOW" "No packages to install."
+	echo "No Homebrew packages to install."
 fi
 
 os_config="$HOME/.scripts/sys/$(uname | tr '[:upper:]' '[:lower:]').sh"
-if [ -f "$os_config" ] && confirm_action "Set os specific configuration"; then
+if [ -f "$os_config" ] && confirm_action "Set OS-specific configuration"; then
 	. "$os_config"
 fi
 
-print_message "$GREEN" "Dotfiles installation completed. Check $LOG_FILE for details."
+echo "Dotfiles Bootstrap completed."
 
-# Log user out for settings to take effect
-if [ "$(uname -s)" = "Darwin" ] && confirm_action "You may want to logout and log back in for many settings to take effect."; then
-	osascript -e 'tell app "System Events" to log out'
+# Suggest logging out for settings to take effect
+if [ "$(uname -s)" = "Darwin" ]; then
+	confirm_action "Logout current user for some settings to take effect"
 fi
