@@ -10,6 +10,9 @@ set -Ux XDG_CONFIG_HOME "$HOME/.config"
 # Set pyenv root directory
 set -x PYENV_ROOT "$HOME/.pyenv"
 
+# Prevent my self from my self (i recently `rm -rf` my home directory)
+alias rm="rm -i"
+
 # Basic abbreviations
 abbr -a c clear
 abbr -a b brew
