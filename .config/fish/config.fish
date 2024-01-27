@@ -70,3 +70,6 @@ fish_add_path "$HOME/.local/bin"
 
 # Setup smart tmux session manager
 fish_add_path "$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin"
+
+# Setup krew (Krew is the plugin manager for kubectl command-line tool)
+fish_add_path "$HOME/.krew/bin"
