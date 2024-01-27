@@ -51,6 +51,14 @@ confirm_action() {
 	fi
 }
 
+check_dependencies() {
+	for dep in "$@"; do
+		if ! command_exists "$dep"; then
+			abort "${tty_yellow}$dep${tty_reset} is a required dependency. Please install it and run this script again."
+		fi
+	done
+}
+
 # Check if OS is compatible.
 OS="$(uname)"
 if [ "${OS}" != "Linux" ] && [ "${OS}" != "Darwin" ]; then
@@ -58,11 +66,7 @@ if [ "${OS}" != "Linux" ] && [ "${OS}" != "Darwin" ]; then
 fi
 
 # Check if all needed dependencies are available
-if ! command_exists "curl"; then
-	exit_with_error "cURL is a requirement for installing Homebrew, please make sure it is installed."
-elif ! command_exists "bash"; then
-	exit_with_error "Bash is a requirement for installing Homebrew, please make sure it is installed."
-fi
+check_dependencies "bash" "curl" "git"
 
 # Install Homebrew if not already installed
 if ! command_exists "brew"; then
