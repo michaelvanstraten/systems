@@ -84,9 +84,6 @@ install_dotfiles() {
 	fi
 
 	# Add remote sub-tree repositories
-	if ! dotfiles remote | grep -q "NvChad"; then
-		dotfiles remote add NvChad https://github.com/NvChad/NvChad
-	fi
 	if ! dotfiles remote | grep -q "Betterfox"; then
 		dotfiles remote add Betterfox https://github.com/yokoffing/Betterfox
 	fi
