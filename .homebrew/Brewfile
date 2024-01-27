@@ -122,13 +122,17 @@ cask "font-jetbrains-mono-nerd-font"    # Developer-targeted fonts with a high n
 # brew "fzf"                # Command-line fuzzy finder written in Go
 # brew "git-filter-repo"    # Quickly rewrite git repository history
 # brew "jq"                 # Lightweight and flexible command-line JSON processor
-# brew "kubernetes-cli"     # Kubernetes command-line interface
 # brew "mmv"                # Move, copy, append, and link multiple files
 # brew "neofetch"           # Fast, highly customizable system info script
 # brew "pandoc"             # Swiss-army knife of markup format conversion
 # brew "qrencode"           # QR Code generation
 # brew "trash"              # CLI tool that moves files or folders to the trash
 # brew "watch"              # Executes a program periodically, showing output fullscreen
+
+# Kubernetes
+# brew "kubernetes-cli"     # Kubernetes command-line interface
+# brew "krew"               # Package manager for kubectl plugins
+# brew "fluxcd/tap/flux"    # Flux CLI
 
 # Cryptocurrency
 # cask "bisq"         # Decentralized bitcoin exchange network
