@@ -7,6 +7,7 @@ tap "theseal/ssh-askpass"
 
 brew "eza"                        # Modern, maintained replacement for ls
 brew "bash"                       # Bourne-Again SHell, a UNIX command interpreter
+brew "trash"                      # CLI tool that moves files or folders to the trash
 brew "tmux"                       # Terminal multiplexer
 brew "z"                          # Tracks most-used directories to make cd smarter
 brew "coreutils"                  # GNU File, Shell, and Text utilities
@@ -126,7 +127,6 @@ cask "font-jetbrains-mono-nerd-font"    # Developer-targeted fonts with a high n
 # brew "neofetch"           # Fast, highly customizable system info script
 # brew "pandoc"             # Swiss-army knife of markup format conversion
 # brew "qrencode"           # QR Code generation
-# brew "trash"              # CLI tool that moves files or folders to the trash
 # brew "watch"              # Executes a program periodically, showing output fullscreen
 
 # Kubernetes
