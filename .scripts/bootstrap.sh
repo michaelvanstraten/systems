@@ -140,12 +140,6 @@ else
 	print_message "$YELLOW" "No packages to install."
 fi
 
-# Install tmux plugin manager (tpm) if tmux is installed
-if command_exists "tmux"; then
-	print_message "$YELLOW" "Installing tmux plugin manager."
-	git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
-fi
-
 os_config="$HOME/.scripts/sys/$(uname | tr '[:upper:]' '[:lower:]').sh"
 if [ -f "$os_config" ] && confirm_action "Set os specific configuration"; then
 	. "$os_config"
