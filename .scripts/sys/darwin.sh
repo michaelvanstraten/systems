@@ -29,6 +29,31 @@ defaults write com.apple.dock show-process-indicators -bool true
 defaults write com.apple.dock mru-spaces -bool false
 # Enable grouping of application windows in Exposé
 defaults write com.apple.dock expose-group-apps -bool true
+# Clear the items in the dock
+defaults write com.apple.dock persistent-apps -array
+# Add wanted items back to the dock
+for dock_item in \
+	"/System/Applications/Mail.app/" \
+	"/Applications/Bitwarden.app/" \
+	"/System/Applications/Messages.app/" \
+	"/Applications/WhatsApp.app/" \
+	"/System/Applications/Calendar.app/" \
+	"/System/Applications/Reminders.app/" \
+	"/Applications/Alacritty.app/" \
+	"/Applications/Firefox Nightly.app/" \
+    "/System/Applications/System Settings.app/"; do
+
+	if [ -d "$dock_item" ]; then
+		defaults write com.apple.dock persistent-apps -array-add "$(
+			printf '%s%s%s%s%s' \
+				'<dict><key>tile-data</key><dict><key>file-data</key><dict>' \
+				'<key>_CFURLString</key><string>' \
+				"$dock_item" \
+				'</string><key>_CFURLStringType</key><integer>0</integer>' \
+				'</dict></dict></dict>'
+		)"
+	fi
+done
 
 # === Finder Settings ===
 # Show Path bar in Finder
