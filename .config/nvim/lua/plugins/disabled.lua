@@ -15,4 +15,6 @@ return {
 	{ "echasnovski/mini.indentscope", enabled = false },
 	-- disable fancy-looking tabs
 	{ "akinsho/bufferline.nvim", enabled = false },
+	-- disable highlighting other uses of the word under the cursor
+	{ "RRethy/vim-illuminate", enabled = false },
 }
