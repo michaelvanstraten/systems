@@ -7,7 +7,7 @@ Welcome to my dotfiles repository, where I store configuration and setup files f
 ## Installation
 
 ```bash
-curl -sS https://raw.githubusercontent.com/michaelvanstraten/dotfiles/master/.scripts/bootstrap.sh | sh
+bash -c "$(curl -sS https://raw.githubusercontent.com/michaelvanstraten/dotfiles/master/.scripts/bootstrap.sh)"
 ```
 
 I'm currently working on documenting the installation process to make it easier for others to use my dotfiles. Stay tuned for updates!
