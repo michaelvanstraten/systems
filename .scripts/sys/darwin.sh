@@ -68,6 +68,8 @@ defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
 defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool false
 # Don't show mounted servers on the desktop
 defaults write com.apple.finder ShowMountedServersOnDesktop -bool false
+# Show the Home directory as Default folder
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
 
 # === Miscellaneous Settings ===
 # Avoid creating .DS_Store files on network volumes
