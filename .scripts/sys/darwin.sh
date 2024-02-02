@@ -41,7 +41,7 @@ for dock_item in \
 	"/System/Applications/Reminders.app/" \
 	"/Applications/Alacritty.app/" \
 	"/Applications/Firefox Nightly.app/" \
-    "/System/Applications/System Settings.app/"; do
+	"/System/Applications/System Settings.app/"; do
 
 	if [ -d "$dock_item" ]; then
 		defaults write com.apple.dock persistent-apps -array-add "$(
@@ -82,5 +82,5 @@ defaults write com.apple.menuextra.clock DateFormat -string "\"EEE d MMM HH:mm:s
 # === Kill Affected Applications ===
 # Restart applications to apply the changes
 for app in Safari Finder Dock Mail SystemUIServer; do
-    killall "$app" >/dev/null 2>&1
+	killall "$app" >/dev/null 2>&1
 done

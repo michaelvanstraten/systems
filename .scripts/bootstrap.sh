@@ -133,9 +133,9 @@ if [ -f "$os_config" ] && confirm_action "Set OS-specific configuration"; then
 fi
 
 if command_exists "fish" && confirm_action "Set fish as default shell"; then
-    local fish_path = $(which fish)
-    echo $fish_path | sudo tee -a /etc/shells
-    chsh -s $fish_path $USER
+	local fish_path = $(which fish)
+	echo $fish_path | sudo tee -a /etc/shells
+	chsh -s $fish_path $USER
 fi
 
 echo "Dotfiles Bootstrap completed."
