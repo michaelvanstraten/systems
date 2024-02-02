@@ -17,4 +17,6 @@ return {
 	{ "akinsho/bufferline.nvim", enabled = false },
 	-- disable highlighting other uses of the word under the cursor
 	{ "RRethy/vim-illuminate", enabled = false },
+    -- disable indent guides
+    { "lukas-reineke/indent-blankline.nvim", enabled = false }
 }

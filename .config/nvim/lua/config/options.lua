@@ -25,6 +25,9 @@ opt.swapfile = false
 opt.wrap = false
 opt.breakindent = false
 
+-- Disable indent guide
+opt.list = false
+
 -- Enable spell checking
 opt.spelllang = {
 	"en",
