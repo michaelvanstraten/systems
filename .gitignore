@@ -1,0 +1,11 @@
+*
+!/.bash_profile
+!/.zprofile
+!/.homebrew/
+!/.mozconfigs/
+!/Library/
+!/.cargo/
+!/.config/
+!/.scripts/
+!/.scripts/
+!/readme.md
