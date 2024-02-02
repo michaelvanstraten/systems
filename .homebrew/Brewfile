@@ -80,7 +80,7 @@ cask "font-jetbrains-mono-nerd-font"    # Developer-targeted fonts with a high n
 # Virtualization and Containers
 # cask "utm"        # Virtual machines UI using QEMU
 # cask "vagrant"    # Development environment
-# cask "docker"     # App to build and share containerized applications and microservices
+# brew "podman"     # Tool for managing OCI containers and pods
 # brew "minikube"   # Run a Kubernetes cluster locally
 # brew "qemu"       # Emulator for x86 and PowerPC
 
