@@ -1,11 +1,13 @@
 *
-!/.bash_profile
-!/.zprofile
-!/.homebrew/
-!/.mozconfigs/
-!/Library/
-!/.cargo/
-!/.config/
-!/.scripts/
-!/.scripts/
-!/readme.md
+
+!.gitignore
+!.bash_profile
+!.zprofile
+!readme.md
+!.cargo/
+!.config/
+!.scripts/
+!.mozconfigs/
+!.homebrew/Brewfile
+!Library/Application Support/VSCodium/User/settings.json
+!Library/Application Support/pypoetry/config.toml

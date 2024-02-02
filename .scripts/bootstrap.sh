@@ -97,7 +97,7 @@ fi
 # Clone dotfiles repository if not already
 if [ ! -d "$HOME/.git" ]; then
 	print_heading "Bootstrapping dotfiles repository ..."
-	git clone --config status.showUntrackedFiles=no --bare --verbose --progress "$DOTFILES_REPO" "$HOME/.git" || abort "Failed to clone dotfiles repository."
+	git clone --bare --verbose --progress "$DOTFILES_REPO" "$HOME/.git" || abort "Failed to clone dotfiles repository."
 	dotfiles config --unset core.bare
 fi
 
