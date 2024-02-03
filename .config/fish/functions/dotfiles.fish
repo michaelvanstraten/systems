@@ -3,10 +3,6 @@ function dotfiles --wraps git
     switch $argv[1]
         case update
             switch (string lower $argv[2])
-                case nvchad
-                    set prefix ".config/nvim/"
-                    set repository NvChad
-                    set ref "v3.0"
                 case betterfox
                     set prefix "Library/Application Support/Firefox/Profiles/rf4bf0gc.michael/"
                     set repository Betterfox
