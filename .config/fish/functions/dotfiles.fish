@@ -18,6 +18,6 @@ function dotfiles --wraps git
 
             cd $HOME && dotfiles subtree pull --prefix $prefix $repository $ref --squash
         case "*"
-            git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $argv
+            git --git-dir=$HOME/.git/ --work-tree=$HOME $argv
     end
 end
