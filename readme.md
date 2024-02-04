@@ -21,8 +21,7 @@ Here's a list of the key components and tools in my setup, along with their resp
 - **Terminal Emulator:** [Alacritty](https://alacritty.org) - [Configuration](.config/alacritty/alacritty.toml)
 - **Terminal Multiplexer:** [tmux](https://github.com/tmux/tmux/wiki) - [Configuration](.config/tmux/tmux.conf)
 - **Shell:** [fish](https://fishshell.com) - [Configuration](.config/fish)
-- **Editor:** [Neovim](https://neovim.io)
-- **Editor Config:** [NvChad](https://github.com/NvChad/NvChad) - [Configuration](.config/nvim)
+- **Editor:** [Neovim](https://neovim.io) - [Configuration](.config/nvim)
 - **Font:** [Jetbrains Mono](https://www.jetbrains.com/lp/mono/)
 - **Keyboard Customization:** [Karabiner-Elements](https://github.com/pqrs-org/Karabiner-Elements) - [Configuration](.config/karabiner/)
 
