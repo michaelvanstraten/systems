@@ -33,6 +33,9 @@ abbr -a gl "git log"
 abbr -a gc "git clone"
 abbr -a gr "git rebase"
 
+# moz-phab abbreviations
+abbr -a mz "moz-phab"
+
 # Replace "ls" with "eza" if available
 if command -q eza
     abbr -a l eza
