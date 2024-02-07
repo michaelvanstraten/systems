@@ -77,7 +77,7 @@ cask "font-jetbrains-mono-nerd-font"    # Developer-targeted fonts with a high n
 # brew "ykman"       # Tool for managing your YubiKey configuration
 # cask "keepassxc"   # Password manager app
 
-# Virtualization and Containers
+# Virtualisation and Containers
 # cask "utm"        # Virtual machines UI using QEMU
 # cask "vagrant"    # Development environment
 # brew "podman"     # Tool for managing OCI containers and pods
