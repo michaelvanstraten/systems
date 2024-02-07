@@ -76,3 +76,8 @@ fish_add_path "$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin"
 
 # Setup krew (Krew is the plugin manager for kubectl command-line tool)
 fish_add_path "$HOME/.krew/bin"
+
+# Setup podman docker replacement
+if command -q podman
+     set -gx DOCKER_HOST "unix://$HOME/.local/share/containers/podman/machine/qemu/podman.sock"
+end
