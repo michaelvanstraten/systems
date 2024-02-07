@@ -9,6 +9,6 @@
 !.config/
 !.scripts/
 !.mozconfigs/
-!.homebrew/Brewfile
+!.homebrew/
 !Library/Application Support/VSCodium/User/settings.json
 !Library/Application Support/pypoetry/config.toml
