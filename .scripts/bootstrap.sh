@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
 # Configuration options
 DOTFILES_REPO="https://github.com/michaelvanstraten/dotfiles.git"
@@ -35,11 +35,6 @@ command_exists() {
 	command -v "$1" >/dev/null 2>&1
 }
 
-# Interact with dotfiles repository
-dotfiles() {
-	git --git-dir="$HOME/.git/" --work-tree="$HOME" "$@"
-}
-
 # Function to confirm actions interactively
 confirm_action() {
 	printf "${tty_blue}Confirm:${tty_reset} %s (y/N): " "$1"
@@ -59,88 +54,114 @@ check_dependencies() {
 	done
 }
 
-# Check if OS is compatible.
-OS="$(uname)"
-if [ "${OS}" != "Linux" ] && [ "${OS}" != "Darwin" ]; then
-	abort "This script is only supported on macOS and Linux."
-fi
+main() {
+	# Check if OS is compatible.
+	OS="$(uname)"
+	if [ "${OS}" != "Linux" ] && [ "${OS}" != "Darwin" ]; then
+		abort "This script is only supported on macOS and Linux."
+	fi
 
-# Check if all needed dependencies are available
-check_dependencies "bash" "curl" "git"
+	if confirm_action "Install Homebrew"; then
+		check_dependencies "bash" "curl" "git"
+		install_homebrew
+	fi
 
-# Install Homebrew if not already installed
-if ! command_exists "brew"; then
-	print_heading "Installing Homebrew ..."
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || abort "Failed to install Homebrew."
+    bootstrap_dotfiles
 
-	case "$(uname -s)" in
-	Darwin)
-		brew_path="/opt/homebrew/bin/brew"
-		;;
-	Linux)
-		if [ -d "$HOME/.linuxbrew" ]; then
-			brew_path="$HOME/.linuxbrew/bin/brew"
-		elif [ -d "/home/linuxbrew/.linuxbrew" ]; then
-			brew_path="/home/linuxbrew/.linuxbrew/bin/brew"
-		else
-			abort "Linuxbrew not found in expected locations."
-		fi
-		;;
-	esac
+	confirm_action "Install Homebrew packages from Brewfile" && install_brewfile
 
-	# Set Homebrew environment
-	eval "$("$brew_path" shellenv)"
-else
-	echo "Homebrew is already installed."
-fi
+	confirm_action "Make fish your default shell" && make_fish_default_shell
 
-# Clone dotfiles repository if not already
-if [ ! -d "$HOME/.git" ]; then
-	print_heading "Bootstrapping dotfiles repository ..."
-	git clone --bare --verbose --progress "$DOTFILES_REPO" "$HOME/.git" || abort "Failed to clone dotfiles repository."
-	dotfiles config --unset core.bare
-fi
+	os_config="$HOME/.scripts/sys/$(uname | tr '[:upper:]' '[:lower:]').sh"
+	if [ -f "$os_config" ] && confirm_action "Set OS-specific configuration"; then
+		. "$os_config"
+	fi
 
-# Stash any file that checkout would overwrite
-if confirm_action "Checkout dotfiles (this will stash any local changes)"; then
-	dotfiles diff --quiet HEAD || dotfiles stash push
-	dotfiles checkout --progress --recurse-submodules
-fi
+	echo "Dotfiles Bootstrap completed."
 
-# Hide readme.md if on macOS
-if [ "$(uname -s)" = "Darwin" ]; then
-	chflags hidden "$HOME/readme.md"
-fi
+	# Suggest logging out for settings to take effect
+	if [ "$(uname -s)" = "Darwin" ] && confirm_action "Logout current user for some settings to take effect"; then
+		osascript -e 'tell app "System Events" to log out'
+	fi
+}
 
-# Add remote sub-tree repositories
-if ! dotfiles remote | grep -q "Betterfox"; then
-	dotfiles remote add Betterfox https://github.com/yokoffing/Betterfox
-fi
+# Installs Homebrew if not already installed
+install_homebrew() {
+	if ! command_exists "brew"; then
+		print_heading "Installing Homebrew ..."
+		/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || abort "Failed to install Homebrew."
+
+		case "$(uname -s)" in
+		Darwin)
+			brew_path="/opt/homebrew/bin/brew"
+			;;
+		Linux)
+			if [ -d "$HOME/.linuxbrew" ]; then
+				brew_path="$HOME/.linuxbrew/bin/brew"
+			elif [ -d "/home/linuxbrew/.linuxbrew" ]; then
+				brew_path="/home/linuxbrew/.linuxbrew/bin/brew"
+			else
+				abort "Linuxbrew not found in expected locations."
+			fi
+			;;
+		esac
+
+		# Set Homebrew environment
+		eval "$("$brew_path" shellenv)"
+	else
+		echo "Homebrew is already installed."
+	fi
+}
+
+# Interact with dotfiles repository
+dotfiles() {
+	git --git-dir="$HOME/.git/" --work-tree="$HOME" "$@"
+}
+
+bootstrap_dotfiles() {
+	# Clone dotfiles repository if not already
+	if [ ! -d "$HOME/.git" ]; then
+		print_heading "Bootstrapping dotfiles repository ..."
+		git clone --bare --verbose --progress "$DOTFILES_REPO" "$HOME/.git" || abort "Failed to clone dotfiles repository."
+		dotfiles config --unset core.bare
+	fi
+
+	# Stash any file that checkout would overwrite
+	if confirm_action "Checkout dotfiles (this will stash any local changes)"; then
+		dotfiles diff --quiet HEAD || dotfiles stash push
+		dotfiles checkout --progress --recurse-submodules
+	fi
+
+	# Hide readme.md if on macOS
+	if [ "$(uname -s)" = "Darwin" ]; then
+		chflags hidden "$HOME/readme.md"
+	fi
+
+	# Add remote sub-tree repositories
+	if ! dotfiles remote | grep -q "Betterfox"; then
+		dotfiles remote add Betterfox https://github.com/yokoffing/Betterfox
+	fi
+
+}
 
 # Install Packages using Brewfile
-if [ -f "$BREWFILE" ] && confirm_action "Install Homebrew packages from Brewfile"; then
-	EDITOR="${EDITOR:-vi}"
-	confirm_action "Edit Brewfile before installing" && $EDITOR "$BREWFILE"
-	print_heading "Installing packages from Brewfile ..."
-	brew bundle --file "$BREWFILE"
-else
-	echo "No Homebrew packages to install."
-fi
+install_brewfile() {
+	if [ -f "$BREWFILE" ]; then
+		EDITOR="${EDITOR:-vi}"
+		confirm_action "Edit Brewfile before installing" && $EDITOR "$BREWFILE"
+		print_heading "Installing packages from Brewfile ..."
+		brew bundle --file "$BREWFILE"
+	else
+		echo "No Homebrew packages to install."
+	fi
+}
 
-os_config="$HOME/.scripts/sys/$(uname | tr '[:upper:]' '[:lower:]').sh"
-if [ -f "$os_config" ] && confirm_action "Set OS-specific configuration"; then
-	. "$os_config"
-fi
+make_fish_default_shell() {
+	if command_exists "fish"; then
+		fish_path=$(command -v fish)
+		echo "$fish_path" | sudo tee -a /etc/shells >/dev/null
+		chsh -s "$fish_path" "$USER"
+	fi
+}
 
-if command_exists "fish" && confirm_action "Set fish as default shell"; then
-	fish_path=$(command -v fish)
-	echo "$fish_path" | sudo tee -a /etc/shells >/dev/null
-	chsh -s "$fish_path" "$USER"
-fi
-
-echo "Dotfiles Bootstrap completed."
-
-# Suggest logging out for settings to take effect
-if [ "$(uname -s)" = "Darwin" ]; then
-	confirm_action "Logout current user for some settings to take effect"
-fi
+main "$@" || exit 1
