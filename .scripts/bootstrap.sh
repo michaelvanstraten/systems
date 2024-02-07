@@ -134,7 +134,7 @@ fi
 
 if command_exists "fish" && confirm_action "Set fish as default shell"; then
 	fish_path=$(command -v fish)
-	sudo tee -a /etc/shells <<< "$fish_path" > /dev/null
+	echo "$fish_path" | sudo tee -a /etc/shells >/dev/null
 	chsh -s "$fish_path" "$USER"
 fi
 
