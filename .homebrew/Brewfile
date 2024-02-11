@@ -81,7 +81,6 @@ cask "font-jetbrains-mono-nerd-font"    # Developer-targeted fonts with a high n
 # cask "utm"        # Virtual machines UI using QEMU
 # cask "vagrant"    # Development environment
 # brew "podman"     # Tool for managing OCI containers and pods
-# brew "minikube"   # Run a Kubernetes cluster locally
 # brew "qemu"       # Emulator for x86 and PowerPC
 
 # Gaming
@@ -132,6 +131,7 @@ cask "font-jetbrains-mono-nerd-font"    # Developer-targeted fonts with a high n
 # Kubernetes
 # brew "kubernetes-cli"     # Kubernetes command-line interface
 # brew "krew"               # Package manager for kubectl plugins
+# brew "minikube"   # Run a Kubernetes cluster locally
 # brew "fluxcd/tap/flux"    # Flux CLI
 
 # Cryptocurrency
