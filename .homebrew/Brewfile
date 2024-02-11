@@ -6,7 +6,7 @@ tap "homebrew/cask-versions"  # Required for firefox-nightly
 tap "theseal/ssh-askpass"
 
 brew "eza"                        # Modern, maintained replacement for ls
-brew "bash"                       # Bourne-Again SHell, a UNIX command interpreter
+brew "bash"                       # Bourne-Again Shell, a UNIX command interpreter
 brew "trash"                      # CLI tool that moves files or folders to the trash
 brew "tmux"                       # Terminal multiplexer
 brew "z"                          # Tracks most-used directories to make cd smarter
