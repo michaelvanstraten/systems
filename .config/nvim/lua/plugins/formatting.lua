@@ -14,6 +14,7 @@ return {
 		opts = function(_, opts)
 			opts.formatters_by_ft["python"] = { "black" }
 			opts.formatters_by_ft["markdown"] = { "mdformat" }
+			opts.formatters_by_ft["cpp"] = { "clang-format" }
 		end,
 	},
 }
