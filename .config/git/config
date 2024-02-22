@@ -8,13 +8,12 @@
     editor = nvim
 	excludesFile = ~/.config/git/ignore
     ignorecase = false
-
 [pull]
     rebase = true
 [push]
 	default = current
 [cinnabar]
-	version-check = 1706007456
+	version-check = 1707138726
 [fetch]
 	prune = true
 [commit]
