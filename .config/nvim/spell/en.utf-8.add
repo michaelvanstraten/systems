@@ -55,3 +55,6 @@ Userspace
 QEMU
 OCI
 Dependency
+mozilla
+opentelemetry
+opentelemetry
