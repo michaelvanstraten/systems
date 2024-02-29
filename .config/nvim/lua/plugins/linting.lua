@@ -3,7 +3,8 @@ return {
 	opts = {
 		linters_by_ft = {
 			fish = { "fish" },
-            sh = { "shellcheck" }
+			sh = { "shellcheck" },
+			dockerfile = { "hadolint" },
 		},
 	},
 }
