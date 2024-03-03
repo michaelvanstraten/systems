@@ -30,7 +30,7 @@ abbr -a kl "kubectl logs"
 # Git abbreviations
 abbr -a gs "git status"
 abbr -a gl "git log"
-abbr -a gc "git commit"
+abbr -a gc "git clone"
 abbr -a gr "git rebase"
 
 # Replace "ls" with "eza" if available
