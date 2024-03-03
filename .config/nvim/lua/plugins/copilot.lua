@@ -3,15 +3,26 @@ return {
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
 		build = ":Copilot auth",
+		keys = {
+			{
+				"<leader>ka",
+				"<cmd>Copilot attach<cr>",
+				mode = { "n" },
+				desc = "Attach to the current buffer",
+			},
+			{
+				"<leader>k",
+				"<cmd>Copilot panel<cr>",
+				mode = { "n" },
+				desc = "Open Copilot panel",
+			},
+		},
 		opts = {
 			panel = {
-				enabled = true,
+				auto_refresh = true,
 				keymap = {
-					jump_prev = "[[",
-					jump_next = "]]",
-					accept = "<CR>",
-					refresh = "gr",
-					open = "<leader>c",
+					jump_next = "j",
+					jump_prev = "k",
 				},
 				layout = {
 					position = "right",
@@ -20,17 +31,6 @@ return {
 			suggestion = {
 				enabled = false,
 				auto_trigger = true,
-				keymap = {
-					accept = "<M-l>",
-					accept_word = false,
-					accept_line = false,
-					next = "<M-]>",
-					prev = "<M-[>",
-					dismiss = "<C-]>",
-				},
-			},
-			filetypes = {
-				markdown = true,
 			},
 		},
 	},
