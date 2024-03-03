@@ -18,13 +18,11 @@ chmod 600 "$KEYS_DIR"/*
 # Set immutable attribute to prevent deletion of keys and config on Linux
 if [[ "$(uname -s)" == "Linux" ]]; then
 	chattr +i "$KEYS_DIR"
-	chattr +i "$HOME/.ssh/config"
 fi
 
 # Set restricted flag to prevent deletion of keys and config on macOS
 if [[ "$(uname -s)" == "Darwin" ]]; then
 	chflags uchg "$KEYS_DIR"
-	chflags uchg "$HOME/.ssh/config"
 fi
 
 echo "SSH key permissions and configuration locked down successfully."
