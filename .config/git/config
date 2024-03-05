@@ -1,6 +1,7 @@
 [user]
 	name = Michael van Straten 
     email = michael@vanstraten.de
+	signingkey = B7AA2A517BE93CB27B3B980AA81434236CF08641
 [init]
 	defaultBranch = master
 [core]
