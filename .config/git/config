@@ -1,6 +1,6 @@
 [user]
 	name = Michael van Straten 
-    email = mvanstraten@mozilla.com
+    email = michael@vanstraten.de
 [init]
 	defaultBranch = master
 [core]
@@ -16,3 +16,5 @@
 	version-check = 1706007456
 [fetch]
 	prune = true
+[commit]
+	gpgsign = true
