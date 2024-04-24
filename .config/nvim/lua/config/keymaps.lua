@@ -7,6 +7,9 @@ map("i", "kj", "<ESC>", { desc = "Escape insert mode" })
 -- Disable recording of macros
 map({ "n" }, "q", "<nop>", { desc = "does nothing to disable recording" })
 
+-- Clear search with <esc>
+map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
+
 -- Move Lines
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move line Down" })
 map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move line Up" })
