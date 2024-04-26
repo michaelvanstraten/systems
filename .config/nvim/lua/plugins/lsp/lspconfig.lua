@@ -38,5 +38,6 @@ return {
 			capabilities = capabilities,
 		})
 		lspconfig.nil_ls.setup({ capabilities = capabilities })
+		lspconfig.yamlls.setup({ capabilities = capabilities })
 	end,
 }
