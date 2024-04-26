@@ -7,6 +7,7 @@ return {
 			linters_by_ft = {
 				fish = { "fish" },
 				sh = { "shellcheck" },
+				tex = { "lacheck" },
 			},
 		},
 		config = function(_, opts)
