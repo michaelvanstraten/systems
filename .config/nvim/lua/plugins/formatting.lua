@@ -21,11 +21,17 @@ return {
 					sh = { "shfmt" },
 					python = { "black" },
 					tex = { "latexindent" },
+					nix = { "nixfmt" },
+					markdown = { "prettier" },
+					yaml = { "prettier" },
 				},
 				formatters = {
 					latexindent = {
 						args = { "-m", "-l", "-" },
 						cwd = require("conform.util").root_file({ ".latexindent.yaml" }),
+					},
+					prettier = {
+						prepend_args = { "--prose-wrap", "always" },
 					},
 				},
 			}
