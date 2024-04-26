@@ -1,32 +1,41 @@
 return {
-	{
-		"neovim/nvim-lspconfig",
-		event = "VeryLazy",
-		dependencies = {
-			"folke/neoconf.nvim",
-			"folke/neodev.nvim",
-		},
-		config = function()
-			local lspconfig = require("lspconfig")
+	"neovim/nvim-lspconfig",
+	event = "VeryLazy",
+	dependencies = {
+		{ "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
+		{ "folke/neodev.nvim", opts = {} },
+		"hrsh7th/cmp-nvim-lsp",
+	},
+	config = function()
+		local lspconfig = require("lspconfig")
+		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-			lspconfig.lua_ls.setup({
-				settings = {
-					Lua = {
-						workspace = {
-							checkThirdParty = false,
-						},
-						codeLens = {
-							enable = true,
-						},
-						completion = {
-							callSnippet = "Replace",
-						},
+		local capabilities = vim.tbl_deep_extend(
+			"force",
+			{},
+			vim.lsp.protocol.make_client_capabilities(),
+			cmp_nvim_lsp.default_capabilities()
+		)
+
+		lspconfig.lua_ls.setup({
+			capabilities = capabilities,
+			settings = {
+				Lua = {
+					workspace = {
+						checkThirdParty = false,
+					},
+					codeLens = {
+						enable = true,
+					},
+					completion = {
+						callSnippet = "Replace",
 					},
 				},
-			})
-
-			lspconfig.texlab.setup({})
-			lspconfig.rust_analyzer.setup({})
-		end,
-	},
+			},
+		})
+		lspconfig.texlab.setup({ capabilities = capabilities })
+		lspconfig.rust_analyzer.setup({
+			capabilities = capabilities,
+		})
+	end,
 }
