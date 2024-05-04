@@ -7,6 +7,12 @@ g.maplocalleader = "\\"
 
 local opt = vim.opt
 
+if not vim.env.SSH_TTY then
+  -- only set clipboard if not in ssh, to make sure the OSC 52
+  -- integration works automatically. Requires Neovim >= 0.10.0
+  opt.clipboard = "unnamedplus" -- Sync with system clipboard
+end
+
 -- Indentation
 opt.shiftwidth = 4
 opt.tabstop = 4
