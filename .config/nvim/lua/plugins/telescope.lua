@@ -28,6 +28,14 @@ return {
 			end,
 			desc = "Lists spelling suggestions for the current word under the cursor, replaces word with selected suggestion on `<cr>`.",
 		},
+		{
+			"gd",
+			function()
+				local builtin = require("telescope.builtin")
+				builtin.lsp_definitions()
+			end,
+			desc = "Goto the definition of the word under the cursor, if there's only one, otherwise show all options in Telescope.",
+		},
 	},
 	opts = {},
 }
