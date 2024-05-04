@@ -36,6 +36,14 @@ return {
 			end,
 			desc = "Goto the definition of the word under the cursor, if there's only one, otherwise show all options in Telescope.",
 		},
+		{
+			"gr",
+			function()
+				local builtin = require("telescope.builtin")
+				builtin.lsp_references()
+			end,
+			desc = "Lists LSP references for word under the cursor.",
+		},
 	},
 	opts = {},
 }
