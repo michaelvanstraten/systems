@@ -26,8 +26,8 @@ return {
 					end,
 				},
 				window = {
-					completion = cmp.config.window.bordered({ winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None" }),
-					documentation = cmp.config.window.bordered({ winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None" }),
+					completion = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
 				},
 				mapping = {
 					["<CR>"] = cmp.mapping(function(fallback)
