@@ -14,7 +14,7 @@ require("lazy").setup({
 		event = "VeryLazy",
 		version = false, -- always use the latest git commit
 	},
-	install = { colorscheme = { "catppuccin", "habamax" } },
+	install = { colorscheme = { "cyberdream", "default" } },
 	performance = {
 		rtp = {
 			-- disable some rtp plugins
