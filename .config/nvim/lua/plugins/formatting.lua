@@ -25,6 +25,7 @@ return {
 					markdown = { "prettier" },
 					yaml = { "prettier" },
 					cpp = { "clang-format" },
+					json = { "prettier" },
 				},
 				formatters = {
 					latexindent = {
