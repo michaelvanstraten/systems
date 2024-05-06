@@ -24,6 +24,7 @@ return {
 					nix = { "nixfmt" },
 					markdown = { "prettier" },
 					yaml = { "prettier" },
+					cpp = { "clang-format" },
 				},
 				formatters = {
 					latexindent = {
