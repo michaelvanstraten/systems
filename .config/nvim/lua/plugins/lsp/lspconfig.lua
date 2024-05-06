@@ -40,5 +40,6 @@ return {
 		lspconfig.nil_ls.setup({ capabilities = capabilities })
 		lspconfig.yamlls.setup({ capabilities = capabilities })
 		lspconfig.pyright.setup({ capabilities = capabilities })
+		lspconfig.clangd.setup({ capabilities = capabilities })
 	end,
 }
