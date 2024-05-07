@@ -31,7 +31,7 @@ return {
 			preserve_window_proportions = true,
 			width = {
 				min = 30,
-				max = -1,
+				max = "25%",
 			},
 		},
 		renderer = {
