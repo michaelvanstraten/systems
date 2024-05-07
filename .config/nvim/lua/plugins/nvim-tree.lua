@@ -26,6 +26,7 @@ return {
 			vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
 		end,
 		hijack_cursor = true,
+		filters = { custom = { "^.git$" } },
 		view = {
 			preserve_window_proportions = true,
 			width = {
