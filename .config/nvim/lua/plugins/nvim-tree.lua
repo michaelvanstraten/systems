@@ -43,9 +43,9 @@ return {
 			icons = {
 				show = {
 					folder = false,
+					git = false,
 				},
 			},
 		},
-		git = { enable = false },
 	},
 }
