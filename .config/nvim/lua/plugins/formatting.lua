@@ -9,7 +9,7 @@ return {
 				function()
 					require("conform").format()
 				end,
-				mode = { "n" },
+				mode = { "n", "v" },
 				desc = "Format the buffer",
 			},
 		},
