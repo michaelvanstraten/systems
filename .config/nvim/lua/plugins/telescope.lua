@@ -20,7 +20,7 @@ return {
 			desc = "Lists normal mode keymappings",
 		},
 		{
-			"ss",
+			"<leader>ss",
 			function()
 				local builtin = require("telescope.builtin")
 				builtin.spell_suggest()
