@@ -7,34 +7,34 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
-	change_detection = {
-		notify = false,
-	},
-	defaults = {
-		event = "VeryLazy",
-		version = false, -- always use the latest git commit
-	},
-	install = { colorscheme = { "cyberdream", "default" } },
-	performance = {
-		rtp = {
-			-- disable some rtp plugins
-			disabled_plugins = {
-				"gzip",
-				-- "matchit",
-				-- "matchparen",
-				-- "netrwPlugin",
-				"tarPlugin",
-				"tohtml",
-				"tutor",
-				"zipPlugin",
-			},
-		},
-	},
-	spec = {
-		{ import = "plugins" },
-		{ import = "plugins.lsp" },
-	},
-	ui = {
-		border = "rounded",
-	},
+    change_detection = {
+        notify = false,
+    },
+    defaults = {
+        event = "VeryLazy",
+        version = false, -- always use the latest git commit
+    },
+    install = { colorscheme = { "cyberdream", "default" } },
+    performance = {
+        rtp = {
+            -- disable some rtp plugins
+            disabled_plugins = {
+                "gzip",
+                -- "matchit",
+                -- "matchparen",
+                -- "netrwPlugin",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
+            },
+        },
+    },
+    spec = {
+        { import = "plugins" },
+        { import = "plugins.lsp" },
+    },
+    ui = {
+        border = "rounded",
+    },
 })

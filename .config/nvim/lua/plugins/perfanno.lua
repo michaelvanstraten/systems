@@ -1,9 +1,9 @@
 return {
-	{
-		"t-troebst/perfanno.nvim",
-		cmd = {
-			"PerfLuaProfileStart",
-		},
-		config = true,
-	},
+    {
+        "t-troebst/perfanno.nvim",
+        cmd = {
+            "PerfLuaProfileStart",
+        },
+        config = true,
+    },
 }

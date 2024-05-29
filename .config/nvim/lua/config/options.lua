@@ -8,9 +8,9 @@ g.maplocalleader = "\\"
 local opt = vim.opt
 
 if not vim.env.SSH_TTY then
-  -- only set clipboard if not in ssh, to make sure the OSC 52
-  -- integration works automatically. Requires Neovim >= 0.10.0
-  opt.clipboard = "unnamedplus" -- Sync with system clipboard
+    -- only set clipboard if not in ssh, to make sure the OSC 52
+    -- integration works automatically. Requires Neovim >= 0.10.0
+    opt.clipboard = "unnamedplus" -- Sync with system clipboard
 end
 
 -- Indentation
@@ -25,7 +25,7 @@ opt.relativenumber = true
 opt.pumblend = 10
 opt.termguicolors = true
 opt.fillchars = {
-  eob = " ",
+    eob = " ",
 }
 
 -- Mouse
@@ -45,7 +45,7 @@ opt.spell = true
 
 -- Additional Settings
 if vim.fn.has("nvim-0.10") == 1 then
-	opt.smoothscroll = true
+    opt.smoothscroll = true
 end
 
 -- Keyword Matching
