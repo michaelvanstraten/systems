@@ -3,7 +3,7 @@
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    lazy2nix.url = "/Users/michaelvanstraten/Projects/lazy2nix/";
+    lazy2nix.url = "github:michaelvanstraten/lazy2nix/";
   };
 
   outputs =
@@ -15,7 +15,8 @@
     }:
     flake-utils.lib.eachDefaultSystem (system: {
       packages.default =
-        ((lazy2nix.lib { pkgs = import nixpkgs { inherit system; }; }).mkNeovimConfiguration { configDir = ./.; })
-        .neovim;
+        ((lazy2nix.lib { pkgs = import nixpkgs { inherit system; }; }).mkNeovimConfiguration {
+          configDir = ./.;
+        }).neovim;
     });
 }

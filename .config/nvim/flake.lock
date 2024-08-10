@@ -39,16 +39,17 @@
         "lazy": "lazy"
       },
       "locked": {
-        "dirtyRev": "e61577f6165524f30d4aa931cfce78066ee93180-dirty",
-        "dirtyShortRev": "e61577f-dirty",
         "lastModified": 1723294509,
-        "narHash": "sha256-j6aykS95v8sIfcxH+Q8UkVsx53dEBPt9ez/Bl6eiyNU=",
-        "type": "git",
-        "url": "file:///Users/michaelvanstraten/Projects/lazy2nix"
+        "narHash": "sha256-xJcmRf1XIkyzAyzIjcuDdcT51ztnVyWmZ9Ap7YK+imA=",
+        "owner": "michaelvanstraten",
+        "repo": "lazy2nix",
+        "rev": "e61577f6165524f30d4aa931cfce78066ee93180",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///Users/michaelvanstraten/Projects/lazy2nix"
+        "owner": "michaelvanstraten",
+        "repo": "lazy2nix",
+        "type": "github"
       }
     },
     "nixpkgs": {
