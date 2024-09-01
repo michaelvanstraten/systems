@@ -23,6 +23,31 @@ consistent experience across different machines.
 - **Automated Checks**: Includes pre-commit hooks for maintaining code quality
   and consistency.
 
+## To-Do
+
+### Configuration Translation
+
+- [ ] Translate legacy Neovim config to Nix-based configuration.
+- [ ] Translate legacy Firefox user profile config to Nix-based configuration.
+
+### System Management
+
+- [ ] Make non-Darwin apps manageable using Nix.
+- [ ] Add work machine configuration.
+- [ ] Abstract dotfiles into modules for better reusability and maintainability.
+
+### Deployment and Secrets Management
+
+- [ ] Explore using [MicroMDM](https://micromdm.io/) to deploy new Darwin
+      systems.
+- [ ] Use [Teller](https://github.com/spectralops/teller) to manage secrets
+      securely.
+
+### Miscellaneous
+
+- [ ] Add [EditorConfig](https://editorconfig.org/) to dotfiles for consistent
+      coding styles.
+
 ## Contributing
 
 Contributions are welcome! If you have any improvements or bug fixes, feel free
