@@ -40,6 +40,19 @@
       ...
     }@inputs:
     {
+      darwinConfigurations = {
+        "MacBook-Pro-von-Michael" = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            home-manager.darwinModule
+            ./darwin/hosts/personal-macbook-pro.nix
+          ];
+          specialArgs = {
+            inherit inputs;
+          };
+        };
+      };
+
       nixosConfigurations =
         let
           lib = nixpkgs.lib;
