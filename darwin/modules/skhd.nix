@@ -1,0 +1,20 @@
+{ ... }:
+{
+  services.skhd.enable = false;
+  services.skhd.skhdConfig = ''
+    # focus windows using hjkl
+    alt + ctrl - h : yabai -m window --focus west
+    alt + ctrl - l : yabai -m window --focus east
+    alt + ctrl - k : yabai -m window --focus north
+    alt + ctrl - j : yabai -m window --focus south
+
+    # toggle float of window
+    alt + ctrl - t : yabai -m window --toggle float
+
+    # swap windows using hjkl
+    shift + alt + ctrl - h : yabai -m window --swap west
+    shift + alt + ctrl - l : yabai -m window --swap east
+    shift + alt + ctrl - k : yabai -m window --swap north
+    shift + alt + ctrl - j : yabai -m window --swap south
+  '';
+}
