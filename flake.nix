@@ -51,6 +51,16 @@
             inherit inputs;
           };
         };
+        "N7R221P6V5" = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            home-manager.darwinModule
+            ./darwin/hosts/mozilla-macbook-pro.nix
+          ];
+          specialArgs = {
+            inherit inputs;
+          };
+        };
       };
 
       nixosConfigurations =
