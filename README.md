@@ -33,7 +33,7 @@ consistent experience across different machines.
 ### System Management
 
 - [ ] Make non-Darwin apps manageable using Nix.
-- [ ] Add work machine configuration.
+- [x] Add work machine configuration.
 - [ ] Abstract dotfiles into modules for better reusability and maintainability.
 
 ### Deployment and Secrets Management
