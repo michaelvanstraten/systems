@@ -6,6 +6,7 @@
 }:
 {
   nix = {
+    channel.enable = false;
     distributedBuilds = true;
     linux-builder = {
       enable = true;
