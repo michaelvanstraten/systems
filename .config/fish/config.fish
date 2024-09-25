@@ -15,26 +15,12 @@ alias rm="rm -i"
 
 # Basic abbreviations
 abbr -a c clear
-abbr -a b brew
-abbr -a vim nvim
-abbr -a npm pnpm
 
 # Abbreviation for creating a new tmux session with the name of the current directory
 abbr -a tn 'tmux new -s (pwd | sed "s/.*\///g")'
 
-# Kubectl abbreviations
-abbr -a k kubectl
-abbr -a kg "kubectl get"
-abbr -a kl "kubectl logs"
-
 # Git abbreviations
-abbr -a gs "git status"
-abbr -a gl "git log"
 abbr -a gc "git clone"
-abbr -a gr "git rebase"
-
-# moz-phab abbreviations
-abbr -a mz "moz-phab"
 
 # Replace "ls" with "eza" if available
 if command -q eza
