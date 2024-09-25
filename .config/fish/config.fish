@@ -7,9 +7,6 @@ set -Ux EDITOR nvim
 # Set common Linux tools config paths
 set -Ux XDG_CONFIG_HOME "$HOME/.config"
 
-# Set pyenv root directory
-set -x PYENV_ROOT "$HOME/.pyenv"
-
 # Prevent my self from my self (i recently `rm -rf` my home directory)
 alias rm="rm -i"
 
@@ -39,11 +36,6 @@ end
 # Setup zoxide
 if command -q zoxide
     zoxide init fish | source
-end
-
-# Initialize pyenv
-if command -q pyenv
-    pyenv init - | source
 end
 
 # Initialize starship prompt
