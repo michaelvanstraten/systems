@@ -1,0 +1,20 @@
+FROM --platform=linux/amd64 ubuntu:noble
+
+RUN apt update && apt install vim sudo curl git -y
+
+# Create user john
+RUN useradd --create-home --groups sudo john 
+
+# Allow user john to run sudo without password
+RUN echo 'john ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+USER john
+WORKDIR /home/john
+
+# Simulate existing dotfiles
+# RUN git clone --bare https://github.com/joshmedeski/dotfiles.git ".git"
+# RUN git config --unset core.bare
+# RUN git checkout --force
+# RUN rm -rf .git
+
+ENTRYPOINT CI=true bash -c "$(curl -sS https://raw.githubusercontent.com/michaelvanstraten/dotfiles/master/.scripts/bootstrap.sh) && bash"
