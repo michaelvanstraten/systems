@@ -1,14 +1,1 @@
-*
 
-!.gitignore
-!.gitmodules
-!.bash_profile
-!.zprofile
-!readme.md
-!.cargo/
-!.config/
-!.scripts/
-!.mozconfigs/
-!.homebrew/
-!Library/Application Support/VSCodium/User/settings.json
-!Library/Application Support/pypoetry/config.toml
