@@ -16,11 +16,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixinate = {
-      url = "github:matthewcroughan/nixinate";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     cyberdream-theme = {
       url = "github:scottmckendry/cyberdream.nvim";
       flake = false;
@@ -35,14 +30,12 @@
       url = "github:bandithedoge/nixpkgs-firefox-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs =
     {
       flake-utils,
       nixpkgs,
-      nixinate,
       nix-darwin,
       home-manager,
       pre-commit-hooks,
@@ -53,8 +46,6 @@
       darwinConfigurations = import ./darwinConfigurations { inherit inputs nix-darwin home-manager; };
 
       nixosConfigurations = import ./nixosConfigurations { inherit nixpkgs; };
-
-      # apps = nixinate.nixinate.aarch64-linux self;
     }
     // flake-utils.lib.eachDefaultSystem (
       system:
