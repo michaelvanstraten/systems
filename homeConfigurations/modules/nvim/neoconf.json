@@ -1,0 +1,40 @@
+{
+    "lspconfig": {
+        "ltex": {
+            "ltex": {
+                "language": "auto",
+                "disabledRules": {
+                    "de": ["UNPAIRED_BRACKETS"]
+                },
+                "additionalrules": {
+                    "enablepickyrules": true
+                }
+            }
+        },
+        "pyright": {
+            "venv": "venv"
+        },
+        "rust_analyzer": {
+            "rust-analyzer": {
+                "check": {
+                    "features": "all",
+                    "command": "clippy"
+                },
+                "import": {
+                    "granularity": {
+                        "enforce": true,
+                        "group": "module"
+                    }
+                }
+            }
+        },
+        "yamlls": {
+            "yaml": {
+                "keyOrdering": false,
+                "format": {
+                    "enable": true
+                }
+            }
+        }
+    }
+}
