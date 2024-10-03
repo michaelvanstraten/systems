@@ -1,32 +1,41 @@
 {
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
+
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+
+    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
+
     nix-darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nixinate = {
       url = "github:matthewcroughan/nixinate";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     cyberdream-theme = {
       url = "github:scottmckendry/cyberdream.nvim";
       flake = false;
     };
+
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nixpkgs-firefox-darwin = {
       url = "github:bandithedoge/nixpkgs-firefox-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
+
   };
 
   outputs =
@@ -36,54 +45,14 @@
       nixinate,
       nix-darwin,
       home-manager,
+      pre-commit-hooks,
       self,
       ...
     }@inputs:
     {
-      darwinConfigurations = {
-        "MacBook-Pro-von-Michael" = nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          modules = [
-            home-manager.darwinModule
-            ./darwin/hosts/personal-macbook-pro.nix
-          ];
-          specialArgs = {
-            inherit inputs;
-          };
-        };
-        "N7R221P6V5" = nix-darwin.lib.darwinSystem {
-          system = "aarch64-darwin";
-          modules = [
-            home-manager.darwinModule
-            ./darwin/hosts/mozilla-macbook-pro.nix
-          ];
-          specialArgs = {
-            inherit inputs;
-          };
-        };
-      };
+      darwinConfigurations = import ./darwinConfigurations { inherit inputs nix-darwin home-manager; };
 
-      nixosConfigurations =
-        let
-          lib = nixpkgs.lib;
-          hostConfigurations = lib.filesystem.listFilesRecursive ./nixos/hosts;
-        in
-        lib.mergeAttrsList (
-          builtins.map (
-            hostConfiguration:
-            let
-              nixosConfiguration = nixpkgs.lib.nixosSystem {
-                modules = [ hostConfiguration ];
-                specialArgs = {
-                  make-disk-image = import "${nixpkgs}/nixos/lib/make-disk-image.nix";
-                };
-              };
-            in
-            {
-              ${nixosConfiguration.config.networking.hostName} = nixosConfiguration;
-            }
-          ) hostConfigurations
-        );
+      nixosConfigurations = import ./nixosConfigurations { inherit nixpkgs; };
 
       # apps = nixinate.nixinate.aarch64-linux self;
     }
@@ -93,24 +62,7 @@
         pkgs = import nixpkgs { inherit system; };
       in
       rec {
-        checks = {
-          pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-            src = ./.;
-            hooks = {
-              nixfmt = {
-                enable = true;
-                package = pkgs.nixfmt-rfc-style;
-              };
-              nil.enable = true;
-              prettier = {
-                enable = true;
-                settings = {
-                  prose-wrap = "always";
-                };
-              };
-            };
-          };
-        };
+        checks = import ./checks { inherit system pre-commit-hooks pkgs; };
 
         devShells = {
           default = pkgs.mkShell {
