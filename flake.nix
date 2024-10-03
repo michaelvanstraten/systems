@@ -1,9 +1,7 @@
 {
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-
     pre-commit-hooks.url = "github:cachix/git-hooks.nix";
 
     nix-darwin = {
@@ -34,12 +32,12 @@
 
   outputs =
     {
+      self,
       flake-utils,
       nixpkgs,
+      pre-commit-hooks,
       nix-darwin,
       home-manager,
-      pre-commit-hooks,
-      self,
       ...
     }@inputs:
     {
@@ -52,15 +50,27 @@
       let
         pkgs = import nixpkgs { inherit system; };
       in
-      rec {
+      {
+        # Checks pre-commit-hooks
         checks = import ./checks { inherit system pre-commit-hooks pkgs; };
 
-        devShells = {
-          default = pkgs.mkShell {
-            inherit (checks.pre-commit-check) shellHook;
-            buildInputs = checks.pre-commit-check.enabledPackages;
+        # Development shell with necessary tools
+        devShells =
+          let
+            pre-commit-check = self.checks.${system}.pre-commit-check;
+          in
+          {
+            default = pkgs.mkShell {
+              packages = pre-commit-check.enabledPackages ++ [
+                self.formatter.${system}
+                # Add other dependencies here
+              ];
+              inherit (pre-commit-check) shellHook;
+            };
           };
-        };
+
+        # Formatter for this flake
+        formatter = pkgs.nixfmt-rfc-style;
       }
     );
 }
