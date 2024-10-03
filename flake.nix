@@ -28,6 +28,11 @@
       url = "github:bandithedoge/nixpkgs-firefox-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -43,7 +48,7 @@
     {
       darwinConfigurations = import ./darwinConfigurations { inherit inputs nix-darwin home-manager; };
 
-      nixosConfigurations = import ./nixosConfigurations { inherit nixpkgs; };
+      nixosConfigurations = import ./nixosConfigurations { inherit inputs nixpkgs; };
     }
     // flake-utils.lib.eachDefaultSystem (
       system:
