@@ -2,9 +2,6 @@
 {
   imports = [
     ../modules/nix.nix
-    ../modules/skhd.nix
-    ../modules/system.nix
-    ../modules/yabai.nix
     ../modules/shells.nix
     ../modules/home-manager.nix
     ../modules/packages.nix
@@ -26,7 +23,7 @@
 
   security.pam.enableSudoTouchIdAuth = true;
 
-  home-manager.users.michaelvanstraten = import ../../dotfiles/michael;
+  home-manager.users.michaelvanstraten = import ../../homeConfigurations/personal.nix;
 
   environment.systemPackages = with pkgs; [ darwin.trash ];
 }

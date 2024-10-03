@@ -1,43 +1,39 @@
 {
     "title": "Mouse button 5 to Copy & Mouse button 4 to paste",
     "rules": [
-      {
-        "description": "Mouse button 5 to Copy",
-        "manipulators": [
-          {
-            "from": {
-              "pointing_button": "button5"
-            },
-            "to": [
-              {
-                "key_code": "c",
-                "modifiers": [
-                  "command"
-                ]
-              }
-            ],
-            "type": "basic"
-          }
-        ]
-      },
-      {
-        "description": "Mouse button 4 to paste",
-        "manipulators": [
-          {
-            "from": {
-              "pointing_button": "button4"
-            },
-            "to": [
-              {
-                "key_code": "v",
-                "modifiers": [
-                  "command"
-                ]
-              }
-            ],
-            "type": "basic"
-          }
-        ]
-      }
+        {
+            "description": "Mouse button 5 to Copy",
+            "manipulators": [
+                {
+                    "from": {
+                        "pointing_button": "button5"
+                    },
+                    "to": [
+                        {
+                            "key_code": "c",
+                            "modifiers": ["command"]
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        },
+        {
+            "description": "Mouse button 4 to paste",
+            "manipulators": [
+                {
+                    "from": {
+                        "pointing_button": "button4"
+                    },
+                    "to": [
+                        {
+                            "key_code": "v",
+                            "modifiers": ["command"]
+                        }
+                    ],
+                    "type": "basic"
+                }
+            ]
+        }
     ]
-  }
+}

@@ -2,7 +2,5 @@
 {
   home.file.".config/nvim".source = ./.;
 
-  home.packages = [
-    inputs.neovim-nightly-overlay.packages.${pkgs.system}.default
-  ];
+  home.packages = [ inputs.neovim-nightly-overlay.packages.${pkgs.system}.default ];
 }

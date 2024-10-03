@@ -51,9 +51,9 @@
           chars = "\\u0001";
         }
         {
-          key = "J";
+          key = "s";
           mods = "Command";
-          chars = "\\u0001T";
+          chars = "\\u0001s";
         }
       ];
     };

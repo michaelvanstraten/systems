@@ -4,9 +4,7 @@
             "ltex": {
                 "language": "auto",
                 "disabledRules": {
-                    "de": [
-                        "UNPAIRED_BRACKETS"
-                    ]
+                    "de": ["UNPAIRED_BRACKETS"]
                 },
                 "additionalrules": {
                     "enablepickyrules": true
