@@ -6,6 +6,7 @@
 }:
 {
   nix = {
+    package = pkgs.nixVersions.latest;
     channel.enable = false;
     distributedBuilds = true;
     linux-builder = {
@@ -20,7 +21,6 @@
       experimental-features = [
         "nix-command"
         "flakes"
-        "repl-flake"
       ];
       trusted-users = [ "@admin" ];
     };
