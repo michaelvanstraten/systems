@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 {
   nix = {
     package = pkgs.nixVersions.latest;
@@ -15,9 +15,4 @@
   };
 
   services.nix-daemon.enable = true;
-
-  nixpkgs = {
-    source = inputs.nixpkgs;
-  };
-
 }
