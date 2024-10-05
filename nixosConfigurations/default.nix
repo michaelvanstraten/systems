@@ -1,21 +1,19 @@
-{ nixpkgs, ... }:
+{ inputs, nixpkgs, ... }:
 let
-  lib = nixpkgs.lib;
-  hostConfigurations = lib.filesystem.listFilesRecursive ./hosts;
+  inherit (nixpkgs.lib) nixosSystem;
+
+  defaultArgs = {
+    specialArgs = {
+      make-disk-image = import "${nixpkgs}/nixos/lib/make-disk-image.nix";
+      inherit inputs;
+    };
+  };
+
 in
-lib.mergeAttrsList (
-  builtins.map (
-    hostConfiguration:
-    let
-      nixosConfiguration = nixpkgs.lib.nixosSystem {
-        modules = [ hostConfiguration ];
-        specialArgs = {
-          make-disk-image = import "${nixpkgs}/nixos/lib/make-disk-image.nix";
-        };
-      };
-    in
-    {
-      ${nixosConfiguration.config.networking.hostName} = nixosConfiguration;
-    }
-  ) hostConfigurations
-)
+{
+  h2946065 = nixosSystem (defaultArgs // { modules = [ ./hosts/h2946065/configuration.nix ]; });
+
+  rack-01-k8s-master-nuc-01 = nixosSystem (
+    defaultArgs // { modules = [ ./hosts/rack-01/k8s-master-nuc-01.nix ]; }
+  );
+}
