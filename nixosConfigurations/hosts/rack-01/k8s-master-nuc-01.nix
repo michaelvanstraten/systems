@@ -1,11 +1,15 @@
-{ ... }:
+{ nixosModules, ... }:
 {
-  imports = [
-    ../../modules
-    ../../modules/hardware/intel-nuc.nix
-    ../../modules/roles/k8s-master.nix
-    ../../modules/format/raw-efi.nix
+  imports = with nixosModules; [
+    format.raw-efi
+    hardware.intel-nuc
+    nix
+    roles.k8s-master
+    ssh
+    users
   ];
+
+  console.keyMap = "de";
 
   networking.hostName = "rack-01-k8s-master-nuc-01";
 
@@ -16,4 +20,6 @@
     substituteOnTarget = true;
     hermetic = false;
   };
+
+  system.stateVersion = "25.11";
 }
