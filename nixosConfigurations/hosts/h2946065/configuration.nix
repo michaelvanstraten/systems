@@ -1,12 +1,16 @@
-{ pkgs, ... }:
+{ nixosModules, pkgs, ... }:
 {
-  imports = [
-    ../../modules
-    ../../modules/hardware/libvirtd.nix
+  imports = with nixosModules; [
+    hardware.libvirtd
+    nix
+    ssh
+    users
     ./virtual-disk-MBR.nix
   ];
 
   networking.hostName = "h2946065";
+
+  console.keyMap = "de";
 
   nixpkgs.hostPlatform = "x86_64-linux";
 

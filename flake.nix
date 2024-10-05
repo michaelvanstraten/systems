@@ -48,7 +48,8 @@
     {
       darwinConfigurations = import ./darwinConfigurations { inherit inputs nix-darwin home-manager; };
 
-      nixosConfigurations = import ./nixosConfigurations { inherit inputs nixpkgs; };
+      nixosConfigurations = import ./nixosConfigurations { inherit self inputs nixpkgs; };
+      nixosModules = import ./nixosModules { inherit nixpkgs; };
     }
     // flake-utils.lib.eachDefaultSystem (
       system:
