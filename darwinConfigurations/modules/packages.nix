@@ -1,7 +1,7 @@
-{ inputs, pkgs, ... }:
+{ nixpkgs-firefox-darwin, pkgs, ... }:
 {
   nixpkgs = {
-    overlays = with inputs; [ nixpkgs-firefox-darwin.overlay ];
+    overlays = [ nixpkgs-firefox-darwin.overlay ];
   };
 
   environment.systemPackages = with pkgs; [

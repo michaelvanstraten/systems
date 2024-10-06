@@ -1,11 +1,11 @@
-{ inputs, pkgs, ... }:
+{ cyberdream-theme, pkgs, ... }:
 {
   fonts.fontconfig.enable = true;
   home.packages = [ pkgs.nerdfonts ];
   programs.alacritty = {
     enable = true;
     settings = {
-      import = [ "${inputs.cyberdream-theme}/extras/alacritty/cyberdream.toml" ];
+      import = [ "${cyberdream-theme}/extras/alacritty/cyberdream.toml" ];
       font = {
         size = 14;
         normal = {

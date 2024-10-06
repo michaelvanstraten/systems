@@ -1,19 +1,11 @@
-{
-  inputs,
-  self,
-  nixpkgs,
-  nixosModules ? self.nixosModules,
-  disko ? inputs.disko,
-  ...
-}:
+{ nixpkgs, ... }@args:
 let
   inherit (nixpkgs.lib) nixosSystem;
 
   defaultArgs = {
     specialArgs = {
       make-disk-image = import "${nixpkgs}/nixos/lib/make-disk-image.nix";
-      inherit disko nixosModules;
-    };
+    } // args;
   };
 
 in

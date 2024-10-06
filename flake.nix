@@ -1,17 +1,8 @@
 {
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
-
-    nix-darwin = {
-      url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+    BetterFox = {
+      url = "github:yokoffing/BetterFox";
+      flake = false;
     };
 
     cyberdream-theme = {
@@ -19,9 +10,32 @@
       flake = false;
     };
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixpkgs = {
+      url = "github:nixos/nixpkgs/nixos-unstable";
     };
 
     nixpkgs-firefox-darwin = {
@@ -29,9 +43,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
     };
   };
 
@@ -45,11 +58,13 @@
       home-manager,
       ...
     }@inputs:
+    let
+      callModule = modulePath: extraArgs: import modulePath (self.outputs // inputs // extraArgs);
+    in
     {
-      darwinConfigurations = import ./darwinConfigurations { inherit inputs nix-darwin home-manager; };
-
-      nixosConfigurations = import ./nixosConfigurations { inherit self inputs nixpkgs; };
-      nixosModules = import ./nixosModules { inherit nixpkgs; };
+      darwinConfigurations = callModule ./darwinConfigurations { };
+      nixosConfigurations = callModule ./nixosConfigurations { };
+      nixosModules = callModule ./nixosModules { };
     }
     // flake-utils.lib.eachDefaultSystem (
       system:
@@ -58,7 +73,7 @@
       in
       {
         # Checks pre-commit-hooks
-        checks = import ./checks { inherit system pre-commit-hooks pkgs; };
+        checks = callModule ./checks { inherit system; };
 
         # Development shell with necessary tools
         devShells =
