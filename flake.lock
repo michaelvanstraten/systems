@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "BetterFox": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1727376228,
+        "narHash": "sha256-s54Y6Ix7W942T+TIwGudoqDzUHifMBJOU9AWqpqIKl4=",
+        "owner": "yokoffing",
+        "repo": "BetterFox",
+        "rev": "ab5ede0fef39f02f0ef2bd119879226e3ab71f9f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yokoffing",
+        "repo": "BetterFox",
+        "type": "github"
+      }
+    },
     "cyberdream-theme": {
       "flake": false,
       "locked": {
@@ -408,6 +424,7 @@
     },
     "root": {
       "inputs": {
+        "BetterFox": "BetterFox",
         "cyberdream-theme": "cyberdream-theme",
         "disko": "disko",
         "flake-utils": "flake-utils",

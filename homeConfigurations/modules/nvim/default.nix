@@ -1,6 +1,6 @@
-{ inputs, pkgs, ... }:
+{ neovim-nightly-overlay, pkgs, ... }:
 {
   home.file.".config/nvim".source = ./.;
 
-  home.packages = [ inputs.neovim-nightly-overlay.packages.${pkgs.system}.default ];
+  home.packages = [ neovim-nightly-overlay.packages.${pkgs.system}.default ];
 }

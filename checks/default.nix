@@ -1,8 +1,4 @@
-{
-  system,
-  pre-commit-hooks,
-  pkgs,
-}:
+{ system, pre-commit-hooks, ... }:
 {
   pre-commit-check = pre-commit-hooks.lib.${system}.run {
     src = ./.;

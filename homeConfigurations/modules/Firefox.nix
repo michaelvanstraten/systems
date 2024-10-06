@@ -1,4 +1,4 @@
-{ inputs, config, ... }:
+{ BetterFox, config, ... }:
 {
   programs.firefox = {
     # Let Firefox package be managed by the system
@@ -25,7 +25,7 @@
         "browser.translations.enable" = false;
       };
 
-      extraConfig = builtins.readFile "${inputs.BetterFox}/user.js";
+      extraConfig = builtins.readFile "${BetterFox}/user.js";
     };
   };
 }
