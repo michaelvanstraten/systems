@@ -1,11 +1,12 @@
 { nixosModules, pkgs, ... }:
 {
   imports = with nixosModules; [
+    ./virtual-disk-MBR.nix
     hardware.libvirtd
     nix
+    personal-cloud
     ssh
     users
-    ./virtual-disk-MBR.nix
   ];
 
   networking.hostName = "h2946065";
@@ -25,7 +26,6 @@
 
   boot.kernel.sysctl = {
     "net.ipv4.ip_unprivileged_port_start" = 80;
-
   };
 
   users.users.michael.extraGroups = [ "docker" ];

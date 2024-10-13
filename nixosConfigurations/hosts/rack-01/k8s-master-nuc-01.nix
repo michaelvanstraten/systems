@@ -4,6 +4,7 @@
     format.raw-efi
     hardware.intel-nuc
     nix
+    personal-cloud
     roles.k8s-master
     ssh
     users
