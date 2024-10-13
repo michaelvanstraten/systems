@@ -35,7 +35,7 @@
     };
 
     nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
+      url = "github:michaelvanstraten/nixpkgs/add-godns-service";
     };
 
     nixpkgs-firefox-darwin = {
@@ -45,6 +45,11 @@
 
     pre-commit-hooks = {
       url = "github:cachix/git-hooks.nix";
+    };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
