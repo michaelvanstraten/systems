@@ -1,19 +1,24 @@
-{ pkgs, lib, ... }:
 {
-  imports = [
-    ./modules/Alacritty.nix
-    ./modules/darwin
-    ./modules/Karabiner-Elements
-    ./modules/Poetry.nix
-    ./modules/VSCodium.nix
-    ./modules/Firefox.nix
-    ./modules/git.nix
-    ./modules/nvim
-    ./modules/Lazygit.nix
-    ./modules/starship.nix
-    ./modules/sesh.nix
-    ./modules/shells.nix
-    ./modules/tmux
+  homeModules,
+  pkgs,
+  lib,
+  ...
+}:
+{
+  imports = with homeModules; [
+    Alacritty
+    darwin.defaults
+    Karabiner-Elements.default
+    Poetry
+    VSCodium
+    Firefox
+    git
+    nvim.default
+    Lazygit
+    starship
+    sesh
+    shells
+    tmux.default
   ];
 
   xdg.enable = true;
@@ -66,7 +71,7 @@
   };
 
   targets.darwin.defaults."com.apple.dock".persistent-apps =
-    (import modules/darwin/utils.nix { inherit lib; }).mkPersistentApps
+    (homeModules.darwin.utils { inherit lib; }).mkPersistentApps
       [
         # Add wanted items back to the dock
         "/System/Applications/Mail.app/"

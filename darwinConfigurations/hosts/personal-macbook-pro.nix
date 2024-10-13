@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ darwinModules, pkgs, ... }:
 {
-  imports = [
-    ../modules/nix.nix
-    ../modules/shells.nix
-    ../modules/home-manager.nix
-    ../modules/packages.nix
+  imports = with darwinModules; [
+    home-manager
+    nix
+    packages
+    shells
   ];
 
   nixpkgs = {

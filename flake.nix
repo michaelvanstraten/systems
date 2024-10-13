@@ -64,12 +64,15 @@
       ...
     }@inputs:
     let
-      callModule = modulePath: extraArgs: import modulePath (self.outputs // inputs // extraArgs);
+      callModule =
+        modulePath: extraArgs:
+        import modulePath ({ callModule = callModule; } // self.outputs // inputs // extraArgs);
     in
     {
       darwinConfigurations = callModule ./darwinConfigurations { };
       nixosConfigurations = callModule ./nixosConfigurations { };
-      nixosModules = callModule ./nixosModules { };
+
+      inherit (callModule ./modules { }) darwinModules homeModules nixosModules;
     }
     // flake-utils.lib.eachDefaultSystem (
       system:
