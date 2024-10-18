@@ -14,6 +14,10 @@ return {
         },
     },
     opts = {
+        filters = {
+            custom = { "^.git$" },
+        },
+        hijack_cursor = true,
         on_attach = function(buffer)
             local api = require("nvim-tree.api")
 
@@ -31,26 +35,27 @@ return {
 
             vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
         end,
-        hijack_cursor = true,
-        filters = { custom = { "^.git$" } },
-        view = {
-            preserve_window_proportions = true,
-            width = {
-                min = 30,
-                max = "25%",
-            },
-        },
         renderer = {
-            root_folder_label = false,
-            indent_markers = {
-                enable = true,
-                inline_arrows = true,
-            },
             icons = {
+                indent_markers = {
+                    enable = true,
+                    inline_arrows = true,
+                },
+                root_folder_label = false,
                 show = {
                     folder = false,
                     git = false,
                 },
+            },
+        },
+        update_focused_file = {
+            enable = true,
+        },
+        view = {
+            preserve_window_proportions = true,
+            width = {
+                max = "25%",
+                min = 30,
             },
         },
     },
