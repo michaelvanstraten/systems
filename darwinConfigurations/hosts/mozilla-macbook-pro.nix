@@ -1,6 +1,7 @@
 { darwinModules, pkgs, ... }:
 {
   imports = with darwinModules; [
+    environment
     home-manager
     nix
     packages
