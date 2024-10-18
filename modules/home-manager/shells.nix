@@ -4,12 +4,7 @@
     enable = true;
 
     shellAbbrs = {
-      c = "clear";
       gc = "git clone";
-      l = "ls";
-      la = "ls -a";
-      ll = "ls -l";
-      lla = "ls -la";
       tn = "tmux new -s (pwd | sed \"s/.*\///g\")";
     };
 

@@ -23,13 +23,7 @@
 
   xdg.enable = true;
   home = {
-    sessionVariables = {
-      EDITOR = "nvim";
-    };
     stateVersion = "24.05";
-    shellAliases = {
-      ls = "eza";
-    };
 
     packages = with pkgs; [
       wget
@@ -47,8 +41,6 @@
   };
 
   programs = {
-    eza.enable = true;
-
     sesh.enable = true;
 
     thefuck.enable = true;
