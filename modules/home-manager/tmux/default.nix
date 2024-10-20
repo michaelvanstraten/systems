@@ -3,6 +3,12 @@
   programs.tmux = {
     enable = true;
 
+    baseIndex = 1;
+
+    customPaneNavigationAndResize = true;
+
+    keyMode = "vi";
+
     extraConfig = builtins.readFile ./tmux.conf;
 
     sensibleOnTop = false;
