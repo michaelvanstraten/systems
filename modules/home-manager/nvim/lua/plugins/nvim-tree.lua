@@ -37,16 +37,16 @@ return {
         end,
         renderer = {
             icons = {
-                indent_markers = {
-                    enable = true,
-                    inline_arrows = true,
-                },
-                root_folder_label = false,
                 show = {
                     folder = false,
                     git = false,
                 },
             },
+            indent_markers = {
+                enable = true,
+                inline_arrows = true,
+            },
+            root_folder_label = false,
         },
         update_focused_file = {
             enable = true,
