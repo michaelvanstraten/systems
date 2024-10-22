@@ -7,6 +7,7 @@ in
   imports = with homeModules; [
     Alacritty
     darwin.defaults
+    darwin.defaultbrowser
     Karabiner-Elements.default
     Poetry
     VSCodium
@@ -60,6 +61,8 @@ in
 
     jq.enable = true;
   };
+
+  targets.darwin.defaultbrowser = "nightly";
 
   targets.darwin.defaults."com.apple.dock".persistent-apps =
     (homeModules.darwin.utils { inherit lib; }).mkPersistentApps
