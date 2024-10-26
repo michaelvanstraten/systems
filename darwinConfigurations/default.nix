@@ -1,7 +1,7 @@
 { nix-darwin, home-manager, ... }@args:
 
 {
-  "MacBook-Pro-von-Michael" = nix-darwin.lib.darwinSystem {
+  "michaels-macbook-pro" = nix-darwin.lib.darwinSystem {
     system = "aarch64-darwin";
     modules = [
       home-manager.darwinModule

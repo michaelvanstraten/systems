@@ -12,6 +12,11 @@
     config.allowUnfree = true;
   };
 
+  networking = {
+    computerName = "Michaels MacBook Pro";
+    hostName = "michaels-macbook-pro";
+  };
+
   users.users.michaelvanstraten = {
     createHome = true;
     description = "Michael van Straten";
