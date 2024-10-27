@@ -1,4 +1,3 @@
-{ ... }:
 {
   home.file.".mozconfig/mozconfig-ff-dbg".source = ./mozconfig-ff-dbg;
   home.file.".mozconfig/mozconfig-ff-rel-dbg".source = ./mozconfig-ff-rel-dbg;

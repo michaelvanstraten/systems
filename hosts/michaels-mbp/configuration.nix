@@ -1,4 +1,8 @@
-{ darwinModules, pkgs, ... }:
+{ self, ... }@inputs:
+let
+  inherit (self) darwinModules;
+in
+{ pkgs, ... }:
 {
   imports = with darwinModules; [
     environment
@@ -12,22 +16,24 @@
     config.allowUnfree = true;
   };
 
-  users.users.mozilla = {
+  networking = {
+    computerName = "Michaels MacBook Pro";
+    hostName = "michaels-mbp";
+  };
+
+  users.users.michaelvanstraten = {
     createHome = true;
     description = "Michael van Straten";
-    home = "/Users/mozilla/";
-    name = "mozilla";
+    home = "/Users/michaelvanstraten/";
+    name = "michaelvanstraten";
     shell = pkgs.fish;
   };
 
   system.stateVersion = 4;
 
-  services.skhd.enable = true;
-  services.yabai.enable = true;
-
   security.pam.enableSudoTouchIdAuth = true;
 
-  home-manager.users.mozilla = import ../../homeConfigurations/mozilla.nix;
+  home-manager.users.michaelvanstraten = import ../../homeConfigurations/personal.nix inputs;
 
   environment.systemPackages = with pkgs; [ darwin.trash ];
 }

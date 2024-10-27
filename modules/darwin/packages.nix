@@ -1,4 +1,5 @@
-{ nixpkgs-firefox-darwin, pkgs, ... }:
+{ nixpkgs-firefox-darwin, ... }:
+{ pkgs, ... }:
 {
   nixpkgs = {
     overlays = [ nixpkgs-firefox-darwin.overlay ];

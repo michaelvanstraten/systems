@@ -1,4 +1,5 @@
-{ cyberdream-theme, pkgs, ... }:
+{ cyberdream-theme, ... }:
+{ pkgs, ... }:
 {
   fonts.fontconfig.enable = true;
   home.packages = [ pkgs.nerdfonts ];

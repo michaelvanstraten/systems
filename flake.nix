@@ -45,6 +45,7 @@
 
     pre-commit-hooks = {
       url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix = {
@@ -59,29 +60,19 @@
       flake-utils,
       nixpkgs,
       pre-commit-hooks,
-      nix-darwin,
-      home-manager,
       ...
     }@inputs:
     let
-      callModule =
-        modulePath: extraArgs:
-        import modulePath ({ callModule = callModule; } // self.outputs // inputs // extraArgs);
+      inherit ((import ./lib/outputs.nix inputs).lib) callOutputs;
     in
-    {
-      darwinConfigurations = callModule ./darwinConfigurations { };
-      nixosConfigurations = callModule ./nixosConfigurations { };
-
-      inherit (callModule ./modules { }) darwinModules homeModules nixosModules;
-    }
-    // flake-utils.lib.eachDefaultSystem (
+    flake-utils.lib.eachDefaultSystem (
       system:
       let
         pkgs = import nixpkgs { inherit system; };
       in
       {
         # Checks pre-commit-hooks
-        checks = callModule ./checks { inherit system; };
+        checks = import ./checks { inherit pre-commit-hooks system; };
 
         # Development shell with necessary tools
         devShells =
@@ -101,5 +92,9 @@
         # Formatter for this flake
         formatter = pkgs.nixfmt-rfc-style;
       }
-    );
+    )
+    // callOutputs {
+      directory = ./.;
+      inherit inputs;
+    };
 }

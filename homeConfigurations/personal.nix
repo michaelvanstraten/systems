@@ -1,9 +1,8 @@
-{
-  homeModules,
-  pkgs,
-  lib,
-  ...
-}:
+{ self, ... }:
+let
+  inherit (self) homeModules;
+in
+{ pkgs, lib, ... }:
 {
   imports = with homeModules; [
     Alacritty

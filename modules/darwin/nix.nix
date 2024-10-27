@@ -7,8 +7,9 @@
     linux-builder.enable = false;
     settings = {
       experimental-features = [
-        "nix-command"
         "flakes"
+        "nix-command"
+        "pipe-operators"
       ];
       trusted-users = [ "@admin" ];
     };

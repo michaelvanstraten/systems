@@ -1,4 +1,5 @@
-{ BetterFox, config, ... }:
+{ BetterFox, ... }:
+{ config, ... }:
 {
   programs.firefox = {
     # Let Firefox package be managed by the system
