@@ -1,6 +1,7 @@
-{ darwinModules, pkgs, ... }:
+{ self, ... }:
+{ pkgs, ... }:
 {
-  imports = with darwinModules; [
+  imports = with self.darwinModules; [
     environment
     home-manager
     nix
@@ -10,6 +11,11 @@
 
   nixpkgs = {
     config.allowUnfree = true;
+  };
+
+  networking = {
+    computerName = "Michaels MacBook Pro at Mozilla";
+    hostName = "michaels-mbp-mozilla";
   };
 
   users.users.mozilla = {

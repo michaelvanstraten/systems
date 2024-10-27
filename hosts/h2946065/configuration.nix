@@ -1,7 +1,11 @@
-{ nixosModules, pkgs, ... }:
+{ self, ... }@inputs:
+let
+  inherit (self) nixosModules;
+in
+{ pkgs, ... }:
 {
   imports = with nixosModules; [
-    ./virtual-disk-MBR.nix
+    (import ./virtual-disk-MBR.nix inputs)
     hardware.libvirtd
     nix
     personal-cloud

@@ -1,4 +1,8 @@
-{ darwinModules, pkgs, ... }:
+{ self, ... }@inputs:
+let
+  inherit (self) darwinModules;
+in
+{ pkgs, ... }:
 {
   imports = with darwinModules; [
     environment
@@ -14,7 +18,7 @@
 
   networking = {
     computerName = "Michaels MacBook Pro";
-    hostName = "michaels-macbook-pro";
+    hostName = "michaels-mbp";
   };
 
   users.users.michaelvanstraten = {
@@ -29,7 +33,7 @@
 
   security.pam.enableSudoTouchIdAuth = true;
 
-  home-manager.users.michaelvanstraten = import ../../homeConfigurations/personal.nix;
+  home-manager.users.michaelvanstraten = import ../../homeConfigurations/personal.nix inputs;
 
   environment.systemPackages = with pkgs; [ darwin.trash ];
 }

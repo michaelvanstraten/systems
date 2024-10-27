@@ -1,4 +1,5 @@
-{ neovim-nightly-overlay, pkgs, ... }:
+{ neovim-nightly-overlay, ... }:
+{ pkgs, ... }:
 {
   home.file.".config/nvim".source = ./.;
 
