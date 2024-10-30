@@ -30,6 +30,7 @@ require("lazy").setup({
             },
         },
     },
+    lockfile = os.getenv("LAZY_LOCKFILE");
     spec = {
         { import = "plugins" },
         { import = "plugins.lsp" },
