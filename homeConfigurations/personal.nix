@@ -26,7 +26,7 @@ in
 
     packages = with pkgs; [
       wget
-      nil
+      nixd
       stylua
       lua-language-server
       nixfmt-rfc-style
