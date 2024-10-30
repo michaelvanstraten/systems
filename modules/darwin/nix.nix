@@ -11,6 +11,7 @@
         "nix-command"
         "pipe-operators"
       ];
+      sandbox = true;
       trusted-users = [ "@admin" ];
     };
   };
