@@ -18,11 +18,11 @@
     hostName = "michaels-mbp-mozilla";
   };
 
-  users.users.mozilla = {
+  users.users.michael = {
     createHome = true;
     description = "Michael van Straten";
-    home = "/Users/mozilla/";
-    name = "mozilla";
+    home = "/Users/michael/";
+    name = "michael";
     shell = pkgs.fish;
   };
 
@@ -33,7 +33,7 @@
 
   security.pam.enableSudoTouchIdAuth = true;
 
-  home-manager.users.mozilla = import ../../homeConfigurations/mozilla.nix;
+  home-manager.users.michael = import ../../homeConfigurations/mozilla.nix;
 
   environment.systemPackages = with pkgs; [ darwin.trash ];
 }
