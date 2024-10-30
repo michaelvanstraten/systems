@@ -35,5 +35,8 @@
 
   home-manager.users.michael = import ../../homeConfigurations/mozilla.nix inputs;
 
-  environment.systemPackages = with pkgs; [ darwin.trash ];
+  environment.systemPackages = with pkgs; [
+    darwin.trash
+    git-cinnabar
+  ];
 }
