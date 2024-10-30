@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, ... } @ inputs:
 { pkgs, ... }:
 {
   imports = with self.darwinModules; [
@@ -33,7 +33,7 @@
 
   security.pam.enableSudoTouchIdAuth = true;
 
-  home-manager.users.michael = import ../../homeConfigurations/mozilla.nix;
+  home-manager.users.michael = import ../../homeConfigurations/mozilla.nix inputs;
 
   environment.systemPackages = with pkgs; [ darwin.trash ];
 }
