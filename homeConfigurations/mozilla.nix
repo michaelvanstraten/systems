@@ -31,7 +31,6 @@ in
       stylua
       lua-language-server
       nixfmt-rfc-style
-      firefox-bin
       ltex-ls
       podman
       podman-compose
@@ -50,6 +49,8 @@ in
   };
 
   programs = {
+    firefox.enable = true;
+
     home-manager.enable = true;
 
     git = {
@@ -71,8 +72,9 @@ in
         "/System/Applications/Mail.app/"
         "/System/Applications/Calendar.app/"
         "/System/Applications/Reminders.app/"
-        "/Applications/Alacritty.app/"
-        "/Applications/Firefox Nightly.app/"
+        "${pkgs.alacritty}/Applications/Alacritty.app"
+        "${pkgs.firefox-nightly-bin}/Applications/Firefox Nightly.app"
+        "${pkgs.slack}/Applications/Slack.app"
         "/System/Applications/System Settings.app/"
       ];
 }
