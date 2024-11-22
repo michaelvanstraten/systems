@@ -18,6 +18,7 @@ in
     shells
     starship
     tmux.default
+    helix
   ];
 
   xdg.enable = true;
