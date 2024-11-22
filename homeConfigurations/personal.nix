@@ -72,7 +72,7 @@ in
         "/Applications/WhatsApp.app/"
         "/System/Applications/Calendar.app/"
         "/System/Applications/Reminders.app/"
-        "/Applications/Alacritty.app/"
+        "${pkgs.alacritty}/Applications/Alacritty.app/"
         "/Applications/Firefox Nightly.app/"
         "/System/Applications/System Settings.app/"
       ];
