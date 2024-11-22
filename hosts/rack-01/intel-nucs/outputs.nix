@@ -2,7 +2,7 @@
 let
   inherit (nixpkgs.lib) nixosSystem;
 in
-({
+{
   nixosConfigurations = builtins.mapAttrs (
     hostname: isMaster:
     nixosSystem {
@@ -14,4 +14,4 @@ in
       ];
     }
   ) { "rack-01-k8s-master-nuc-01" = true; };
-})
+}
