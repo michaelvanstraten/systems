@@ -6,6 +6,7 @@
       ".DS_Store"
       ".vscode/"
       ".venv/"
+      ".cache/"
     ];
 
     lfs.enable = true;
