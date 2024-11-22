@@ -19,7 +19,7 @@ return {
                     lua = { "stylua" },
                     fish = { "fish_indent" },
                     sh = { "shfmt" },
-                    python = { "black" },
+                    python = { "ruff" },
                     tex = { "latexindent" },
                     nix = { "nixfmt" },
                     markdown = { "prettier" },
