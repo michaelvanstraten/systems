@@ -6,7 +6,7 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      import = [ "${cyberdream-theme}/extras/alacritty/cyberdream.toml" ];
+      general.import = [ "${cyberdream-theme}/extras/alacritty/cyberdream.toml" ];
       font = {
         size = 14;
         normal = {
