@@ -33,7 +33,7 @@
 
   security.pam.enableSudoTouchIdAuth = true;
 
-  home-manager.users.michael = import ../../homeConfigurations/mozilla.nix inputs;
+  home-manager.users.michael = import ./home.nix inputs;
 
   environment.systemPackages = with pkgs; [
     darwin.trash

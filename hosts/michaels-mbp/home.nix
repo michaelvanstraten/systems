@@ -35,7 +35,6 @@ in
       ltex-ls
       podman
       podman-compose
-      nodejs_22
       tree-sitter
     ];
   };
@@ -44,6 +43,8 @@ in
     sesh.enable = true;
 
     thefuck.enable = true;
+
+    direnv.enable = true;
 
     zoxide.enable = true;
     zoxide.options = [ "--cmd j" ];
