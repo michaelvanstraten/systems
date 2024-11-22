@@ -10,6 +10,7 @@ in
     nix
     packages
     shells
+    applications
   ];
 
   nixpkgs = {
@@ -35,5 +36,7 @@ in
 
   home-manager.users.michaelvanstraten = import ./home.nix inputs;
 
-  environment.systemPackages = with pkgs; [ darwin.trash ];
+  environment.systemPackages = with pkgs; [
+    karabiner-elements
+  ];
 }

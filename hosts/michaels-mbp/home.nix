@@ -2,7 +2,7 @@
 let
   inherit (self) homeModules;
 in
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = with homeModules; [
     Alacritty
@@ -12,6 +12,7 @@ in
     Poetry
     VSCodium
     darwin.defaults
+    darwin.applications
     git
     nvim.default
     sesh
@@ -36,6 +37,10 @@ in
       podman
       podman-compose
       tree-sitter
+      darwin.trash
+
+      keepassxc
+      utm
     ];
   };
 
