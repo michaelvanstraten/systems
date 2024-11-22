@@ -65,16 +65,13 @@ in
 
   targets.darwin.defaultbrowser = "nightly";
 
-  targets.darwin.defaults."com.apple.dock".persistent-apps =
-    (homeModules.darwin.utils { inherit lib; }).mkPersistentApps
-      [
-        # Add wanted items back to the dock
-        "/System/Applications/Mail.app/"
-        "/System/Applications/Calendar.app/"
-        "/System/Applications/Reminders.app/"
-        "${pkgs.alacritty}/Applications/Alacritty.app"
-        "${pkgs.firefox-nightly-bin}/Applications/Firefox Nightly.app"
-        "${pkgs.slack}/Applications/Slack.app"
-        "/System/Applications/System Settings.app/"
-      ];
+  targets.darwin.defaults."com.apple.dock".persistent-apps = self.lib.darwin.mkPersistentApps [
+    "/System/Applications/Mail.app/"
+    "/System/Applications/Calendar.app/"
+    "/System/Applications/Reminders.app/"
+    "${pkgs.alacritty}/Applications/Alacritty.app"
+    "${pkgs.firefox-nightly-bin}/Applications/Firefox Nightly.app"
+    "${pkgs.slack}/Applications/Slack.app"
+    "/System/Applications/System Settings.app/"
+  ];
 }

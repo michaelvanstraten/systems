@@ -63,18 +63,16 @@ in
     jq.enable = true;
   };
 
-  targets.darwin.defaults."com.apple.dock".persistent-apps =
-    (homeModules.darwin.utils { inherit lib; }).mkPersistentApps
-      [
-        # Add wanted items back to the dock
-        "/System/Applications/Mail.app/"
-        "/Applications/Bitwarden.app/"
-        "/System/Applications/Messages.app/"
-        "/Applications/WhatsApp.app/"
-        "/System/Applications/Calendar.app/"
-        "/System/Applications/Reminders.app/"
-        "${pkgs.alacritty}/Applications/Alacritty.app/"
-        "/Applications/Firefox Nightly.app/"
-        "/System/Applications/System Settings.app/"
-      ];
+  targets.darwin.defaults."com.apple.dock".persistent-apps = self.lib.darwin.mkPersistentApps [
+    "/System/Applications/Mail.app/"
+    "${pkgs.signal-desktop}/Applications/Signal.app/"
+    "/System/Applications/Messages.app/"
+    "/Applications/WhatsApp.app/"
+    "/System/Applications/Reminders.app/"
+    "/System/Applications/Calendar.app/"
+    "${pkgs.alacritty}/Applications/Alacritty.app/"
+    "/Applications/Firefox Nightly.app/"
+    "/Applications/Bitwarden.app/"
+    "/System/Applications/System Settings.app/"
+  ];
 }

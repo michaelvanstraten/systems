@@ -1,4 +1,7 @@
-{ lib, ... }:
+{ nixpkgs, ... }:
+let
+  inherit (nixpkgs) lib;
+in
 {
   mkPersistentApps =
     value:
