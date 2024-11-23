@@ -11,6 +11,7 @@ in
     packages
     shells
     applications
+    karabiner-elements
   ];
 
   nixpkgs = {
@@ -35,8 +36,4 @@ in
   security.pam.enableSudoTouchIdAuth = true;
 
   home-manager.users.michaelvanstraten = import ./home.nix inputs;
-
-  environment.systemPackages = with pkgs; [
-    karabiner-elements
-  ];
 }

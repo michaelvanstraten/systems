@@ -9,6 +9,7 @@
     shells
     yabai
     applications
+    karabiner-elements
   ];
 
   nixpkgs = {
