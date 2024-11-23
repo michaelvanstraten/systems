@@ -49,6 +49,8 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-generators.url = "github:nix-community/nixos-generators";
   };
 
   outputs =

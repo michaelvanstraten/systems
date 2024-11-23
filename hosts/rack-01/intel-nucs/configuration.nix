@@ -4,7 +4,6 @@
   imports =
     with self.nixosModules;
     [
-      format.raw-efi
       hardware.intel-nuc
       nix
       personal-cloud
