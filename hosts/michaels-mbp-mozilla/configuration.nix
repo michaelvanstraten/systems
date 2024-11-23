@@ -7,6 +7,7 @@
     nix
     packages
     shells
+    yabai
   ];
 
   nixpkgs = {
@@ -29,7 +30,6 @@
   system.stateVersion = 4;
 
   services.skhd.enable = true;
-  services.yabai.enable = true;
 
   security.pam.enableSudoTouchIdAuth = true;
 
