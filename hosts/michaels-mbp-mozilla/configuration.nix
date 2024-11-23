@@ -41,5 +41,8 @@
   environment.systemPackages = with pkgs; [
     darwin.trash
     git-cinnabar
+    clang
+    clang-tools
+    ripgrep
   ];
 }
