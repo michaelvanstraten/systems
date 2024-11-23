@@ -1,11 +1,13 @@
 { BetterFox, ... }:
-{ config, ... }:
+{ pkgs, ... }:
 {
   programs.firefox = {
-    # Let Firefox package be managed by the system
-    package = null;
+    enable = true;
 
-    profiles.${config.home.username} = {
+    # Let Firefox package be managed by the system
+    package = pkgs.firefox-bin;
+
+    profiles.michael = {
       settings = {
         # PREF: enable SameSite Cookies
         "network.cookie.sameSite.laxByDefault" = true;

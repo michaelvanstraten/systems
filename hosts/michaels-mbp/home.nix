@@ -32,7 +32,6 @@ in
       stylua
       lua-language-server
       nixfmt-rfc-style
-      firefox-bin
       ltex-ls
       podman
       podman-compose
@@ -76,7 +75,7 @@ in
     "/System/Applications/Reminders.app/"
     "/System/Applications/Calendar.app/"
     "${pkgs.alacritty}/Applications/Alacritty.app/"
-    "/Applications/Firefox Nightly.app/"
+    "${pkgs.firefox-bin}/Applications/Firefox.app/"
     "/Applications/Bitwarden.app/"
     "/System/Applications/System Settings.app/"
   ];
