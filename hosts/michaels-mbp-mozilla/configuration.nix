@@ -19,12 +19,15 @@
     hostName = "michaels-mbp-mozilla";
   };
 
+  users.knownUsers = [ "michael" ];
+
   users.users.michael = {
     createHome = true;
     description = "Michael van Straten";
-    home = "/Users/michael/";
+    home = "/Users/michael";
     name = "michael";
     shell = pkgs.fish;
+    uid = 501;
   };
 
   system.stateVersion = 4;
