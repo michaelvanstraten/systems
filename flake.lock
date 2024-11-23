@@ -321,11 +321,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1732316930,
-        "narHash": "sha256-riDOtP7Mh4PhnWYL0L3y57zf7EKN9uUz6pxCtxCmLkE=",
+        "lastModified": 1732398858,
+        "narHash": "sha256-SY6A34vSEL8H/Dwx3oXFHEzNsJZ8zAMUCZOASopL0Ic=",
         "owner": "michaelvanstraten",
         "repo": "nixpkgs",
-        "rev": "215437293d6e43d8077e8023faea9229b1c903f2",
+        "rev": "54f25d0582825e3d3bf6b681461e749be8e16413",
         "type": "github"
       },
       "original": {

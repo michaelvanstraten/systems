@@ -5,6 +5,9 @@
   services.godns = {
     enable = true;
     configPath = config.sops.templates."godns-config.yaml".path;
+    additionalRestartTriggers = [
+      config.sops.templates."godns-config.yaml".content
+    ];
   };
 
   sops.templates."godns-config.yaml".content = # yaml
@@ -17,7 +20,6 @@
             - "${config.networking.hostName}"
       ipv6_urls:
         - https://api6.ipify.org
-        - https://api-ipv6.ip.sb/ip
         - https://ip2location.io/ip
         - https://v6.ipinfo.io/ip
       ip_type: IPv6
