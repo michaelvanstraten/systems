@@ -23,16 +23,12 @@ in
         }
       )
       {
-        "rack-01-k8s-master-nuc-01" = {
+        "rack-01-nuc-01" = {
           imports = [
             self.nixosModules.roles.k8s-master
           ];
         };
-        "rack-01-k8s-worker-nuc-02" =
-          {
-          };
-        "rack-01-k8s-worker-nuc-03" =
-          {
-          };
+        "rack-01-nuc-02" = { };
+        "rack-01-nuc-03" = { };
       };
 }
