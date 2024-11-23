@@ -2,12 +2,13 @@
 let
   inherit (self) homeModules;
 in
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = with homeModules; [
     Alacritty
     darwin.defaults
     darwin.defaultbrowser
+    darwin.applications
     Karabiner-Elements.default
     Poetry
     VSCodium

@@ -8,6 +8,7 @@
     packages
     shells
     yabai
+    applications
   ];
 
   nixpkgs = {
