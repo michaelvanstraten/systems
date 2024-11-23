@@ -68,11 +68,11 @@ in
 
   targets.darwin.defaults."com.apple.dock".persistent-apps = self.lib.darwin.mkPersistentApps [
     "/System/Applications/Mail.app/"
-    "/System/Applications/Calendar.app/"
+    "/Applications/Slack.app" # Externally managed
     "/System/Applications/Reminders.app/"
+    "/System/Applications/Calendar.app/"
     "${pkgs.alacritty}/Applications/Alacritty.app"
     "/Applications/Firefox Nightly.app" # Externally managed
-    "/Applications/Slack.app" # Externally managed
     "/System/Applications/System Settings.app/"
   ];
 }
