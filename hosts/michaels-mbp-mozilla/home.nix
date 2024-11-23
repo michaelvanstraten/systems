@@ -70,8 +70,8 @@ in
     "/System/Applications/Calendar.app/"
     "/System/Applications/Reminders.app/"
     "${pkgs.alacritty}/Applications/Alacritty.app"
-    "${pkgs.firefox-nightly-bin}/Applications/Firefox Nightly.app"
-    "${pkgs.slack}/Applications/Slack.app"
+    "/Applications/Firefox Nightly.app" # Externally managed
+    "/Applications/Slack.app" # Externally managed
     "/System/Applications/System Settings.app/"
   ];
 }
