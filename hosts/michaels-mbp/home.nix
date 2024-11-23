@@ -11,15 +11,15 @@ in
     Lazygit
     Poetry
     VSCodium
-    darwin.defaults
     darwin.applications
+    darwin.defaults
     git
+    helix
     nvim.default
     sesh
     shells
     starship
     tmux.default
-    helix
   ];
 
   xdg.enable = true;

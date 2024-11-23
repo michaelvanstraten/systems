@@ -2,14 +2,14 @@
 { pkgs, ... }:
 {
   imports = with self.darwinModules; [
+    applications
     environment
     home-manager
+    karabiner-elements
     nix
     packages
     shells
     yabai
-    applications
-    karabiner-elements
   ];
 
   nixpkgs = {

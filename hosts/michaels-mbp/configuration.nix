@@ -5,13 +5,13 @@ in
 { pkgs, ... }:
 {
   imports = with darwinModules; [
+    applications
     environment
     home-manager
+    karabiner-elements
     nix
     packages
     shells
-    applications
-    karabiner-elements
   ];
 
   nixpkgs = {

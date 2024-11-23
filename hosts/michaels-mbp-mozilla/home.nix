@@ -6,19 +6,19 @@ in
 {
   imports = with homeModules; [
     Alacritty
-    darwin.defaults
-    darwin.defaultbrowser
-    darwin.applications
+    Firefox
     Karabiner-Elements.default
+    Lazygit
     Poetry
     VSCodium
-    Firefox
+    darwin.applications
+    darwin.defaultbrowser
+    darwin.defaults
     git
     nvim.default
-    Lazygit
-    starship
     sesh
     shells
+    starship
     tmux.default
   ];
 
