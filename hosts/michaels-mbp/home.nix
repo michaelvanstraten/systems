@@ -44,6 +44,8 @@ in
   };
 
   programs = {
+    firefox.package = pkgs.firefox-bin;
+
     sesh.enable = true;
 
     thefuck.enable = true;

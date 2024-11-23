@@ -1,11 +1,10 @@
 { BetterFox, ... }:
-{ pkgs, ... }:
-{
+_: {
   programs.firefox = {
     enable = true;
 
     # Let Firefox package be managed by the system
-    package = pkgs.firefox-bin;
+    package = null;
 
     profiles.michael = {
       settings = {

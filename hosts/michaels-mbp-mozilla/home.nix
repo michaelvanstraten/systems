@@ -50,7 +50,7 @@ in
   };
 
   programs = {
-    firefox.enable = true;
+    firefox.package = null;
 
     home-manager.enable = true;
 

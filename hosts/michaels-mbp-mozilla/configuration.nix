@@ -40,6 +40,7 @@
 
   home-manager.users.michael = import ./home.nix inputs;
 
+
   environment.systemPackages = with pkgs; [
     darwin.trash
     git-cinnabar
