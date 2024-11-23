@@ -2,6 +2,8 @@ keys:
   - &michaels-mbp age1g0hp53jqntn6xmd73kd9wx33gst5yvz6gzuwt3t8yx2rvr08h5mqey899s
   - &h2946065 age1h464yfcqxe39qlgxvte2yf5wgpjc0wmtdv7luadr9lxnn5fwl5aq7fjyxq
   - &rack-01-k8s-master-nuc-01 age1ww22f2vmmnmfkfc30e7p37xz98kmdgt7j6k6mcm62wktg2qjtpaqjd4km5
+  - &rack-01-k8s-worker-nuc-02 age1umrqd532xcyh408es0xf55pg7z0shgeznpwzht3ejk20vp0d5ezq726wr7
+  - &rack-01-k8s-worker-nuc-03 age1v8d6pzukqmzkwaqwczeksychxmv9mnym6u28tlu8ff5skwl8vygsvcfk25
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
@@ -9,3 +11,5 @@ creation_rules:
           - *michaels-mbp
           - *h2946065
           - *rack-01-k8s-master-nuc-01
+          - *rack-01-k8s-worker-nuc-02
+          - *rack-01-k8s-worker-nuc-03
