@@ -1,4 +1,4 @@
-{ self, ... } @ inputs:
+{ self, ... }@inputs:
 { pkgs, ... }:
 {
   imports = with self.darwinModules; [
