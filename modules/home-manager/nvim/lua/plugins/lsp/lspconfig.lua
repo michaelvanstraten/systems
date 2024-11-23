@@ -62,8 +62,8 @@ return {
         lspconfig.rust_analyzer.setup(make_client_options())
         lspconfig.nixd.setup(make_client_options())
         lspconfig.yamlls.setup(make_client_options())
-        lspconfig.pyright.setup(make_client_options())
         lspconfig.clangd.setup(make_client_options())
+        lspconfig.pylsp.setup(make_client_options())
         lspconfig.ltex.setup(make_client_options())
     end,
 }
