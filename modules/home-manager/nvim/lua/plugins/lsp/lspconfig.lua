@@ -1,15 +1,10 @@
 local function on_client_attach(_, buffer_number)
     local map = vim.keymap.set
 
-    map(
-        "n",
-        "ca",
-        vim.lsp.buf.code_action,
-        {
-            buffer = buffer_number,
-            desc = "Selects a code action available at the current cursor position",
-        }
-    )
+    map("n", "ca", vim.lsp.buf.code_action, {
+        buffer = buffer_number,
+        desc = "Selects a code action available at the current cursor position",
+    })
     map(
         "n",
         "cn",
