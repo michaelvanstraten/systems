@@ -1,10 +1,10 @@
 { BetterFox, ... }:
-_: {
+{ lib, ... }: {
   programs.firefox = {
     enable = true;
 
     # Let Firefox package be managed by the system
-    package = null;
+    package = lib.mkDefault null;
 
     profiles.michael = {
       settings = {
