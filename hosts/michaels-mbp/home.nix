@@ -12,6 +12,7 @@ in
     Poetry
     VSCodium
     darwin.applications
+    darwin.defaultbrowser
     darwin.defaults
     git
     helix
@@ -68,6 +69,8 @@ in
 
     jq.enable = true;
   };
+
+  targets.darwin.defaultbrowser = "firefox";
 
   targets.darwin.defaults."com.apple.dock".persistent-apps = self.lib.darwin.mkPersistentApps [
     "/System/Applications/Mail.app/"
