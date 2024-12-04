@@ -4,6 +4,5 @@ let
 in
 {
   darwinModules = modulesFromDirectoryRecursive ./darwin;
-  homeModules = modulesFromDirectoryRecursive ./home-manager;
   nixosModules = modulesFromDirectoryRecursive ./nixos;
 }
