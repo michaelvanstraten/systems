@@ -22,7 +22,6 @@
         prune = true;
         writeCommitGraph = true;
       };
-      rerere.enabled = true;
       branch.sort = "-committerdate";
     };
   };
