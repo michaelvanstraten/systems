@@ -17,6 +17,9 @@ return {
         filters = {
             custom = { "^.git$" },
         },
+        filesystem_watchers = {
+            enable = false,
+        },
         hijack_cursor = true,
         on_attach = function(buffer)
             local api = require("nvim-tree.api")
