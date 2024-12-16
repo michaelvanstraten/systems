@@ -15,7 +15,6 @@ in
     darwin.defaultbrowser
     darwin.defaults
     git
-    helix
     nvim.default
     sesh
     shells
