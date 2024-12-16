@@ -1,10 +1,7 @@
-{ self, ... }@inputs:
-let
-  inherit (self) darwinModules;
-in
+{ self, ... }:
 { pkgs, ... }:
 {
-  imports = with darwinModules; [
+  imports = with self.darwinModules; [
     applications
     environment
     home-manager
@@ -35,5 +32,5 @@ in
 
   security.pam.enableSudoTouchIdAuth = true;
 
-  home-manager.users.michaelvanstraten = import ./home.nix inputs;
+  home-manager.users.michaelvanstraten = self.lib.mkModule ./home.nix { };
 }

@@ -1,9 +1,48 @@
-{ self, ... }:
+{ nixpkgs, ... }@inputs:
 let
-  inherit (self.lib) modulesFromDirectoryRecursive;
+  inherit (nixpkgs) lib;
+  inherit (lib) fileset;
+
+  mkModule =
+    modulePath: _:
+    let
+      module = import modulePath;
+      isFlakeModule =
+        module:
+        builtins.isFunction module
+        && (builtins.functionArgs module |> builtins.intersectAttrs inputs) != { };
+    in
+    if isFlakeModule module then module inputs else module;
+
+  mkModules =
+    dir:
+    fileset.fileFilter (file: file.hasExt "nix") dir
+    |> fileset.toList
+    |> map (
+      module:
+      let
+        moduleName =
+          module
+          |> toString
+          |> lib.removeSuffix ".nix"
+          |> lib.removePrefix (toString dir)
+          |> lib.removePrefix "/";
+      in
+      if lib.hasSuffix "default" moduleName then
+        {
+          ${lib.removeSuffix "/default" moduleName} = mkModule module { };
+        }
+      else
+        { ${moduleName} = mkModule module { }; }
+    )
+    |> lib.attrsets.mergeAttrsList;
 in
 {
-  darwinModules = modulesFromDirectoryRecursive ./darwin;
-  homeModules = modulesFromDirectoryRecursive ./home-manager;
-  nixosModules = modulesFromDirectoryRecursive ./nixos;
+  darwinModules = mkModules ./darwin;
+  homeModules = mkModules ./home-manager;
+  nixosModules = mkModules ./nixos;
+
+  lib = {
+    inherit mkModule mkModules;
+  };
 }

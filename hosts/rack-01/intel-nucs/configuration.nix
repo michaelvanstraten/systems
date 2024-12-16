@@ -4,13 +4,15 @@
   imports =
     with self.nixosModules;
     [
-      hardware.intel-nuc
       nix
       personal-cloud
       ssh
       users
     ]
-    ++ [ sops-nix.nixosModules.sops ];
+    ++ [
+      self.nixosModules."hardware/intel-nuc"
+      sops-nix.nixosModules.sops
+    ];
 
   console.keyMap = "de";
 

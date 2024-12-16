@@ -3,21 +3,18 @@
   nixpkgs,
   self,
   ...
-}@inputs:
-let
-  inherit (nixpkgs.lib) nixosSystem;
-in
+}:
 {
   nixosConfigurations =
     builtins.mapAttrs
       (
         hostname: module:
-        nixosSystem {
+        nixpkgs.lib.nixosSystem {
           modules = [
             { networking.hostName = hostname; }
             nixos-generators.nixosModules.raw-efi
             ../../../secrets
-            (import ./configuration.nix inputs)
+            (self.lib.mkModule ./configuration.nix { })
             module
           ];
         }
@@ -25,7 +22,7 @@ in
       {
         "rack-01-nuc-01" = {
           imports = [
-            self.nixosModules.roles.k8s-master
+            self.nixosModules."roles/k8s-master"
           ];
         };
         "rack-01-nuc-02" = { };

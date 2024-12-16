@@ -1,4 +1,4 @@
-{ self, ... }@inputs:
+{ self, ... }:
 { pkgs, ... }:
 {
   imports = with self.darwinModules; [
@@ -38,7 +38,7 @@
 
   security.pam.enableSudoTouchIdAuth = true;
 
-  home-manager.users.michael = import ./home.nix inputs;
+  home-manager.users.michael = self.lib.mkModule ./home.nix { };
 
   environment.systemPackages = with pkgs; [
     darwin.trash

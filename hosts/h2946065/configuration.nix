@@ -1,17 +1,18 @@
-{ self, ... }@inputs:
-let
-  inherit (self) nixosModules;
-in
+{ self, ... }:
 { pkgs, ... }:
 {
-  imports = with nixosModules; [
-    (import ./virtual-disk-MBR.nix inputs)
-    hardware.libvirtd
-    nix
-    personal-cloud
-    ssh
-    users
-  ];
+  imports =
+    with self.nixosModules;
+    [
+      (self.lib.mkModule ./virtual-disk-MBR.nix { })
+      nix
+      personal-cloud
+      ssh
+      users
+    ]
+    ++ [
+      self.nixosModules."hardware/libvirtd"
+    ];
 
   networking.hostName = "h2946065";
 

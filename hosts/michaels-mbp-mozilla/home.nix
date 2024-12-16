@@ -1,26 +1,27 @@
 { self, ... }:
-let
-  inherit (self) homeModules;
-in
 { pkgs, ... }:
 {
-  imports = with homeModules; [
-    Alacritty
-    Firefox
-    Karabiner-Elements.default
-    Lazygit
-    Poetry
-    VSCodium
-    darwin.applications
-    darwin.defaultbrowser
-    darwin.defaults
-    git
-    nvim.default
-    sesh
-    shells
-    starship
-    tmux.default
-  ];
+  imports =
+    with self.homeModules;
+    [
+      Alacritty
+      Firefox
+      Karabiner-Elements
+      Lazygit
+      Poetry
+      VSCodium
+      git
+      nvim
+      sesh
+      shells
+      starship
+      tmux
+    ]
+    ++ [
+      self.homeModules."darwin/defaults"
+      self.homeModules."darwin/applications"
+      self.homeModules."darwin/defaultbrowser"
+    ];
 
   xdg.enable = true;
   home = {
