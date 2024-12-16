@@ -8,7 +8,6 @@
   environment = {
     shellAliases = {
       c = "clear";
-      e = "$EDITOR";
       l = "ls";
       la = "ls -a";
       ll = "ls -l";
@@ -21,11 +20,6 @@
 
     systemPackages = [
       pkgs.eza
-      pkgs.neovim
     ];
-
-    variables = {
-      EDITOR = "nvim";
-    };
   };
 }

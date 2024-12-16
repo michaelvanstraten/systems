@@ -28,14 +28,8 @@ in
 
     packages = with pkgs; [
       wget
-      nixd
-      stylua
-      lua-language-server
-      nixfmt-rfc-style
-      ltex-ls
       podman
       podman-compose
-      tree-sitter
       darwin.trash
 
       keepassxc
