@@ -2,13 +2,7 @@
   programs.lazygit = {
     enable = true;
     settings = {
-      gui = {
-        scrollPastBottom = false;
-        expandFocusedSidePanel = true;
-        showCommandLog = true;
-        skipRewordInEditorWarning = true;
-      };
-
+      disableStartupPopups = true;
       git = {
         paging.useConfig = false;
         autoFetch = false;
@@ -16,12 +10,12 @@
         fetchAll = true;
         parseEmoji = true;
       };
-
-      os = {
-        editPreset = "nvim";
+      gui = {
+        scrollPastBottom = false;
+        expandFocusedSidePanel = true;
+        showCommandLog = true;
+        skipRewordInEditorWarning = true;
       };
-
-      disableStartupPopups = true;
       notARepository = "skip";
       promptToReturnFromSubprocess = false;
     };
