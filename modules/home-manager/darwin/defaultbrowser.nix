@@ -12,7 +12,7 @@ let
 in
 {
   options.targets.darwin.defaultbrowser = mkOption {
-    type = types.nullOr types.string;
+    type = types.nullOr types.str;
     default = null;
     description = "The default browser (HTTP handler).";
   };
