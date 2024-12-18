@@ -1,4 +1,11 @@
 {
+  nixConfig = {
+    experimental-features = [
+      "flakes"
+      "pipe-operators"
+    ];
+  };
+
   inputs = {
     BetterFox = {
       url = "github:yokoffing/BetterFox";
