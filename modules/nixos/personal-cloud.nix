@@ -4,7 +4,7 @@
 
   services.godns = {
     enable = true;
-    configPath = config.sops.templates."godns-config.yaml".path;
+    configFile = config.sops.templates."godns-config.yaml".path;
     additionalRestartTriggers = [
       config.sops.templates."godns-config.yaml".content
     ];

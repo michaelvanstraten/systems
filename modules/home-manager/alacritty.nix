@@ -2,7 +2,7 @@
 { pkgs, ... }:
 {
   fonts.fontconfig.enable = true;
-  home.packages = [ pkgs.nerdfonts ];
+  home.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
   programs.alacritty = {
     enable = true;
     settings = {
