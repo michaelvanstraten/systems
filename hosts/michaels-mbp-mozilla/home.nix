@@ -34,12 +34,11 @@
     self.homeModules."darwin/applications"
     self.homeModules."darwin/defaultbrowser"
     self.homeModules."darwin/defaults"
-    self.homeModules.Alacritty
-    self.homeModules.Firefox
-    self.homeModules.Karabiner-Elements
-    self.homeModules.Lazygit
-    self.homeModules.Poetry
-    self.homeModules.VSCodium
+    self.homeModules.alacritty
+    self.homeModules.firefox
+    self.homeModules.karabiner-elements
+    self.homeModules.lazygit
+    self.homeModules.vscodium
     self.homeModules.git
     self.homeModules.nvim
     self.homeModules.sesh
