@@ -9,8 +9,12 @@
     "michaels-mbp" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
-        home-manager.darwinModule
         (self.lib.mkModule ./configuration.nix { })
+        home-manager.darwinModule
+        {
+          home-manager.useUserPackages = true;
+          home-manager.users.michaelvanstraten = self.lib.mkModule ./home.nix { };
+        }
       ];
     };
   };

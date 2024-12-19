@@ -4,7 +4,6 @@
   imports =
     with self.nixosModules;
     [
-      nix
       personal-cloud
       ssh
       users
@@ -12,6 +11,7 @@
     ++ [
       self.nixosModules."hardware/intel-nuc"
       sops-nix.nixosModules.sops
+      self.sharedModules.nix
     ];
 
   console.keyMap = "de";

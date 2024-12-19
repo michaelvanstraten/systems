@@ -1,70 +1,24 @@
 { self, ... }:
 { pkgs, ... }:
 {
-  imports =
-    with self.homeModules;
-    [
-      Alacritty
-      Firefox
-      Karabiner-Elements
-      Lazygit
-      Poetry
-      VSCodium
-      git
-      nvim
-      sesh
-      shells
-      starship
-      tmux
-    ]
-    ++ [
-      self.homeModules."darwin/defaults"
-      self.homeModules."darwin/applications"
-      self.homeModules."darwin/defaultbrowser"
-    ];
+  home.stateVersion = "24.05";
 
-  xdg.enable = true;
-  home = {
-    stateVersion = "24.05";
-
-    packages = with pkgs; [
-      wget
-      podman
-      podman-compose
-      darwin.trash
-
-      keepassxc
-      utm
-    ];
+  programs.git = {
+    userName = "Michael van Straten";
+    userEmail = "michael@vanstraten.de";
   };
 
-  programs = {
-    firefox.package = pkgs.firefox-bin;
+  nixpkgs.config.allowUnfree = true;
 
-    sesh.enable = true;
-
-    thefuck.enable = true;
-
-    direnv.enable = true;
-
-    zoxide.enable = true;
-    zoxide.options = [ "--cmd j" ];
-  };
-
-  programs = {
-    home-manager.enable = true;
-
-    git = {
-      userName = "Michael van Straten";
-      userEmail = "michael@vanstraten.de";
-    };
-
-    bat.enable = true;
-
-    jq.enable = true;
-  };
-
-  targets.darwin.defaultbrowser = "firefox";
+  home.packages = [
+    pkgs.alacritty
+    pkgs.firefox-bin
+    pkgs.keepassxc
+    pkgs.podman
+    pkgs.podman-compose
+    pkgs.signal-desktop
+    pkgs.utm
+  ];
 
   targets.darwin.defaults."com.apple.dock".persistent-apps = self.lib.darwin.mkPersistentApps [
     "/System/Applications/Mail.app/"
@@ -77,5 +31,22 @@
     "${pkgs.firefox-bin}/Applications/Firefox.app/"
     "/Applications/Bitwarden.app/"
     "/System/Applications/System Settings.app/"
+  ];
+
+  imports = [
+    self.homeModules."darwin/applications"
+    self.homeModules."darwin/defaultbrowser"
+    self.homeModules."darwin/defaults"
+    self.homeModules.Alacritty
+    self.homeModules.Firefox
+    self.homeModules.Karabiner-Elements
+    self.homeModules.Lazygit
+    self.homeModules.Poetry
+    self.homeModules.VSCodium
+    self.homeModules.git
+    self.homeModules.nvim
+    self.homeModules.sesh
+    self.homeModules.shell-environment
+    self.homeModules.tmux
   ];
 }

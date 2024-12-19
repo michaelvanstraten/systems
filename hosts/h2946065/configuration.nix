@@ -5,13 +5,13 @@
     with self.nixosModules;
     [
       (self.lib.mkModule ./virtual-disk-MBR.nix { })
-      nix
       personal-cloud
       ssh
       users
     ]
     ++ [
       self.nixosModules."hardware/libvirtd"
+      self.sharedModules.nix
     ];
 
   networking.hostName = "h2946065";

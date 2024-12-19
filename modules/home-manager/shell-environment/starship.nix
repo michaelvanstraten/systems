@@ -3,8 +3,6 @@
   programs.starship = {
     enable = true;
 
-    enableFishIntegration = true;
-
     settings = {
       # Don't inserts a blank line between shell prompts
       add_newline = false;

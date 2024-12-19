@@ -1,10 +1,8 @@
 { pkgs, ... }:
 {
   nix = {
-    package = pkgs.nixVersions.latest;
     channel.enable = false;
-    distributedBuilds = true;
-    linux-builder.enable = false;
+    package = pkgs.nixVersions.latest;
     settings = {
       experimental-features = [
         "auto-allocate-uids"
@@ -22,6 +20,4 @@
       trusted-users = [ "@admin" ];
     };
   };
-
-  services.nix-daemon.enable = true;
 }

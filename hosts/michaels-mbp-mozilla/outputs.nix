@@ -9,8 +9,13 @@
     "michaels-mbp-mozilla" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
-        home-manager.darwinModule
         (self.lib.mkModule ./configuration.nix { })
+        home-manager.darwinModule
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.michael = self.lib.mkModule ./home.nix { };
+        }
       ];
     };
   };

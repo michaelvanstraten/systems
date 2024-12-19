@@ -41,6 +41,7 @@ in
   darwinModules = mkModules ./darwin;
   homeModules = mkModules ./home-manager;
   nixosModules = mkModules ./nixos;
+  sharedModules = mkModules ./sharedModules;
 
   lib = {
     inherit mkModule mkModules;

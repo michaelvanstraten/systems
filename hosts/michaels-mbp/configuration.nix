@@ -1,18 +1,14 @@
 { self, ... }:
 { pkgs, ... }:
 {
-  imports = with self.darwinModules; [
-    applications
-    environment
-    home-manager
-    karabiner-elements
-    nix
-    packages
-    shells
-  ];
+  system.stateVersion = 4;
 
-  nixpkgs = {
-    config.allowUnfree = true;
+  users.users.michaelvanstraten = {
+    description = "Michael van Straten";
+    home = "/Users/michaelvanstraten";
+    name = "michaelvanstraten";
+    shell = pkgs.nushell;
+    uid = 501;
   };
 
   networking = {
@@ -20,17 +16,13 @@
     hostName = "michaels-mbp";
   };
 
-  users.users.michaelvanstraten = {
-    createHome = true;
-    description = "Michael van Straten";
-    home = "/Users/michaelvanstraten/";
-    name = "michaelvanstraten";
-    shell = pkgs.fish;
-  };
+  environment.systemPackages = [
+  ];
 
-  system.stateVersion = 4;
-
-  security.pam.enableSudoTouchIdAuth = true;
-
-  home-manager.users.michaelvanstraten = self.lib.mkModule ./home.nix { };
+  imports = [
+    self.darwinModules."applications/karabiner-elements"
+    self.darwinModules.applications
+    self.darwinModules.common
+    self.sharedModules.nix
+  ];
 }
