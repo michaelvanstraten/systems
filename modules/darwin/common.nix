@@ -9,7 +9,7 @@
     environment.enableEssentialPackages = lib.mkEnableOption "Enable essential packages";
   };
 
-  config =
+  config = lib.mkMerge [
     {
       environment.shells = lib.mapAttrsToList (_: user: user.shell) config.users.users;
 
@@ -22,9 +22,10 @@
 
       environment.enableEssentialPackages = lib.mkDefault true;
     }
-    // lib.mkIf config.environment.enableEssentialPackages {
+    (lib.mkIf config.environment.enableEssentialPackages {
       environment.systemPackages = [
-        pkgs.trash
+        pkgs.darwin.trash
       ];
-    };
+    })
+  ];
 }
