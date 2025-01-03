@@ -1,5 +1,5 @@
 { self, ... }:
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.stateVersion = "24.05";
 
@@ -20,7 +20,7 @@
     pkgs.utm
   ];
 
-  targets.darwin.defaults."com.apple.dock".persistent-apps = self.lib.darwin.mkPersistentApps [
+  targets.darwin.defaults."com.apple.dock".persistent-apps = config.lib.darwin.mkPersistentApps [
     "/System/Applications/Mail.app/"
     "${pkgs.signal-desktop}/Applications/Signal.app/"
     "/System/Applications/Messages.app/"

@@ -1,5 +1,5 @@
 { self, ... }:
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   home.stateVersion = "24.05";
 
@@ -17,7 +17,7 @@
 
   programs.firefox.package = null;
 
-  targets.darwin.defaults."com.apple.dock".persistent-apps = self.lib.darwin.mkPersistentApps [
+  targets.darwin.defaults."com.apple.dock".persistent-apps = config.lib.darwin.mkPersistentApps [
     "/System/Applications/Mail.app/"
     "${pkgs.element-desktop}/Applications/Element.app"
     "/Applications/Slack.app" # Externally managed
