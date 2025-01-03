@@ -40,6 +40,7 @@
     self.homeModules.lazygit
     self.homeModules.vscodium
     self.homeModules.git
+    self.homeModules.mach-command
     self.homeModules.nvim
     self.homeModules.sesh
     self.homeModules.shell-environment
