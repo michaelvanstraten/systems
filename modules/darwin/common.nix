@@ -20,6 +20,8 @@
 
       security.pam.enableSudoTouchIdAuth = true;
 
+      programs.fish.enable = true;
+
       environment.enableEssentialPackages = lib.mkDefault true;
     }
     (lib.mkIf config.environment.enableEssentialPackages {

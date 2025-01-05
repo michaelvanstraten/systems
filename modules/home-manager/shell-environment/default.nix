@@ -31,7 +31,8 @@ in
   home.packages = [ sessionCommand ];
 
   imports = [
-    ./starship.nix
+    ./fish.nix
     ./nushell
+    ./starship.nix
   ];
 }

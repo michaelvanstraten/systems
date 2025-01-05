@@ -10,7 +10,4 @@
     lg = "lazygit";
   };
 
-  # Command argument completion
-  programs.carapace.enable = true;
-  programs.carapace.enableNushellIntegration = true;
 }

@@ -10,6 +10,4 @@ $env.PATH = (
   | uniq
 )
 
-$env.CARAPACE_BRIDGES = 'zsh,fish,bash,inshellisense'
-
 $env.EDITOR = "nvim"
