@@ -9,5 +9,3 @@ $env.PATH = (
   | prepend $"($env.HOME)/.cargo/bin"
   | uniq
 )
-
-$env.EDITOR = "nvim"

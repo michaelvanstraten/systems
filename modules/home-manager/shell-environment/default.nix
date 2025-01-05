@@ -30,6 +30,14 @@ in
   programs.sesh.enableAlias = false;
   home.packages = [ sessionCommand ];
 
+  home.shellAliases = {
+    c = "clear";
+    l = "ls";
+    la = "ls -a";
+    nv = "nvim";
+    lg = "lazygit";
+  };
+
   imports = [
     ./fish.nix
     ./nushell
