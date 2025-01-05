@@ -8,7 +8,6 @@
     settings = {
       general.import = [ "${cyberdream-theme}/extras/alacritty/cyberdream.toml" ];
       font = {
-        size = 14;
         normal = {
           family = "JetBrainsMono Nerd Font";
           style = "Medium";
