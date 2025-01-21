@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, moz-phab, ... }:
 { config, pkgs, ... }:
 {
   home.stateVersion = "24.05";
@@ -8,11 +8,18 @@
     userEmail = "mvanstraten@mozilla.com";
   };
 
+  nixpkgs.config.allowBroken = true;
+
   home.packages = [
     pkgs.alacritty
     pkgs.element-desktop
     pkgs.podman
     pkgs.podman-compose
+
+    pkgs.git-cinnabar
+    (pkgs.mozphab.overrideAttrs {
+      src = moz-phab;
+    })
   ];
 
   programs.firefox.package = null;

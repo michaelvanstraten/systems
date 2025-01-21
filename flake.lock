@@ -201,6 +201,22 @@
         "type": "github"
       }
     },
+    "moz-phab": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1730759837,
+        "narHash": "sha256-Y7UrM5vIYVN1Kol09kFUEQcHdI+zxFLWqDvAyX2A/R4=",
+        "owner": "mozilla-conduit",
+        "repo": "review",
+        "rev": "a862118056927d3f645cb81da2365725abf65842",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mozilla-conduit",
+        "repo": "review",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -370,6 +386,7 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",
+        "moz-phab": "moz-phab",
         "nix-darwin": "nix-darwin",
         "nixos-generators": "nixos-generators",
         "nixpkgs": "nixpkgs_3",

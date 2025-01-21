@@ -58,6 +58,11 @@
     };
 
     nixos-generators.url = "github:nix-community/nixos-generators";
+
+    moz-phab = {
+      url = "github:mozilla-conduit/review";
+      flake = false;
+    };
   };
 
   outputs =
