@@ -43,15 +43,15 @@
     self.homeModules."darwin/defaults"
     self.homeModules.alacritty
     self.homeModules.firefox
+    self.homeModules.git
     self.homeModules.karabiner-elements
     self.homeModules.lazygit
-    self.homeModules.vscodium
-    self.homeModules.git
     self.homeModules.mach-command
     self.homeModules.mozconfig
     self.homeModules.nvim
     self.homeModules.sesh
     self.homeModules.shell-environment
     self.homeModules.tmux
+    self.homeModules.vscodium
   ];
 }
