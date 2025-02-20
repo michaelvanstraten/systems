@@ -4,18 +4,13 @@
     enable = true;
 
     baseIndex = 1;
-
     customPaneNavigationAndResize = true;
-
-    keyMode = "vi";
-
     extraConfig = builtins.readFile ./tmux.conf;
-
-    sensibleOnTop = false;
-
+    keyMode = "vi";
     plugins = with pkgs.tmuxPlugins; [
       # Enables seamless navigation between tmux panes and vim splits
       vim-tmux-navigator
     ];
+    sensibleOnTop = false;
   };
 }
