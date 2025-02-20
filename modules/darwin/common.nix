@@ -29,5 +29,13 @@
         pkgs.darwin.trash
       ];
     })
+    {
+      nix.settings = {
+        sandbox = true;
+        extra-sandbox-paths = [
+          "/nix/store"
+        ];
+      };
+    }
   ];
 }

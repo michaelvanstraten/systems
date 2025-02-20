@@ -16,7 +16,6 @@
         "recursive-nix"
         "verified-fetches"
       ];
-      sandbox = true;
       trusted-users = [ "@admin" ];
     };
   };
