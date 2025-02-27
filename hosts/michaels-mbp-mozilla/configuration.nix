@@ -1,7 +1,7 @@
 { self, ... }:
 { pkgs, ... }:
 {
-  system.stateVersion = 4;
+  system.stateVersion = 5;
 
   users.users.michael = {
     description = "Michael van Straten";
