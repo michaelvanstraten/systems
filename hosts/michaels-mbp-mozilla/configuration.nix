@@ -20,6 +20,8 @@
     pkgs.utm
   ];
 
+  services.redis.enable = true;
+
   imports = [
     self.darwinModules."applications/karabiner-elements"
     self.darwinModules."applications/yabai"
