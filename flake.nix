@@ -39,7 +39,7 @@
     };
 
     nixpkgs = {
-      url = "github:michaelvanstraten/nixpkgs/add-godns-service";
+      url = "github:NixOs/nixpkgs?ref=master";
     };
 
     nixpkgs-firefox-darwin = {
@@ -57,11 +57,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-generators.url = "github:nix-community/nixos-generators";
-
-    moz-phab = {
-      url = "github:mozilla-conduit/review";
-      flake = false;
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
