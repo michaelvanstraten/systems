@@ -3,7 +3,7 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
-    userSettings = {
+    profiles.default.userSettings = {
       "files.autoSave" = "afterDelay";
       "workbench.startupEditor" = "none";
       "workbench.colorTheme" = "Ayu Dark Bordered";
