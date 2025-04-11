@@ -7,7 +7,7 @@ map("i", "kj", "<ESC>", { desc = "Escape insert mode" })
 -- Disable recording of macros
 map({ "n" }, "q", "<nop>", { desc = "does nothing to disable recording" })
 
--- Clear search with <esc>
+-- Clear search with <ESC>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
 
 -- Move Lines
@@ -18,7 +18,7 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move line Up" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move line Down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move line Up" })
 
--- Move to window using the <ctrl> hjkl keys
+-- Move to window using the <Ctrl> hjkl keys
 map("n", "<C-h>", "<C-w>h", { desc = "Go to Left Window", remap = true })
 map("n", "<C-j>", "<C-w>j", { desc = "Go to Lower Window", remap = true })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to Upper Window", remap = true })
