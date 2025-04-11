@@ -24,5 +24,6 @@
     self.darwinModules.applications
     self.darwinModules.common
     self.sharedModules.nix
+    self.sharedModules.nix-remote-builders
   ];
 }

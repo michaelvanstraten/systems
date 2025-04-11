@@ -11,8 +11,11 @@
     ]
     ++ [
       self.nixosModules."hardware/libvirtd"
+      self.nixosModules.remote-builder
       self.sharedModules.nix
     ];
+
+  nix.remoteBuilder.enable = true;
 
   networking.hostName = "h2946065";
 
