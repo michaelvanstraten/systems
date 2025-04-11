@@ -1,4 +1,4 @@
-{ self, moz-phab, ... }:
+{ self, ... }:
 { config, pkgs, ... }:
 {
   home.stateVersion = "24.05";
@@ -17,9 +17,7 @@
     pkgs.podman-compose
 
     pkgs.git-cinnabar
-    (pkgs.mozphab.overrideAttrs {
-      src = moz-phab;
-    })
+    pkgs.mozphab
   ];
 
   programs.firefox.package = null;
