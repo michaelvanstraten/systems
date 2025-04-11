@@ -61,6 +61,11 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nil_ls = {
+      url = "github:oxalica/nil";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -69,6 +74,7 @@
       flake-utils,
       nixpkgs,
       pre-commit-hooks,
+      nil_ls,
       ...
     }@inputs:
     let
@@ -81,7 +87,7 @@
       in
       {
         # Checks pre-commit-hooks
-        checks = import ./checks { inherit pre-commit-hooks system; };
+        checks = import ./checks { inherit pre-commit-hooks system nil_ls; };
 
         # Development shell with necessary tools
         devShells =
