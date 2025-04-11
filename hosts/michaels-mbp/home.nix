@@ -44,7 +44,6 @@
     self.homeModules.vscodium
     self.homeModules.git
     self.homeModules.nvim
-    self.homeModules.sesh
     self.homeModules.shell-environment
     self.homeModules.tmux
   ];

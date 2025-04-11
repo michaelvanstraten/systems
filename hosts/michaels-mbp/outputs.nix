@@ -10,7 +10,7 @@
       system = "aarch64-darwin";
       modules = [
         (self.lib.mkModule ./configuration.nix { })
-        home-manager.darwinModule
+        home-manager.darwinModules.home-manager
         {
           home-manager.useUserPackages = true;
           home-manager.users.michaelvanstraten = self.lib.mkModule ./home.nix { };

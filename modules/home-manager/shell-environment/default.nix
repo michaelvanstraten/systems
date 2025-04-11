@@ -26,9 +26,9 @@ in
 
   programs.direnv.enable = true;
 
-  programs.sesh.enable = true;
-  programs.sesh.enableAlias = false;
   home.packages = [ sessionCommand ];
+  programs.fzf.tmux.enableShellIntegration = true;
+  programs.sesh.enable = true;
 
   home.shellAliases = {
     c = "clear";
