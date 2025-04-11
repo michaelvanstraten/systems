@@ -1,5 +1,5 @@
 {
-  home.shellAliases  = {
+  home.shellAliases = {
     lg = "lazygit";
   };
 
