@@ -16,8 +16,8 @@
     hostName = "michaels-mbp";
   };
 
-  environment.systemPackages = [
-  ];
+  nix.linux-builder.enable = true;
+  nix.linux-builder.ephemeral = true;
 
   imports = [
     self.darwinModules."applications/karabiner-elements"
