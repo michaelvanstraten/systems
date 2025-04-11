@@ -39,6 +39,10 @@ opt.swapfile = false
 opt.wrap = true
 opt.breakindent = false
 
+opt.scrolloff = 3
+
+opt.cursorline = true
+
 -- Spell Checking
 opt.spelllang = { "en", "de" }
 opt.spell = true
