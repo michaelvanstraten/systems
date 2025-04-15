@@ -10,6 +10,19 @@
 
   nixpkgs.config.allowBroken = true;
 
+  nixpkgs.overlays = [
+    (self: super: {
+      python312 = super.python312.override {
+        packageOverrides = python-self: python-super: {
+          glean-sdk = python-super.glean-sdk.overridePythonAttrs (old: {
+            # Disable pytest and other checks
+            doCheck = false;
+          });
+        };
+      };
+    })
+  ];
+
   home.packages = [
     pkgs.alacritty
     pkgs.element-desktop
