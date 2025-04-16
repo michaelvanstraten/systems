@@ -26,6 +26,7 @@ return {
                     yaml = { "prettier" },
                     cpp = { "clang-format" },
                     json = { "prettier" },
+                    toml = { "taplo" }
                 },
                 formatters = {
                     latexindent = {

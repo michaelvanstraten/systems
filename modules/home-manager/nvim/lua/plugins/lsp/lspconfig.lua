@@ -37,6 +37,7 @@ return {
             clangd = {},
             pylsp = {},
             ltex = {},
+            taplo = {},
         },
     },
     config = function(_, opts)

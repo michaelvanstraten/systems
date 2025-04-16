@@ -7,6 +7,7 @@
     pkgs.ltex-ls # Grammar checker
     pkgs.lua-language-server
     pkgs.nixd
+    pkgs.taplo
     pkgs.nixfmt-rfc-style
     pkgs.ripgrep # Needed for Telescope
     pkgs.stylua
