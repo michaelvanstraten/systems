@@ -37,7 +37,6 @@ return {
             clangd = {},
             pylsp = {},
             ltex = {},
-            atlab_ls = {},
         },
     },
     config = function(_, opts)
