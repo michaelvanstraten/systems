@@ -2,7 +2,7 @@
 let
   sessionCommand = pkgs.writeShellScriptBin "s" ''
     if [ $# -eq 0 ]; then
-        result=$(sesh list | fzf)
+        result=$(sesh list --icons | fzf --ansi)
     elif [[ $# -eq 1 && $1 == '-' ]]; then
         sesh last
         exit 0
@@ -26,8 +26,9 @@ in
 
   programs.direnv.enable = true;
 
-  home.packages = [ sessionCommand ];
+  home.packages = [ pkgs.fzf sessionCommand ];
   programs.fzf.tmux.enableShellIntegration = true;
+  programs.sesh.enableAlias = false;
   programs.sesh.enable = true;
 
   home.shellAliases = {
