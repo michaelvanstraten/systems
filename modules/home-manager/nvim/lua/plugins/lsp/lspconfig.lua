@@ -15,30 +15,24 @@ return {
     },
     opts = {
         servers = {
+            clangd = {},
+            ltex = {},
             lua_ls = {
                 settings = {
                     Lua = {
-                        workspace = {
-                            checkThirdParty = false,
-                        },
-                        codeLens = {
-                            enable = true,
-                        },
-                        completion = {
-                            callSnippet = "Replace",
-                        },
+                        workspace = { checkThirdParty = false },
+                        codeLens = { enable = true },
+                        completion = { callSnippet = "Replace" },
                     },
                 },
             },
-            texlab = {},
-            rust_analyzer = {},
-            nixd = {},
             nil_ls = {},
-            yamlls = {},
-            clangd = {},
+            nixd = {},
             pyright = {},
-            ltex = {},
+            rust_analyzer = {},
             taplo = {},
+            texlab = {},
+            yamlls = {},
         },
     },
     config = function(_, opts)
