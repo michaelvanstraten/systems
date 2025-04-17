@@ -19,7 +19,7 @@
     pkgs.yaml-language-server
 
     # Formatters & Linters
-    pkgs.ltex-ls # Grammar checker
+    pkgs.harper # Grammar checker
     pkgs.nixfmt-rfc-style
     pkgs.nodePackages.prettier
     pkgs.ruff

@@ -16,7 +16,7 @@ return {
     opts = {
         servers = {
             clangd = {},
-            ltex = {},
+            harper_ls = {},
             lua_ls = {
                 settings = {
                     Lua = {
