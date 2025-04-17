@@ -33,6 +33,7 @@ return {
             texlab = {},
             rust_analyzer = {},
             nixd = {},
+            nil_ls = {},
             yamlls = {},
             clangd = {},
             pyright = {},
