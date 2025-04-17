@@ -44,8 +44,8 @@ opt.scrolloff = 3
 opt.cursorline = true
 
 -- Spell Checking
-opt.spelllang = { "en", "de" }
-opt.spell = true
+-- opt.spelllang = { "en", "de" }
+-- opt.spell = true
 
 -- Additional Settings
 if vim.fn.has("nvim-0.10") == 1 then
