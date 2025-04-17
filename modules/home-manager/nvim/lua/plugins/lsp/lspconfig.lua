@@ -35,7 +35,7 @@ return {
             nixd = {},
             yamlls = {},
             clangd = {},
-            pylsp = {},
+            pyright = {},
             ltex = {},
             taplo = {},
         },
