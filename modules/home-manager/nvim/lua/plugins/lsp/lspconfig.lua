@@ -32,6 +32,7 @@ return {
             rust_analyzer = {},
             taplo = {},
             texlab = {},
+            tinymist = {},
             yamlls = {},
         },
     },

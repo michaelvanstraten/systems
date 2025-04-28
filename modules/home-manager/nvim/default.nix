@@ -17,6 +17,8 @@
     pkgs.taplo
     pkgs.texlab
     pkgs.yaml-language-server
+    pkgs.tinymist
+    pkgs.websocat # used by typst-preview.nvim
 
     # Formatters & Linters
     pkgs.harper # Grammar checker
@@ -26,6 +28,8 @@
     pkgs.shfmt
     pkgs.stylua
     pkgs.texlivePackages.latexindent
+    (pkgs.texlive.withPackages (ps: [ ps.latexindent ]))
+    # TODO: typstyle
 
     # Shell
     pkgs.fish

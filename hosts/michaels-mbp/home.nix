@@ -18,6 +18,7 @@
     pkgs.podman-compose
     pkgs.signal-desktop
     pkgs.utm
+    pkgs.typst
   ];
 
   targets.darwin.defaults."com.apple.dock".persistent-apps = config.lib.darwin.mkPersistentApps [
