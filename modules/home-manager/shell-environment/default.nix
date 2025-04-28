@@ -26,7 +26,10 @@ in
 
   programs.direnv.enable = true;
 
-  home.packages = [ pkgs.fzf sessionCommand ];
+  home.packages = [
+    pkgs.fzf
+    sessionCommand
+  ];
   programs.fzf.tmux.enableShellIntegration = true;
   programs.sesh.enableAlias = false;
   programs.sesh.enable = true;
