@@ -37,20 +37,15 @@ return {
     {
         "echasnovski/mini.pairs",
         event = "VeryLazy",
-        opts = {},
-        config = function(_, opts)
-            local pairs = require("mini.pairs")
+        config = function()
+            require("mini.pairs").setup({})
 
-            -- vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-            -- 	pattern = { "*.rs" },
-            -- 	callback = function(autocmd)
-            -- 		print(autocmd.buf)
-            -- 		autocmd.
-            -- 		pairs.unmap_buf(autocmd.buf, "i", "'", "''")
-            -- 	end,
-            -- })
-            --
-            pairs.setup(opts)
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "tex,typst",
+                callback = function()
+                    MiniPairs.map_buf(0, "i", "$", { action = "closeopen", pair = "$$" })
+                end,
+            })
         end,
     },
     {
