@@ -21,6 +21,7 @@
 
   imports = [
     self.darwinModules."applications/karabiner-elements"
+    self.darwinModules."applications/yabai"
     self.darwinModules.applications
     self.darwinModules.common
     self.sharedModules.nix
