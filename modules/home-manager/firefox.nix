@@ -1,13 +1,11 @@
-{ BetterFox, nixpkgs-firefox-darwin, ... }:
+{ BetterFox, ... }:
 { lib, pkgs, ... }:
 {
-  nixpkgs.overlays = [ nixpkgs-firefox-darwin.overlay ];
-
   programs.firefox = {
     enable = true;
 
     # Let Firefox package be managed by the system
-    package = lib.mkDefault pkgs.firefox-bin;
+    package = lib.mkDefault pkgs.firefox;
 
     policies = {
       DisableAppUpdate = true;

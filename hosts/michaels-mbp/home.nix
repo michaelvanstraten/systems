@@ -12,24 +12,24 @@
 
   home.packages = [
     pkgs.alacritty
-    pkgs.firefox-bin
+    pkgs.firefox
     pkgs.keepassxc
     pkgs.podman
     pkgs.podman-compose
-    pkgs.signal-desktop
+    pkgs.signal-desktop-bin
     pkgs.utm
     pkgs.typst
   ];
 
   targets.darwin.defaults."com.apple.dock".persistent-apps = config.lib.darwin.mkPersistentApps [
     "/System/Applications/Mail.app/"
-    "${pkgs.signal-desktop}/Applications/Signal.app/"
+    "${pkgs.signal-desktop-bin}/Applications/Signal.app/"
     "/System/Applications/Messages.app/"
     "/Applications/WhatsApp.app/"
     "/System/Applications/Reminders.app/"
     "/System/Applications/Calendar.app/"
     "${pkgs.alacritty}/Applications/Alacritty.app/"
-    "${pkgs.firefox-bin}/Applications/Firefox.app/"
+    "${pkgs.firefox}/Applications/Firefox.app/"
     "/Applications/Bitwarden.app/"
     "/System/Applications/System Settings.app/"
   ];
