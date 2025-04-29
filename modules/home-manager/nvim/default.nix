@@ -10,7 +10,6 @@
     # Language Servers
     pkgs.clang-tools
     pkgs.lua-language-server
-    pkgs.nixd
     pkgs.nil
     pkgs.pyright
     pkgs.rust-analyzer

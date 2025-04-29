@@ -27,7 +27,6 @@ return {
                 },
             },
             nil_ls = {},
-            nixd = {},
             pyright = {},
             rust_analyzer = {},
             taplo = {},
