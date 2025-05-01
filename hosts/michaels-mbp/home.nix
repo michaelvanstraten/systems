@@ -12,7 +12,7 @@
 
   home.packages = [
     pkgs.alacritty
-    pkgs.firefox
+    pkgs.firefox-bin
     pkgs.keepassxc
     pkgs.podman
     pkgs.podman-compose
@@ -29,7 +29,7 @@
     "/System/Applications/Reminders.app/"
     "/System/Applications/Calendar.app/"
     "${pkgs.alacritty}/Applications/Alacritty.app/"
-    "${pkgs.firefox}/Applications/Firefox.app/"
+    "${pkgs.firefox-bin}/Applications/Firefox.app/"
     "/Applications/Bitwarden.app/"
     "/System/Applications/System Settings.app/"
   ];

@@ -5,7 +5,7 @@
     enable = true;
 
     # Let Firefox package be managed by the system
-    package = lib.mkDefault pkgs.firefox;
+    package = lib.mkDefault pkgs.firefox-bin;
 
     policies = {
       DisableAppUpdate = true;
