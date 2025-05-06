@@ -29,7 +29,6 @@
     pkgs.podman
     pkgs.podman-compose
 
-    pkgs.git-cinnabar
     pkgs.mozphab
   ];
 
