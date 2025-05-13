@@ -61,6 +61,10 @@
       url = "github:oxalica/nil";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    pyproject-nix.url = "github:pyproject-nix/pyproject.nix";
+
+    proxmox-nixos.url = "github:SaumonNet/proxmox-nixos?rev=91c96a414e14835b84adbf775f793739a5851fab";
   };
 
   outputs =
