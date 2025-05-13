@@ -7,6 +7,20 @@ in
   options.nix.remoteBuilder = {
     enable = lib.mkEnableOption "Enable remote builder functionality";
 
+    supportedFeatures = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      example = [
+        "kvm"
+        "big-parallel"
+      ];
+      description = ''
+        A list of features supported by this builder. The builder will
+        be ignored for derivations that require features not in this
+        list.
+      '';
+    };
+
     authorizedKeys = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ];

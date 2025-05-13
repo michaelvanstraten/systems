@@ -16,6 +16,10 @@
     ];
 
   nix.remoteBuilder.enable = true;
+  nix.remoteBuilder.supportedFeatures = [
+    "kvm"
+    "big-parallel"
+  ];
 
   networking.hostName = "h2946065";
 

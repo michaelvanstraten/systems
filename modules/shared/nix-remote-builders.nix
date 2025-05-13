@@ -18,6 +18,7 @@ let
 
   # Helper function to generate Nix build machine host.configuration for a single host
   mkBuildMachine = host: {
+    inherit (host.config.nix.remoteBuilder) supportedFeatures;
     hostName = host.config.networking.fqdn;
     system = host.pkgs.system;
     protocol = "ssh-ng";
