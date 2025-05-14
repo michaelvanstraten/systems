@@ -4,8 +4,10 @@
     enable = true;
     ports = [ 62518 ];
     settings = {
-      PasswordAuthentication = false;
+      # Forbid root login through SSH.
       PermitRootLogin = "no";
+      # Use keys only.
+      PasswordAuthentication = false;
     };
   };
 }
