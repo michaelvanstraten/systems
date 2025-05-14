@@ -40,6 +40,7 @@
     self.homeModules."darwin/defaults"
     self.homeModules.alacritty
     self.homeModules.firefox
+    self.homeModules.go
     self.homeModules.karabiner-elements
     self.homeModules.lazygit
     self.homeModules.vscodium
