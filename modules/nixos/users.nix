@@ -8,4 +8,6 @@
     ];
     initialPassword = "fsbEh&PzR9Eo";
   };
+
+  security.sudo.wheelNeedsPassword = false;
 }
