@@ -1,9 +1,17 @@
-{ self, ... }:
+{ self, nixpkgs, ... }:
 let
   # Filter the NixOS configurations to include only those with remote builders enabled
   remoteBuilders =
     self.nixosConfigurations
     |> builtins.attrValues
+    |> builtins.filter (
+      nixpkgs.lib.attrsets.hasAttrByPath [
+        "config"
+        "nix"
+        "remoteBuilder"
+        "enable"
+      ]
+    )
     |> builtins.filter (host: host.config.nix.remoteBuilder.enable);
 
   # Helper function to generate a list of "Port <number>" strings
