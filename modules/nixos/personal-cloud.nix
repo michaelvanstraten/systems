@@ -13,12 +13,16 @@
           sub_domains = [ "${config.networking.hostName}" ];
         }
       ];
+      ip_type = "IPv4";
+      ip_urls = [
+        "https://api.ipify.org"
+        "https://ipinfo.io/ip"
+      ];
       ipv6_urls = [
         "https://api6.ipify.org"
         "https://ip2location.io/ip"
         "https://v6.ipinfo.io/ip"
       ];
-      ip_type = "IPv6";
       interval = 300;
     };
 
