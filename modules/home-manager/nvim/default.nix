@@ -1,3 +1,4 @@
+{ nil_ls, ... }:
 { pkgs, ... }:
 {
   home.file.".config/nvim".source = ./.;
@@ -10,7 +11,7 @@
     # Language Servers
     pkgs.clang-tools
     pkgs.lua-language-server
-    pkgs.nil
+    nil_ls.packages.${pkgs.system}.nil
     pkgs.pyright
     pkgs.rust-analyzer
     pkgs.taplo
