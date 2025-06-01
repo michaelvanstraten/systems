@@ -11,7 +11,7 @@ in
   nixosConfigurations.dxp4800plus = nixosSystem {
     modules = [
       (self.lib.mkModule ./configuration.nix { })
-      ./hardware-configuration.nix
+      (self.lib.mkModule ./hardware-configuration.nix { })
     ];
   };
 

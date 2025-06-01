@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   config,
   pkgs,
@@ -23,6 +24,7 @@ in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    self.nixosModules."hardware/ugreen-nasync-serie"
   ];
 
   boot.initrd.availableKernelModules = [

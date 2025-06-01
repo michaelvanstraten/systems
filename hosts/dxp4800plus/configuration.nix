@@ -10,7 +10,6 @@
     self.nixosModules.ssh
     self.nixosModules.users
     self.sharedModules.nix
-    self.nixosModules."hardware/ugreen-nasync-serie"
   ];
 
   console.keyMap = "de";
