@@ -6,6 +6,7 @@
 {
   imports = [
     (self.lib.mkModule ./services { })
+    ./zfs.nix
     self.nixosModules.remote-builder
     self.nixosModules.ssh
     self.nixosModules.users
@@ -23,12 +24,6 @@
   boot.kernel.sysctl."net.ipv6.ip_forward" = 1;
   boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  boot.zfs.extraPools = [ "tank" ];
-
-  # ZFS stuff
-  environment.systemPackages = [ pkgs.zfs ];
-  services.zfs.autoScrub.enable = true;
 
   system.stateVersion = "25.11";
 }
