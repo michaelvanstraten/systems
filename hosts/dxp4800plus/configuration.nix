@@ -5,7 +5,7 @@
 { pkgs, ... }:
 {
   imports = [
-    (self.lib.mkModule ./proxmox.nix { })
+    (self.lib.mkModule ./services { })
     self.nixosModules.remote-builder
     self.nixosModules.ssh
     self.nixosModules.users
