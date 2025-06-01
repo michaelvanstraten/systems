@@ -6,7 +6,6 @@
 {
   imports = [
     (self.lib.mkModule ./proxmox.nix { })
-    (self.lib.mkModule ./automated-ripping-machine { })
     self.nixosModules.remote-builder
     self.nixosModules.ssh
     self.nixosModules.users
@@ -33,8 +32,6 @@
     "kvm"
     "big-parallel"
   ];
-
-  services.automated-ripping-machine.enable = true;
 
   # ZFS stuff
   environment.systemPackages = [ pkgs.zfs ];
