@@ -26,12 +26,6 @@
 
   boot.zfs.extraPools = [ "tank" ];
 
-  nix.remoteBuilder.enable = true;
-  nix.remoteBuilder.supportedFeatures = [
-    "kvm"
-    "big-parallel"
-  ];
-
   # ZFS stuff
   environment.systemPackages = [ pkgs.zfs ];
   services.zfs.autoScrub.enable = true;
