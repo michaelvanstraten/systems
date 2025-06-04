@@ -19,6 +19,7 @@
     pkgs.signal-desktop-bin
     pkgs.utm
     pkgs.typst
+    pkgs.grandperspective
   ];
 
   targets.darwin.defaults."com.apple.dock".persistent-apps = config.lib.darwin.mkPersistentApps [
