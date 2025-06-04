@@ -28,6 +28,7 @@ return {
                     json = { "prettier" },
                     toml = { "taplo" },
                     typst = { "typstyle" },
+                    swift = { "swift_format" },
                     rust = { "rustfmt" },
                 },
                 formatters = {

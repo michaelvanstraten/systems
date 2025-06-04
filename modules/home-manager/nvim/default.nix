@@ -30,6 +30,7 @@
     pkgs.texlivePackages.latexindent
     (pkgs.texlive.withPackages (ps: [ ps.latexindent ]))
     pkgs.typstyle
+    pkgs.swift-format
 
     # Shell
     pkgs.fish
