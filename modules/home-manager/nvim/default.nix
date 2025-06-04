@@ -29,7 +29,7 @@
     pkgs.stylua
     pkgs.texlivePackages.latexindent
     (pkgs.texlive.withPackages (ps: [ ps.latexindent ]))
-    # TODO: typstyle
+    pkgs.typstyle
 
     # Shell
     pkgs.fish

@@ -38,6 +38,9 @@ return {
                     prettier = {
                         prepend_args = { "--prose-wrap", "always" },
                     },
+                    typestyle = {
+                        append_args = { "--wrap-text" },
+                    },
                 },
             }
         end,
