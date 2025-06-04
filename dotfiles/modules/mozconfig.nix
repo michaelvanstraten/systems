@@ -21,6 +21,15 @@ in
       ac_add_options --with-ccache=sccache
     '';
 
+  home.file.".mozconfigs/mozconfig-ff-rel-opt".text = # bash
+    ''
+      mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-ff-rel-opt
+      mk_add_options AUTOCLOBBER=1
+      ac_add_options --disable-debug
+      ac_add_options --enable-optimize
+      ac_add_options --with-ccache=sccache
+    '';
+
   home.file."Library/Application Support/Mozilla.sccache/config".source =
     tomlFormat.generate "sccache-config"
       {
