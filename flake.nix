@@ -96,8 +96,9 @@
           {
             default = pkgs.mkShell {
               packages = pre-commit-check.enabledPackages ++ [
+                pkgs.just
+                (pkgs.nixos-rebuild-ng.overridePythonAttrs { doCheck = false; })
                 self.formatter.${system}
-                # Add other dependencies here
               ];
               inherit (pre-commit-check) shellHook;
             };
