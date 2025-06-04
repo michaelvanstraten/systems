@@ -27,7 +27,8 @@ return {
                     cpp = { "clang-format" },
                     json = { "prettier" },
                     toml = { "taplo" },
-                    typst = { "typstyle" }
+                    typst = { "typstyle" },
+                    rust = { "rustfmt" },
                 },
                 formatters = {
                     latexindent = {
