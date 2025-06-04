@@ -253,6 +253,22 @@
         "type": "github"
       }
     },
+    "moz-phab": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746124040,
+        "narHash": "sha256-CVpsq9YoEww47uruHYEsJk9YQ39ZFQsMdL0nBc8AHUM=",
+        "owner": "mozilla-conduit",
+        "repo": "review",
+        "rev": "0133de4c63cc29460636bbf6ba32ca11bcbe8216",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mozilla-conduit",
+        "repo": "review",
+        "type": "github"
+      }
+    },
     "nil_ls": {
       "inputs": {
         "flake-utils": "flake-utils_3",
@@ -462,6 +478,7 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "mac-app-util": "mac-app-util",
+        "moz-phab": "moz-phab",
         "nil_ls": "nil_ls",
         "nix-darwin": "nix-darwin",
         "nixos-generators": "nixos-generators",

@@ -63,6 +63,11 @@
     };
 
     proxmox-nixos.url = "github:SaumonNet/proxmox-nixos?rev=91c96a414e14835b84adbf775f793739a5851fab";
+
+    moz-phab = {
+      url = "github:mozilla-conduit/review";
+      flake = false;
+    };
   };
 
   outputs =
