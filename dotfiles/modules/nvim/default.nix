@@ -23,6 +23,7 @@
     # Formatters & Linters
     pkgs.harper # Grammar checker
     pkgs.nixfmt-rfc-style
+    pkgs.nodejs # Needed for prettier
     pkgs.nodePackages.prettier
     pkgs.ruff
     pkgs.shfmt
