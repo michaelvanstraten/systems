@@ -1,4 +1,24 @@
+{ pkgs, ... }:
 {
+  systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD";
+
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD";
+  };
+
+  nixpkgs.config.allowUnfree = true;
+
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-compute-runtime
+      vpl-gpu-rt
+      intel-media-sdk
+      intel-ocl
+    ];
+  };
+
   services.jellyfin.enable = true;
 
   services.samba = {
