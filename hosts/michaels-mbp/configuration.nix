@@ -2,6 +2,7 @@
 { pkgs, ... }:
 {
   system.stateVersion = 4;
+  system.primaryUser = "michaelvanstraten";
 
   users.users.michaelvanstraten = {
     description = "Michael van Straten";

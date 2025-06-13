@@ -5,7 +5,7 @@ default:
 switch:
     #!/usr/bin/env bash
     if [[ "$OSTYPE" == "darwin"* ]]; then
-        darwin-rebuild switch --flake .
+        sudo darwin-rebuild switch --flake .
     else
         sudo nixos-rebuild switch --flake .
     fi

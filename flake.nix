@@ -39,7 +39,7 @@
     };
 
     nixpkgs = {
-      url = "github:NixOs/nixpkgs?ref=nixos-unstable";
+      url = "github:NixOs/nixpkgs?ref=nixpkgs-unstable";
     };
 
     pre-commit-hooks = {

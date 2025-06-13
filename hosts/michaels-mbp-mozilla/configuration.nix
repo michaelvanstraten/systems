@@ -7,6 +7,7 @@
 }:
 {
   system.stateVersion = 5;
+  system.primaryUser = "michael";
 
   users.users.michael = {
     description = "Michael van Straten";
