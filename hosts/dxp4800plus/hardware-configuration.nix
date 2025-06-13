@@ -3,36 +3,27 @@
   config,
   pkgs,
   lib,
-  modulesPath,
   ...
 }:
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    self.nixosModules."hardware/ugreen-nasync-serie"
-  ];
-
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "nvme"
     "ahci"
+    "usbhid"
     "uas"
     "sd_mod"
   ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.configurationLimit = 8;
-
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/f222513b-ded1-49fa-b591-20ce86a2fe7f";
-    fsType = "ext4";
+  boot.loader.grub = {
+    enable = true;
+    device = "nodev";
+    efiInstallAsRemovable = true;
+    efiSupport = true;
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/12CE-A600";
+    device = "/dev/disk/by-uuid/C8A3-7CAA";
     fsType = "vfat";
     options = [
       "fmask=0022"
@@ -40,10 +31,13 @@
     ];
   };
 
-  swapDevices = [ ];
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  networking.useDHCP = lib.mkDefault true;
+  imports = [ self.nixosModules."hardware/ugreen-nasync-serie" ];
+
+  networking.hostId = "4831eedc";
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  powerManagement.powertop.enable = true;
 }
