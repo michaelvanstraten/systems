@@ -2,7 +2,6 @@
 {
   nix = {
     gc.automatic = true;
-    channel.enable = false;
     package = pkgs.nixVersions.latest;
     settings = {
       experimental-features = [
