@@ -37,5 +37,5 @@
     pkgs.fish
   ];
   home.sessionVariables.EDITOR = "nvim";
-  home.shellAliases.nv = "nvim";
+  home.shellAliases.e = "nvim";
 }
