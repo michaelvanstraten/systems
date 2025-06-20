@@ -18,7 +18,6 @@
     pkgs.podman-compose
     pkgs.signal-desktop-bin
     pkgs.utm
-    pkgs.typst
     pkgs.grandperspective
   ];
 

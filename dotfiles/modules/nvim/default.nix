@@ -5,8 +5,9 @@
   home.packages = [
     # Core
     pkgs.neovim
-    pkgs.tree-sitter
     pkgs.ripgrep # Needed for Telescope
+    pkgs.tree-sitter
+    pkgs.typst
 
     # Language Servers
     pkgs.clang-tools
