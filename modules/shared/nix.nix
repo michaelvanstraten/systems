@@ -18,5 +18,6 @@
       ];
       trusted-users = [ "@admin" ];
     };
+    optimise.automatic = true;
   };
 }
