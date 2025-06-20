@@ -8,7 +8,7 @@
     description = "Michael van Straten";
     home = "/Users/michaelvanstraten";
     name = "michaelvanstraten";
-    shell = pkgs.nushell;
+    shell = pkgs.fish;
     uid = 501;
   };
 
