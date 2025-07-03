@@ -12,7 +12,9 @@
     # Language Servers
     pkgs.clang-tools
     pkgs.lua-language-server
-    nil_ls.packages.${pkgs.system}.nil
+    (nil_ls.packages.${pkgs.system}.nil.override {
+      doCheck = false;
+    })
     pkgs.pyright
     pkgs.rust-analyzer
     pkgs.taplo
