@@ -12,6 +12,14 @@ return {
                 mode = { "n", "v" },
                 desc = "Format the buffer",
             },
+            {
+                "<leader>F",
+                function()
+                    require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
+                end,
+                mode = { "n", "v" },
+                desc = "Format Injected Langs",
+            },
         },
         opts = function()
             return {
@@ -32,6 +40,7 @@ return {
                     rust = { "rustfmt" },
                 },
                 formatters = {
+                    injected = { options = { ignore_errors = true } },
                     latexindent = {
                         args = { "-m", "-l", "-" },
                         cwd = require("conform.util").root_file({ ".latexindent.yaml" }),
