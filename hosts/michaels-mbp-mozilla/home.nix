@@ -28,11 +28,15 @@
     pkgs.element-desktop
     pkgs.podman
     pkgs.podman-compose
-
-    (pkgs.mozphab.overrideAttrs {
-      src = moz-phab;
-    })
   ];
+
+  programs.moz-phab = {
+    enable = true;
+    package = pkgs.mozphab.overridePythonAttrs (old: {
+      src = moz-phab;
+      doCheck = false;
+    });
+  };
 
   programs.firefox.package = null;
 
@@ -58,6 +62,7 @@
     self.homeModules.git
     self.homeModules.karabiner-elements
     self.homeModules.lazygit
+    self.homeModules."mozilla/moz-phab"
     self.homeModules."mozilla/mozconfig"
     self.homeModules."mozilla/mach-command"
     self.homeModules.nvim
