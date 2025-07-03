@@ -58,8 +58,8 @@
     self.homeModules.git
     self.homeModules.karabiner-elements
     self.homeModules.lazygit
-    self.homeModules.mach-command
-    self.homeModules.mozconfig
+    self.homeModules."mozilla/mozconfig"
+    self.homeModules."mozilla/mach-command"
     self.homeModules.nvim
     self.homeModules.shell-environment
     self.homeModules.tmux
