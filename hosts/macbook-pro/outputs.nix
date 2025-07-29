@@ -6,7 +6,7 @@
 }:
 {
   darwinConfigurations = {
-    "michaels-mbp" = nix-darwin.lib.darwinSystem {
+    "macbook-pro" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
         (self.lib.mkModule ./configuration.nix { })
