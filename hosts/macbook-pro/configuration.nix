@@ -13,8 +13,8 @@
   };
 
   networking = {
-    computerName = "Michaels MacBook Pro";
-    hostName = "michaels-mbp";
+    computerName = "Michael’s MacBook Pro";
+    hostName = "macbook-pro";
   };
 
   nix.linux-builder.enable = true;

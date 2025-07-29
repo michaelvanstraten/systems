@@ -18,8 +18,8 @@
   };
 
   networking = {
-    computerName = "Michaels MacBook Pro at Mozilla";
-    hostName = "michaels-mbp-mozilla";
+    computerName = "Michael’s MacBook Pro at Mozilla";
+    hostName = "macbook-pro-mozilla";
   };
 
   environment.systemPackages = [
