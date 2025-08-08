@@ -57,11 +57,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nil_ls = {
-      url = "github:oxalica/nil";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     proxmox-nixos.url = "github:SaumonNet/proxmox-nixos?rev=91c96a414e14835b84adbf775f793739a5851fab";
 
     moz-phab = {
@@ -76,7 +71,6 @@
       flake-utils,
       nixpkgs,
       pre-commit-hooks,
-      nil_ls,
       ...
     }@inputs:
     let
@@ -89,7 +83,7 @@
       in
       {
         # Checks pre-commit-hooks
-        checks = import ./checks { inherit pre-commit-hooks system nil_ls; };
+        checks = import ./checks { inherit pre-commit-hooks system; };
 
         # Development shell with necessary tools
         devShells =

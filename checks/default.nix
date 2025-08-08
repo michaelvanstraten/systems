@@ -1,7 +1,6 @@
 {
   system,
   pre-commit-hooks,
-  nil_ls,
   ...
 }:
 {
@@ -11,9 +10,6 @@
       # Nix linting and formatting
       nil = {
         enable = true;
-        package = nil_ls.packages.${system}.default.override {
-          doCheck = false;
-        };
       };
       nixfmt-rfc-style.enable = true;
       # Disabled until pipe-operator support lands.

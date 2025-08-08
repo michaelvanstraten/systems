@@ -1,4 +1,3 @@
-{ nil_ls, ... }:
 { pkgs, ... }:
 {
   home.file.".config/nvim".source = ./.;
@@ -12,16 +11,14 @@
     # Language Servers
     pkgs.clang-tools
     pkgs.lua-language-server
-    (nil_ls.packages.${pkgs.system}.nil.override {
-      doCheck = false;
-    })
+    pkgs.nil
     pkgs.pyright
     pkgs.rust-analyzer
     pkgs.taplo
     pkgs.texlab
-    pkgs.yaml-language-server
     pkgs.tinymist
     pkgs.websocat # used by typst-preview.nvim
+    pkgs.yaml-language-server
 
     # Formatters & Linters
     pkgs.harper # Grammar checker
