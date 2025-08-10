@@ -1,8 +1,6 @@
 { pkgs, ... }:
 {
   programs.tmux = {
-    enable = true;
-
     baseIndex = 1;
     customPaneNavigationAndResize = true;
     extraConfig = builtins.readFile ./tmux.conf;

@@ -1,8 +1,5 @@
-{ pkgs, ... }:
 {
   programs.vscode = {
-    enable = true;
-    package = pkgs.vscodium;
     profiles.default.userSettings = {
       "files.autoSave" = "afterDelay";
       "workbench.startupEditor" = "none";

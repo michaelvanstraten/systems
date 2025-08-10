@@ -1,14 +1,14 @@
 { BetterFox, ... }:
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   programs.firefox = {
-    enable = true;
-
-    # Let Firefox package be managed by the system
-    package = lib.mkDefault pkgs.firefox-bin;
-
     policies = {
-      DisableAppUpdate = true;
+      DisableAppUpdate = !(isNull config.programs.firefox.package);
     };
 
     profiles.michael = {
