@@ -30,6 +30,8 @@ in
     hostName = "macbook-pro-mozilla";
   };
 
+  programs.fish.enable = true;
+
   security.pam.services.sudo_local = {
     enable = true;
     touchIdAuth = true;
@@ -49,7 +51,7 @@ in
     description = "Michael van Straten";
     home = "/Users/${primaryUser}";
     name = primaryUser;
-    shell = pkgs.nushell;
+    shell = pkgs.fish;
     uid = 501;
   };
 }
