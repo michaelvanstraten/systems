@@ -46,6 +46,7 @@
     };
     lazygit.enable = true;
     karabiner-elements.enable = true;
+    mach.enable = true;
     moz-phab = {
       enable = true;
       package = pkgs.mozphab.overridePythonAttrs (old: {
