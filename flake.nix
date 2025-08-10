@@ -7,6 +7,44 @@
   };
 
   inputs = {
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+    };
+
+    nixpkgs = {
+      url = "github:NixOs/nixpkgs?ref=nixpkgs-unstable";
+    };
+
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     BetterFox = {
       url = "github:yokoffing/BetterFox";
       flake = false;
@@ -17,45 +55,7 @@
       flake = false;
     };
 
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     mac-app-util.url = "github:hraban/mac-app-util";
-
-    nix-darwin = {
-      url = "github:nix-darwin/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixpkgs = {
-      url = "github:NixOs/nixpkgs?ref=nixpkgs-unstable";
-    };
-
-    pre-commit-hooks = {
-      url = "github:cachix/git-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     moz-phab = {
       url = "github:mozilla-conduit/review";
@@ -69,6 +69,7 @@
       flake-utils,
       nixpkgs,
       pre-commit-hooks,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -94,6 +95,8 @@
                 pkgs.just
                 (pkgs.nixos-rebuild-ng.overridePythonAttrs { doCheck = false; })
                 self.formatter.${system}
+                pkgs.sops
+                pkgs.ssh-to-age
               ];
               inherit (pre-commit-check) shellHook;
             };
