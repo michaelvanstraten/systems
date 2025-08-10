@@ -41,10 +41,4 @@ in
     nv = "nvim";
     lg = "lazygit";
   };
-
-  imports = [
-    ./fish.nix
-    ./nushell
-    ./starship.nix
-  ];
 }
