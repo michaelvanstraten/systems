@@ -8,7 +8,9 @@
   home = {
     packages = [
       pkgs.alacritty
+      pkgs.bash
       pkgs.element-desktop
+      pkgs.python3
     ];
 
     stateVersion = "24.05";
