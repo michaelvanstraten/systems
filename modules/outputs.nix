@@ -35,6 +35,17 @@ let
       else
         { ${moduleName} = mkModule module { }; }
     )
+    |> (
+      allModules:
+      allModules
+      ++ [
+        {
+          all = {
+            imports = allModules |> map lib.attrValues |> lib.flatten;
+          };
+        }
+      ]
+    )
     |> lib.attrsets.mergeAttrsList;
 in
 {
