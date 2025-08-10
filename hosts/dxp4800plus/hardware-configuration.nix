@@ -1,43 +1,52 @@
 { self, ... }:
 {
   config,
-  pkgs,
   lib,
+  pkgs,
   ...
 }:
 {
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "nvme"
-    "ahci"
-    "usbhid"
-    "uas"
-    "sd_mod"
-  ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    efiInstallAsRemovable = true;
-    efiSupport = true;
-  };
+  boot = {
+    # Ugreen LEDs
+    kernelModules = [
+      "kvm-intel"
+      "i2c-dev"
+    ];
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/C8A3-7CAA";
-    fsType = "vfat";
-    options = [
-      "fmask=0022"
-      "dmask=0022"
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "nvme"
+      "ahci"
+      "usbhid"
+      "uas"
+      "sd_mod"
     ];
   };
 
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  environment.systemPackages = [
+    pkgs.ugreen-leds-cli
+  ];
 
-  imports = [ self.nixosModules."hardware/ugreen-nasync-serie" ];
+  hardware.cpu.intel.updateMicrocode = true;
 
   networking.hostId = "4831eedc";
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   powerManagement.powertop.enable = true;
+
+  services.udev.extraRules =
+    let
+      mkRule = as: lib.concatStringsSep ", " as;
+      mkRules = rs: lib.concatStringsSep "\n" rs;
+    in
+    mkRules ([
+      (mkRule [
+        ''ACTION=="add|change"''
+        ''SUBSYSTEM=="block"''
+        ''KERNEL=="sd[a-z]"''
+        ''ATTR{queue/rotational}=="1"''
+        ''RUN+="${pkgs.hdparm}/bin/hdparm -S 120 /dev/%k"''
+      ])
+    ]);
 }

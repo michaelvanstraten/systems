@@ -5,5 +5,6 @@
 _: {
   imports = [
     ./jellyfin.nix
+    ./monitoring.nix
   ];
 }

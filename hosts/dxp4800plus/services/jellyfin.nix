@@ -8,18 +8,19 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      intel-compute-runtime
-      vpl-gpu-rt
-      intel-media-sdk
-      intel-ocl
-    ];
-  };
-
+  # hardware.graphics = {
+  #   enable = true;
+  #   extraPackages = with pkgs; [
+  #     intel-media-driver
+  #     intel-compute-runtime
+  #     vpl-gpu-rt
+  #     intel-media-sdk
+  #     intel-ocl
+  #   ];
+  # };
+  #
   services.jellyfin.enable = true;
+  services.jellyfin.openFirewall = true;
 
   services.samba = {
     enable = true;
