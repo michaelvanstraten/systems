@@ -1,15 +1,11 @@
-keys:
-  - &michaels-mbp age1g0hp53jqntn6xmd73kd9wx33gst5yvz6gzuwt3t8yx2rvr08h5mqey899s
-  - &h2946065 age1h464yfcqxe39qlgxvte2yf5wgpjc0wmtdv7luadr9lxnn5fwl5aq7fjyxq
-  - &rack-01-k8s-master-nuc-01 age1ww22f2vmmnmfkfc30e7p37xz98kmdgt7j6k6mcm62wktg2qjtpaqjd4km5
-  - &rack-01-k8s-worker-nuc-02 age1umrqd532xcyh408es0xf55pg7z0shgeznpwzht3ejk20vp0d5ezq726wr7
-  - &rack-01-k8s-worker-nuc-03 age1v8d6pzukqmzkwaqwczeksychxmv9mnym6u28tlu8ff5skwl8vygsvcfk25
 creation_rules:
-  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: hosts/macbook-pro
     key_groups:
       - age:
-          - *michaels-mbp
-          - *h2946065
-          - *rack-01-k8s-master-nuc-01
-          - *rack-01-k8s-worker-nuc-02
-          - *rack-01-k8s-worker-nuc-03
+          - age1e06gkr9e24cstp8kdvccdal0ekkeqtcl4ltvak0fqcsqa2dayp3svtjwcq # root@macbook-pro
+          - age1kvq49jdepnwtl4duwep6t6lhzdk59c4ljnmla3025q34jcx98uys0k78qx # michaelvanstraten@macbook-pro
+  - path_regex: ^secrets.yaml$
+    key_groups:
+      - age:
+          - age1kvq49jdepnwtl4duwep6t6lhzdk59c4ljnmla3025q34jcx98uys0k78qx # michaelvanstraten@macbook-pro
+          - age16gue9smyyte76y085zj38ax7a6rwm0yrmue6m3q0k8y8duknc5rqp4cj9v # root@dxp4800plus
