@@ -31,6 +31,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = config.services.tailscale.enable;
+        message = "The remote builder system assumes you are using Tailscale as an overlay network";
+      }
+    ];
+
     # Enable the remote builder by default if the module is enabled
     nix.settings.trusted-users = [ "nixremote" ];
 
@@ -44,10 +51,5 @@ in
 
     # Define the nixremote group
     users.groups."nixremote" = { };
-
-    # Set default authorized keys for the remote builder
-    nix.remoteBuilder.authorizedKeys = lib.mkDefault [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2irMjH018f65+NRlc3VdrZcKtfbsNkODpWRWY9WAfX root@MacBook-Pro-von-Michael.local"
-    ];
   };
 }
