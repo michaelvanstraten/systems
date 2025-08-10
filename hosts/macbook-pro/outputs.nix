@@ -1,20 +1,10 @@
-{
-  self,
-  nix-darwin,
-  home-manager,
-  ...
-}:
+{ self, nix-darwin, ... }:
 {
   darwinConfigurations = {
     "macbook-pro" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
         (self.lib.mkModule ./configuration.nix { })
-        home-manager.darwinModules.home-manager
-        {
-          home-manager.useUserPackages = true;
-          home-manager.users.michaelvanstraten = self.lib.mkModule ./home.nix { };
-        }
       ];
     };
   };

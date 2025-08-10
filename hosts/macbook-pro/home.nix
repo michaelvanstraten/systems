@@ -1,47 +1,51 @@
 { self, ... }:
 { config, pkgs, ... }:
 {
-  home.stateVersion = "24.05";
+  imports = [ self.homeModules.all ];
 
-  programs.git = {
-    userName = "Michael van Straten";
-    userEmail = "michael@vanstraten.de";
+  home = {
+    packages = [
+      pkgs.alacritty
+      pkgs.utm
+      pkgs.grandperspective
+    ];
+
+    stateVersion = "24.05";
   };
 
   nixpkgs.config.allowUnfree = true;
 
-  home.packages = [
-    pkgs.alacritty
-    pkgs.utm
-    pkgs.grandperspective
-  ];
+  programs = {
+    alacritty.enable = true;
+    git = {
+      enable = true;
+      userName = "Michael van Straten";
+      userEmail = "michael@vanstraten.de";
+    };
+    firefox = {
+      enable = true;
+      package = null;
+    };
+    karabiner-elements.enable = true;
+    lazygit.enable = true;
+    neovim.enable = true;
+    tmux.enable = true;
+  };
 
-  targets.darwin.defaults."com.apple.dock".persistent-apps = config.lib.darwin.mkPersistentApps [
-    "/System/Applications/Mail.app/"
-    "/Applications/Signal.app/"
-    "/System/Applications/Messages.app/"
-    "/Applications/WhatsApp.app/"
-    "/System/Applications/Reminders.app/"
-    "/System/Applications/Calendar.app/"
-    "${pkgs.alacritty}/Applications/Alacritty.app/"
-    "/Applications/Firefox.app/"
-    "/Applications/Bitwarden.app/"
-    "/System/Applications/System Settings.app/"
-  ];
+  targets.darwin = {
+    defaults."com.apple.dock".persistent-apps = config.lib.darwin.mkPersistentApps [
+      "/System/Applications/Mail.app/"
+      "/Applications/Signal.app/"
+      "/System/Applications/Messages.app/"
+      "/Applications/WhatsApp.app/"
+      "/System/Applications/Reminders.app/"
+      "/System/Applications/Calendar.app/"
+      "${pkgs.alacritty}/Applications/Alacritty.app/"
+      "/Applications/Firefox Nightly.app"
+      "/Applications/Bitwarden.app/"
+      "/System/Applications/System Settings.app/"
+    ];
 
-  imports = [
-    self.homeModules."darwin/applications"
-    self.homeModules."darwin/defaultbrowser"
-    self.homeModules."darwin/defaults"
-    self.homeModules.alacritty
-    self.homeModules.firefox
-    self.homeModules.git
-    self.homeModules.go
-    self.homeModules.karabiner-elements
-    self.homeModules.lazygit
-    self.homeModules.nvim
-    self.homeModules.shell-environment
-    self.homeModules.tmux
-    self.homeModules.vscodium
-  ];
+    defaultbrowser = "nightly";
+  };
 }

@@ -1,15 +1,20 @@
-{ self, ... }:
-{ pkgs, ... }:
-{
-  system.stateVersion = 4;
-  system.primaryUser = "michaelvanstraten";
+{ self, home-manager, ... }:
+{ config, pkgs, ... }:
+let
+  primaryUser = "michaelvanstraten";
+in
 
-  users.users.michaelvanstraten = {
-    description = "Michael van Straten";
-    home = "/Users/michaelvanstraten";
-    name = "michaelvanstraten";
-    shell = pkgs.fish;
-    uid = 501;
+{
+  imports = [
+    home-manager.darwinModules.home-manager
+    self.darwinModules.all
+    self.sharedModules.all
+    (self.lib.mkModule ./secrets { })
+  ];
+
+  home-manager = {
+    useUserPackages = true;
+    users.${primaryUser} = self.lib.mkModule ./home.nix { };
   };
 
   networking = {
@@ -17,15 +22,34 @@
     hostName = "macbook-pro";
   };
 
-  nix.linux-builder.enable = true;
-  nix.linux-builder.ephemeral = true;
+  nix.autoDiscoverBuildMachines = {
+    enable = true;
+    sshKey = config.sops.secrets.nixremote-ssh-key.path;
+  };
 
-  imports = [
-    self.darwinModules."applications/karabiner-elements"
-    self.darwinModules."applications/yabai"
-    self.darwinModules.applications
-    self.darwinModules.common
-    self.sharedModules.nix
-    self.sharedModules.nix-remote-builders
-  ];
+  programs.fish.enable = true;
+
+  services = {
+    karabiner-elements.enable = true;
+    yabai.enable = true;
+  };
+
+  security.pam.services.sudo_local = {
+    enable = true;
+    touchIdAuth = true;
+    reattach = true;
+  };
+
+  system = {
+    inherit primaryUser;
+    stateVersion = 4;
+  };
+
+  users.users.${primaryUser} = {
+    description = "Michael van Straten";
+    home = "/Users/${primaryUser}";
+    name = primaryUser;
+    shell = pkgs.fish;
+    uid = 501;
+  };
 }
