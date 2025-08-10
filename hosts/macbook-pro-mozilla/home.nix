@@ -21,7 +21,7 @@
 
     overlays = [
       (self: super: {
-        python312 = super.python312.override {
+        python3 = super.python3.override {
           packageOverrides = python-self: python-super: {
             glean-sdk = python-super.glean-sdk.overridePythonAttrs (old: {
               # Disable pytest and other checks
