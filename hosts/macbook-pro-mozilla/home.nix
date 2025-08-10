@@ -1,73 +1,74 @@
 { self, moz-phab, ... }:
 { config, pkgs, ... }:
 {
-  home.stateVersion = "24.05";
-
-  programs.git = {
-    userName = "Michael van Straten";
-    userEmail = "mvanstraten@mozilla.com";
-  };
-
-  nixpkgs.config.allowBroken = true;
-
-  nixpkgs.overlays = [
-    (self: super: {
-      python312 = super.python312.override {
-        packageOverrides = python-self: python-super: {
-          glean-sdk = python-super.glean-sdk.overridePythonAttrs (old: {
-            # Disable pytest and other checks
-            doCheck = false;
-          });
-        };
-      };
-    })
-  ];
-
-  home.packages = [
-    pkgs.alacritty
-    pkgs.element-desktop
-    pkgs.podman
-    pkgs.podman-compose
-  ];
-
-  programs.moz-phab = {
-    enable = true;
-    package = pkgs.mozphab.overridePythonAttrs (old: {
-      src = moz-phab;
-      doCheck = false;
-    });
-  };
-
-  programs.firefox.package = null;
-
-  targets.darwin.defaults."com.apple.dock".persistent-apps = config.lib.darwin.mkPersistentApps [
-    "/System/Applications/Mail.app/"
-    "${pkgs.element-desktop}/Applications/Element.app"
-    "/Applications/Slack.app" # Externally managed
-    "/System/Applications/Reminders.app/"
-    "/System/Applications/Calendar.app/"
-    "${pkgs.alacritty}/Applications/Alacritty.app"
-    "/Applications/Firefox Nightly.app" # Externally managed
-    "/System/Applications/System Settings.app/"
-  ];
-
-  targets.darwin.defaultbrowser = "nightly";
-
   imports = [
-    self.homeModules."darwin/applications"
-    self.homeModules."darwin/defaultbrowser"
-    self.homeModules."darwin/defaults"
-    self.homeModules.alacritty
-    self.homeModules.firefox
-    self.homeModules.git
-    self.homeModules.karabiner-elements
-    self.homeModules.lazygit
-    self.homeModules."mozilla/moz-phab"
-    self.homeModules."mozilla/mozconfig"
-    self.homeModules."mozilla/mach-command"
-    self.homeModules.nvim
-    self.homeModules.shell-environment
-    self.homeModules.tmux
-    self.homeModules.vscodium
+    self.homeModules.all
   ];
+
+  home = {
+    packages = [
+      pkgs.alacritty
+      pkgs.element-desktop
+      pkgs.podman
+      pkgs.podman-compose
+    ];
+
+    stateVersion = "24.05";
+  };
+
+  nixpkgs = {
+    config.allowBroken = true;
+
+    overlays = [
+      (self: super: {
+        python312 = super.python312.override {
+          packageOverrides = python-self: python-super: {
+            glean-sdk = python-super.glean-sdk.overridePythonAttrs (old: {
+              # Disable pytest and other checks
+              doCheck = false;
+            });
+          };
+        };
+      })
+    ];
+  };
+
+  programs = {
+    alacritty.enable = true;
+    firefox = {
+      enable = true;
+      package = null;
+    };
+    git = {
+      enable = true;
+      userName = "Michael van Straten";
+      userEmail = "mvanstraten@mozilla.com";
+    };
+    lazygit.enable = true;
+    karabiner-elements.enable = true;
+    moz-phab = {
+      enable = true;
+      package = pkgs.mozphab.overridePythonAttrs (old: {
+        src = moz-phab;
+        doCheck = false;
+      });
+    };
+    neovim.enable = true;
+    tmux.enable = true;
+  };
+
+  targets.darwin = {
+    defaults."com.apple.dock".persistent-apps = config.lib.darwin.mkPersistentApps [
+      "/System/Applications/Mail.app/"
+      "${pkgs.element-desktop}/Applications/Element.app"
+      "/Applications/Slack.app" # Externally managed
+      "/System/Applications/Reminders.app/"
+      "/System/Applications/Calendar.app/"
+      "${pkgs.alacritty}/Applications/Alacritty.app"
+      "/Applications/Firefox Nightly.app" # Externally managed
+      "/System/Applications/System Settings.app/"
+    ];
+
+    defaultbrowser = "nightly";
+  };
 }

@@ -1,20 +1,28 @@
-{ self, ... }:
+{ self, home-manager, ... }:
 {
   config,
-  pkgs,
   lib,
+  pkgs,
   ...
 }:
+let
+  primaryUser = "michael";
+in
 {
-  system.stateVersion = 5;
-  system.primaryUser = "michael";
+  imports = [
+    home-manager.darwinModules.home-manager
+    self.darwinModules.all
+    self.sharedModules.all
+    ./redis.nix
+  ];
 
-  users.users.michael = {
-    description = "Michael van Straten";
-    home = "/Users/michael";
-    name = "michael";
-    shell = pkgs.nushell;
-    uid = 501;
+  environment.systemPackages = [
+    pkgs.utm
+  ];
+
+  home-manager = {
+    useUserPackages = true;
+    users.michael = self.lib.mkModule ./home.nix { };
   };
 
   networking = {
@@ -22,45 +30,26 @@
     hostName = "macbook-pro-mozilla";
   };
 
-  environment.systemPackages = [
-    pkgs.utm
-  ];
-
-  services.redis.enable = true;
-
-  launchd.user.agents.redis = {
-    command = lib.mkForce (
-      pkgs.writeScript "redis-start"
-        # bash
-        ''
-          #! ${pkgs.stdenv.shell}
-
-          REDIS_DIR="/var/lib/redis"
-          CURRENT_USER="$(whoami)"
-
-          # See: https://github.com/LnL7/nix-darwin/issues/659#issuecomment-1813204545
-          if [ ! -d "$REDIS_DIR" ]; then
-            echo "Creating Redis data directory..."
-            sudo mkdir -m 755 -p "$REDIS_DIR"
-            sudo chown "$CURRENT_USER" "$REDIS_DIR"
-          else
-            OWNER="$(stat -f %Su "$REDIS_DIR")"
-            if [ "$OWNER" != "$CURRENT_USER" ]; then
-              echo "Changing owner of $REDIS_DIR to $CURRENT_USER..."
-              sudo chown "$CURRENT_USER" "$REDIS_DIR"
-            fi
-          fi
-
-          ${config.services.redis.package}/bin/redis-server /etc/redis.conf
-        ''
-    );
+  security.pam.services.sudo_local = {
+    enable = true;
+    touchIdAuth = true;
+    reattach = true;
   };
 
-  imports = [
-    self.darwinModules."applications/karabiner-elements"
-    self.darwinModules."applications/yabai"
-    self.darwinModules.applications
-    self.darwinModules.common
-    self.sharedModules.nix
-  ];
+  services = {
+    karabiner-elements.enable = true;
+  };
+
+  system = {
+    inherit primaryUser;
+    stateVersion = 5;
+  };
+
+  users.users.michael = {
+    description = "Michael van Straten";
+    home = "/Users/${primaryUser}";
+    name = primaryUser;
+    shell = pkgs.nushell;
+    uid = 501;
+  };
 }
