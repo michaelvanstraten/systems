@@ -9,8 +9,6 @@
     packages = [
       pkgs.alacritty
       pkgs.element-desktop
-      pkgs.podman
-      pkgs.podman-compose
     ];
 
     stateVersion = "24.05";
