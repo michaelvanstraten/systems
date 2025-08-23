@@ -5,7 +5,7 @@
   pkgs,
   ...
 }:
-{
+lib.mkIf pkgs.stdenv.isDarwin {
   home.file."Applications/Home Manager Apps".enable = false;
 
   home.activation.link-apps =

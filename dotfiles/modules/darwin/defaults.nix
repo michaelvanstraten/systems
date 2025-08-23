@@ -4,7 +4,7 @@
   pkgs,
   ...
 }:
-{
+lib.mkIf pkgs.stdenv.isDarwin {
   home.activation.restartDarwinDock = lib.hm.dag.entryAfter [ "setDarwinDefaults" ] (
     lib.optionalString (config.targets.darwin.defaults ? "com.apple.dock") ''
       verboseEcho "Restarting macOS Dock"
