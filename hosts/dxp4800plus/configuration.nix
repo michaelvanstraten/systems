@@ -10,6 +10,7 @@
     self.nixosModules.all
     self.sharedModules.all
     (self.lib.mkModule ./services { })
+    # ./desktop.nix
   ];
 
   boot.loader = {
