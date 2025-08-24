@@ -32,6 +32,10 @@
 
   networking.hostName = "dxp4800plus";
 
+  programs.fish.enable = true;
+
+  security.sudo.wheelNeedsPassword = false;
+
   services = {
     tailscale = {
       enable = true;
@@ -50,6 +54,16 @@
   };
 
   system.stateVersion = "25.11";
+
+  users.users.michael = {
+    extraGroups = [ "wheel" ];
+    initialPassword = "fsbEh&PzR9Eo";
+    isNormalUser = true;
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8OCYTaHjQy7Y7bRmxzVwNBgnD9P21UQPzVpJ3NKwVV"
+    ];
+    shell = pkgs.fish;
+  };
 
   time.timeZone = "Europe/Berlin";
 }
