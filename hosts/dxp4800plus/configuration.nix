@@ -19,7 +19,6 @@
 
   console.keyMap = "de";
 
-  environment.systemPackages = [ pkgs.zfs ];
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
