@@ -1,10 +1,12 @@
 {
   self,
+  home-manager,
   ...
 }:
 { config, pkgs, ... }:
 {
   imports = [
+    home-manager.nixosModules.home-manager
     self.nixosModules.all
     self.sharedModules.all
     (self.lib.mkModule ./services { })
@@ -18,6 +20,11 @@
   console.keyMap = "de";
 
   environment.systemPackages = [ pkgs.zfs ];
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.michael = self.lib.mkModule ./home.nix { };
+  };
 
   nix.remoteBuilder = {
     enable = true;
