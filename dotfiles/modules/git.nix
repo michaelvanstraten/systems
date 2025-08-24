@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   programs.git = {
     ignores = [
@@ -22,5 +23,8 @@
       };
       branch.sort = "-committerdate";
     };
+
+    userName = "Michael van Straten";
+    userEmail = lib.mkDefault "michael@vanstraten.de";
   };
 }
