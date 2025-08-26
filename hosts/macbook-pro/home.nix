@@ -22,10 +22,6 @@
       userName = "Michael van Straten";
       userEmail = "michael@vanstraten.de";
     };
-    firefox = {
-      enable = true;
-      package = null;
-    };
     karabiner-elements.enable = true;
     lazygit.enable = true;
     neovim.enable = true;
