@@ -45,11 +45,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    BetterFox = {
-      url = "github:yokoffing/BetterFox";
-      flake = false;
-    };
-
     cyberdream-theme = {
       url = "github:scottmckendry/cyberdream.nvim";
       flake = false;

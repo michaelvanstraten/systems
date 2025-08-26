@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "BetterFox": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1755724919,
-        "narHash": "sha256-3xvZAMPdGfj8w2AaepWW5xAX05Ry+pN8peLMORKNTIc=",
-        "owner": "yokoffing",
-        "repo": "BetterFox",
-        "rev": "2d81cd4094a665be94cfc309157a8a72a8d0b262",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yokoffing",
-        "repo": "BetterFox",
-        "type": "github"
-      }
-    },
     "cl-nix-lite": {
       "locked": {
         "lastModified": 1728174978,
@@ -329,7 +313,6 @@
     },
     "root": {
       "inputs": {
-        "BetterFox": "BetterFox",
         "cyberdream-theme": "cyberdream-theme",
         "disko": "disko",
         "flake-utils": "flake-utils",
