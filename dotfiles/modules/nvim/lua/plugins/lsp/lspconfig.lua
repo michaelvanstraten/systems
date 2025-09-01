@@ -32,6 +32,7 @@ return {
             taplo = {},
             texlab = {},
             tinymist = {},
+            ts_ls = {},
             yamlls = {},
         },
     },

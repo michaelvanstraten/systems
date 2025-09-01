@@ -27,6 +27,8 @@
         pkgs.tinymist
         pkgs.websocat # used by typst-preview.nvim
         pkgs.yaml-language-server
+        pkgs.typescript-language-server
+        pkgs.prettier
 
         # Formatters & Linters
         pkgs.harper # Grammar checker

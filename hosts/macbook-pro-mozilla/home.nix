@@ -11,6 +11,7 @@
       pkgs.bash
       pkgs.element-desktop
       pkgs.python3
+      pkgs.nodejs
     ];
 
     stateVersion = "24.05";

@@ -31,6 +31,7 @@ return {
                 formatters_by_ft = {
                     cpp = { "clang-format" },
                     fish = { "fish_indent" },
+                    javascript = { "prettier" },
                     json = { "prettier" },
                     lua = { "stylua" },
                     markdown = { "prettier" },
@@ -41,6 +42,8 @@ return {
                     swift = { "swift_format" },
                     tex = { "latexindent" },
                     toml = { "taplo" },
+                    typescript = { "prettier" },
+                    typescriptreact = { "prettier" },
                     typst = { "typstyle" },
                     yaml = { "prettier" },
                 },
