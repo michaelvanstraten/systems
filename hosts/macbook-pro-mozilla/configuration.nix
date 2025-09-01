@@ -13,7 +13,6 @@ in
     home-manager.darwinModules.home-manager
     self.darwinModules.all
     self.sharedModules.all
-    ./redis.nix
   ];
 
   environment.systemPackages = [

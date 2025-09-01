@@ -39,7 +39,5 @@ in
 
   home.file."Library/Application Support/Mozilla.sccache/config".source =
     tomlFormat.generate "sccache-config"
-      {
-        cache.redis.endpoint = "redis://127.0.0.1:6379";
-      };
+      { };
 }
