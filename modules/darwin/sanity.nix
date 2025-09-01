@@ -9,4 +9,6 @@
     config.users.users
     |> lib.attrsets.filterAttrs (_: user: user.shell != null)
     |> lib.mapAttrsToList (_: user: user.name);
+
+  system.startup.chime = false;
 }
