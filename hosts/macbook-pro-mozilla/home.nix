@@ -14,6 +14,11 @@
       pkgs.nodejs
     ];
 
+    sessionPath = [
+      "$HOME/.mozbuild/clang/bin/"
+      "$HOME/.cargo/bin"
+    ];
+
     stateVersion = "24.05";
   };
 
