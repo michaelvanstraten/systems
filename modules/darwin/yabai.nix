@@ -1,22 +1,33 @@
+{ config, lib, ... }:
+let
+  cfg = config.services.yabai;
+in
 {
-  services.yabai = {
-    extraConfig = # bash
-      ''
-        # use bsp layout
-        yabai -m config layout bsp
+  config = lib.mkMerge [
+    {
+      services.yabai = {
+        extraConfig = # bash
+          ''
+            # use bsp layout
+            yabai -m config layout bsp
 
-        # put new windows always to the right of the current one
-        yabai -m config window_placement second_child
+            # put new windows always to the right of the current one
+            yabai -m config window_placement second_child
 
-        # window padding
-        yabai -m config top_padding     12
-        yabai -m config bottom_padding  12
-        yabai -m config left_padding    12
-        yabai -m config right_padding   12
-        yabai -m config window_gap      12
+            # window padding
+            yabai -m config top_padding     12
+            yabai -m config bottom_padding  12
+            yabai -m config left_padding    12
+            yabai -m config right_padding   12
+            yabai -m config window_gap      12
 
-        # apps to not manage by default
-        yabai -m rule --add app!="^(Firefox|Skim|Firefox Nightly|Alacritty)$" manage=off
-      '';
-  };
+            # apps to not manage by default
+            yabai -m rule --add app!="^(Firefox|Skim|Firefox Nightly|Alacritty)$" manage=off
+          '';
+      };
+    }
+    (lib.mkIf cfg.enable {
+      system.defaults.spaces.spans-displays = true;
+    })
+  ];
 }
