@@ -27,7 +27,7 @@ in
       };
     }
     (lib.mkIf cfg.enable {
-      system.defaults.spaces.spans-displays = true;
+      system.defaults.spaces.spans-displays = false;
     })
   ];
 }
