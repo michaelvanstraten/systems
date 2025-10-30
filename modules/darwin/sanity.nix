@@ -1,9 +1,20 @@
-{ config, lib, ... }:
 {
-  environment.shells =
-    config.users.users
-    |> lib.mapAttrsToList (_: user: user.shell)
-    |> builtins.filter (shell: !builtins.isNull shell);
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  environment = {
+    systemPackages = [
+      pkgs.unnaturalscrollwheels
+    ];
+
+    shells =
+      config.users.users
+      |> lib.mapAttrsToList (_: user: user.shell)
+      |> builtins.filter (shell: !builtins.isNull shell);
+  };
 
   users.knownUsers =
     config.users.users
