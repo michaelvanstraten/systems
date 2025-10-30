@@ -22,6 +22,7 @@
     };
     karabiner-elements.enable = true;
     lazygit.enable = true;
+    mach.enable = true;
     neovim.enable = true;
     tmux.enable = true;
   };
