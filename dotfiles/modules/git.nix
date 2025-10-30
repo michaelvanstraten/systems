@@ -10,7 +10,7 @@
 
     lfs.enable = true;
 
-    extraConfig = {
+    settings = {
       init.defaultBranch = "master";
       core = {
         ignorecase = false;
@@ -22,9 +22,8 @@
         writeCommitGraph = true;
       };
       branch.sort = "-committerdate";
+      user.name = "Michael van Straten";
+      user.email = lib.mkDefault "michael@vanstraten.de";
     };
-
-    userName = "Michael van Straten";
-    userEmail = lib.mkDefault "michael@vanstraten.de";
   };
 }

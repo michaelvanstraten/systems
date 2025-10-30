@@ -47,8 +47,10 @@
     };
     git = {
       enable = true;
-      userName = "Michael van Straten";
-      userEmail = "mvanstraten@mozilla.com";
+      settings = {
+        user.name = "Michael van Straten";
+        user.email = "mvanstraten@mozilla.com";
+      };
     };
     lazygit.enable = true;
     karabiner-elements.enable = true;

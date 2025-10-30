@@ -19,8 +19,6 @@
     alacritty.enable = true;
     git = {
       enable = true;
-      userName = "Michael van Straten";
-      userEmail = "michael@vanstraten.de";
     };
     karabiner-elements.enable = true;
     lazygit.enable = true;
