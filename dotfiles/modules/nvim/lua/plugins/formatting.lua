@@ -46,6 +46,7 @@ return {
                     typescriptreact = { "prettier" },
                     typst = { "typstyle" },
                     yaml = { "prettier" },
+                    meson = { "meson" },
                 },
                 formatters = {
                     injected = { options = { ignore_errors = true } },
