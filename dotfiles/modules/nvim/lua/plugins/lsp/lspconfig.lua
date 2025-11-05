@@ -37,7 +37,6 @@ return {
         },
     },
     config = function(_, opts)
-        local lspconfig = require("lspconfig")
         for server, config in pairs(opts.servers) do
             local blink = require("blink.cmp")
 
@@ -54,7 +53,8 @@ return {
                 })
             end
 
-            lspconfig[server].setup(config)
+            vim.lsp.config(server, config)
+            vim.lsp.enable(server)
         end
     end,
 }
