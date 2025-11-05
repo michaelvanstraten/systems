@@ -3,15 +3,7 @@
 {
   imports = [ self.homeModules.all ];
 
-  home = {
-    packages = [
-      pkgs.alacritty
-      pkgs.utm
-      pkgs.grandperspective
-    ];
-
-    stateVersion = "24.05";
-  };
+  home.stateVersion = "24.05";
 
   nixpkgs.config.allowUnfree = true;
 

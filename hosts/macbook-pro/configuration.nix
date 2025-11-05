@@ -12,6 +12,13 @@ in
     (self.lib.mkModule ./secrets { })
   ];
 
+  environment.systemPackages = [
+    pkgs.alacritty
+    pkgs.utm
+    pkgs.grandperspective
+    pkgs.python3
+  ];
+
   home-manager = {
     useUserPackages = true;
     users.${primaryUser} = self.lib.mkModule ./home.nix { };
