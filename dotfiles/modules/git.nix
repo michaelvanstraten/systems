@@ -11,10 +11,8 @@
     lfs.enable = true;
 
     settings = {
-      init.defaultBranch = "master";
-      core = {
-        ignorecase = false;
-      };
+      init.defaultBranch = "main";
+      core.ignorecase = false;
       pull.rebase = true;
       push.default = "current";
       fetch = {
