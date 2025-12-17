@@ -9,7 +9,7 @@
       settings = {
         disableStartupPopups = true;
         git = {
-          paging.useConfig = false;
+          pagers = [ ];
           autoFetch = false;
           autoRefresh = true;
           fetchAll = true;
