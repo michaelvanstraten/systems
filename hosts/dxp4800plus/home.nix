@@ -7,10 +7,7 @@ _: {
   ];
 
   programs = {
-    git = {
-      enable = true;
-      userName = "Michael van Straten";
-    };
+    git.enable = true;
     firefox.enable = true;
     lazygit.enable = true;
     neovim.enable = true;
