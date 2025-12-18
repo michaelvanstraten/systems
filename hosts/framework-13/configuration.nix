@@ -60,7 +60,7 @@
     git
     ghostty
     thunderbird
-    rustup
+    (rustup.overrideAttrs { doCheck = false; })
     zed-editor
     python3
   ];
