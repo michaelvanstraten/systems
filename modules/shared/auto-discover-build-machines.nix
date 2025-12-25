@@ -35,7 +35,7 @@ in
         buildMachines = map (host: {
           inherit (host.config.nix.remoteBuilder) supportedFeatures;
           hostName = host.config.networking.hostName;
-          system = host.pkgs.system;
+          system = host.pkgs.stdenv.hostPlatform.system;
           protocol = "ssh-ng";
           sshUser = "nixremote";
           sshKey = cfg.sshKey;
