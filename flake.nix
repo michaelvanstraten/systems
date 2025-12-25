@@ -4,6 +4,12 @@
       "flakes"
       "pipe-operators"
     ];
+    extra-substituters = [
+      "https://cache.saumon.network/proxmox-nixos"
+    ];
+    extra-trusted-public-keys = [
+      "proxmox-nixos:D9RYSWpQQC/msZUWphOY2I5RLH5Dd6yQcaHIuug7dWM="
+    ];
   };
 
   inputs = {
@@ -58,6 +64,8 @@
       url = "github:mozilla-conduit/review";
       flake = false;
     };
+
+    proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
   };
 
   outputs =
@@ -97,6 +105,8 @@
               ];
               inherit (pre-commit-check) shellHook;
             };
+
+            kubernetes-pki = import ./kubernetes/devShell.nix { inherit pkgs; };
           };
 
         # Formatter for this flake

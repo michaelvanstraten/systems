@@ -9,8 +9,8 @@
     home-manager.nixosModules.home-manager
     self.nixosModules.all
     self.sharedModules.all
-    (self.lib.mkModule ./services { })
-    # ./desktop.nix
+    # (self.lib.mkModule ./kubernetes { })
+    (self.lib.mkModule ./proxmox.nix { })
   ];
 
   boot.loader = {
@@ -19,12 +19,6 @@
   };
 
   console.keyMap = "de";
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.michael = self.lib.mkModule ./home.nix { };
-  };
 
   nix.remoteBuilder = {
     enable = true;
