@@ -9,8 +9,8 @@
     home-manager.nixosModules.home-manager
     self.nixosModules.all
     self.sharedModules.all
-    (self.lib.mkModule ./services { })
-    # ./desktop.nix
+    # (self.lib.mkModule ./kubernetes { })
+    (self.lib.mkModule ./proxmox.nix { })
   ];
 
   boot.loader = {

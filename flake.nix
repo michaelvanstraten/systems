@@ -119,6 +119,8 @@
               ];
               inherit (pre-commit-check) shellHook;
             };
+
+            kubernetes-pki = import ./kubernetes/devShell.nix { inherit pkgs; };
           };
 
         # Formatter for this flake
