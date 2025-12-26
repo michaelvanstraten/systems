@@ -8,4 +8,8 @@ creation_rules:
     key_groups:
       - age:
           - age1kvq49jdepnwtl4duwep6t6lhzdk59c4ljnmla3025q34jcx98uys0k78qx # michaelvanstraten@macbook-pro
-          - age16gue9smyyte76y085zj38ax7a6rwm0yrmue6m3q0k8y8duknc5rqp4cj9v # root@dxp4800plus
+          - age16z8kj8vwkdd5uq6sjkva0xu9ts7rrpfemnz2u7lr0re2jmw4nemsay9mf3 # root@dxp4800plus
+          - age1yw26ujl8hdwz8jhmjk7nlka5c5q6vqmw44a85cw9trsjcgl65unsxuq6de # root@netcup-vps-1000-arm-1
+  - key_groups:
+      - age:
+          - age1kvq49jdepnwtl4duwep6t6lhzdk59c4ljnmla3025q34jcx98uys0k78qx # michaelvanstraten@macbook-pro
