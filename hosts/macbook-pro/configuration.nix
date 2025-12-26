@@ -38,7 +38,7 @@ in
 
   services = {
     karabiner-elements.enable = true;
-    yabai.enable = true;
+    yabai.enable = false;
   };
 
   security.pam.services.sudo_local = {
