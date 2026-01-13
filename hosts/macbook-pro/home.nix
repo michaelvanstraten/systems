@@ -32,6 +32,6 @@
       "/System/Applications/System Settings.app/"
     ];
 
-    defaultbrowser = "nightly";
+    defaultbrowser = "firefox";
   };
 }
