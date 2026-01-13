@@ -4,7 +4,7 @@ let
   inherit (lib) fileset;
 
   mkModule =
-    modulePath: _:
+    modulePath: overrides:
     let
       module = import modulePath;
       isFlakeModule =
@@ -12,7 +12,7 @@ let
         builtins.isFunction module
         && (builtins.functionArgs module |> builtins.intersectAttrs inputs) != { };
     in
-    if isFlakeModule module then module inputs else module;
+    if isFlakeModule module then module (inputs // overrides) else module;
 
   mkModules =
     dir:
