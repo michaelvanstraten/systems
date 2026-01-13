@@ -2,7 +2,9 @@
 {
   nix = {
     gc.automatic = true;
-    package = pkgs.nixVersions.latest;
+    package = pkgs.nixVersions.latest.overrideAttrs {
+      doCheck = false;
+    };
     settings = {
       experimental-features = [
         "auto-allocate-uids"
