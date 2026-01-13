@@ -162,6 +162,20 @@ lib.mkIf pkgs.stdenv.isDarwin {
           }
         ];
       };
+
+      "com.theron.UnnaturalScrollWheels" = {
+        AlternateDetectionMethod = 0;
+        DisableMouseAccel = 0;
+        DisableScrollAccel = 1;
+        FirstLaunch = 0;
+        InvertHorizonalScroll = 0;
+        InvertHorizontalScroll = 0;
+        InvertVerticalScroll = 1;
+        LaunchAtLogin = 1;
+        OriginalAccel = 45056;
+        ScrollLines = 3;
+        ShowMenuBarIcon = 0;
+      };
     };
   };
 
