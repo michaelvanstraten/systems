@@ -1,7 +1,7 @@
 { self, home-manager, ... }:
 { config, pkgs, ... }:
 let
-  primaryUser = "michaelvanstraten";
+  primaryUser = "michael";
 in
 
 {
@@ -53,7 +53,7 @@ in
 
   system = {
     inherit primaryUser;
-    stateVersion = 4;
+    stateVersion = 6;
   };
 
   users.users.${primaryUser} = {
