@@ -9,10 +9,9 @@
 
   programs = {
     alacritty.enable = true;
-    git = {
-      enable = true;
-    };
-    karabiner-elements.enable = true;
+    alacritty.package = null;
+    git.enable = true;
+    karabiner-elements.enable = false;
     lazygit.enable = true;
     mach.enable = true;
     neovim.enable = true;
@@ -27,9 +26,9 @@
       "/Applications/WhatsApp.app/"
       "/System/Applications/Reminders.app/"
       "/System/Applications/Calendar.app/"
-      "${pkgs.alacritty}/Applications/Alacritty.app/"
-      "/Applications/Firefox Nightly.app"
-      "/Applications/Bitwarden.app/"
+      "/Applications/Alacritty.app/"
+      "/Applications/Nix Apps/Firefox.app/"
+      "/Applications/Nix Apps/Bitwarden.app/"
       "/System/Applications/System Settings.app/"
     ];
 

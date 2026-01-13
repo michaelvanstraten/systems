@@ -10,13 +10,17 @@ in
     self.darwinModules.all
     self.sharedModules.all
     (self.lib.mkModule ./secrets { })
+    (self.lib.mkModule ./homebrew.nix { inherit primaryUser; })
   ];
 
   environment.systemPackages = [
-    pkgs.alacritty
     pkgs.utm
     pkgs.grandperspective
+    pkgs.monitorcontrol
     pkgs.python3
+    pkgs.zed-editor
+    pkgs.firefox
+    pkgs.bitwarden-desktop
   ];
 
   home-manager = {
