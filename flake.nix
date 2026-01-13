@@ -111,7 +111,7 @@
           };
 
         # Formatter for this flake
-        formatter = pkgs.nixfmt-rfc-style;
+        formatter = pkgs.nixfmt;
       }
     )
     // callOutputs {

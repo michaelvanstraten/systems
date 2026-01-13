@@ -32,7 +32,7 @@
 
         # Formatters & Linters
         pkgs.harper # Grammar checker
-        pkgs.nixfmt-rfc-style
+        pkgs.nixfmt
         pkgs.nodejs # Needed for prettier
         pkgs.nodePackages.prettier
         pkgs.ruff

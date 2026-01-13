@@ -9,7 +9,7 @@
     hooks = {
       # Nix linting and formatting
       nil.enable = true;
-      nixfmt-rfc-style.enable = true;
+      nixfmt.enable = true;
 
       # General formatting
       prettier = {
