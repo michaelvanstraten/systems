@@ -8,13 +8,8 @@
     src = ./.;
     hooks = {
       # Nix linting and formatting
-      nil = {
-        enable = true;
-      };
+      nil.enable = true;
       nixfmt-rfc-style.enable = true;
-      # Disabled until pipe-operator support lands.
-      # See https://github.com/oppiliappan/statix/issues/88
-      statix.enable = false;
 
       # General formatting
       prettier = {
