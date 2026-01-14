@@ -1,6 +1,7 @@
 { self, ... }:
 _: {
   home.stateVersion = "25.11";
+  home.sessionPath = [ "$HOME/.cargo/bin/" ];
 
   imports = [
     self.homeModules.all
