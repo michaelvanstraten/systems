@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   sessionCommand = pkgs.writeShellScriptBin "s" ''
     if [ $# -eq 0 ]; then
@@ -20,25 +20,36 @@ let
     fi
   '';
 in
-{
-  programs.zoxide.enable = true;
-  programs.zoxide.options = [ "--cmd j" ];
+lib.mkMerge [
+  {
+    programs.zoxide.enable = true;
+    programs.zoxide.options = [ "--cmd j" ];
 
-  programs.direnv.enable = true;
+    programs.direnv.enable = true;
 
-  home.packages = [
-    pkgs.fzf
-    sessionCommand
-  ];
-  programs.fzf.tmux.enableShellIntegration = true;
-  programs.sesh.enableAlias = false;
-  programs.sesh.enable = true;
+    home.packages = [
+      pkgs.fzf
+      sessionCommand
+    ];
+    programs.fzf.tmux.enableShellIntegration = true;
+    programs.sesh.enableAlias = false;
+    programs.sesh.enable = true;
 
-  home.shellAliases = {
-    c = "clear";
-    l = "ls";
-    la = "ls -a";
-    nv = "nvim";
-    lg = "lazygit";
-  };
-}
+    home.shellAliases = {
+      c = "clear";
+      l = "ls";
+      la = "ls -a";
+      nv = "nvim";
+      lg = "lazygit";
+    };
+  }
+
+  (lib.mkIf pkgs.stdenv.isLinux {
+    home.packages = [ pkgs.xsel ];
+
+    home.shellAliases = {
+      pbcopy = "xsel --clipboard --input";
+      pbpaste = "xsel --clipboard --output";
+    };
+  })
+]
