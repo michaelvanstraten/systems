@@ -54,3 +54,12 @@ end
 
 -- Keyword Matching
 opt.iskeyword:append("-")
+
+-- Jinja2/minijinja filetypes
+vim.filetype.add({
+    extension = {
+        jinja = "jinja",
+        jinja2 = "jinja",
+        j2 = "jinja",
+    },
+})
