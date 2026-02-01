@@ -2,7 +2,7 @@
 {
   nix = {
     settings = {
-      sandbox = true;
+      sandbox = "relaxed";
       extra-sandbox-paths = [
         "/nix/store"
       ];
