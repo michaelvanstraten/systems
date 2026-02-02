@@ -18,7 +18,10 @@
         "recursive-nix"
         "verified-fetches"
       ];
-      trusted-users = [ "@admin" ];
+      trusted-users = [
+        "@admin"
+        "@wheel"
+      ];
     };
     optimise.automatic = true;
   };
