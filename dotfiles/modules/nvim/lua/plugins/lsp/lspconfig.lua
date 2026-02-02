@@ -34,6 +34,7 @@ return {
             tinymist = {},
             ts_ls = {},
             yamlls = {},
+            gopls = {},
         },
     },
     config = function(_, opts)
