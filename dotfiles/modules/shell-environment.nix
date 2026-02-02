@@ -22,34 +22,67 @@ let
 in
 lib.mkMerge [
   {
-    programs.zoxide.enable = true;
-    programs.zoxide.options = [ "--cmd j" ];
+    programs = {
+      zoxide = {
+        enable = true;
+        options = [ "--cmd j" ];
+      };
 
-    programs.direnv.enable = true;
+      direnv.enable = true;
 
-    home.packages = [
-      pkgs.fzf
-      sessionCommand
-    ];
-    programs.fzf.tmux.enableShellIntegration = true;
-    programs.sesh.enableAlias = false;
-    programs.sesh.enable = true;
+      fzf = {
+        tmux.enableShellIntegration = true;
+        enable = true;
+        enableBashIntegration = true;
+      };
 
-    home.shellAliases = {
-      c = "clear";
-      l = "ls";
-      la = "ls -a";
-      nv = "nvim";
-      lg = "lazygit";
+      sesh = {
+        enableAlias = false;
+        enable = true;
+      };
+
+      bash = {
+        historyControl = [
+          "ignoredups"
+          "ignorespace"
+        ];
+
+        historyIgnore = [
+          "l"
+          "ls"
+          "ll"
+          "exit"
+          "clear"
+          "cd"
+          "rm*"
+        ];
+
+        shellOptions = [
+          "histappend"
+        ];
+      };
+    };
+
+    home = {
+      packages = [ sessionCommand ];
+      shellAliases = {
+        c = "clear";
+        l = "ls";
+        la = "ls -a";
+        nv = "nvim";
+        lg = "lazygit";
+      };
     };
   }
 
   (lib.mkIf pkgs.stdenv.isLinux {
-    home.packages = [ pkgs.xsel ];
+    home = {
+      packages = [ pkgs.xsel ];
 
-    home.shellAliases = {
-      pbcopy = "xsel --clipboard --input";
-      pbpaste = "xsel --clipboard --output";
+      shellAliases = {
+        pbcopy = "xsel --clipboard --input";
+        pbpaste = "xsel --clipboard --output";
+      };
     };
   })
 ]
