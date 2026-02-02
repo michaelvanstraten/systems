@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
   programs.git = {
     ignores = [
@@ -23,5 +23,9 @@
       user.name = "Michael van Straten";
       user.email = lib.mkDefault "michael@vanstraten.de";
     };
+
+    signing.format = "ssh";
+    signing.key = "${config.home.homeDirectory}/.ssh/id_ecdsa.pub";
+    signing.signByDefault = true;
   };
 }
