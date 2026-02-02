@@ -1,7 +1,5 @@
 {
   programs.fish = {
-    enable = true;
-
     shellAbbrs = {
       gc = "git clone";
     };

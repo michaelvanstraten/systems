@@ -1,8 +1,6 @@
 { lib, ... }:
 {
   programs.starship = {
-    enable = true;
-
     settings = {
       # Don't inserts a blank line between shell prompts
       add_newline = false;
