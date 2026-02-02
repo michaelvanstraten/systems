@@ -4,6 +4,14 @@
       "flakes"
       "pipe-operators"
     ];
+    extra-substituters = [
+      "https://nix-community.cachix.org"
+      "https://zed-industries.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "zed-industries.cachix.org-1:fgVpvtdF+ssrgP1lB6EusuR3uM6bNcncWduKxri3u6Y="
+    ];
   };
 
   inputs = {
@@ -12,7 +20,7 @@
     };
 
     nixpkgs = {
-      url = "github:NixOs/nixpkgs?ref=nixpkgs-unstable";
+      url = "github:NixOs/nixpkgs?ref=nixos-unstable";
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
