@@ -1,7 +1,6 @@
 { pkgs, ... }:
 {
   nix = {
-    gc.automatic = true;
     package = pkgs.nixVersions.latest.overrideAttrs {
       doCheck = false;
     };
@@ -23,6 +22,5 @@
         "@wheel"
       ];
     };
-    optimise.automatic = true;
   };
 }
