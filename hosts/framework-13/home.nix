@@ -1,5 +1,6 @@
 { self, ... }:
-_: {
+{ config, ... }:
+{
   home.stateVersion = "25.11";
   home.sessionPath = [ "$HOME/.cargo/bin/" ];
 
@@ -14,6 +15,8 @@ _: {
         user.name = "Michael van Straten";
         user.email = "mvanstraten@mozilla.com";
       };
+      signing.key = "${config.home.homeDirectory}/.ssh/id_ecdsa.pub";
+      signing.signByDefault = true;
     };
     lazygit.enable = true;
     neovim.enable = true;

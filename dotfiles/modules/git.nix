@@ -25,7 +25,5 @@
     };
 
     signing.format = "ssh";
-    signing.key = "${config.home.homeDirectory}/.ssh/id_ecdsa.pub";
-    signing.signByDefault = true;
   };
 }

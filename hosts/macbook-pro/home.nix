@@ -10,7 +10,11 @@
   programs = {
     alacritty.enable = true;
     alacritty.package = null;
-    git.enable = true;
+    git = {
+      enable = true;
+      signing.key = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
+      signing.signByDefault = true;
+    };
     karabiner-elements.enable = false;
     lazygit.enable = true;
     mach.enable = true;
