@@ -16,6 +16,8 @@
     mach.enable = true;
     neovim.enable = true;
     tmux.enable = true;
+    fish.enable = true;
+    starship.enable = true;
   };
 
   targets.darwin = {
