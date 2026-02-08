@@ -21,6 +21,7 @@ in
     pkgs.zed-editor
     pkgs.firefox
     pkgs.bitwarden-desktop
+    pkgs.anki
   ];
 
   home-manager = {
