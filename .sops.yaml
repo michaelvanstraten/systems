@@ -1,4 +1,9 @@
 creation_rules:
+  - path_regex: hosts/mac-studio
+    key_groups:
+      - age:
+          - age1l0vmpvuchm7cvesu0mpwltc6fe830j8jh5j7m0l2gw4gj0shze8q3uylj5
+          - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID7atwi/0OoP5kHlgIbWRMctz5zT1s9WGQEkQ3wHMdbC michael@mac-studio"
   - path_regex: hosts/macbook-pro
     key_groups:
       - age:

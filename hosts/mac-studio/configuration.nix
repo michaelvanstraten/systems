@@ -13,6 +13,7 @@ in
     home-manager.darwinModules.home-manager
     self.darwinModules.all
     self.sharedModules.all
+    (self.lib.mkModule ./secrets.nix { })
   ];
 
   environment.systemPackages = [
@@ -31,6 +32,15 @@ in
   };
 
   services.tailscale.enable = true;
+
+  services.github-runners = {
+    "enterprise-helm" = {
+      enable = true;
+      url = "https://github.com/mozilla/enterprise-helm";
+      tokenFile = config.sops.secrets."github_runners/enterprise_helm/token".path;
+      name = config.networking.hostName;
+    };
+  };
 
   security.pam.services.sudo_local = {
     enable = true;
