@@ -26,8 +26,8 @@ in
   };
 
   networking = {
-    computerName = "Michael’s Mac Studio at Mozilla";
-    hostName = "michael-mac-studio";
+    computerName = "Firefox Enterprise Mac Studio (M2 Max)";
+    hostName = "fxe-mac-studio-01";
   };
 
   services.tailscale.enable = true;
