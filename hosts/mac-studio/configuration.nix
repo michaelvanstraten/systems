@@ -43,6 +43,8 @@ in
     stateVersion = 5;
   };
 
+  power.sleep.computer = "never";
+
   users.users.michael = {
     description = "Michael van Straten";
     home = "/Users/${primaryUser}";
