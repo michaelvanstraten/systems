@@ -26,7 +26,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin";
+      url = "github:michaelvanstraten/nix-darwin?ref=make-state-dir-use-nix-attr-name";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

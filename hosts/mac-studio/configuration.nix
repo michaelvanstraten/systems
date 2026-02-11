@@ -40,6 +40,12 @@ in
       tokenFile = config.sops.secrets."github_runners/enterprise_helm/token".path;
       name = config.networking.hostName;
     };
+    "enterprise-console" = {
+      enable = true;
+      url = "https://github.com/mozilla/enterprise-console-backend";
+      tokenFile = config.sops.secrets."github_runners/enterprise_console/token".path;
+      name = config.networking.hostName;
+    };
   };
 
   security.pam.services.sudo_local = {
