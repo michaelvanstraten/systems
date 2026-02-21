@@ -1,20 +1,21 @@
+keys:
+  # Master Keys
+  - &ssh_michael_macbook_pro "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8OCYTaHjQy7Y7bRmxzVwNBgnD9P21UQPzVpJ3NKwVV"
+  - &yubikey "4B92 DBDE 172E 7C69 16F0  04EE 8560 19C4 9BE6 D7C0"
+  # Host Keys
+  - &host_macbook_pro "age15qzjd9u3mqyqgsyyq7fy6dr0mkkc82rtvdpevfvvtv6j56z2k9vscqhmfs"
+  - &host_mac_studio "age1l0vmpvuchm7cvesu0mpwltc6fe830j8jh5j7m0l2gw4gj0shze8q3uylj5"
+  # User SSH Keys
+  - &ssh_michael_mac-studio "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID7atwi/0OoP5kHlgIbWRMctz5zT1s9WGQEkQ3wHMdbC"
+
 creation_rules:
-  - path_regex: hosts/mac-studio
-    key_groups:
-      - age:
-          - age1l0vmpvuchm7cvesu0mpwltc6fe830j8jh5j7m0l2gw4gj0shze8q3uylj5
-          - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID7atwi/0OoP5kHlgIbWRMctz5zT1s9WGQEkQ3wHMdbC michael@mac-studio"
-  - path_regex: hosts/macbook-pro
-    key_groups:
-      - age:
-          - age1e06gkr9e24cstp8kdvccdal0ekkeqtcl4ltvak0fqcsqa2dayp3svtjwcq # root@macbook-pro
-          - age1kvq49jdepnwtl4duwep6t6lhzdk59c4ljnmla3025q34jcx98uys0k78qx # michaelvanstraten@macbook-pro
-  - path_regex: ^secrets.yaml$
-    key_groups:
-      - age:
-          - age1kvq49jdepnwtl4duwep6t6lhzdk59c4ljnmla3025q34jcx98uys0k78qx # michaelvanstraten@macbook-pro
-          - age16z8kj8vwkdd5uq6sjkva0xu9ts7rrpfemnz2u7lr0re2jmw4nemsay9mf3 # root@dxp4800plus
-          - age1yw26ujl8hdwz8jhmjk7nlka5c5q6vqmw44a85cw9trsjcgl65unsxuq6de # root@netcup-vps-1000-arm-1
-  - key_groups:
-      - age:
-          - age1kvq49jdepnwtl4duwep6t6lhzdk59c4ljnmla3025q34jcx98uys0k78qx # michaelvanstraten@macbook-pro
+  - path_regex: ^hosts/macbook-pro/secrets\.yaml$
+    pgp: [*yubikey]
+    age: [*ssh_michael_macbook_pro, *host_macbook_pro]
+
+  - path_regex: ^hosts/mac-studio/secrets\.yaml$
+    pgp: [*yubikey]
+    age: [*ssh_michael_macbook_pro, *host_mac_studio, *ssh_michael_mac-studio]
+
+  - pgp: [*yubikey]
+    age: [*ssh_michael_macbook_pro]

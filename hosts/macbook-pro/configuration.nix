@@ -9,7 +9,6 @@ in
     home-manager.darwinModules.home-manager
     self.darwinModules.all
     self.sharedModules.all
-    (self.lib.mkModule ./secrets { })
     (self.lib.mkModule ./homebrew.nix { inherit primaryUser; })
   ];
 

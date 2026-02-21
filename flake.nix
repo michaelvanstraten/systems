@@ -113,6 +113,9 @@
                 self.formatter.${system}
                 pkgs.sops
                 pkgs.ssh-to-age
+                pkgs.gnupg
+                pkgs.yubikey-manager
+                pkgs.yubikey-personalization
               ];
               inherit (pre-commit-check) shellHook;
             };
