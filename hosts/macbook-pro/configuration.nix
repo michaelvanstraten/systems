@@ -22,6 +22,7 @@ in
     pkgs.firefox
     pkgs.bitwarden-desktop
     pkgs.anki
+    pkgs.rustup
   ];
 
   home-manager = {
