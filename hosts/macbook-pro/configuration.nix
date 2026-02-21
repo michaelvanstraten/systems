@@ -43,7 +43,7 @@ in
   programs.fish.enable = true;
 
   services = {
-    karabiner-elements.enable = true;
+    karabiner-elements.enable = false;
     yabai.enable = false;
   };
 
