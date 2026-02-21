@@ -14,7 +14,6 @@
       init.defaultBranch = "main";
       core.ignorecase = false;
       pull.rebase = true;
-      push.default = "current";
       fetch = {
         prune = true;
         writeCommitGraph = true;
