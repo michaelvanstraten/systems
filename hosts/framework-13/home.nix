@@ -25,5 +25,6 @@
     starship.enable = true;
     starship.enableBashIntegration = true;
     mach.enable = true;
+    moz-phab.enable = true;
   };
 }
