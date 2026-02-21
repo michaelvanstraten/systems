@@ -45,6 +45,7 @@ in
   services = {
     karabiner-elements.enable = false;
     yabai.enable = false;
+    tailscale.enable = true;
   };
 
   security.pam.services.sudo_local = {
