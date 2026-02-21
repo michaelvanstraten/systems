@@ -34,10 +34,10 @@ in
     hostName = "macbook-pro";
   };
 
-  nix.autoDiscoverBuildMachines = {
-    enable = true;
-    sshKey = config.sops.secrets.nixremote-ssh-key.path;
-  };
+  # nix.autoDiscoverBuildMachines = {
+  #   enable = true;
+  #   sshKey = config.sops.secrets.nixremote-ssh-key.path;
+  # };
 
   programs.fish.enable = true;
 

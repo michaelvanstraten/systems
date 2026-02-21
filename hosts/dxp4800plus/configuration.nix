@@ -26,16 +26,16 @@
     users.michael = self.lib.mkModule ./home.nix { };
   };
 
-  nix.remoteBuilder = {
-    enable = true;
-    supportedFeatures = [
-      "kvm"
-      "big-parallel"
-    ];
-    authorizedKeys = [
-      (builtins.readFile ../macbook-pro/secrets/nixremote-ssh-key.pub)
-    ];
-  };
+  # nix.remoteBuilder = {
+  #   enable = true;
+  #   supportedFeatures = [
+  #     "kvm"
+  #     "big-parallel"
+  #   ];
+  #   authorizedKeys = [
+  #     (builtins.readFile ../macbook-pro/secrets/nixremote-ssh-key.pub)
+  #   ];
+  # };
 
   networking.hostName = "dxp4800plus";
 
@@ -44,16 +44,16 @@
   security.sudo.wheelNeedsPassword = false;
 
   services = {
-    tailscale = {
-      enable = true;
-      useRoutingFeatures = "both";
-      authKeyFile = config.sops.secrets."tailscale/oauth_client_secret".path;
-      authKeyParameters.ephemeral = false;
-      extraUpFlags = [
-        "--advertise-exit-node"
-        "--advertise-tags=tag:server"
-      ];
-    };
+    # tailscale = {
+    #   enable = true;
+    #   useRoutingFeatures = "both";
+    #   authKeyFile = config.sops.secrets."tailscale/oauth_client_secret".path;
+    #   authKeyParameters.ephemeral = false;
+    #   extraUpFlags = [
+    #     "--advertise-exit-node"
+    #     "--advertise-tags=tag:server"
+    #   ];
+    # };
 
     openssh.enable = true;
 

@@ -46,16 +46,16 @@ in
           system.stateVersion = "25.11";
 
           services = {
-            tailscale = {
-              enable = true;
-              useRoutingFeatures = "both";
-              authKeyFile = config.sops.secrets."tailscale/oauth_client_secret".path;
-              authKeyParameters.ephemeral = false;
-              extraUpFlags = [
-                "--advertise-exit-node"
-                "--advertise-tags=tag:server"
-              ];
-            };
+            # tailscale = {
+            #   enable = true;
+            #   useRoutingFeatures = "both";
+            #   authKeyFile = config.sops.secrets."tailscale/oauth_client_secret".path;
+            #   authKeyParameters.ephemeral = false;
+            #   extraUpFlags = [
+            #     "--advertise-exit-node"
+            #     "--advertise-tags=tag:server"
+            #   ];
+            # };
           };
 
           services.k3s.enable = true;

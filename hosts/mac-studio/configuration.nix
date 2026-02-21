@@ -1,4 +1,9 @@
-{ self, home-manager, ... }:
+{
+  self,
+  home-manager,
+  sops-nix,
+  ...
+}:
 {
   config,
   lib,
@@ -13,6 +18,7 @@ in
     home-manager.darwinModules.home-manager
     self.darwinModules.all
     self.sharedModules.all
+    sops-nix.darwinModules.sops
     (self.lib.mkModule ./secrets.nix { })
   ];
 
