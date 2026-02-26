@@ -1,6 +1,7 @@
 {
   self,
   home-manager,
+  sops-nix,
   ...
 }:
 { config, pkgs, ... }:
@@ -9,8 +10,8 @@
     home-manager.nixosModules.home-manager
     self.nixosModules.all
     self.sharedModules.all
-    (self.lib.mkModule ./services { })
-    # ./desktop.nix
+    sops-nix.nixosModules.sops
+    # (self.lib.mkModule ./services { })
   ];
 
   boot.loader = {
@@ -26,34 +27,29 @@
     users.michael = self.lib.mkModule ./home.nix { };
   };
 
-  # nix.remoteBuilder = {
-  #   enable = true;
-  #   supportedFeatures = [
-  #     "kvm"
-  #     "big-parallel"
-  #   ];
-  #   authorizedKeys = [
-  #     (builtins.readFile ../macbook-pro/secrets/nixremote-ssh-key.pub)
-  #   ];
-  # };
+  nix.remoteBuilder = {
+    enable = true;
+    supportedFeatures = [
+      "kvm"
+      "big-parallel"
+    ];
+  };
 
   networking.hostName = "dxp4800plus";
-
-  programs.fish.enable = true;
 
   security.sudo.wheelNeedsPassword = false;
 
   services = {
-    # tailscale = {
-    #   enable = true;
-    #   useRoutingFeatures = "both";
-    #   authKeyFile = config.sops.secrets."tailscale/oauth_client_secret".path;
-    #   authKeyParameters.ephemeral = false;
-    #   extraUpFlags = [
-    #     "--advertise-exit-node"
-    #     "--advertise-tags=tag:server"
-    #   ];
-    # };
+    tailscale = {
+      enable = true;
+      useRoutingFeatures = "both";
+      # authKeyFile = config.sops.secrets."tailscale/oauth_client_secret".path;
+      # authKeyParameters.ephemeral = false;
+      extraUpFlags = [
+        "--advertise-exit-node"
+        "--advertise-tags=tag:server"
+      ];
+    };
 
     openssh.enable = true;
 
@@ -69,7 +65,6 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8OCYTaHjQy7Y7bRmxzVwNBgnD9P21UQPzVpJ3NKwVV"
     ];
-    shell = pkgs.fish;
   };
 
   time.timeZone = "Europe/Berlin";

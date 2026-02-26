@@ -12,6 +12,11 @@ in
       default = "/var/root/.ssh/keys/nixremote";
       description = "Path to the private SSH key used to connect to remote build machines.";
     };
+
+    sshPublicKeyFile = lib.mkOption {
+      type = lib.types.path;
+      description = "Path to a file containing one OpenSSH public keySSH key used to connect to the remote build machines.";
+    };
   };
 
   config = lib.mkIf cfg.enable (

@@ -9,7 +9,7 @@ keys:
   - &ssh_michael_mac-studio "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID7atwi/0OoP5kHlgIbWRMctz5zT1s9WGQEkQ3wHMdbC"
 
 creation_rules:
-  - path_regex: ^hosts/macbook-pro/secrets\.yaml$
+  - path_regex: ^hosts/macbook-pro/.*$
     pgp: [*yubikey]
     age: [*ssh_michael_macbook_pro, *host_macbook_pro]
 

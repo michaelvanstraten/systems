@@ -8,9 +8,10 @@ _: {
 
   programs = {
     git.enable = true;
-    firefox.enable = true;
     lazygit.enable = true;
     neovim.enable = true;
     tmux.enable = true;
+    bash.enable = true;
+    starship.enable = true;
   };
 }
