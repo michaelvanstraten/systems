@@ -2,7 +2,10 @@
 { config, ... }:
 {
   home.stateVersion = "25.11";
-  home.sessionPath = [ "$HOME/.cargo/bin/" ];
+  home.sessionPath = [
+    "$HOME/.cargo/bin/"
+    "$HOME/.mozbuild/clang/bin/"
+  ];
 
   imports = [
     self.homeModules.all

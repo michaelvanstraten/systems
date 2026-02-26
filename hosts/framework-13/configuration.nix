@@ -1,88 +1,117 @@
 { pkgs, ... }:
 {
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "framework-13";
-
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
-
-  # Select internationalization properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    useXkbConfig = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
 
-  # Enable the openssh server
-  services.openssh.enable = true;
+  environment = {
+    systemPackages = with pkgs; [
+      neovim
+      git
+      ghostty
+      thunderbird
+      rustup
+      zed-editor
+      python3
+      jq
+      signal-desktop
+      k9s
+      gh
+      quickemu
+      spice
+      gdb
+      (pkgs.google-cloud-sdk.withExtraComponents (
+        with pkgs.google-cloud-sdk.components;
+        [
+          gke-gcloud-auth-plugin
+        ]
+      ))
+      kubernetes-helm
+      kubectl
+    ];
 
-  services.fprintd.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "de";
-    variant = "nodeadkeys";
+    gnome.excludePackages = [
+      pkgs.epiphany # web browser
+      pkgs.gedit # text editor
+      pkgs.totem # video player
+      pkgs.yelp # help viewer
+      pkgs.geary # email client
+      pkgs.gnome-calendar # calendar
+      pkgs.gnome-contacts # contacts
+      pkgs.gnome-maps # maps
+      pkgs.gnome-music # music
+      pkgs.gnome-photos # photos
+      pkgs.gnome-tour # tour app
+      pkgs.evince # document viewer
+    ];
   };
 
-  services.fwupd.enable = true;
+  programs = {
+    firefox.enable = true;
+    nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        gtk3
+        alsa-lib
+        libx11
+        libxcb
+        libxcomposite
+        libxrandr
+        libxcursor
+        libxdamage
+        libxi
+        libxext
+        libxfixes
+        libz
+      ];
+    };
+  };
 
-  virtualisation.docker.enable = true;
+  services = {
+    fprintd.enable = true;
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+    xserver.xkb = {
+      layout = "de";
+      variant = "nodeadkeys";
+    };
+    fwupd.enable = true;
+    tailscale.enable = true;
+    openssh.enable = true;
+    upower.enable = true;
+  };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.michael = {
     isNormalUser = true;
     extraGroups = [
       "wheel"
       "docker"
     ];
-    packages = with pkgs; [ ];
   };
 
-  programs.firefox.enable = true;
+  virtualisation.docker.enable = true;
 
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    gtk3
-    alsa-lib
-  ];
+  networking = {
+    hostName = "framework-13";
+    networkmanager.enable = true;
+    # networkmanager.dns = "systemd-resolved";
+    networkmanager.dns = "dnsmasq";
+  };
+  # services.resolved.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    neovim
-    git
-    ghostty
-    thunderbird
-    (rustup.overrideAttrs { doCheck = false; })
-    zed-editor
-    python3
-  ];
+  security.pki.certificateFiles = [ ./mkcert/rootCA.pem ];
 
-  # Exclude Core Apps From Being Installed.
-  environment.gnome.excludePackages = [
-    pkgs.epiphany # web browser
-    pkgs.gedit # text editor
-    pkgs.totem # video player
-    pkgs.yelp # help viewer
-    pkgs.geary # email client
-    pkgs.gnome-calendar # calendar
-    pkgs.gnome-contacts # contacts
-    pkgs.gnome-maps # maps
-    pkgs.gnome-music # music
-    pkgs.gnome-photos # photos
-    pkgs.gnome-tour # tour app
-    pkgs.evince # document viewer
-    pkgs.xterm
-  ];
+  powerManagement.powertop.enable = true;
+
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  console = {
+    font = "Lat2-Terminus16";
+    useXkbConfig = true;
+  };
+
+  time.timeZone = "Europe/Berlin";
 
   system.stateVersion = "25.11";
 }
