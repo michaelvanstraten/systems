@@ -37,7 +37,7 @@ in
       ac_add_options --as-milestone=release
     '';
 
-  home.file."Library/Application Support/Mozilla.sccache/config".source =
-    tomlFormat.generate "sccache-config"
-      { };
+  # home.file."Library/Application Support/Mozilla.sccache/config".source =
+  #   tomlFormat.generate "sccache-config"
+  #     { };
 }

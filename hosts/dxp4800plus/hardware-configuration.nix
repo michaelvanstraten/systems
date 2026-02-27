@@ -6,11 +6,12 @@
   ...
 }:
 {
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
   boot = {
-    # Ugreen LEDs
     kernelModules = [
       "kvm-intel"
-      "i2c-dev"
+      "i2c-dev" # Required for Ugreen LED control
     ];
 
     initrd.availableKernelModules = [
@@ -23,15 +24,7 @@
     ];
   };
 
-  environment.systemPackages = [
-    pkgs.ugreen-leds-cli
-  ];
-
   hardware.cpu.intel.updateMicrocode = true;
-
-  networking.hostId = "4831eedc";
-
-  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   powerManagement.powertop.enable = true;
 
@@ -41,6 +34,7 @@
       mkRules = rs: lib.concatStringsSep "\n" rs;
     in
     mkRules ([
+      # Spin down rotational drives after 10 minutes of inactivity
       (mkRule [
         ''ACTION=="add|change"''
         ''SUBSYSTEM=="block"''
@@ -49,4 +43,8 @@
         ''RUN+="${pkgs.hdparm}/bin/hdparm -S 120 /dev/%k"''
       ])
     ]);
+
+  environment.systemPackages = [
+    pkgs.ugreen-leds-cli
+  ];
 }
