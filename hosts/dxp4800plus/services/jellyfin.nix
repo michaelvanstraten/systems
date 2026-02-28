@@ -1,64 +1,92 @@
 { pkgs, ... }:
 {
-  boot.zfs.extraPools = [ "tank" ];
-
-  environment.sessionVariables = {
-    LIBVA_DRIVER_NAME = "iHD";
-  };
-
   nixpkgs.config.allowUnfree = true;
 
-  networking.firewall = {
-    enable = true;
-    allowPing = true;
-  };
+  hardware.enableAllFirmware = true;
 
-  # hardware.graphics = {
-  #   enable = true;
-  #   extraPackages = with pkgs; [
-  #     intel-media-driver
-  #     intel-compute-runtime
-  #     vpl-gpu-rt
-  #     intel-media-sdk
-  #     intel-ocl
-  #   ];
-  # };
+  containers.jellyfin = {
+    autoStart = true;
+    privateNetwork = true;
 
-  services = {
-    jellyfin = {
-      enable = true;
-      openFirewall = true;
-    };
+    hostBridge = "br-containers";
+    localAddress = "10.100.0.3/24";
 
-    samba = {
-      enable = true;
-      settings = {
-        global = {
-          "hosts allow" = "100.64.0.0/10 127.0.0.1 localhost";
-          "hosts deny" = "0.0.0.0/0";
-          "guest account" = "nobody";
-          "map to guest" = "bad user";
-        };
-        media = {
-          path = "/tank/media";
-          browseable = true;
-          "guest ok" = true;
-          "read only" = "no";
-          "writeable" = "yes";
-          "force user" = "nobody";
-          "force group" = "nogroup";
-          "create mask" = "0664";
-          "directory mask" = "0775";
-        };
+    allowedDevices = [
+      {
+        node = "/dev/dri/card0";
+        modifier = "rw";
+      }
+      {
+        node = "/dev/dri/renderD128";
+        modifier = "rw";
+      }
+    ];
+
+    bindMounts = {
+      "/dev/dri/card0" = {
+        hostPath = "/dev/dri/card0";
+        isReadOnly = false;
       };
-      openFirewall = true;
+      "/dev/dri/renderD128" = {
+        hostPath = "/dev/dri/renderD128";
+        isReadOnly = false;
+      };
+
+      "/srv/media" = {
+        hostPath = "/tank/media";
+        isReadOnly = true;
+      };
+
+      "/var/lib/jellyfin" = {
+        hostPath = "/tank/appdata/jellyfin";
+        isReadOnly = false;
+      };
+      "/var/cache/jellyfin" = {
+        hostPath = "/tank/appdata/jellyfin-cache";
+        isReadOnly = false;
+      };
     };
 
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
+    config = {
+      system.stateVersion = "26.05";
+
+      hardware.graphics = {
+        enable = true;
+
+        extraPackages = with pkgs; [
+          intel-ocl
+          intel-media-driver
+          intel-compute-runtime
+          vpl-gpu-rt
+        ];
+      };
+
+      environment.systemPackages = [
+        pkgs.libva-utils
+      ];
+
+      users.users.jellyfin.extraGroups = [
+        "video"
+        "render"
+      ];
+
+      systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD";
+
+      environment.sessionVariables = {
+        LIBVA_DRIVER_NAME = "iHD";
+      };
+
+      networking.defaultGateway = "10.100.0.1";
+      networking.useHostResolvConf = false;
+      networking.nameservers = [
+        "1.1.1.1"
+        "9.9.9.9"
+      ];
+
+      services.jellyfin = {
+        enable = true;
+        openFirewall = true;
+      };
     };
   };
-
-  systemd.services.jellyfin.environment.LIBVA_DRIVER_NAME = "iHD";
 }

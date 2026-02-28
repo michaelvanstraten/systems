@@ -1,7 +1,28 @@
+{ self, nixpkgs, ... }:
 { config, lib, ... }:
 let
   # Define the configuration options for the module
   cfg = config.nix.remoteBuilder;
+
+  hosts = builtins.attrValues self.darwinConfigurations;
+  collect =
+    path:
+    hosts
+    |> builtins.map (
+      h:
+      let
+        r = builtins.tryEval (lib.attrsets.getAttrFromPath path h);
+      in
+      if r.success then r.value else null
+    )
+    |> builtins.filter (v: v != null);
+
+  extraPublicKeyFiles = collect [
+    "config"
+    "nix"
+    "autoDiscoverBuildMachines"
+    "sshPublicKeyFile"
+  ];
 in
 {
   options.nix.remoteBuilder = {
@@ -47,6 +68,7 @@ in
       hashedPassword = "!";
       group = "nixremote";
       openssh.authorizedKeys.keys = cfg.authorizedKeys;
+      openssh.authorizedKeys.keyFiles = extraPublicKeyFiles;
     };
 
     # Define the nixremote group

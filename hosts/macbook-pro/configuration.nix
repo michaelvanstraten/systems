@@ -10,6 +10,7 @@ in
     self.darwinModules.all
     self.sharedModules.all
     (self.lib.mkModule ./homebrew.nix { inherit primaryUser; })
+    (self.lib.mkModule ./secrets.nix { })
   ];
 
   environment.systemPackages = [
@@ -34,10 +35,11 @@ in
     hostName = "macbook-pro";
   };
 
-  # nix.autoDiscoverBuildMachines = {
-  #   enable = true;
-  #   sshKey = config.sops.secrets.nixremote-ssh-key.path;
-  # };
+  nix.autoDiscoverBuildMachines = {
+    enable = true;
+    sshKey = config.sops.secrets.nixremote.path;
+    sshPublicKeyFile = ./nixremote.pub;
+  };
 
   programs.fish.enable = true;
 

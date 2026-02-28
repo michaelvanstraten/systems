@@ -12,7 +12,7 @@ switch:
 
 # Install system on remote host via SSH
 deploy host target=host:
-    nixos-rebuild-ng switch \
+    nixos-rebuild switch \
         --flake .#{{host}} \
         --target-host {{target}} \
         --build-host {{target}} \
