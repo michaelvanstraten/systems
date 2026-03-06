@@ -27,7 +27,7 @@ return {
                 },
             },
             nil_ls = {},
-            pyright = {},
+            basedpyright = {},
             rust_analyzer = {},
             taplo = {},
             texlab = {},

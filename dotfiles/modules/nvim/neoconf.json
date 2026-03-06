@@ -11,9 +11,6 @@
                 }
             }
         },
-        "pyright": {
-            "venv": "venv"
-        },
         "rust_analyzer": {
             "rust-analyzer": {
                 "check": {
