@@ -23,6 +23,14 @@ in
     pkgs.bitwarden-desktop
     pkgs.anki
     pkgs.rustup
+    pkgs.lima
+    pkgs.k9s
+    (pkgs.google-cloud-sdk.withExtraComponents (
+      with pkgs.google-cloud-sdk.components;
+      [
+        gke-gcloud-auth-plugin
+      ]
+    ))
   ];
 
   home-manager = {
