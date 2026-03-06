@@ -10,6 +10,11 @@
       pkgs.unnaturalscrollwheels
     ];
 
+    variables = {
+      LANG = "en_US.UTF-8";
+      LC_CTYPE = "en_US.UTF-8";
+    };
+
     shells =
       config.users.users
       |> lib.mapAttrsToList (_: user: user.shell)
