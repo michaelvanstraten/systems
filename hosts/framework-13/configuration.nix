@@ -95,10 +95,9 @@
   networking = {
     hostName = "framework-13";
     networkmanager.enable = true;
-    # networkmanager.dns = "systemd-resolved";
-    networkmanager.dns = "dnsmasq";
+    networkmanager.dns = "systemd-resolved";
   };
-  # services.resolved.enable = true;
+  services.resolved.enable = true;
 
   security.pki.certificateFiles = [ ./mkcert/rootCA.pem ];
 
