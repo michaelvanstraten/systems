@@ -12,7 +12,7 @@ in
     modules = [
       sops-nix.nixosModules.sops
       (self.lib.mkModule ./disko.nix { })
-      ./hardware-configuration.nix
+      (self.lib.mkModule ./hardware-configuration.nix { })
       (self.lib.mkModule ./configuration.nix { })
     ];
   };

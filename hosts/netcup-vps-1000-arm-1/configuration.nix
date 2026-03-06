@@ -20,8 +20,6 @@
     hostName = "netcup-vps-1000-arm-1";
   };
 
-  nixpkgs.hostPlatform = "aarch64-linux";
-
   time.timeZone = "Europe/Berlin";
 
   console.keyMap = "de";
