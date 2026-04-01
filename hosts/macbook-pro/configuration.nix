@@ -31,6 +31,8 @@ in
         gke-gcloud-auth-plugin
       ]
     ))
+    pkgs.gh
+    pkgs.xz
   ];
 
   home-manager = {
