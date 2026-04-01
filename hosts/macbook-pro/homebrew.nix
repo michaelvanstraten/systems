@@ -38,6 +38,7 @@
     "amethyst"
     "veracrypt"
     "macfuse"
+    "rustdesk"
   ];
 
   homebrew.onActivation.cleanup = "uninstall";
