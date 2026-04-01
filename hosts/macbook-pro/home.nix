@@ -4,6 +4,10 @@
   imports = [ self.homeModules.all ];
 
   home.stateVersion = "24.05";
+  home.sessionPath = [
+    "$HOME/.cargo/bin/"
+    "$HOME/.mozbuild/clang/bin/"
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
