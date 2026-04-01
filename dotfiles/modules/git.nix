@@ -14,6 +14,7 @@
       init.defaultBranch = "main";
       core.ignorecase = false;
       pull.rebase = true;
+      push.autoSetupRemote = true;
       fetch = {
         prune = true;
         writeCommitGraph = true;
