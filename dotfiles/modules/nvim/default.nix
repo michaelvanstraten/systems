@@ -34,7 +34,7 @@
         pkgs.harper # Grammar checker
         pkgs.nixfmt
         pkgs.nodejs # Needed for prettier
-        pkgs.nodePackages.prettier
+        pkgs.prettier
         pkgs.ruff
         pkgs.shfmt
         pkgs.stylua

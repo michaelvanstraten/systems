@@ -60,8 +60,6 @@
       flake = false;
     };
 
-    mac-app-util.url = "github:hraban/mac-app-util";
-
     moz-phab = {
       url = "github:mozilla-conduit/review";
       flake = false;
