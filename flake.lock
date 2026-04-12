@@ -282,11 +282,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772814673,
-        "narHash": "sha256-LPJAx3NtdLoa7U3nEPaBxvhnx9NJ2S2z3PsmoaOJ0EQ=",
+        "lastModified": 1775998427,
+        "narHash": "sha256-ovpyfVllsSJvDf6sWETLX/LVm15Z/UQGNf0vDvlcWLY=",
         "owner": "michaelvanstraten",
         "repo": "nix-darwin",
-        "rev": "7295e2b1132864f1ab73cb8da5dede7a97f30ddb",
+        "rev": "f47bfc3aef8a9cd745f9ade6445bb95885524d45",
         "type": "github"
       },
       "original": {
