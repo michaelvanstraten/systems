@@ -45,6 +45,9 @@
         # Shell
         pkgs.fish
       ];
+
+      withPython3 = false;
+      withRuby = false;
     };
 
     home.shellAliases.e = "nvim";
