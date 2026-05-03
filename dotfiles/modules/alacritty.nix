@@ -55,12 +55,12 @@
           {
             key = "A";
             mods = "Command";
-            chars = "\\u0001";
+            chars = builtins.fromJSON ''"\u0001"'';
           }
           {
             key = "s";
             mods = "Command";
-            chars = "\\u0001s";
+            chars = "${builtins.fromJSON ''"\u0001"''}s";
           }
         ];
       };
