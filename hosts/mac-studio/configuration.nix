@@ -19,7 +19,7 @@ in
     self.darwinModules.all
     self.sharedModules.all
     sops-nix.darwinModules.sops
-    (self.lib.mkModule ./secrets.nix { })
+    ./github-runners.nix
   ];
 
   environment.systemPackages = [
@@ -39,26 +39,13 @@ in
 
   services.tailscale.enable = true;
 
-  services.github-runners = {
-    "enterprise-helm" = {
-      enable = true;
-      url = "https://github.com/mozilla/enterprise-helm";
-      tokenFile = config.sops.secrets."github_runners/enterprise_helm/token".path;
-      name = config.networking.hostName;
-    };
-    "enterprise-console" = {
-      enable = true;
-      url = "https://github.com/mozilla/enterprise-console-backend";
-      tokenFile = config.sops.secrets."github_runners/enterprise_console/token".path;
-      name = config.networking.hostName;
-    };
-  };
-
   security.pam.services.sudo_local = {
     enable = true;
     touchIdAuth = true;
     reattach = true;
   };
+
+  sops.defaultSopsFile = ./secrets.yaml;
 
   system = {
     inherit primaryUser;
