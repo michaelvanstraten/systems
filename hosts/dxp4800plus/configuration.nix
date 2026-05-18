@@ -14,6 +14,8 @@
     ./networking.nix
     ./services/jellyfin.nix
     ./services/newt.nix
+    ./services/proxy-sidecar.nix
+    ./services/seedbox.nix
     ./services/nextcloud
     ./services/paperless
     (self.lib.mkModule ./vms { })

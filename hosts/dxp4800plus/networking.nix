@@ -67,6 +67,15 @@
           # Allow established/related connections everywhere
           ct state established,related accept
 
+          # ---- Seedbox container isolation (10.100.0.5) ----
+
+          # Allow seedbox -> proxy-sidecar on SOCKS port 1080 and DNS
+          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.5 ip daddr 10.100.0.4 tcp dport { 53, 1080 } accept
+          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.5 ip daddr 10.100.0.4 udp dport 53 accept
+
+          # Block all other outbound traffic from qbittorrent (internet and east/west)
+          iifname "br-containers" ip saddr 10.100.0.5 drop
+
           # ---- Egress: bridges -> WAN ----
 
           # Allow containers to reach the internet
@@ -79,6 +88,9 @@
 
           # Allow newt (10.100.0.2) -> jellyfin (10.100.0.3)
           iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.3 accept
+
+          # Allow newt (10.100.0.2) -> seedbox (10.100.0.5)
+          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.5 accept
 
           # Allow newt (10.100.0.2) -> paperless (10.100.0.6)
           iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.6 accept
