@@ -1,4 +1,5 @@
 /flake.lock
 lazy-lock.json
 secrets.yaml
+secrets.json
 .sops.yaml

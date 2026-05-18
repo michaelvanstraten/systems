@@ -14,6 +14,7 @@
     ./networking.nix
     ./services/jellyfin.nix
     ./services/newt.nix
+    ./services/nextcloud
   ];
 
   system.stateVersion = "25.11";
