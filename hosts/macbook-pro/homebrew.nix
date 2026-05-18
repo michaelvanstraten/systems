@@ -31,14 +31,17 @@
   homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
 
   homebrew.casks = [
-    "whatsapp"
     "alacritty"
+    "anki"
+    "bambu-studio"
+    "freecad"
+    "macfuse"
+    "nextcloud"
+    "rustdesk"
     "signal"
     "steam"
-    "amethyst"
     "veracrypt"
-    "macfuse"
-    "rustdesk"
+    "whatsapp"
   ];
 
   homebrew.onActivation.cleanup = "uninstall";
