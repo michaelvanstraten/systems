@@ -15,6 +15,7 @@
     ./services/jellyfin.nix
     ./services/newt.nix
     ./services/nextcloud
+    ./services/paperless
   ];
 
   system.stateVersion = "25.11";
