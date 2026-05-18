@@ -59,7 +59,10 @@
           # Allow newt (10.100.0.2) -> jellyfin (10.100.0.3)
           iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.3 accept
 
-          # Default: block any other container-to-container traffic on the bridge
+          # Allow newt (10.100.0.2) -> nextcloud (10.100.0.8)
+          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.8 accept
+
+          # Block any other container-to-container traffic on the bridge
           iifname "br-containers" oifname "br-containers" drop
         }
       }
