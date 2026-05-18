@@ -2,6 +2,7 @@
 { config, lib, ... }:
 let
   cfg = config.nix.autoDiscoverBuildMachines;
+  tailnet = "zuul-banjo";
 in
 {
   options.nix.autoDiscoverBuildMachines = {
@@ -39,7 +40,7 @@ in
       nix = {
         buildMachines = map (host: {
           inherit (host.config.nix.remoteBuilder) supportedFeatures;
-          hostName = host.config.networking.hostName;
+          hostName = "${host.config.networking.hostName}.${tailnet}.ts.net";
           system = host.pkgs.stdenv.hostPlatform.system;
           protocol = "ssh-ng";
           sshUser = "nixremote";
