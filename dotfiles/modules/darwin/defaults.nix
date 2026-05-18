@@ -176,6 +176,10 @@ lib.mkIf pkgs.stdenv.isDarwin {
         ScrollLines = 3;
         ShowMenuBarIcon = 0;
       };
+
+      "com.apple.TextInputMenu" = {
+        visible = false;
+      };
     };
   };
 
