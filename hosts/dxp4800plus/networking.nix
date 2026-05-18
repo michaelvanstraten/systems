@@ -19,6 +19,13 @@
           Name = "br-containers";
         };
       };
+
+      "30-br-vms" = {
+        netdevConfig = {
+          Kind = "bridge";
+          Name = "br-vms";
+        };
+      };
     };
 
     networks = {
@@ -32,12 +39,21 @@
         address = [ "10.100.0.1/24" ];
         bridgeConfig = { };
       };
+
+      "30-br-vms" = {
+        matchConfig.Name = "br-vms";
+        address = [ "10.101.0.1/24" ];
+        bridgeConfig = { };
+      };
     };
   };
 
   networking.nat = {
     enable = true;
-    internalInterfaces = [ "br-containers" ];
+    internalInterfaces = [
+      "br-containers"
+      "br-vms"
+    ];
     externalInterface = "enp6s0";
   };
 
@@ -51,8 +67,13 @@
           # Allow established/related connections everywhere
           ct state established,related accept
 
-          # Allow containers to reach the internet (bridge -> WAN)
+          # ---- Egress: bridges -> WAN ----
+
+          # Allow containers to reach the internet
           iifname "br-containers" oifname "enp6s0" accept
+
+          # Allow VMs to reach the internet
+          iifname "br-vms" oifname "enp6s0" accept
 
           # ---- East/West Policy (container <-> container) ----
 
@@ -65,8 +86,22 @@
           # Allow newt (10.100.0.2) -> nextcloud (10.100.0.8)
           iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.8 accept
 
+          # ---- Cross-bridge (container -> VM) ----
+
+          # Allow newt (10.100.0.2) -> buildkit microvm (10.101.0.9) on the gRPC port
+          iifname "br-containers" oifname "br-vms" ip saddr 10.100.0.2 ip daddr 10.101.0.9 tcp dport 1234 accept
+
+          # ---- Default deny: bridge-local & cross-bridge ----
+
           # Block any other container-to-container traffic on the bridge
           iifname "br-containers" oifname "br-containers" drop
+
+          # Block any other VM-to-VM traffic on the bridge
+          iifname "br-vms" oifname "br-vms" drop
+
+          # Block any other cross-bridge traffic in both directions
+          iifname "br-containers" oifname "br-vms" drop
+          iifname "br-vms" oifname "br-containers" drop
         }
       }
     '';

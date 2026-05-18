@@ -16,6 +16,7 @@
     ./services/newt.nix
     ./services/nextcloud
     ./services/paperless
+    (self.lib.mkModule ./vms { })
   ];
 
   system.stateVersion = "25.11";
