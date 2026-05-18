@@ -38,6 +38,7 @@
       "/System/Applications/Calendar.app/"
       "/Applications/Alacritty.app/"
       "/Applications/Nix Apps/Firefox.app/"
+      "/Applications/Firefox Enterprise.app/"
       "/Applications/Nix Apps/Bitwarden.app/"
       "/System/Applications/System Settings.app/"
     ];
