@@ -24,8 +24,11 @@
   time.timeZone = "Europe/Berlin";
 
   console.keyMap = "de";
-
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 8;
+  };
+  boot.zfs.forceImportRoot = false;
 
   users.users.michael = {
     isNormalUser = true;
