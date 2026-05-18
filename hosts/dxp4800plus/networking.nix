@@ -59,6 +59,9 @@
           # Allow newt (10.100.0.2) -> jellyfin (10.100.0.3)
           iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.3 accept
 
+          # Allow newt (10.100.0.2) -> paperless (10.100.0.6)
+          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.6 accept
+
           # Allow newt (10.100.0.2) -> nextcloud (10.100.0.8)
           iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.8 accept
 
