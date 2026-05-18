@@ -36,6 +36,4 @@
 
     zfs.devNodes = "/dev/disk/by-path";
   };
-
-  networking.useDHCP = lib.mkDefault true;
 }

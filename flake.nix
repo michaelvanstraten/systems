@@ -75,6 +75,8 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+
+    authentik-nix.url = "github:nix-community/authentik-nix";
   };
 
   outputs =

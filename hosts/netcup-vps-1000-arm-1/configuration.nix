@@ -11,6 +11,7 @@
     self.sharedModules.all
     ./networking.nix
     ./services/pangolin.nix
+    (self.lib.mkModule ./services/authentik { })
   ];
 
   system.stateVersion = "25.11";
