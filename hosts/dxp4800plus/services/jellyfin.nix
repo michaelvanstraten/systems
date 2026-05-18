@@ -2,8 +2,6 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  hardware.enableAllFirmware = true;
-
   containers.jellyfin = {
     autoStart = true;
     privateNetwork = true;
@@ -76,12 +74,22 @@
         LIBVA_DRIVER_NAME = "iHD";
       };
 
-      networking.defaultGateway = "10.100.0.1";
+      networking.useNetworkd = true;
       networking.useHostResolvConf = false;
       networking.nameservers = [
+        "8.8.8.8"
         "1.1.1.1"
-        "9.9.9.9"
       ];
+
+      systemd.network.networks."10-eth0" = {
+        matchConfig.Name = "eth0";
+        networkConfig = {
+          Address = "10.100.0.3/24";
+          Gateway = "10.100.0.1";
+          DHCP = "no";
+          LinkLocalAddressing = "no";
+        };
+      };
 
       services.jellyfin = {
         enable = true;
