@@ -98,11 +98,6 @@
           # Allow newt (10.100.0.2) -> nextcloud (10.100.0.8)
           iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.8 accept
 
-          # ---- Cross-bridge (container -> VM) ----
-
-          # Allow newt (10.100.0.2) -> buildkit microvm (10.101.0.9) on the gRPC port
-          iifname "br-containers" oifname "br-vms" ip saddr 10.100.0.2 ip daddr 10.101.0.9 tcp dport 1234 accept
-
           # ---- Default deny: bridge-local & cross-bridge ----
 
           # Block any other container-to-container traffic on the bridge
