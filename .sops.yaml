@@ -15,7 +15,7 @@ creation_rules:
     pgp: [*yubikey]
     age: [*ssh_michael_macbook_pro, *host_macbook_pro]
 
-  - path_regex: ^hosts/mac-studio/secrets\.yaml$
+  - path_regex: ^hosts/mac-studio/.*$
     pgp: [*yubikey]
     age: [*ssh_michael_macbook_pro, *host_mac_studio, *ssh_michael_mac-studio]
 

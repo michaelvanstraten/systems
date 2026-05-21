@@ -20,6 +20,7 @@ in
     self.sharedModules.all
     sops-nix.darwinModules.sops
     ./github-runners.nix
+    (self.lib.mkModule ./vms { })
   ];
 
   environment.systemPackages = [
