@@ -20,6 +20,7 @@ in
     self.sharedModules.all
     sops-nix.darwinModules.sops
     ./github-runners.nix
+    ./olm.nix
     (self.lib.mkModule ./vms { })
   ];
 
