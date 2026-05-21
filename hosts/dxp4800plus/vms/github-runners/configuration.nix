@@ -73,7 +73,7 @@
   systemd.network.networks."10-lan" = {
     matchConfig.MACAddress = "02:00:00:00:00:0a";
     networkConfig = {
-      Address = "10.101.0.10/24";
+      Address = "10.101.0.3/24";
       Gateway = "10.101.0.1";
       DHCP = "no";
       LinkLocalAddressing = "no";
