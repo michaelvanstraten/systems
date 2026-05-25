@@ -23,7 +23,6 @@
         pkgs.basedpyright
         pkgs.rust-analyzer
         pkgs.taplo
-        pkgs.texlab
         pkgs.tinymist
         pkgs.websocat # used by typst-preview.nvim
         pkgs.yaml-language-server
@@ -38,12 +37,7 @@
         pkgs.ruff
         pkgs.shfmt
         pkgs.stylua
-        (pkgs.texlive.withPackages (ps: [ ps.latexindent ]))
         pkgs.typstyle
-        pkgs.swift-format
-
-        # Shell
-        pkgs.fish
       ];
 
       withPython3 = false;
