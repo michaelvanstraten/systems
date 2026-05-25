@@ -1,5 +1,14 @@
 { self, ... }:
-{ config, ... }:
+{
+  config,
+  vmSecretsHostPath,
+  ...
+}:
+let
+  vmIp = "10.101.0.2";
+  tcpPort = "1234";
+  vmSecretsGuestPath = "/run/host-secrets";
+in
 {
   imports = [ self.nixosModules.buildkitd ];
 
@@ -9,8 +18,7 @@
       root = "/var/lib/buildkit";
 
       grpc.address = [
-        "unix:///run/buildkit/buildkitd.sock"
-        "tcp://0.0.0.0:1234"
+        "tcp://0.0.0.0:${tcpPort}"
       ];
 
       cdi.disabled = true;
@@ -48,6 +56,12 @@
         tag = "ro-store";
         proto = "virtiofs";
       }
+      {
+        source = vmSecretsHostPath;
+        mountPoint = vmSecretsGuestPath;
+        tag = "ro-secrets";
+        proto = "virtiofs";
+      }
     ];
 
     volumes = [
@@ -60,19 +74,34 @@
     ];
   };
 
-  networking = {
-    useNetworkd = true;
-    nameservers = [
-      "8.8.8.8"
-      "1.1.1.1"
-    ];
-    firewall.allowedTCPPorts = [ 1234 ];
+  services.newt = {
+    enable = true;
+    settings.endpoint = "https://pangolin.vanstraten.cloud";
+    environmentFile = "${vmSecretsGuestPath}/newt/env";
+    blueprint = {
+      private-resources = {
+        buildkit-linux-amd64 = {
+          name = "BuildKit linux/amd64";
+          mode = "host";
+          destination = "localhost";
+          alias = "linux-amd64.buildkit.vanstraten.cloud";
+          tcp-ports = tcpPort;
+          disable-icmp = true;
+          machines = [
+            "affectionate-russian-desman"
+            "thorough-seven-banded-armadillo"
+          ];
+        };
+      };
+    };
   };
+
+  networking.useNetworkd = true;
 
   systemd.network.networks."10-lan" = {
     matchConfig.MACAddress = "02:00:00:00:00:09";
     networkConfig = {
-      Address = "10.101.0.9/24";
+      Address = "${vmIp}/24";
       Gateway = "10.101.0.1";
       DHCP = "no";
       LinkLocalAddressing = "no";

@@ -1,5 +1,5 @@
 { self, ... }:
-{ ... }:
+{ lib, ... }:
 let
   vmName = "buildkit";
   vmSecretsHostPath = "/run/secrets/microvms/${vmName}";
@@ -11,9 +11,11 @@ in
   };
 
   microvm.vms.buildkit = {
+    autostart = true;
+    hypervisor = "vfkit";
+    specialArgs = {
+      inherit vmSecretsHostPath;
+    };
     config = self.lib.mkModule ./configuration.nix { };
-    specialArgs = { inherit vmSecretsHostPath; };
   };
-
-  microvm.autostart = [ "buildkit" ];
 }

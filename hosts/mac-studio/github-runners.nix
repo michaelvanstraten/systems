@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   getRunnerUser =
     runnerName:
@@ -33,6 +38,14 @@ lib.mkMerge (
         url = "https://github.com/mozilla/enterprise-console-backend";
         tokenFile = config.sops.secrets.${tokenSecret}.path;
         name = "${config.networking.hostName}-slot-${num}";
+        extraPackages = [
+          pkgs.nodejs_20
+          pkgs.nodejs_24
+          pkgs.nodejs_latest
+          pkgs.rustup
+          pkgs.docker
+          pkgs.curl
+        ];
       };
       sops.secrets.${tokenSecret}.owner = getRunnerUser runnerName;
     }
