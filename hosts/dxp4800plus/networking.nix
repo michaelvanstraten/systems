@@ -70,7 +70,7 @@
           # ---- Seedbox container isolation (10.100.0.5) ----
 
           # Allow seedbox -> proxy-sidecar on SOCKS port 1080 and DNS
-          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.5 ip daddr 10.100.0.4 tcp dport { 53, 1080 } accept
+          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.5 ip daddr 10.100.0.4 tcp dport { 53, 1080, 1081 } accept
           iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.5 ip daddr 10.100.0.4 udp dport 53 accept
 
           # Block all other outbound traffic from qbittorrent (internet and east/west)
@@ -94,6 +94,9 @@
 
           # Allow newt (10.100.0.2) -> paperless (10.100.0.6)
           iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.6 accept
+
+          # Allow newt (10.100.0.2) -> samba (10.100.0.7)
+          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.7 accept
 
           # Allow newt (10.100.0.2) -> nextcloud (10.100.0.8)
           iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.8 accept

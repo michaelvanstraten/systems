@@ -18,6 +18,7 @@
     ./services/seedbox.nix
     ./services/nextcloud
     ./services/paperless
+    ./services/samba.nix
     (self.lib.mkModule ./vms { })
   ];
 
