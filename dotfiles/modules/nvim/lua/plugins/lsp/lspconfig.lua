@@ -35,6 +35,7 @@ return {
             ts_ls = {},
             yamlls = {},
             gopls = {},
+            tsserver = {},
         },
     },
     config = function(_, opts)
