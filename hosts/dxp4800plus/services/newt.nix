@@ -1,4 +1,10 @@
-{ config, ... }:
+{ fosrl-newt, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   sops.secrets."newt/id" = { };
   sops.secrets."newt/secret" = { };
@@ -25,14 +31,24 @@
     };
 
     config = {
-      system.stateVersion = "26.05";
+      services.newt = {
+        enable = true;
+        package = fosrl-newt.packages.${pkgs.stdenv.system}.pangolin-newt;
+        settings = {
+          endpoint = "https://pangolin.vanstraten.cloud";
+        };
+        environmentFile = "/run/secrets/newt.env";
+        blueprint = config.services.newt.blueprint;
+      };
 
-      networking.useNetworkd = true;
-      networking.useHostResolvConf = false;
-      networking.nameservers = [
-        "8.8.8.8"
-        "1.1.1.1"
-      ];
+      networking = {
+        useNetworkd = true;
+        useHostResolvConf = false;
+        nameservers = [
+          "8.8.8.8"
+          "1.1.1.1"
+        ];
+      };
 
       systemd.network.networks."10-eth0" = {
         matchConfig.Name = "eth0";
@@ -44,13 +60,7 @@
         };
       };
 
-      services.newt = {
-        enable = true;
-        settings = {
-          endpoint = "https://pangolin.vanstraten.cloud";
-        };
-        environmentFile = "/run/secrets/newt.env";
-      };
+      system.stateVersion = "26.05";
     };
   };
 

@@ -13,7 +13,7 @@
     sops-nix.nixosModules.sops
     ./networking.nix
     ./services/jellyfin.nix
-    ./services/newt.nix
+    (self.lib.mkModule ./services/newt.nix { })
     ./services/proxy-sidecar.nix
     ./services/seedbox.nix
     ./services/nextcloud

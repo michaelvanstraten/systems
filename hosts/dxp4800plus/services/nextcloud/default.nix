@@ -1,4 +1,9 @@
 { config, ... }:
+let
+  containerIp = "10.100.0.8";
+  nextcloudPort = 80;
+  fqdn = "nextcloud.vanstraten.cloud";
+in
 {
   sops.secrets."nextcloud/adminpass" = { };
   sops.secrets."nextcloud/config" = {
@@ -6,12 +11,30 @@
     format = "binary";
   };
 
+  services.newt.blueprint = {
+    public-resources = {
+      nextcloud = {
+        name = "Nextcloud";
+        protocol = "http";
+        ssl = true;
+        full-domain = fqdn;
+        targets = [
+          {
+            method = "http";
+            hostname = containerIp;
+            port = nextcloudPort;
+          }
+        ];
+      };
+    };
+  };
+
   containers.nextcloud = {
     autoStart = true;
     privateNetwork = true;
 
     hostBridge = "br-containers";
-    localAddress = "10.100.0.8/24";
+    localAddress = "${containerIp}/24";
 
     bindMounts = {
       "/run/secrets/nextcloud-admin-pass" = {
@@ -47,13 +70,13 @@
             "1.1.1.1"
           ];
 
-          firewall.allowedTCPPorts = [ 80 ];
+          firewall.allowedTCPPorts = [ nextcloudPort ];
         };
 
         systemd.network.networks."10-eth0" = {
           matchConfig.Name = "eth0";
           networkConfig = {
-            Address = "10.100.0.8/24";
+            Address = "${containerIp}/24";
             Gateway = "10.100.0.1";
             DHCP = "no";
             LinkLocalAddressing = "no";
@@ -63,7 +86,7 @@
         services.nextcloud = {
           enable = true;
           package = pkgs.nextcloud33;
-          hostName = "nextcloud.vanstraten.cloud";
+          hostName = fqdn;
           config = {
             adminpassFile = "/run/secrets/nextcloud-admin-pass";
             dbtype = "pgsql";

@@ -74,6 +74,8 @@
     authentik-nix.url = "github:nix-community/authentik-nix";
 
     microvm.url = "github:microvm-nix/microvm.nix";
+
+    fosrl-newt.url = "github:fosrl/newt?ref=1.12.5";
   };
 
   outputs =

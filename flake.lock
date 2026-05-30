@@ -203,6 +203,25 @@
         "type": "github"
       }
     },
+    "fosrl-newt": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1778263591,
+        "narHash": "sha256-MBch8Zj+2jsHJTkFR/HJoZk35ZVAbdbkZAaf6pqUZCU=",
+        "owner": "fosrl",
+        "repo": "newt",
+        "rev": "0da8a29a6162c97e9ed99d03d0c993a2049eeacb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fosrl",
+        "ref": "1.12.5",
+        "repo": "newt",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -278,7 +297,7 @@
     },
     "microvm": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "spectrum": "spectrum"
       },
       "locked": {
@@ -424,6 +443,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1763934636,
+        "narHash": "sha256-9glbI7f1uU+yzQCq5LwLgdZqx6svOhZWkd4JRY265fc=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ee09932cedcef15aaf476f9343d1dea2cb77e261",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1778869304,
         "narHash": "sha256-30sZNZoA1cqF5JNO9fVX+wgiQYjB7HJqqJ4ztCDeBZE=",
         "owner": "nixos",
@@ -438,7 +473,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1779508470,
         "narHash": "sha256-Ap9KJX+5xHIn3bPIpfNgT6MEXdAECECwo4/rmlQD74M=",
@@ -532,6 +567,7 @@
         "cyberdream-theme": "cyberdream-theme",
         "disko": "disko",
         "flake-utils": "flake-utils_2",
+        "fosrl-newt": "fosrl-newt",
         "home-manager": "home-manager",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
@@ -540,7 +576,7 @@
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_4",
         "pre-commit-hooks": "pre-commit-hooks",
         "sops-nix": "sops-nix"
       }
