@@ -14,8 +14,8 @@
     ./networking.nix
     ./services/jellyfin.nix
     (self.lib.mkModule ./services/newt.nix { })
-    ./services/proxy-sidecar.nix
-    ./services/seedbox.nix
+    ./services/proxy-sidecar
+    ./services/servarr.nix
     ./services/nextcloud
     ./services/paperless
     ./services/samba.nix

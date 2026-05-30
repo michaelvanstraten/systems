@@ -5,6 +5,13 @@
     format = "binary";
   };
 
+  sops.secrets."proxy/username".sopsFile = ./secrets.yaml;
+  sops.secrets."proxy/password".sopsFile = ./secrets.yaml;
+
+  sops.templates."soax-auth".content = ''
+    ${config.sops.placeholder."proxy/username"} ${config.sops.placeholder."proxy/password"}
+  '';
+
   containers.proxy-sidecar = {
     autoStart = true;
     privateNetwork = true;
@@ -17,6 +24,10 @@
         hostPath = config.sops.secrets."de-ber-wg-001.conf".path;
         isReadOnly = true;
       };
+      "/run/secrets/soax-auth" = {
+        hostPath = config.sops.templates."soax-auth".path;
+        isReadOnly = true;
+      };
     };
 
     config =
@@ -25,17 +36,26 @@
         gostConfig = (pkgs.formats.yaml { }).generate "gost.yaml" {
           services = [
             {
-              name = "socks5-proxy";
+              name = "socks5-mullvad";
               addr = ":1080";
               handler = {
                 type = "socks5";
-                chain = "chain-0";
+                chain = "chain-mullvad";
+              };
+              listener.type = "tcp";
+            }
+            {
+              name = "socks5-soax";
+              addr = ":1081";
+              handler = {
+                type = "socks5";
+                chain = "chain-soax";
               };
               listener.type = "tcp";
             }
             {
               name = "dns-proxy";
-              addr = ":53";
+              addr = "10.100.0.4:53";
               handler.type = "dns";
               listener = {
                 type = "dns";
@@ -51,7 +71,7 @@
           ];
           chains = [
             {
-              name = "chain-0";
+              name = "chain-mullvad";
               hops = [
                 {
                   name = "hop-0";
@@ -66,18 +86,47 @@
                 }
               ];
             }
+            {
+              name = "chain-soax";
+              hops = [
+                {
+                  name = "hop-0";
+                  nodes = [
+                    {
+                      name = "soax";
+                      addr = "proxy.soax.com:5000";
+                      connector = {
+                        type = "socks5";
+                        auth.file = "/run/credentials/gost.service/soax-auth";
+                      };
+                      dialer.type = "tcp";
+                    }
+                  ];
+                }
+              ];
+            }
           ];
         };
       in
       {
         system.stateVersion = "26.05";
 
-        networking.useNetworkd = true;
-        networking.useHostResolvConf = false;
-        # Mullvad DNS is only reachable once WireGuard is up; resolved picks
-        # this up from the networkd DNS= field so that it becomes available
-        # as soon as the wg-quick service brings the tunnel online.
-        networking.nameservers = [ "10.64.0.1" ];
+        networking = {
+          useNetworkd = true;
+          useHostResolvConf = false;
+          nameservers = [ "10.64.0.1" ];
+
+          wg-quick.interfaces."de-ber-wg-001".configFile = "/run/secrets/de-ber-wg-001.conf";
+
+          firewall = {
+            allowedTCPPorts = [
+              53
+              1080
+              1081
+            ];
+            allowedUDPPorts = [ 53 ];
+          };
+        };
 
         systemd.network.networks."10-eth0" = {
           matchConfig.Name = "eth0";
@@ -89,16 +138,8 @@
           };
         };
 
-        networking.wg-quick.interfaces."de-ber-wg-001".configFile = "/run/secrets/de-ber-wg-001.conf";
-
-        networking.firewall.allowedTCPPorts = [
-          53
-          1080
-        ];
-        networking.firewall.allowedUDPPorts = [ 53 ];
-
         systemd.services.gost = {
-          description = "GOST SOCKS5 + DNS proxy forwarding to Mullvad";
+          description = "GOST SOCKS5 (Mullvad + SOAX) + DNS proxy";
           after = [
             "network.target"
             "wg-quick-de-ber-wg-001.service"
@@ -110,6 +151,7 @@
             Restart = "on-failure";
             RestartSec = "5s";
             DynamicUser = true;
+            LoadCredential = "soax-auth:/run/secrets/soax-auth";
             AmbientCapabilities = "CAP_NET_BIND_SERVICE";
             CapabilityBoundingSet = "CAP_NET_BIND_SERVICE";
           };
