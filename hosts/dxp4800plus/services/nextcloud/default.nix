@@ -94,6 +94,19 @@ in
           secretFile = "/run/secrets/nextcloud-config";
           database.createLocally = true;
           configureRedis = true;
+          notify_push = {
+            enable = true;
+            bendDomainToLocalhost = true;
+          };
+          settings = {
+            overwriteprotocol = "https";
+            maintenance_window_start = 1;
+            default_phone_region = "DE";
+            serverid = 0;
+          };
+          phpOptions = {
+            "opcache.interned_strings_buffer" = "16";
+          };
           extraApps = {
             inherit (config.services.nextcloud.package.packages.apps)
               spreed
@@ -108,6 +121,10 @@ in
           };
           extraAppsEnable = true;
         };
+
+        services.nginx.virtualHosts.${fqdn}.extraConfig = ''
+          add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
+        '';
 
         services.postgresql.package = pkgs.postgresql_16;
       };
