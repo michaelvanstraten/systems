@@ -11,6 +11,7 @@ in
     self.sharedModules.all
     (self.lib.mkModule ./homebrew.nix { inherit primaryUser; })
     (self.lib.mkModule ./secrets.nix { })
+    ./services/postgres.nix
   ];
 
   environment.systemPackages = [
