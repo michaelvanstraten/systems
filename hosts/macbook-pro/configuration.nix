@@ -25,13 +25,12 @@ in
     pkgs.lima
     pkgs.k9s
     (pkgs.google-cloud-sdk.withExtraComponents (
-      with pkgs.google-cloud-sdk.components;
-      [
-        gke-gcloud-auth-plugin
-      ]
+      with pkgs.google-cloud-sdk.components; [ gke-gcloud-auth-plugin ]
     ))
     pkgs.gh
     pkgs.xz
+    pkgs.iina
+    pkgs.pangolin-cli
   ];
 
   home-manager = {
