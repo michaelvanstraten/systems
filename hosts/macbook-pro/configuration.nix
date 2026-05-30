@@ -20,7 +20,6 @@ in
     pkgs.python3
     pkgs.zed-editor
     pkgs.firefox
-    pkgs.bitwarden-desktop
     pkgs.rustup
     pkgs.lima
     pkgs.k9s

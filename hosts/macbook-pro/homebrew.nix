@@ -42,6 +42,7 @@
     "steam"
     "veracrypt"
     "whatsapp"
+    "bitwarden"
   ];
 
   homebrew.onActivation.cleanup = "uninstall";
