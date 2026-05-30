@@ -18,6 +18,7 @@
           prose-wrap = "always";
         };
       };
+      trim-trailing-whitespace.enable = true;
 
       # Security checks
       detect-private-keys.enable = true;
