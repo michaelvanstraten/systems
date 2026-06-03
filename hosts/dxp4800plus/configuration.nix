@@ -19,7 +19,6 @@
     ./services/nextcloud
     ./services/paperless
     ./services/samba.nix
-    (self.lib.mkModule ./vms { })
   ];
 
   system.stateVersion = "25.11";
