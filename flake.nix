@@ -66,6 +66,7 @@
       url = "github:homebrew/homebrew-core";
       flake = false;
     };
+
     homebrew-cask = {
       url = "github:homebrew/homebrew-cask";
       flake = false;
@@ -76,6 +77,11 @@
     microvm.url = "github:microvm-nix/microvm.nix";
 
     fosrl-newt.url = "github:fosrl/newt?ref=1.12.5";
+
+    private-patches = {
+      url = "github:michaelvanstraten/private-patches";
+      flake = false;
+    };
   };
 
   outputs =
