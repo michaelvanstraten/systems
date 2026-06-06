@@ -10,7 +10,7 @@
     self.nixosModules.all
     self.sharedModules.all
     ./networking.nix
-    ./services/pangolin.nix
+    (self.lib.mkModule ./services/pangolin.nix { })
     (self.lib.mkModule ./services/authentik { })
   ];
 

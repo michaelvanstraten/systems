@@ -510,6 +510,22 @@
         "type": "github"
       }
     },
+    "private-patches": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1780763640,
+        "narHash": "sha256-t04iJERhplJ95erJVsDjU8C5GaMWMFOXQEMhvcnncjQ=",
+        "owner": "michaelvanstraten",
+        "repo": "private-patches",
+        "rev": "285eb4bd4a05b59ab61c0167e339a252938dbe72",
+        "type": "github"
+      },
+      "original": {
+        "owner": "michaelvanstraten",
+        "repo": "private-patches",
+        "type": "github"
+      }
+    },
     "pyproject-build-systems": {
       "inputs": {
         "nixpkgs": [
@@ -577,6 +593,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_5",
         "pre-commit-hooks": "pre-commit-hooks",
+        "private-patches": "private-patches",
         "sops-nix": "sops-nix"
       }
     },
