@@ -36,6 +36,7 @@
     loader = {
       efi.canTouchEfiVariables = true;
       systemd-boot.enable = true;
+      systemd-boot.configurationLimit = 32;
     };
 
     zfs.extraPools = [ "tank" ];
@@ -45,7 +46,6 @@
   users.users.michael = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    initialPassword = "fsbEh&PzR9Eo";
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8OCYTaHjQy7Y7bRmxzVwNBgnD9P21UQPzVpJ3NKwVV"
     ];
