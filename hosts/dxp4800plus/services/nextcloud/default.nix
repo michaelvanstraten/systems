@@ -94,15 +94,16 @@ in
           secretFile = "/run/secrets/nextcloud-config";
           database.createLocally = true;
           configureRedis = true;
-          notify_push = {
-            enable = true;
-            bendDomainToLocalhost = true;
-          };
+          https = true;
+          # notify_push.enable = true;
           settings = {
             overwriteprotocol = "https";
             maintenance_window_start = 1;
             default_phone_region = "DE";
             serverid = 0;
+            trusted_proxies = [
+              "10.100.0.0/24"
+            ];
           };
           phpOptions = {
             "opcache.interned_strings_buffer" = "16";
@@ -120,6 +121,7 @@ in
             };
           };
           extraAppsEnable = true;
+          phpExtraExtensions = all: [ all.smbclient ];
         };
 
         services.nginx.virtualHosts.${fqdn}.extraConfig = ''
