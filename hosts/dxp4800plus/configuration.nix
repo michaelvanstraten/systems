@@ -39,6 +39,7 @@
     };
 
     zfs.extraPools = [ "tank" ];
+    zfs.forceImportRoot = false;
   };
 
   users.users.michael = {
