@@ -23,6 +23,11 @@ in
     localAddress = "${containerIp}/24";
 
     bindMounts = {
+      "/srv/homes" = {
+        hostPath = "/tank/homes";
+        isReadOnly = false;
+      };
+
       "/srv/media" = {
         hostPath = "/tank/media";
         isReadOnly = false;
@@ -61,10 +66,20 @@ in
             "fruit:aapl" = "yes";
             "server min protocol" = "SMB2";
           };
+
+          homes = {
+            "read only" = "no";
+            path = "/srv/homes/%U";
+            "valid users" = "%S";
+            browseable = "no";
+            "create mask" = "0700";
+            "directory mask" = "0700";
+          };
+
           Media = {
             path = "/srv/media";
             "valid users" = "@mediashare";
-            "read only" = "yes";
+            "read only" = "no";
             browseable = "yes";
             comment = "Media Library";
           };
