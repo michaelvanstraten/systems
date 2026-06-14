@@ -64,11 +64,11 @@
     "cyberdream-theme": {
       "flake": false,
       "locked": {
-        "lastModified": 1780041775,
-        "narHash": "sha256-gTohoc2uWEdeu7g3KpcmCPyEE0ttu2XTHGiEedD3qqM=",
+        "lastModified": 1781374255,
+        "narHash": "sha256-HLHIZwgNBxkBnFLu1N+zAyrSgavW2etDU7Qw3nEyOj0=",
         "owner": "scottmckendry",
         "repo": "cyberdream.nvim",
-        "rev": "4fbdeb7376faed87ead7c7c805c02092ca7bac01",
+        "rev": "4da5ba201fbfcd886fa9ab34daae9472f564c0d9",
         "type": "github"
       },
       "original": {
