@@ -300,11 +300,11 @@
     "moz-phab": {
       "flake": false,
       "locked": {
-        "lastModified": 1780539507,
-        "narHash": "sha256-YDOM3bnj7CvxnxzHL9fqdo1FY3Hbk/C8oQnCWlKeYDM=",
+        "lastModified": 1780942125,
+        "narHash": "sha256-CSUAiPRk+DCBS+KY4QbeeVmnNj6h09lbX0R9MepUVBc=",
         "owner": "mozilla-conduit",
         "repo": "review",
-        "rev": "20ea353c732ed45d068408f6bf9d158df8a3b91c",
+        "rev": "ac36b536fd7199fd40d24c38147d402062bb22a8",
         "type": "github"
       },
       "original": {
