@@ -82,11 +82,11 @@
     "cyberdream-theme": {
       "flake": false,
       "locked": {
-        "lastModified": 1781374255,
-        "narHash": "sha256-HLHIZwgNBxkBnFLu1N+zAyrSgavW2etDU7Qw3nEyOj0=",
+        "lastModified": 1782625698,
+        "narHash": "sha256-iLdBf66y5nZgSj3OJWjjv07vBOMMRxx0ncSH477eXIg=",
         "owner": "scottmckendry",
         "repo": "cyberdream.nvim",
-        "rev": "4da5ba201fbfcd886fa9ab34daae9472f564c0d9",
+        "rev": "b9cc88378b776f33d3ea77164716f37c3f13ef72",
         "type": "github"
       },
       "original": {
@@ -102,11 +102,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780290312,
-        "narHash": "sha256-eTAlX0CwgB84Ts3GaBd944A3DRXVMzgA0EqroZBISUo=",
+        "lastModified": 1781152676,
+        "narHash": "sha256-RxWs5ND31KzTG7wvMM+PMfUjyNpmIEr999lqNARaM5o=",
         "owner": "nix-community",
         "repo": "disko",
-        "rev": "115e5211780054d8a890b41f0b7734cafad54dfe",
+        "rev": "ff8702b4de27f72b4c78573dfb89ec74e36abdf1",
         "type": "github"
       },
       "original": {
@@ -251,11 +251,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780679734,
-        "narHash": "sha256-KmRNvpNOb7QEORa06bVgjW9kITcx0VhsI7w0vhmZyD8=",
+        "lastModified": 1782522538,
+        "narHash": "sha256-CvOaUvJ+mXlxU3m2cPWKcOAhtKETsPUYhq+Xa5ewBp4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "b2b7db486e06e098711dc291bb25db82850e1d16",
+        "rev": "8d8a6cc50ddc60748791a14ee1163c865ec57635",
         "type": "github"
       },
       "original": {
@@ -267,11 +267,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1782632399,
-        "narHash": "sha256-/YYC/WfNmE+CdRpUlv+z5bWNKxJu9KjCzOkpw2vEgwo=",
+        "lastModified": 1782647689,
+        "narHash": "sha256-cAG9rZdjdJSGdifIHF3f6IZHUiHfw95tmH7cMX5qt/M=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "d5b4c4651b3733ff4cacba1e24b18de0ca5e1f9b",
+        "rev": "42dcc765255892c492d73178475344fb1b0b4a52",
         "type": "github"
       },
       "original": {
@@ -283,11 +283,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1782640363,
-        "narHash": "sha256-LUNeVK3K1L4ymP4RgN4iqiGv9KqfBg4ds8bmlRzTFT8=",
+        "lastModified": 1782648361,
+        "narHash": "sha256-3QQi1K41lj1R9b5J9Vc6jGDV1a1Ph5MOqYdBwnv/m+Q=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "3334b76797dc468074a0083ca44d10a15d7913b9",
+        "rev": "89e8ff63aa790094f8ae4f61a95ab4f9d99e67b6",
         "type": "github"
       },
       "original": {
@@ -318,11 +318,11 @@
     "moz-phab": {
       "flake": false,
       "locked": {
-        "lastModified": 1780942125,
-        "narHash": "sha256-CSUAiPRk+DCBS+KY4QbeeVmnNj6h09lbX0R9MepUVBc=",
+        "lastModified": 1782404096,
+        "narHash": "sha256-QqWvwKkD0WL50E9NmgXmgxM8zATXdJTdK4l/CYk0lgk=",
         "owner": "mozilla-conduit",
         "repo": "review",
-        "rev": "ac36b536fd7199fd40d24c38147d402062bb22a8",
+        "rev": "c693f52492e502aa70d0b2bdbdba818e60dd80ea",
         "type": "github"
       },
       "original": {
@@ -491,11 +491,11 @@
     },
     "nixpkgs_5": {
       "locked": {
-        "lastModified": 1781577229,
-        "narHash": "sha256-lrp67w8AulE9Ks53n27I45ADSzbOCn4H+CNW1Ck8B+8=",
+        "lastModified": 1782467914,
+        "narHash": "sha256-pGvFkM8N0xEkIIXDe5YYfbEAvHrk4IxBrjB/x8OomhE=",
         "owner": "NixOs",
         "repo": "nixpkgs",
-        "rev": "567a49d1913ce81ac6e9582e3553dd90a955875f",
+        "rev": "e73de5be04e0eff4190a1432b946d469c794e7b4",
         "type": "github"
       },
       "original": {
@@ -621,11 +621,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780547341,
-        "narHash": "sha256-Gq8KNx5A7hBB3uGJaj6eQfLDIz5YdLu92gqBcvHvoUo=",
+        "lastModified": 1782165805,
+        "narHash": "sha256-478kKQBvK6SYTOdN2h9jhKJv94nbXRbFMfuL1WshErg=",
         "owner": "Mic92",
         "repo": "sops-nix",
-        "rev": "9ed65852b6257fbeae4355bc24ecfea307ca759a",
+        "rev": "56b24064fdcaedca53553b1a6d607fd23b613a24",
         "type": "github"
       },
       "original": {
