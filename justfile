@@ -16,4 +16,5 @@ deploy host target=host:
         --flake .#{{host}} \
         --target-host {{target}} \
         --build-host {{target}} \
+        --no-reexec \
         --sudo

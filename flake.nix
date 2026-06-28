@@ -114,7 +114,7 @@
             default = pkgs.mkShell {
               packages = pre-commit-check.enabledPackages ++ [
                 pkgs.just
-                (pkgs.nixos-rebuild-ng.overridePythonAttrs { doCheck = false; })
+                pkgs.nixos-rebuild
                 self.formatter.${system}
                 pkgs.sops
                 pkgs.ssh-to-age
