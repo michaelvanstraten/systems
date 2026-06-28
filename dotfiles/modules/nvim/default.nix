@@ -20,7 +20,7 @@
         pkgs.clang-tools
         pkgs.lua-language-server
         pkgs.nil
-        pkgs.basedpyright
+        pkgs.pyright
         pkgs.rust-analyzer
         pkgs.taplo
         pkgs.tinymist
