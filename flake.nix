@@ -78,6 +78,11 @@
       url = "github:michaelvanstraten/private-patches";
       flake = false;
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -137,8 +142,8 @@
         pkgs.writeShellScriptBin "pre-commit-run" script
       );
     }
-    // callOutputs {
+    |> nixpkgs.lib.recursiveUpdate (callOutputs {
       directory = ./.;
       inherit inputs;
-    };
+    });
 }

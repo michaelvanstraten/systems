@@ -22,7 +22,7 @@
       signing.signByDefault = true;
     };
     lazygit.enable = true;
-    neovim.enable = true;
+    nixvim.enable = true;
     tmux.enable = true;
     bash.enable = true;
     starship.enable = true;

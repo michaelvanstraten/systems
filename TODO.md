@@ -14,4 +14,3 @@
 - [ ] full disk encryption with remote unlock (key server or initrd SSH)
 - [ ] fix nextcloud push (when using `bendDomainToLocalhost` it assumes http and
       configures that)
-- [ ] Translate legacy Neovim config to Nix-based configuration.

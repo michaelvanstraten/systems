@@ -12,8 +12,10 @@
   nixpkgs.config.allowUnfree = true;
 
   programs = {
-    alacritty.enable = true;
-    alacritty.package = null;
+    alacritty = {
+      enable = true;
+      package = null;
+    };
     git = {
       enable = true;
       signing.key = "${config.home.homeDirectory}/.ssh/id_ed25519.pub";
@@ -22,7 +24,12 @@
     karabiner-elements.enable = false;
     lazygit.enable = true;
     mach.enable = true;
-    neovim.enable = true;
+    nixvim = {
+      enable = true;
+      plugins.typst-preview.enable = true;
+      plugins.lean.enable = true;
+      lsp.servers.tinymist.enable = true;
+    };
     tmux.enable = true;
     fish.enable = true;
     starship.enable = true;

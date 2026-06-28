@@ -1,49 +1,37 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  config = lib.mkIf config.programs.neovim.enable {
-    home.file.".config/nvim".source = ./.;
+{ nixvim, ... }: { lib, config, ... }: {
+  imports = [ nixvim.homeModules.nixvim ];
 
-    programs.neovim = {
-      defaultEditor = true;
+  programs.nixvim = {
+    defaultEditor = true;
 
-      extraPackages = [
-        pkgs.ripgrep # Needed for Telescope
-        pkgs.tree-sitter
-        pkgs.typst
+    imports = [
+      ./keymap.nix
+      ./options.nix
+      ./performance.nix
+      ./plugins/blink-cmp.nix
+      ./plugins/conform.nix
+      ./plugins/lazygit.nix
+      ./plugins/lsp.nix
+      ./plugins/mini.nix
+      ./plugins/nvim-tree.nix
+      ./plugins/telescope.nix
+      ./plugins/treesitter.nix
+    ];
 
-        # Language Servers
-        pkgs.clang-tools
-        pkgs.lua-language-server
-        pkgs.nil
-        pkgs.pyright
-        pkgs.rust-analyzer
-        pkgs.taplo
-        pkgs.tinymist
-        pkgs.websocat # used by typst-preview.nvim
-        pkgs.yaml-language-server
-        pkgs.typescript-language-server
-        pkgs.prettier
-
-        # Formatters & Linters
-        pkgs.harper # Grammar checker
-        pkgs.nixfmt
-        pkgs.nodejs # Needed for prettier
-        pkgs.prettier
-        pkgs.ruff
-        pkgs.shfmt
-        pkgs.stylua
-        pkgs.typstyle
-      ];
-
-      withPython3 = false;
-      withRuby = false;
+    colorschemes.cyberdream = {
+      enable = true;
+      settings = {
+        transparent = true;
+      };
     };
 
-    home.shellAliases.e = "nvim";
+    plugins.auto-save.enable = true;
+    plugins.fidget.enable = true;
+    plugins.gitsigns.enable = true;
+    plugins.neoconf.enable = true;
+    plugins.tmux-navigator.enable = true;
+    plugins.web-devicons.enable = true;
   };
+
+  home.shellAliases.e = lib.mkIf config.programs.nixvim.enable "nvim";
 }

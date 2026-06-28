@@ -1,7 +1,6 @@
 { nixpkgs, ... }@inputs:
 let
   inherit (nixpkgs) lib;
-  inherit (lib) fileset;
 
   mkModule =
     modulePath: overrides:
@@ -14,10 +13,32 @@ let
     in
     if isFlakeModule module then module (inputs // overrides) else module;
 
+  collectModulePaths =
+    dir:
+    let
+      entries = builtins.readDir dir;
+    in
+    if entries ? "default.nix" then
+      [ dir ]
+    else
+      entries
+      |> lib.attrsToList
+      |> lib.concatMap (
+        { name, value }:
+        let
+          path = dir + "/${name}";
+        in
+        if value == "directory" then
+          collectModulePaths path
+        else if lib.hasSuffix ".nix" name then
+          [ path ]
+        else
+          [ ]
+      );
+
   mkModules =
     dir:
-    fileset.fileFilter (file: file.hasExt "nix") dir
-    |> fileset.toList
+    collectModulePaths dir
     |> map (
       module:
       let
@@ -28,12 +49,9 @@ let
           |> lib.removePrefix (toString dir)
           |> lib.removePrefix "/";
       in
-      if lib.hasSuffix "default" moduleName then
-        {
-          ${lib.removeSuffix "/default" moduleName} = mkModule module { };
-        }
-      else
-        { ${moduleName} = mkModule module { }; }
+      {
+        ${moduleName} = mkModule module { };
+      }
     )
     |> (
       allModules:

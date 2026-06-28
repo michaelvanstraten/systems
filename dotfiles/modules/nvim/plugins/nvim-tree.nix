@@ -1,0 +1,65 @@
+{ lib, ... }:
+let
+  inherit (lib.nixvim.utils) mkRaw;
+in
+{
+  keymaps = [
+    {
+      key = "<leader>e";
+      action = mkRaw ''function() require("nvim-tree.api").tree.toggle() end'';
+      options.desc = "Toggle file explorer (NvimTree)";
+    }
+  ];
+
+  plugins.nvim-tree = {
+    enable = true;
+
+    settings = {
+      filters.custom = [ "^.git$" ];
+      filesystem_watchers.enable = false;
+      hijack_cursor = true;
+
+      on_attach = mkRaw ''
+        function(buffer)
+          local api = require("nvim-tree.api")
+
+          local function opts(desc)
+            return {
+              desc = "nvim-tree: " .. desc,
+              buffer = buffer,
+              noremap = true,
+              silent = true,
+              nowait = true,
+            }
+          end
+
+          api.config.mappings.default_on_attach(buffer)
+
+          vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
+        end
+      '';
+
+      renderer = {
+        icons.show = {
+          folder = false;
+          git = false;
+        };
+        indent_markers = {
+          enable = true;
+          inline_arrows = true;
+        };
+        root_folder_label = false;
+      };
+
+      update_focused_file.enable = true;
+
+      view = {
+        preserve_window_proportions = true;
+        width = {
+          max = "25%";
+          min = 30;
+        };
+      };
+    };
+  };
+}
