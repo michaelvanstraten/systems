@@ -1,7 +1,7 @@
 { config, lib, ... }:
 let
   containerIp = "10.100.0.5";
-  proxyIp = "10.100.0.4";
+  proxyIp = lib.head (lib.splitString "/" config.containers.proxy-sidecar.localAddress);
   proxyPort = 1080;
   cfg = config.containers.servarr.config;
 
@@ -60,10 +60,6 @@ in
   };
 
   containers.servarr = {
-    autoStart = true;
-    privateNetwork = true;
-
-    hostBridge = "br-containers";
     localAddress = "${containerIp}/24";
 
     config =
@@ -126,23 +122,7 @@ in
             flaresolverr.environment.PROXY_URL = residentialProxyUrl;
           };
 
-        systemd.network.networks."10-eth0" = {
-          matchConfig.Name = "eth0";
-          networkConfig = {
-            Address = "${containerIp}/24";
-            Gateway = "10.100.0.1";
-            DHCP = "no";
-            LinkLocalAddressing = "no";
-          };
-        };
-
-        networking = {
-          useNetworkd = true;
-          useHostResolvConf = false;
-          nameservers = [ proxyIp ];
-        };
-
-        system.stateVersion = "26.05";
+        networking.nameservers = [ proxyIp ];
       };
   };
 }

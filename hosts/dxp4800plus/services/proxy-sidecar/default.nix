@@ -1,4 +1,7 @@
-{ config, ... }:
+{ config, lib, ... }:
+let
+  containerIp = "10.100.0.4";
+in
 {
   sops.secrets."de-ber-wg-001.conf" = {
     sopsFile = ./de-ber-wg-001.conf;
@@ -13,11 +16,7 @@
   '';
 
   containers.proxy-sidecar = {
-    autoStart = true;
-    privateNetwork = true;
-
-    hostBridge = "br-containers";
-    localAddress = "10.100.0.4/24";
+    localAddress = "${containerIp}/24";
 
     bindMounts = {
       "/run/secrets/de-ber-wg-001.conf" = {
@@ -55,7 +54,7 @@
             }
             {
               name = "dns-proxy";
-              addr = "10.100.0.4:53";
+              addr = "${containerIp}:53";
               handler.type = "dns";
               listener = {
                 type = "dns";
@@ -109,11 +108,8 @@
         };
       in
       {
-        system.stateVersion = "26.05";
-
         networking = {
-          useNetworkd = true;
-          useHostResolvConf = false;
+          # Resolve through the VPN's DNS instead of the shared default.
           nameservers = [ "10.64.0.1" ];
 
           wg-quick.interfaces."de-ber-wg-001".configFile = "/run/secrets/de-ber-wg-001.conf";
@@ -125,16 +121,6 @@
               1081
             ];
             allowedUDPPorts = [ 53 ];
-          };
-        };
-
-        systemd.network.networks."10-eth0" = {
-          matchConfig.Name = "eth0";
-          networkConfig = {
-            Address = "10.100.0.4/24";
-            Gateway = "10.100.0.1";
-            DHCP = "no";
-            LinkLocalAddressing = "no";
           };
         };
 

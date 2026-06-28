@@ -1,4 +1,9 @@
-{ ... }:
+{ config, lib, ... }:
+let
+  inherit (lib) head splitString;
+
+  containerIp = name: head (splitString "/" config.containers.${name}.localAddress);
+in
 {
   networking.useDHCP = false;
 
@@ -67,14 +72,14 @@
           # Allow established/related connections everywhere
           ct state established,related accept
 
-          # ---- Seedbox container isolation (10.100.0.5) ----
+          # ---- Servarr container isolation ----
 
-          # Allow seedbox -> proxy-sidecar on SOCKS port 1080 and DNS
-          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.5 ip daddr 10.100.0.4 tcp dport { 53, 1080, 1081 } accept
-          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.5 ip daddr 10.100.0.4 udp dport 53 accept
+          # Allow servarr -> proxy-sidecar on SOCKS port 1080 and DNS
+          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "servarr"} ip daddr ${containerIp "proxy-sidecar"} tcp dport { 53, 1080, 1081 } accept
+          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "servarr"} ip daddr ${containerIp "proxy-sidecar"} udp dport 53 accept
 
           # Block all other outbound traffic from qbittorrent (internet and east/west)
-          iifname "br-containers" ip saddr 10.100.0.5 drop
+          iifname "br-containers" ip saddr ${containerIp "servarr"} drop
 
           # ---- Egress: bridges -> WAN ----
 
@@ -86,20 +91,20 @@
 
           # ---- East/West Policy (container <-> container) ----
 
-          # Allow newt (10.100.0.2) -> jellyfin (10.100.0.3)
-          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.3 accept
+          # Allow newt -> jellyfin
+          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "jellyfin"} accept
 
-          # Allow newt (10.100.0.2) -> seedbox (10.100.0.5)
-          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.5 accept
+          # Allow newt -> servarr
+          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "servarr"} accept
 
-          # Allow newt (10.100.0.2) -> paperless (10.100.0.6)
-          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.6 accept
+          # Allow newt -> paperless
+          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "paperless"} accept
 
-          # Allow newt (10.100.0.2) -> samba (10.100.0.7)
-          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.7 accept
+          # Allow newt -> samba
+          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "samba"} accept
 
-          # Allow newt (10.100.0.2) -> nextcloud (10.100.0.8)
-          iifname "br-containers" oifname "br-containers" ip saddr 10.100.0.2 ip daddr 10.100.0.8 accept
+          # Allow newt -> nextcloud
+          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "nextcloud"} accept
 
           # ---- Default deny: bridge-local & cross-bridge ----
 

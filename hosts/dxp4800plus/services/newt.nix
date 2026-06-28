@@ -17,10 +17,6 @@
   };
 
   containers.newt = {
-    autoStart = true;
-    privateNetwork = true;
-
-    hostBridge = "br-containers";
     localAddress = "10.100.0.2/24";
 
     bindMounts = {
@@ -40,27 +36,6 @@
         environmentFile = "/run/secrets/newt.env";
         blueprint = config.services.newt.blueprint;
       };
-
-      networking = {
-        useNetworkd = true;
-        useHostResolvConf = false;
-        nameservers = [
-          "8.8.8.8"
-          "1.1.1.1"
-        ];
-      };
-
-      systemd.network.networks."10-eth0" = {
-        matchConfig.Name = "eth0";
-        networkConfig = {
-          Address = "10.100.0.2/24";
-          Gateway = "10.100.0.1";
-          DHCP = "no";
-          LinkLocalAddressing = "no";
-        };
-      };
-
-      system.stateVersion = "26.05";
     };
   };
 

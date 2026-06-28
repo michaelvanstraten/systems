@@ -29,10 +29,6 @@ in
   };
 
   containers.paperless = {
-    autoStart = true;
-    privateNetwork = true;
-
-    hostBridge = "br-containers";
     localAddress = "${containerIp}/24";
 
     bindMounts = {
@@ -50,25 +46,6 @@ in
     config =
       { pkgs, ... }:
       {
-        system.stateVersion = "26.05";
-
-        networking.useNetworkd = true;
-        networking.useHostResolvConf = false;
-        networking.nameservers = [
-          "8.8.8.8"
-          "1.1.1.1"
-        ];
-
-        systemd.network.networks."10-eth0" = {
-          matchConfig.Name = "eth0";
-          networkConfig = {
-            Address = "${containerIp}/24";
-            Gateway = "10.100.0.1";
-            DHCP = "no";
-            LinkLocalAddressing = "no";
-          };
-        };
-
         networking.firewall.allowedTCPPorts = [ paperlessPort ];
 
         services.paperless = {

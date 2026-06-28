@@ -30,10 +30,6 @@ in
   };
 
   containers.nextcloud = {
-    autoStart = true;
-    privateNetwork = true;
-
-    hostBridge = "br-containers";
     localAddress = "${containerIp}/24";
 
     bindMounts = {
@@ -60,28 +56,7 @@ in
     config =
       { config, pkgs, ... }:
       {
-        system.stateVersion = "26.05";
-
-        networking = {
-          useNetworkd = true;
-          useHostResolvConf = false;
-          nameservers = [
-            "8.8.8.8"
-            "1.1.1.1"
-          ];
-
-          firewall.allowedTCPPorts = [ nextcloudPort ];
-        };
-
-        systemd.network.networks."10-eth0" = {
-          matchConfig.Name = "eth0";
-          networkConfig = {
-            Address = "${containerIp}/24";
-            Gateway = "10.100.0.1";
-            DHCP = "no";
-            LinkLocalAddressing = "no";
-          };
-        };
+        networking.firewall.allowedTCPPorts = [ nextcloudPort ];
 
         services.nextcloud = {
           enable = true;

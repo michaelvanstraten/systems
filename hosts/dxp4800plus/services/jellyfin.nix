@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 let
   containerIp = "10.100.0.3";
 in
@@ -20,10 +20,6 @@ in
   };
 
   containers.jellyfin = {
-    autoStart = true;
-    privateNetwork = true;
-
-    hostBridge = "br-containers";
     localAddress = "${containerIp}/24";
 
     allowedDevices = [
@@ -93,27 +89,6 @@ in
       environment.sessionVariables = {
         LIBVA_DRIVER_NAME = "iHD";
       };
-
-      networking = {
-        useNetworkd = true;
-        useHostResolvConf = false;
-        nameservers = [
-          "8.8.8.8"
-          "1.1.1.1"
-        ];
-      };
-
-      systemd.network.networks."10-eth0" = {
-        matchConfig.Name = "eth0";
-        networkConfig = {
-          Address = "${containerIp}/24";
-          Gateway = "10.100.0.1";
-          DHCP = "no";
-          LinkLocalAddressing = "no";
-        };
-      };
-
-      system.stateVersion = "26.05";
     };
   };
 }
