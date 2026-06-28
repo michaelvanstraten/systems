@@ -26,7 +26,7 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
     nix-darwin = {
-      url = "github:michaelvanstraten/nix-darwin?ref=make-state-dir-use-nix-attr-name";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -72,7 +72,7 @@
       flake = false;
     };
 
-    authentik-nix.url = "github:nix-community/authentik-nix";
+    authentik-nix.url = "github:nix-community/authentik-nix?ref=version/2026.2.3";
 
     microvm.url = "github:microvm-nix/microvm.nix";
 
