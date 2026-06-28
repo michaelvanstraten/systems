@@ -70,6 +70,7 @@ in
   darwinModules = mkModules ./darwin;
   nixosModules = mkModules ./nixos;
   sharedModules = mkModules ./shared;
+  homeModules = mkModules ./dotfiles;
 
   lib = {
     inherit mkModule mkModules;
