@@ -6,16 +6,7 @@
     format = "dotenv";
   };
 
-  # sops.secrets."authentik/ldap-env" = {
-  #   sopsFile = ./ldap.env;
-  #   format = "dotenv";
-  # };
-
   containers.authentik = {
-    autoStart = true;
-    privateNetwork = true;
-
-    hostBridge = "br-containers";
     localAddress = "10.100.0.3/24";
 
     bindMounts = {
@@ -24,11 +15,6 @@
         isReadOnly = true;
       };
 
-      # "/run/secrets/authentik/ldap-env" = {
-      #   hostPath = config.sops.secrets."authentik/ldap-env".path;
-      #   isReadOnly = true;
-      # };
-      #
       "/srv/authentik" = {
         hostPath = "/srv/authentik";
         isReadOnly = false;
@@ -47,33 +33,13 @@
           authentik-nix.nixosModules.default
         ];
 
-        system.stateVersion = "26.05";
-
         networking = {
-          useNetworkd = true;
-          useHostResolvConf = false;
-          nameservers = [
-            "8.8.8.8"
-            "1.1.1.1"
-          ];
           hosts = {
             "10.100.0.2" = [ "sso.vanstraten.cloud" ];
           };
           firewall.allowedTCPPorts = [
             9000
-            # 3389
-            # 6636
           ];
-        };
-
-        systemd.network.networks."10-eth0" = {
-          matchConfig.Name = "eth0";
-          networkConfig = {
-            Address = "10.100.0.3/24";
-            Gateway = "10.100.0.1";
-            DHCP = "no";
-            LinkLocalAddressing = "no";
-          };
         };
 
         services = {
@@ -92,11 +58,6 @@
               storage.media.file.path = "/srv/authentik";
             };
           };
-          #
-          # authentik-ldap = {
-          #   enable = true;
-          #   environmentFile = "/run/secrets/authentik/ldap-env";
-          # };
         };
       };
   };
