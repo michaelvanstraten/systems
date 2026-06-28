@@ -15,10 +15,6 @@
   };
 
   inputs = {
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
-
     nixpkgs = {
       url = "github:NixOs/nixpkgs?ref=nixos-unstable";
     };
@@ -87,49 +83,60 @@
   outputs =
     {
       self,
-      flake-utils,
       nixpkgs,
       pre-commit-hooks,
       sops-nix,
       ...
     }@inputs:
     let
-      inherit ((import ./lib/outputs.nix inputs).lib) callOutputs;
+      inherit ((import ./lib/outputs.nix inputs).lib) forAllSystems callOutputs;
     in
-    flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-      in
-      {
-        # Checks pre-commit-hooks
-        checks = import ./checks { inherit pre-commit-hooks system; };
+    {
+      # Checks pre-commit-hooks
+      checks = forAllSystems (
+        pkgs:
+        import ./checks {
+          inherit
+            pre-commit-hooks
+            ;
+          inherit (pkgs.stdenv) system;
+        }
+      );
 
-        # Development shell with necessary tools
-        devShells =
-          let
-            pre-commit-check = self.checks.${system}.pre-commit-check;
-          in
-          {
-            default = pkgs.mkShell {
-              packages = pre-commit-check.enabledPackages ++ [
-                pkgs.just
-                pkgs.nixos-rebuild
-                self.formatter.${system}
-                pkgs.sops
-                pkgs.ssh-to-age
-                pkgs.gnupg
-                pkgs.yubikey-manager
-                pkgs.yubikey-personalization
-              ];
-              inherit (pre-commit-check) shellHook;
-            };
+      # Development shell with necessary tools
+      devShells = forAllSystems (
+        pkgs:
+        let
+          pre-commit-check = self.checks.${pkgs.stdenv.system}.pre-commit-check;
+        in
+        {
+          default = pkgs.mkShell {
+            packages = pre-commit-check.enabledPackages ++ [
+              pkgs.just
+              pkgs.nixos-rebuild
+              pkgs.sops
+              pkgs.ssh-to-age
+              pkgs.gnupg
+              pkgs.yubikey-manager
+              pkgs.yubikey-personalization
+            ];
+            inherit (pre-commit-check) shellHook;
           };
+        }
+      );
 
-        # Formatter for this flake
-        formatter = pkgs.nixfmt;
-      }
-    )
+      # Formatter for this flake
+      formatter = forAllSystems (
+        pkgs:
+        let
+          inherit (self.checks.${pkgs.stdenv.system}.pre-commit-check.config) package configFile;
+          script = ''
+            ${pkgs.lib.getExe package} run --all-files --config ${configFile}
+          '';
+        in
+        pkgs.writeShellScriptBin "pre-commit-run" script
+      );
+    }
     // callOutputs {
       directory = ./.;
       inherit inputs;
