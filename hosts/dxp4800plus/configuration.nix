@@ -16,6 +16,8 @@
     (self.lib.mkModule ./services/newt.nix { })
     ./services/proxy-sidecar
     ./services/servarr.nix
+    ./services/monitoring.nix
+    ./services/disk-monitoring.nix
     ./services/nextcloud
     ./services/paperless
     ./services/samba.nix
@@ -77,6 +79,17 @@
       "big-parallel"
     ];
   };
+
+  services.alloy =
+    let
+      inherit (pkgs.lib) head splitString;
+      containerIp = head (splitString "/" config.containers."monitoring".localAddress);
+    in
+    {
+      enable = true;
+      lokiUrl = "http://${containerIp}:3100/loki/api/v1/push";
+      prometheusUrl = "http://${containerIp}:3200/api/v1/write";
+    };
 
   home-manager = {
     useGlobalPkgs = true;

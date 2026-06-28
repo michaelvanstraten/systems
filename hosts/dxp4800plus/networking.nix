@@ -106,6 +106,9 @@ in
           # Allow newt -> nextcloud
           iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "nextcloud"} accept
 
+          # Allow newt -> monitoring
+          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "monitoring"} accept
+
           # ---- Default deny: bridge-local & cross-bridge ----
 
           # Block any other container-to-container traffic on the bridge
