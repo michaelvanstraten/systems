@@ -40,6 +40,7 @@ in
         taplo = fmt pkgs.taplo;
         typstyle = fmt pkgs.typstyle;
         meson = fmt pkgs.meson;
+        packer_fmt = fmt pkgs.packer;
       };
 
       formatters_by_ft = {
@@ -49,19 +50,27 @@ in
         json = [ "prettier" ];
         lua = [ "stylua" ];
         markdown = [ "prettier" ];
+        meson = [ "meson" ];
         nix = [ "nixfmt" ];
         python = [ "ruff_format" ];
         rust = [ "rustfmt" ];
         sh = [ "shfmt" ];
+        svg = [ "prettier" ];
         swift = [ "swift_format" ];
         tex = [ "latexindent" ];
         toml = [ "taplo" ];
+        hcl = [ "packer_fmt" ];
         typescript = [ "prettier" ];
         typescriptreact = [ "prettier" ];
         typst = [ "typstyle" ];
         yaml = [ "prettier" ];
-        meson = [ "meson" ];
       };
     };
   };
+
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "packer"
+    ];
 }
