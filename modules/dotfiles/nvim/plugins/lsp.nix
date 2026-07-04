@@ -32,6 +32,7 @@
       rust_analyzer.enable = true;
       taplo.enable = true;
       yamlls.enable = true;
+      ts_ls.enable = true;
     };
   };
 }
