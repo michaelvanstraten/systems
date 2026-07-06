@@ -43,6 +43,7 @@
     "veracrypt"
     "whatsapp"
     "bitwarden"
+    "tailscale-app"
   ];
 
   homebrew.onActivation.cleanup = "uninstall";
