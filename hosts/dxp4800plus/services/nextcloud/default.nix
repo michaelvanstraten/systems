@@ -58,6 +58,11 @@ in
       {
         networking.firewall.allowedTCPPorts = [ nextcloudPort ];
 
+        environment.systemPackages = [
+          pkgs.convmv
+          pkgs.trash-cli
+        ];
+
         services.nextcloud = {
           enable = true;
           package = pkgs.nextcloud33;
