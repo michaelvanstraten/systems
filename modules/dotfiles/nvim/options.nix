@@ -56,6 +56,8 @@ in
     };
     pattern = {
       "moz.build" = "python";
+      ".*/templates/.*%.ya?ml" = "helm";
+      "values.*%.yaml" = "yaml.helm-values";
     };
   };
 
