@@ -29,23 +29,25 @@ in
       formatters = {
         clang-format = fmt pkgs.clang-tools;
         fish_indent = fmt' pkgs.fish "fish_indent";
-        prettier = fmt pkgs.prettier;
-        stylua = fmt pkgs.stylua;
+        latexindent = fmt pkgs.texlivePackages.latexindent;
+        meson = fmt pkgs.meson;
         nixfmt = fmt pkgs.nixfmt;
+        packer_fmt = fmt pkgs.packer;
+        prettier = fmt pkgs.prettier;
         ruff_format = fmt pkgs.ruff;
         rustfmt = fmt pkgs.rustfmt;
         shfmt = fmt pkgs.shfmt;
+        stylua = fmt pkgs.stylua;
         swift_format = fmt pkgs.swift-format;
-        latexindent = fmt pkgs.texlivePackages.latexindent;
         taplo = fmt pkgs.taplo;
+        terraform_fmt = fmt pkgs.opentofu;
         typstyle = fmt pkgs.typstyle;
-        meson = fmt pkgs.meson;
-        packer_fmt = fmt pkgs.packer;
       };
 
       formatters_by_ft = {
         cpp = [ "clang-format" ];
         fish = [ "fish_indent" ];
+        hcl = [ "packer_fmt" ];
         javascript = [ "prettier" ];
         json = [ "prettier" ];
         lua = [ "stylua" ];
@@ -57,9 +59,9 @@ in
         sh = [ "shfmt" ];
         svg = [ "prettier" ];
         swift = [ "swift_format" ];
+        terraform = [ "terraform_fmt" ];
         tex = [ "latexindent" ];
         toml = [ "taplo" ];
-        hcl = [ "packer_fmt" ];
         typescript = [ "prettier" ];
         typescriptreact = [ "prettier" ];
         typst = [ "typstyle" ];
