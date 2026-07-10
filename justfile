@@ -2,12 +2,12 @@ default:
     @just --list
 
 # Build and switch system configuration for current host
-switch:
+switch host=`hostname`:
     #!/usr/bin/env bash
     if [[ "$OSTYPE" == "darwin"* ]]; then
-        sudo darwin-rebuild switch --flake .
+        sudo darwin-rebuild switch --flake .#{{host}}
     else
-        sudo nixos-rebuild switch --flake .
+        sudo nixos-rebuild switch --flake .#{{host}}
     fi
 
 # Install system on remote host via SSH
