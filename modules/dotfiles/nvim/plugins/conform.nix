@@ -38,7 +38,6 @@ in
         rustfmt = fmt pkgs.rustfmt;
         shfmt = fmt pkgs.shfmt;
         stylua = fmt pkgs.stylua;
-        swift_format = fmt pkgs.swift-format;
         taplo = fmt pkgs.taplo;
         terraform_fmt = fmt pkgs.opentofu;
         typstyle = fmt pkgs.typstyle;
@@ -58,7 +57,6 @@ in
         rust = [ "rustfmt" ];
         sh = [ "shfmt" ];
         svg = [ "prettier" ];
-        swift = [ "swift_format" ];
         terraform = [ "terraform_fmt" ];
         tex = [ "latexindent" ];
         toml = [ "taplo" ];
