@@ -44,6 +44,7 @@
     "whatsapp"
     "bitwarden"
     "tailscale-app"
+    "inkscape"
   ];
 
   homebrew.onActivation.cleanup = "uninstall";
