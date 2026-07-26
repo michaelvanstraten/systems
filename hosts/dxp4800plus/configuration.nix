@@ -11,10 +11,11 @@
     self.nixosModules.all
     self.sharedModules.all
     sops-nix.nixosModules.sops
+    ./airvpn.nix
     ./networking.nix
     ./services/jellyfin.nix
     (self.lib.mkModule ./services/newt.nix { })
-    ./services/proxy-sidecar
+    ./services/proxy-sidecar.nix
     ./services/servarr.nix
     ./services/monitoring.nix
     ./services/disk-monitoring.nix

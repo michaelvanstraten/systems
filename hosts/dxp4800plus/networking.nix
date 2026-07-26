@@ -1,8 +1,11 @@
 { config, lib, ... }:
 let
   inherit (lib) head splitString;
-
   containerIp = name: head (splitString "/" config.containers.${name}.localAddress);
+  servarrIp = containerIp "servarr";
+  proxyIp = containerIp "proxy-sidecar";
+  residentialProxyPort = 1080;
+  vpnInterface = "airvpn";
 in
 {
   networking.useDHCP = false;
@@ -43,12 +46,14 @@ in
         matchConfig.Name = "br-containers";
         address = [ "10.100.0.1/24" ];
         bridgeConfig = { };
+        linkConfig.RequiredForOnline = false;
       };
 
       "30-br-vms" = {
         matchConfig.Name = "br-vms";
         address = [ "10.101.0.1/24" ];
         bridgeConfig = { };
+        linkConfig.RequiredForOnline = false;
       };
     };
   };
@@ -72,14 +77,22 @@ in
           # Allow established/related connections everywhere
           ct state established,related accept
 
-          # ---- Servarr container isolation ----
+          # ---- Servarr container isolation  ----
 
-          # Allow servarr -> proxy-sidecar on SOCKS port 1080 and DNS
-          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "servarr"} ip daddr ${containerIp "proxy-sidecar"} tcp dport { 53, 1080, 1081 } accept
-          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "servarr"} ip daddr ${containerIp "proxy-sidecar"} udp dport 53 accept
+          # Allow servarr -> residential SOCKS5 proxy on the sidecar
+          iifname "br-containers" oifname "br-containers" ip saddr ${servarrIp} ip daddr ${proxyIp} tcp dport ${toString residentialProxyPort} accept
 
-          # Block all other outbound traffic from qbittorrent (internet and east/west)
-          iifname "br-containers" ip saddr ${containerIp "servarr"} drop
+          # Allow servarr -> internet, but ONLY through the WireGuard tunnel.
+          iifname "br-containers" oifname "${vpnInterface}" ip saddr ${servarrIp} accept
+
+          # Allow server -> jellyfin
+          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "servarr"} ip daddr ${containerIp "jellyfin"} accept
+
+          # Allow AirVPN's forwarded port to qBittorrent.
+          iifname "${vpnInterface}" oifname "br-containers" ct status dnat accept
+
+          # Fail closed: drop anything else leaving the servarr container
+          iifname "br-containers" ip saddr ${servarrIp} drop
 
           # ---- Egress: bridges -> WAN ----
 
@@ -88,26 +101,6 @@ in
 
           # Allow VMs to reach the internet
           iifname "br-vms" oifname "enp6s0" accept
-
-          # ---- East/West Policy (container <-> container) ----
-
-          # Allow newt -> jellyfin
-          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "jellyfin"} accept
-
-          # Allow newt -> servarr
-          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "servarr"} accept
-
-          # Allow newt -> paperless
-          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "paperless"} accept
-
-          # Allow newt -> samba
-          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "samba"} accept
-
-          # Allow newt -> nextcloud
-          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "nextcloud"} accept
-
-          # Allow newt -> monitoring
-          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "newt"} ip daddr ${containerIp "monitoring"} accept
 
           # ---- Default deny: bridge-local & cross-bridge ----
 
