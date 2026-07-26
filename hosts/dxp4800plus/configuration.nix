@@ -14,6 +14,7 @@
     ./airvpn.nix
     ./networking.nix
     ./services/jellyfin.nix
+    ./services/navidrome.nix
     (self.lib.mkModule ./services/newt.nix { })
     ./services/proxy-sidecar.nix
     ./services/servarr.nix
