@@ -72,6 +72,8 @@
     };
 
     zfs.autoScrub.enable = true;
+
+    fwupd.enable = true;
   };
 
   nix.remoteBuilder = {
