@@ -28,7 +28,11 @@
       enable = true;
       plugins.typst-preview.enable = true;
       plugins.lean.enable = true;
-      lsp.servers.tinymist.enable = true;
+      lsp.servers = {
+        tinymist.enable = true;
+        helm_ls.enable = true;
+        terraform_ls.enable = true;
+      };
     };
     tmux.enable = true;
     fish.enable = true;
