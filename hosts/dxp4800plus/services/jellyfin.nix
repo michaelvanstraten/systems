@@ -74,9 +74,12 @@ in
         pkgs.libva-utils
       ];
 
+      users.groups.media.gid = 1500;
+
       users.users.jellyfin.extraGroups = [
         "video"
         "render"
+        "media"
       ];
 
       services.jellyfin = {

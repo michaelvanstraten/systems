@@ -1,6 +1,16 @@
-{ ... }:
+{ lib, ... }:
 let
   containerIp = "10.100.0.7";
+
+  sambaUsers = {
+    michael = [
+      "timemachine"
+      "media"
+    ];
+    uwe = [
+      "timemachine"
+    ];
+  };
 in
 {
   services.newt.blueprint = {
@@ -43,16 +53,31 @@ in
     config = {
       users.groups = {
         timemachine = { };
-        mediashare = { };
+        media.gid = 1500;
       };
 
-      users.users.michael = {
+      users.users = lib.mapAttrs (_: extraGroups: {
         isNormalUser = true;
-        extraGroups = [
-          "timemachine"
-          "mediashare"
-        ];
-      };
+        inherit extraGroups;
+      }) sambaUsers;
+
+      systemd.tmpfiles.settings."10-samba-user-dirs" = lib.concatMapAttrs (
+        user: extraGroups:
+        {
+          "/srv/homes/${user}".d = {
+            inherit user;
+            group = "users";
+            mode = "0700";
+          };
+        }
+        // lib.optionalAttrs (lib.elem "timemachine" extraGroups) {
+          "/srv/timemachine/${user}".d = {
+            inherit user;
+            group = "timemachine";
+            mode = "0700";
+          };
+        }
+      ) sambaUsers;
 
       services.samba = {
         enable = true;
@@ -61,6 +86,7 @@ in
           global = {
             "fruit:aapl" = "yes";
             "server min protocol" = "SMB2";
+            "host msdfs" = "no";
           };
 
           homes = {
@@ -74,10 +100,15 @@ in
 
           Media = {
             path = "/srv/media";
-            "valid users" = "@mediashare";
+            "valid users" = "@media";
             "read only" = "no";
             browseable = "yes";
             comment = "Media Library";
+            "force group" = "media";
+            "create mask" = "0664";
+            "force create mode" = "0664";
+            "directory mask" = "2775";
+            "force directory mode" = "2775";
           };
 
           "Time Machine" = {
