@@ -4,10 +4,31 @@ let
   containerIp = name: head (splitString "/" config.containers.${name}.localAddress);
   servarrIp = containerIp "servarr";
   proxyIp = containerIp "proxy-sidecar";
+  jellyfinIp = containerIp "jellyfin";
+  jellyfinPort = config.services.newt.blueprint.private-resources.jellyfin.destination-port;
   residentialProxyPort = 1080;
-  vpnInterface = "airvpn";
+  vpnInterface = config.networking.airvpn.interface;
+  bridgePort = name: "vb-${name}";
+  servarrPort = bridgePort "servarr";
 in
 {
+  assertions = [
+    {
+      assertion = config.containers.servarr.hostBridge == "br-containers";
+      message = ''
+        The servarr anti-spoof filter hooks the bridge family on ${servarrPort} and
+        silently stops applying unless the container is attached to br-containers.
+      '';
+    }
+    {
+      assertion = builtins.stringLength servarrPort <= 15;
+      message = ''
+        systemd-nspawn shortens host-side veth names longer than 15 characters, which
+        would leave ${servarrPort} unmatched by the servarr anti-spoof filter.
+      '';
+    }
+  ];
+
   networking.useDHCP = false;
 
   boot.kernelModules = [ "br_netfilter" ];
@@ -47,6 +68,10 @@ in
         address = [ "10.100.0.1/24" ];
         bridgeConfig = { };
         linkConfig.RequiredForOnline = false;
+        networkConfig = {
+          ConfigureWithoutCarrier = true;
+          IgnoreCarrierLoss = true;
+        };
       };
 
       "30-br-vms" = {
@@ -54,6 +79,10 @@ in
         address = [ "10.101.0.1/24" ];
         bridgeConfig = { };
         linkConfig.RequiredForOnline = false;
+        networkConfig = {
+          ConfigureWithoutCarrier = true;
+          IgnoreCarrierLoss = true;
+        };
       };
     };
   };
@@ -69,52 +98,60 @@ in
 
   networking.nftables = {
     enable = true;
-    ruleset = ''
-      table inet filter {
+    tables."servarr-antispoof" = {
+      family = "bridge";
+      content = ''
+        chain prerouting {
+          type filter hook prerouting priority filter; policy accept;
+
+          iifname "${servarrPort}" ip saddr ${servarrIp} accept
+          iifname "${servarrPort}" arp saddr ip ${servarrIp} accept
+
+          iifname "${servarrPort}" drop
+        }
+      '';
+    };
+
+    tables."filter" = {
+      family = "inet";
+      content = ''
+        chain servarr-egress {
+          oifname "${vpnInterface}" accept
+
+          # Residential SOCKS5 proxy on the sidecar.
+          ip daddr ${proxyIp} tcp dport ${toString residentialProxyPort} accept
+
+          # Library refresh notifications to Jellyfin.
+          ip daddr ${jellyfinIp} tcp dport ${toString jellyfinPort} accept
+
+          drop
+        }
+
         chain forward {
           type filter hook forward priority 0; policy drop;
 
-          # Allow established/related connections everywhere
+          # ---- Servarr container isolation ----
+          iifname "br-containers" ip saddr ${servarrIp} jump servarr-egress
+          iifname "br-containers" meta nfproto ipv6 drop
+
           ct state established,related accept
 
-          # ---- Servarr container isolation  ----
-
-          # Allow servarr -> residential SOCKS5 proxy on the sidecar
-          iifname "br-containers" oifname "br-containers" ip saddr ${servarrIp} ip daddr ${proxyIp} tcp dport ${toString residentialProxyPort} accept
-
-          # Allow servarr -> internet, but ONLY through the WireGuard tunnel.
-          iifname "br-containers" oifname "${vpnInterface}" ip saddr ${servarrIp} accept
-
-          # Allow server -> jellyfin
-          iifname "br-containers" oifname "br-containers" ip saddr ${containerIp "servarr"} ip daddr ${containerIp "jellyfin"} accept
-
-          # Allow AirVPN's forwarded port to qBittorrent.
-          iifname "${vpnInterface}" oifname "br-containers" ct status dnat accept
-
-          # Fail closed: drop anything else leaving the servarr container
-          iifname "br-containers" ip saddr ${servarrIp} drop
+          iifname "${vpnInterface}" oifname "br-containers" ip daddr ${servarrIp} ct status dnat accept
 
           # ---- Egress: bridges -> WAN ----
 
-          # Allow containers to reach the internet
           iifname "br-containers" oifname "enp6s0" accept
-
-          # Allow VMs to reach the internet
           iifname "br-vms" oifname "enp6s0" accept
+          iifname "tailscale0" oifname "enp6s0" accept
 
           # ---- Default deny: bridge-local & cross-bridge ----
 
-          # Block any other container-to-container traffic on the bridge
           iifname "br-containers" oifname "br-containers" drop
-
-          # Block any other VM-to-VM traffic on the bridge
           iifname "br-vms" oifname "br-vms" drop
-
-          # Block any other cross-bridge traffic in both directions
           iifname "br-containers" oifname "br-vms" drop
           iifname "br-vms" oifname "br-containers" drop
         }
-      }
-    '';
+      '';
+    };
   };
 }

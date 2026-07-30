@@ -3,8 +3,7 @@ let
   hostConfig = config;
   containerIp = "10.100.0.5";
   cfg = config.containers.servarr.config;
-  tunnelDns = "10.128.0.1";
-  torrentPort = 50475;
+  vpn = config.networking.airvpn;
   mediaDir = "/srv/media";
   downloadDir = "${mediaDir}/downloads";
   mediaGid = 1500;
@@ -19,7 +18,7 @@ in
       Session\DefaultSavePath=${downloadDir}
       Session\TempPath=${downloadDir}/incomplete
       Session\TempPathEnabled=true
-      Session\Port=${toString torrentPort}
+      Session\Port=${toString vpn.forwardedPort}
       Session\UseRandomPort=false
       Session\QueueingSystemEnabled=true
       Session\MaxActiveDownloads=5
@@ -217,7 +216,7 @@ in
         );
 
         networking = {
-          nameservers = [ tunnelDns ];
+          nameservers = [ vpn.dns ];
 
           hosts = {
             ${lib.head (lib.splitString "/" hostConfig.containers.jellyfin.localAddress)} = [
@@ -226,8 +225,8 @@ in
           };
 
           firewall = {
-            allowedTCPPorts = [ torrentPort ];
-            allowedUDPPorts = [ torrentPort ];
+            allowedTCPPorts = [ vpn.forwardedPort ];
+            allowedUDPPorts = [ vpn.forwardedPort ];
           };
         };
       };
