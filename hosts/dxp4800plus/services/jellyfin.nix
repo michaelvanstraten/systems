@@ -15,6 +15,7 @@ in
         full-domain = "jellyfin.vanstraten.cloud";
         ssl = true;
         scheme = "http";
+        users = [ "uwe@vanstraten.de" ];
       };
     };
   };

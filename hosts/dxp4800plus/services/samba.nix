@@ -21,6 +21,7 @@ in
         destination = containerIp;
         tcp-ports = "445";
         alias = "smb.vanstraten.cloud";
+        users = [ "uwe@vanstraten.de" ];
       };
     };
   };
