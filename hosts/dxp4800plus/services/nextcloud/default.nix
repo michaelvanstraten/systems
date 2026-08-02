@@ -65,7 +65,7 @@ in
 
         services.nextcloud = {
           enable = true;
-          package = pkgs.nextcloud33;
+          package = pkgs.nextcloud34;
           hostName = fqdn;
           config = {
             adminpassFile = "/run/secrets/nextcloud-admin-pass";
@@ -95,8 +95,8 @@ in
               calendar
               ;
             oidc_login = pkgs.fetchNextcloudApp {
-              sha256 = "sha256-KBa8A7aC0uS6FQoOSa7nIkaaYe+A2KeAtzfqoKw0Gn4=";
-              url = "https://github.com/pulsejet/nextcloud-oidc-login/releases/download/v3.3.1/oidc_login.tar.gz";
+              sha256 = "sha256-5pdHzB57lsJHuOBiYRTONgBZoZgh1EFyE+B16A5/Lds=";
+              url = "https://github.com/pulsejet/nextcloud-oidc-login/releases/download/v3.3.2/oidc_login.tar.gz";
               license = "gpl3";
             };
           };
