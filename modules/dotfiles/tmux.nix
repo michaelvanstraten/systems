@@ -37,6 +37,7 @@
         # Status bar customization
         set -g status-right ""
         set -g status-style "bg=default"
+        set -g status-position top
 
         # Reload config
         bind r source-file ~/.config/tmux/tmux.conf \; display "Config reloaded!"
