@@ -31,6 +31,7 @@ in
     pkgs.xz
     pkgs.iina
     pkgs.pangolin-cli
+    pkgs.ripgrep
   ];
 
   home-manager = {
