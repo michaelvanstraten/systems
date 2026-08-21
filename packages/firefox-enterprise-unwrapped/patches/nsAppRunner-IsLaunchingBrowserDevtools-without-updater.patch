@@ -1,0 +1,48 @@
+Define IsLaunchingBrowserDevtools() unconditionally.
+
+`IsLaunchingBrowserDevtools()` is defined inside the
+`#if defined(MOZ_UPDATER) && !defined(MOZ_WIDGET_ANDROID)` block, but the
+`MOZ_ENTERPRISE` standalone-launch check in `XREMain::XRE_main` calls it
+unconditionally. Building without the updater (as Nixpkgs always does, since
+in-place updates cannot work on NixOS) therefore fails with:
+
+    toolkit/xre/nsAppRunner.cpp:7014:52: error: use of undeclared identifier
+    'IsLaunchingBrowserDevtools'
+
+The helper only inspects the command line and has nothing to do with updates,
+so hoist it out of the updater-only block.
+
+This is submitted upstream; drop this patch once it lands.
+
+diff --git a/toolkit/xre/nsAppRunner.cpp b/toolkit/xre/nsAppRunner.cpp
+--- a/toolkit/xre/nsAppRunner.cpp
++++ b/toolkit/xre/nsAppRunner.cpp
+@@ -5303,6 +5303,15 @@
+ }
+ #endif
+
++// Returns true if we are launching the browser toolbox (i.e. the devtools
++// debugger), as evidenced by "--chrome ..." with the browser toolbox chrome
++// document URL.
++bool IsLaunchingBrowserDevtools() {
++  const char* chromeParam = nullptr;
++  return (ARG_FOUND == CheckArg("chrome", &chromeParam, CheckArgFlag::None)) &&
++         (strcmp(chromeParam, BROWSER_TOOLBOX_WINDOW_URL) == 0);
++}
++
+ #if defined(MOZ_UPDATER) && !defined(MOZ_WIDGET_ANDROID)
+ enum struct ShouldNotProcessUpdatesReason {
+   DevToolsLaunching,
+@@ -5331,12 +5340,6 @@
+   }
+ }
+
+-bool IsLaunchingBrowserDevtools() {
+-  const char* chromeParam = nullptr;
+-  return (ARG_FOUND == CheckArg("chrome", &chromeParam, CheckArgFlag::None)) &&
+-         (strcmp(chromeParam, BROWSER_TOOLBOX_WINDOW_URL) == 0);
+-}
+-
+ Maybe<ShouldNotProcessUpdatesReason> ShouldNotProcessUpdates(
+     nsXREDirProvider& aDirProvider) {
+   // Don't process updates when launched from the installer.

@@ -78,6 +78,11 @@
     };
 
     nixvim.url = "github:nix-community/nixvim";
+
+    firefox-enterprise-src = {
+      url = "github:mozilla/enterprise-firefox?ref=enterprise-release";
+      flake = false;
+    };
   };
 
   outputs =
@@ -86,6 +91,7 @@
       nixpkgs,
       pre-commit-hooks,
       sops-nix,
+      firefox-enterprise-src,
       ...
     }@inputs:
     let
@@ -135,6 +141,25 @@
           '';
         in
         pkgs.writeShellScriptBin "pre-commit-run" script
+      );
+
+      packages = forAllSystems (
+        pkgs:
+        let
+          firefox-enterprise-unwrapped = pkgs.callPackage ./packages/firefox-enterprise-unwrapped {
+            inherit firefox-enterprise-src;
+          };
+        in
+        {
+          inherit firefox-enterprise-unwrapped;
+
+          firefox-enterprise = pkgs.wrapFirefox firefox-enterprise-unwrapped {
+            pname = "firefox-enterprise";
+            nameSuffix = "-enterprise";
+            icon = "firefox-enterprise";
+            wmClass = "firefoxenterprise";
+          };
+        }
       );
     }
     |> nixpkgs.lib.recursiveUpdate (callOutputs {

@@ -115,6 +115,23 @@
         "type": "github"
       }
     },
+    "firefox-enterprise-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792467362,
+        "narHash": "sha256-i/NuEF2pBvlVE5WUmk0+AGXLUmxP654VeTvqy6a1CwA=",
+        "owner": "mozilla",
+        "repo": "enterprise-firefox",
+        "rev": "1e4ae3e33fbabc93da277b2403850d432c55a209",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mozilla",
+        "ref": "enterprise-release",
+        "repo": "enterprise-firefox",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -580,6 +597,7 @@
         "authentik-nix": "authentik-nix",
         "cyberdream-theme": "cyberdream-theme",
         "disko": "disko",
+        "firefox-enterprise-src": "firefox-enterprise-src",
         "home-manager": "home-manager",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
