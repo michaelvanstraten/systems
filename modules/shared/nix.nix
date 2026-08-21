@@ -1,10 +1,13 @@
 { pkgs, ... }:
 {
   nix = {
+    gc.automatic = true;
+    optimise.automatic = true;
     package = pkgs.nixVersions.latest.overrideAttrs {
       doCheck = false;
     };
     settings = {
+      auto-optimise-store = true;
       experimental-features = [
         "auto-allocate-uids"
         "ca-derivations"
