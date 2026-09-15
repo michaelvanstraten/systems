@@ -7,6 +7,7 @@ keys:
   - &host_mac_studio "age1l0vmpvuchm7cvesu0mpwltc6fe830j8jh5j7m0l2gw4gj0shze8q3uylj5"
   - &host_netcup_vps_1000_arm_1 "age12cm60732er6qha4k42e2xa0vtl8n55rnf0qey0gac4n6d6kg9cdqenjjl2"
   - &host_dxp4800plus "age196wp4u9e954sktpx37dpr8yadm33gfd4h27np8stcs3j8w8jnuyszsl06j"
+  - &host_hp_elitedesk_01 "age1kcqdpf3qce44xj4vl46glds8scfhe2ll8x43kprkxhnv3r2rl9qs3txr2w"
   # User SSH Keys
   - &ssh_michael_mac-studio "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID7atwi/0OoP5kHlgIbWRMctz5zT1s9WGQEkQ3wHMdbC"
 
@@ -26,6 +27,10 @@ creation_rules:
   - path_regex: ^hosts/dxp4800plus/.*$
     pgp: [*yubikey]
     age: [*ssh_michael_macbook_pro, *host_dxp4800plus]
+
+  - path_regex: ^hosts/hp-elitedesk-01/.*$
+    pgp: [*yubikey]
+    age: [*ssh_michael_macbook_pro, *host_hp_elitedesk_01]
 
   - pgp: [*yubikey]
     age: [*ssh_michael_macbook_pro]

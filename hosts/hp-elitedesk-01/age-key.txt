@@ -1,0 +1,25 @@
+{
+	"data": "ENC[AES256_GCM,data:9BGcdR0a8l/YdiQwfGOdDbGNFfu/6fqHjuI6KrZMgGa7iyZVztARthF8y0ybnJJot057iLtS8BNVeolkSwFlid9B7YU1TdNh5WHrNosqBYCseHOzfoiHPKyQ4ySVlYRiFTaY4gya+3DNVrDswrpfAtXhmqaqM0KyShr/Jj2u+i5F1g/jqgs8sMNfUS+nx6Q6DJSAWGju63x0F+t453BqtBfGoh0j3gdkdcTpDcv7CJUArbKnA3ePyHtqo4kY,iv:thE8EMazcH8Mcu1QFNJms1ZiZmKc6Y9Cvv1o8KI+gbI=,tag:/ii6aKXRVTMghdAUdH4UTg==,type:str]",
+	"sops": {
+		"age": [
+			{
+				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IHNzaC1lZDI1NTE5IDI0RnJjQSBwTDdi\nUk5vTDJZNXAwQXhpZk1HKzNtRmhkR2JaRGpjR3hPOU13NGtLK2hBCnd0d1BCSlZs\nZGNqOHlTYlZrYXVpdDdPSitqUkttRDZydU90Zjd0ZXBBUTgKLS0tIFBOTFo5S2wx\nTEFNTXhXVHlWb2U4L2ErMHRvbkdLS0lZMStEaUI5Wk5KR0EKV4ELubHVIl5GoWoj\n0+R4hHefESL735u0aSmKUBl0j/QOFDOpXdek5U0OasSwdWL1oLWDO9w/1IaW3KjY\naRQVvg==\n-----END AGE ENCRYPTED FILE-----\n",
+				"recipient": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8OCYTaHjQy7Y7bRmxzVwNBgnD9P21UQPzVpJ3NKwVV"
+			},
+			{
+				"enc": "-----BEGIN AGE ENCRYPTED FILE-----\nYWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBuYmZmMGhFY0FVMkx1aTlx\nMEhhdWxEVEFVMkZFTkF1MlY2UFJjRGpCMWdzCjlLa3hZOHNZMjJFY2YwSm01T1Jk\nZzlNcStEdDVMczhGaHNIVWE5T2FUdU0KLS0tIDBXVFlvNnFrQm9yeUxUUXBIUGY0\nRU1uRnZ6NlhEcGhiTkFBazdUTC9JV00K6EFEhwLaQuxeFEaWxDrJHRY3lZCd0gHw\nlo2/CJvyeoyR+TnsmX1Q13DHgcVrFf8Slv0wR8TwfF4C8IYvfQtW+w==\n-----END AGE ENCRYPTED FILE-----\n",
+				"recipient": "age1kcqdpf3qce44xj4vl46glds8scfhe2ll8x43kprkxhnv3r2rl9qs3txr2w"
+			}
+		],
+		"lastmodified": "2026-08-14T12:56:01Z",
+		"mac": "ENC[AES256_GCM,data:K8bV1uAszPD/zDMqPvxpTSwuIwR2K51x2+petoofe1c4fRp2eIQSw+OnfJcbMwTY7KkVFKFH24di3+6lDtGnLg+BonYm/k+Wa6mQJHclggrithfg8tkmkO+mEiY4X2uIAnm8h9WgCcJOHE0KDwKR14HEtGGvTAKPMKMl5w90mQM=,iv:tpxCOpogoxSkKml/mQ4DYf53NVaws7WNdEQtctZigts=,tag:WZsEUGND9GN3B+KzPoBluQ==,type:str]",
+		"pgp": [
+			{
+				"created_at": "2026-08-14T12:56:01Z",
+				"enc": "-----BEGIN PGP MESSAGE-----\n\nhF4DOIh/CBfaI+ISAQdAOwEJ/EupCEpK/is58YW/v/Y2/FqqaFwZw0IkNNtvVHQw\n/ML/z0ALqwlwfH7DLoxke7HvV0M0CLrlxw7xGtRyFmgTT6Xo45eBzLJCYpj5cXho\n0l4B6yzZMh1WfQbyrTL2SLm+X/GV2cfkJwsbvcW0tM2I9eSqbuaom81I2lApPuLG\nnBLKsiCfrDzWpW3aSMMKZM4JVmVcYkcyLEUNGc0ctP3hozTJZghB3S05hddU5Juj\n=hxPo\n-----END PGP MESSAGE-----",
+				"fp": "4B92DBDE172E7C6916F004EE856019C49BE6D7C0"
+			}
+		],
+		"version": "3.13.3"
+	}
+}
