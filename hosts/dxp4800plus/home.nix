@@ -7,10 +7,6 @@ _: {
   ];
 
   programs = {
-    git.enable = true;
-    lazygit.enable = true;
-    nixvim.enable = true;
-    tmux.enable = true;
     bash.enable = true;
     starship.enable = true;
   };
