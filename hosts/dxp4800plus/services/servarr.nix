@@ -82,6 +82,15 @@ in
         ssl = true;
         scheme = "http";
       };
+      seerr = {
+        name = "seerr";
+        mode = "http";
+        destination = containerIp;
+        destination-port = cfg.services.seerr.port;
+        full-domain = "seerr.vanstraten.cloud";
+        ssl = true;
+        scheme = "http";
+      };
     };
   };
 
@@ -112,6 +121,10 @@ in
       };
       "/var/lib/prowlarr" = {
         hostPath = "/tank/appdata/prowlarr";
+        isReadOnly = false;
+      };
+      "/var/lib/private/seerr" = {
+        hostPath = "/tank/appdata/seerr";
         isReadOnly = false;
       };
 
@@ -207,6 +220,10 @@ in
               ];
             };
           };
+          seerr = {
+            enable = true;
+            openFirewall = true;
+          };
         };
 
         systemd.services = (
@@ -229,6 +246,8 @@ in
             allowedUDPPorts = [ vpn.forwardedPort ];
           };
         };
+
+        system.stateVersion = lib.mkForce "26.05";
       };
   };
 }
