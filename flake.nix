@@ -16,7 +16,7 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:NixOs/nixpkgs?ref=nixos-unstable";
+      url = "github:michaelvanstraten/nixpkgs?ref=nixos-qbittorrent-add-config-file-option";
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
