@@ -20,7 +20,9 @@ in
     pkgs.monitorcontrol
     pkgs.python3
     pkgs.zed-editor
-    pkgs.firefox
+    (pkgs.firefox.override {
+      appDataDir = "/Users/${primaryUser}/Library/Application Support/org.nixos.firefox";
+    })
     pkgs.rustup
     pkgs.lima
     pkgs.k9s
