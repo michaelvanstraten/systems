@@ -52,13 +52,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    assertions = [
-      {
-        assertion = config.services.tailscale.enable;
-        message = "The remote builder system assumes you are using Tailscale as an overlay network";
-      }
-    ];
-
+    # assertions = [
+    #   {
+    #     assertion = config.services.tailscale.enable;
+    #     message = "The remote builder system assumes you are using Tailscale as an overlay network";
+    #   }
+    # ];
+    #
     # Enable the remote builder by default if the module is enabled
     nix.settings.trusted-users = [ "nixremote" ];
 

@@ -10,11 +10,14 @@
     self.nixosModules.all
     self.sharedModules.all
     ./networking.nix
-    (self.lib.mkModule ./services/pangolin.nix { })
     (self.lib.mkModule ./services/authentik { })
+    (self.lib.mkModule ./services/newt.nix { })
+    (self.lib.mkModule ./services/pangolin.nix { })
   ];
 
   system.stateVersion = "25.11";
+
+  internal.sshAccess.enable = true;
 
   networking = {
     hostId = "178054be";
@@ -24,11 +27,14 @@
   time.timeZone = "Europe/Berlin";
 
   console.keyMap = "de";
-  boot.loader.systemd-boot = {
-    enable = true;
-    configurationLimit = 8;
+
+  boot = {
+    loader.systemd-boot = {
+      enable = true;
+      configurationLimit = 8;
+    };
+    zfs.forceImportRoot = false;
   };
-  boot.zfs.forceImportRoot = false;
 
   users.users.michael = {
     isNormalUser = true;

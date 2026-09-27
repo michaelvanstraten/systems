@@ -11,9 +11,9 @@ in
   nixosConfigurations.netcup-vps-1000-arm-1 = nixosSystem {
     modules = [
       sops-nix.nixosModules.sops
+      (self.lib.mkModule ./configuration.nix { })
       (self.lib.mkModule ./disk-config.nix { })
       (self.lib.mkModule ./hardware-configuration.nix { })
-      (self.lib.mkModule ./configuration.nix { })
     ];
   };
 }

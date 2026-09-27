@@ -27,6 +27,8 @@
 
   system.stateVersion = "25.11";
 
+  internal.sshAccess.enable = true;
+
   networking = {
     hostId = "4831eedc"; # Required for ZFS
     hostName = "dxp4800plus";
