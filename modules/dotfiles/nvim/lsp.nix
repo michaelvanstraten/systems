@@ -40,4 +40,30 @@
       gopls.enable = true;
     };
   };
+
+  plugins.codesettings = {
+    enable = true;
+    settings = {
+      config_file_paths = [
+        ".vscode/settings.json"
+      ];
+    };
+  };
+  extraConfigLua = ''
+    local function wrap_codesettings(name)
+      local cfg = vim.lsp.config[name]
+      local existing_before_init = cfg and cfg.before_init
+      vim.lsp.config(name, {
+        before_init = function(init_params, config)
+          require('codesettings').loader()
+            :root_dir(config.root_dir)
+            :with_local_settings(config.name, config)
+          if existing_before_init then
+            existing_before_init(init_params, config)
+          end
+        end,
+      })
+    end
+    wrap_codesettings('rust_analyzer')
+  '';
 }

@@ -28,7 +28,6 @@
     plugins.auto-save.enable = true;
     plugins.fidget.enable = true;
     plugins.gitsigns.enable = true;
-    plugins.neoconf.enable = true;
     plugins.tmux-navigator.enable = true;
     plugins.web-devicons.enable = true;
   };
