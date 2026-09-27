@@ -1,9 +1,8 @@
-{ lib, config, ... }:
+{ lib, ... }:
 {
   programs.git = {
     ignores = [
       ".DS_Store"
-      ".vscode/"
       ".venv/"
       ".cache/"
     ];
