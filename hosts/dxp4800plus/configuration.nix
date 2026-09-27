@@ -23,6 +23,7 @@
     ./services/nextcloud
     ./services/paperless
     ./services/samba.nix
+    ./services/sanoid.nix
   ];
 
   system.stateVersion = "25.11";
