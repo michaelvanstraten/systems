@@ -75,7 +75,7 @@ in
                 # (the NixOS default); be explicit about it. The matching,
                 # deterministic machine-id is pinned from the host in the
                 # `container@${name}` preStart below.
-                config.services.journald.storage = "persistent";
+                config.services.journald.settings.Journal.Storage = "persistent";
               }
             ))
           ];

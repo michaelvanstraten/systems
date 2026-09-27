@@ -66,8 +66,11 @@ let
       }
 
       rule {
-        source_labels = ["__journal_priority_keyword"]
+        source_labels = ["__journal__transport", "__journal_priority_keyword"]
+        separator     = ";"
+        regex         = "(?:journal|syslog|kernel|audit|driver);(.+)"
         target_label  = "level"
+        replacement   = "$1"
       }
     }
 

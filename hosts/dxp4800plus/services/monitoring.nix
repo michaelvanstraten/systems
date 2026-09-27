@@ -10,6 +10,8 @@ let
   prometheus_port = 3200;
 in
 {
+  sops.secrets."grafana/env" = { };
+
   services.newt.blueprint = {
     private-resources = {
       grafana = {
@@ -62,90 +64,123 @@ in
           hostPath = "/tank/appdata/monitoring/loki";
           isReadOnly = false;
         };
+
+        "/run/secrets/grafana-env" = {
+          hostPath = config.sops.secrets."grafana/env".path;
+          isReadOnly = true;
+        };
       };
 
       config = {
-        services = {
-          grafana = {
-            enable = true;
-            settings = {
-              server = {
-                http_addr = "0.0.0.0";
-                http_port = grafana_http_port;
-                enforce_domain = true;
-                enable_gzip = true;
-                domain = grafana_domain;
-              };
-              security.secret_key = "f0ffc581602dad869f78d08d6b9614e66cd51321bc0aadc2e4de62785174328e";
+        systemd.services.grafana.serviceConfig.EnvironmentFile = "/run/secrets/grafana-env";
+        services.grafana = {
+          enable = true;
+
+          settings = {
+            server = {
+              http_addr = "0.0.0.0";
+              http_port = grafana_http_port;
+              enforce_domain = true;
+              enable_gzip = true;
+              domain = grafana_domain;
             };
-            provision = {
-              enable = true;
-              datasources.settings.datasources = [
+
+            security.secret_key = "f0ffc581602dad869f78d08d6b9614e66cd51321bc0aadc2e4de62785174328e";
+
+            "log.console" = {
+              level = "warn";
+            };
+
+            smtp = {
+              enabled = true;
+              from_address = "monitoring@vanstraten.cloud";
+            };
+          };
+
+          provision = {
+            enable = true;
+            datasources.settings.datasources = [
+              {
+                name = "Prometheus";
+                type = "prometheus";
+                uid = "prometheus";
+                access = "proxy";
+                url = "http://localhost:${toString prometheus_port}";
+                isDefault = true;
+              }
+              {
+                name = "Loki";
+                type = "loki";
+                uid = "loki";
+                access = "proxy";
+                url = "http://localhost:${toString loki_http_port}";
+              }
+            ];
+          };
+          openFirewall = true;
+        };
+
+        services.loki = {
+          enable = true;
+          configuration = {
+            auth_enabled = false;
+
+            server = {
+              http_listen_port = 3100;
+              log_level = "warn";
+            };
+
+            common = {
+              ring = {
+                instance_addr = "127.0.0.1";
+                kvstore = {
+                  store = "inmemory";
+                };
+              };
+              replication_factor = 1;
+              path_prefix = lokiDataDir;
+            };
+
+            schema_config = {
+              configs = [
                 {
-                  name = "Prometheus";
-                  type = "prometheus";
-                  uid = "prometheus";
-                  access = "proxy";
-                  url = "http://localhost:${toString prometheus_port}";
-                  isDefault = true;
-                }
-                {
-                  name = "Loki";
-                  type = "loki";
-                  uid = "loki";
-                  access = "proxy";
-                  url = "http://localhost:${toString loki_http_port}";
+                  from = "2020-05-15";
+                  store = "tsdb";
+                  object_store = "filesystem";
+                  schema = "v13";
+                  index = {
+                    prefix = "index_";
+                    period = "24h";
+                  };
                 }
               ];
             };
-            openFirewall = true;
-          };
 
-          loki = {
-            enable = true;
-            configuration = {
-              auth_enabled = false;
-              server.http_listen_port = 3100;
-
-              common = {
-                ring = {
-                  instance_addr = "127.0.0.1";
-                  kvstore = {
-                    store = "inmemory";
-                  };
-                };
-                replication_factor = 1;
-                path_prefix = lokiDataDir;
-              };
-
-              schema_config = {
-                configs = [
-                  {
-                    from = "2020-05-15";
-                    store = "tsdb";
-                    object_store = "filesystem";
-                    schema = "v13";
-                    index = {
-                      prefix = "index_";
-                      period = "24h";
-                    };
-                  }
-                ];
-              };
-
-              storage_config = {
-                filesystem = {
-                  directory = "${lokiDataDir}/chunks";
-                };
+            storage_config = {
+              filesystem = {
+                directory = "${lokiDataDir}/chunks";
               };
             };
-          };
 
-          prometheus = {
-            port = prometheus_port;
-            enable = true;
-            extraFlags = [ "--web.enable-remote-write-receiver" ];
+            compactor = {
+              retention_enabled = true;
+              delete_request_store = "filesystem";
+
+            };
+
+            limits_config = {
+              retention_period = "90d";
+            };
           };
+        };
+
+        services.prometheus = {
+          port = prometheus_port;
+          enable = true;
+          retentionTime = "1y";
+          extraFlags = [
+            "--web.enable-remote-write-receiver"
+          ];
         };
 
         networking.firewall.allowedTCPPorts = [
