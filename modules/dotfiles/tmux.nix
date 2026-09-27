@@ -9,7 +9,7 @@
     focusEvents = true;
     escapeTime = 0;
     terminal = "tmux-256color";
-    prefix = if pkgs.stdenv.isDarwin then "C-a" else "M-a";
+    prefix = if pkgs.stdenv.hostPlatform.isDarwin then "C-a" else "M-a";
     customPaneNavigationAndResize = true;
     resizeAmount = 2;
 
