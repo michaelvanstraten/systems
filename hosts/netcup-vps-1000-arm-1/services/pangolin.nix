@@ -1,5 +1,8 @@
 { private-patches, ... }:
 { config, pkgs, ... }:
+let
+  loopbackIPs = [ "89.58.36.215" ];
+in
 {
   sops.secrets."pangolin/server_secret" = { };
   sops.secrets."cloudflare/dns_api_token" = { };
@@ -72,49 +75,20 @@
               enable_integration_api = true;
             };
           };
-          package =
-            let
-              react-is = pkgs.fetchzip {
-                url = "https://registry.npmjs.org/react-is/-/react-is-19.2.6.tgz";
-                hash = "sha256-oYXgCz6C1vdf2uujesEifDgH3J1KNAq1QY7wvIhT/xQ=";
+          package = pkgs.fosrl-pangolin.overrideAttrs (
+            final: prev: {
+              patches = [ "${private-patches}/pangolin.patch" ];
+
+              env = (prev.env or { }) // {
+                NODE_OPTIONS = "--max-old-space-size=6144";
               };
-            in
-            pkgs.fosrl-pangolin.overrideAttrs (
-              final: prev: {
-                version = "1.19.4";
 
-                src = pkgs.fetchFromGitHub {
-                  owner = "fosrl";
-                  repo = "pangolin";
-                  tag = final.version;
-                  hash = "sha256-Joo7N92ZbKybD15ojIIoEtjLjzcho5PqAzuGlj17zag=";
-                };
-
-                npmDeps = pkgs.fetchNpmDeps {
-                  inherit (final) src;
-                  hash = "sha256-n3VMToqPUwDyDbFOceSjVl8/GPnu4HH3g2IlXsbl8rs=";
-                };
-
-                patches = [ "${private-patches}/pangolin.patch" ];
-
-                postPatch = ''
-                  substituteInPlace server/lib/consts.ts --replace-fail \
-                    'export const APP_VERSION = "${lib.versions.majorMinor final.version + ".0"}";' \
-                    'export const APP_VERSION = "${final.version}";'
-                '';
-
-                preBuild = ''
-                  cp -r ${react-is} node_modules/react-is
-                  chmod -R u+w node_modules/react-is
-                ''
-                + (prev.preBuild or "");
-
-                postInstall = (prev.postInstall or "") + ''
-                  rm -rf $out/share/pangolin/.next/cache
-                  ln -s /var/cache/pangolin $out/share/pangolin/.next/cache
-                '';
-              }
-            );
+              postInstall = (prev.postInstall or "") + ''
+                rm -rf $out/share/pangolin/.next/cache
+                ln -s /var/cache/pangolin $out/share/pangolin/.next/cache
+              '';
+            }
+          );
         };
 
         systemd.services.pangolin.serviceConfig = {
@@ -158,21 +132,25 @@
       sourcePort = 80;
       destination = "10.100.0.2:80";
       proto = "tcp";
+      inherit loopbackIPs;
     }
     {
       sourcePort = 443;
       destination = "10.100.0.2:443";
       proto = "tcp";
+      inherit loopbackIPs;
     }
     {
       sourcePort = 51820;
       destination = "10.100.0.2:51820";
       proto = "udp";
+      inherit loopbackIPs;
     }
     {
       sourcePort = 21820;
       destination = "10.100.0.2:21820";
       proto = "udp";
+      inherit loopbackIPs;
     }
   ];
 

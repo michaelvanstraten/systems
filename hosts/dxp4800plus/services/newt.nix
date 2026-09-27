@@ -1,8 +1,5 @@
-{ fosrl-newt, ... }:
 {
   config,
-  lib,
-  pkgs,
   ...
 }:
 {
@@ -10,7 +7,6 @@
 
   services.newt = {
     enable = true;
-    package = fosrl-newt.packages.${pkgs.stdenv.system}.pangolin-newt;
     environmentFile = config.sops.secrets."newt/env".path;
   };
 }
