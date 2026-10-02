@@ -65,7 +65,7 @@ in
 
         services.nextcloud = {
           enable = true;
-          package = pkgs.nextcloud34;
+          package = pkgs.nextcloud35;
           hostName = fqdn;
           config = {
             adminpassFile = "/run/secrets/nextcloud-admin-pass";
