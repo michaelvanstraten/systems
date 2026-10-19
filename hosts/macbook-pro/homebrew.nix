@@ -45,6 +45,7 @@
     "bitwarden"
     "tailscale-app"
     "inkscape"
+    "ungoogled-chromium"
   ];
 
   homebrew.onActivation.cleanup = "uninstall";
