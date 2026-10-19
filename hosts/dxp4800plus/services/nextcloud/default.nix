@@ -95,8 +95,8 @@ in
               calendar
               ;
             oidc_login = pkgs.fetchNextcloudApp {
-              sha256 = "sha256-5pdHzB57lsJHuOBiYRTONgBZoZgh1EFyE+B16A5/Lds=";
-              url = "https://github.com/pulsejet/nextcloud-oidc-login/releases/download/v3.3.2/oidc_login.tar.gz";
+              sha256 = "sha256-2E42FuhlJZwUKvbPQLbwCSIorXi+2EP4XGV19FlCiEs=";
+              url = "https://github.com/pulsejet/nextcloud-oidc-login/releases/download/v3.4.0/oidc_login.tar.gz";
               license = "gpl3";
             };
           };
