@@ -62,6 +62,12 @@
             mods = "Command";
             chars = "${builtins.fromJSON ''"\u0001"''}s";
           }
+          # Enable things like shift+enter in opencode
+          {
+            key = "Return";
+            mods = "Shift";
+            chars = builtins.fromJSON ''"\u001b[13;2u"'';
+          }
         ];
       };
     };

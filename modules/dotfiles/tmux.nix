@@ -53,6 +53,9 @@
 
         # Copy mode
         bind c copy-mode
+
+        # Enable things like shift+enter in opencode
+        set -g extended-keys on
       '';
   };
 }
