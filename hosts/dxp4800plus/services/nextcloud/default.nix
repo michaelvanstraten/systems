@@ -5,7 +5,6 @@ let
   fqdn = "nextcloud.vanstraten.cloud";
 in
 {
-  sops.secrets."nextcloud/adminpass" = { };
   sops.secrets."nextcloud/config" = {
     sopsFile = ./secrets.json;
     format = "binary";
@@ -33,11 +32,6 @@ in
     localAddress = "${containerIp}/24";
 
     bindMounts = {
-      "/run/secrets/nextcloud-admin-pass" = {
-        hostPath = config.sops.secrets."nextcloud/adminpass".path;
-        isReadOnly = true;
-      };
-
       "/run/secrets/nextcloud-config" = {
         hostPath = config.sops.secrets."nextcloud/config".path;
         isReadOnly = true;
@@ -68,7 +62,6 @@ in
           package = pkgs.nextcloud35;
           hostName = fqdn;
           config = {
-            adminpassFile = "/run/secrets/nextcloud-admin-pass";
             dbtype = "pgsql";
           };
           secretFile = "/run/secrets/nextcloud-config";
