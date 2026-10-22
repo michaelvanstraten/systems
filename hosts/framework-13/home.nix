@@ -1,5 +1,10 @@
 { self, ... }:
-{ config, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 {
   home.stateVersion = "25.11";
   home.sessionPath = [
@@ -47,6 +52,12 @@
   };
 
   dconf.settings = {
+    "org/gnome/desktop/peripherals/keyboard" = {
+      delay = lib.hm.gvariant.mkUint32 225;
+      repeat-interval = lib.hm.gvariant.mkUint32 30;
+      repeat = true;
+    };
+
     "org/gnome/shell" = {
       favorite-apps = [
         "org.gnome.Nautilus.desktop"
