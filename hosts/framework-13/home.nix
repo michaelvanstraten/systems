@@ -46,6 +46,18 @@
       };
   };
 
+  dconf.settings = {
+    "org/gnome/shell" = {
+      favorite-apps = [
+        "org.gnome.Nautilus.desktop"
+        "com.mitchellh.ghostty.desktop"
+        "firefox-enterprise.desktop"
+        "thunderbird.desktop"
+        "signal.desktop"
+      ];
+    };
+  };
+
   programs = {
     git = {
       enable = true;
