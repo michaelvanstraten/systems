@@ -1,3 +1,4 @@
+{ self, ... }:
 { pkgs, ... }:
 {
   imports = [
@@ -16,7 +17,6 @@
       ghostty
       thunderbird
       rustup
-      zed-editor
       python3
       jq
       signal-desktop
@@ -33,6 +33,11 @@
       ))
       kubernetes-helm
       kubectl
+      trash-cli
+      firefox
+      self.packages.${pkgs.stdenv.system}.firefox-enterprise
+      ripgrep
+      opencode
     ];
 
     gnome.excludePackages = [

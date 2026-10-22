@@ -8,7 +8,7 @@
 {
   nixosConfigurations.framework-13 = nixpkgs.lib.nixosSystem {
     modules = [
-      ./configuration.nix
+      (self.lib.mkModule ./configuration.nix { })
       ./hardware-configuration.nix
       ./gaming.nix
       nixos-hardware.nixosModules.framework-amd-ai-300-series
