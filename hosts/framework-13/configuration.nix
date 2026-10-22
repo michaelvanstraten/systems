@@ -42,18 +42,18 @@
     ];
 
     gnome.excludePackages = [
-      pkgs.epiphany # web browser
-      pkgs.gedit # text editor
-      pkgs.totem # video player
-      pkgs.yelp # help viewer
-      pkgs.geary # email client
-      pkgs.gnome-calendar # calendar
-      pkgs.gnome-contacts # contacts
-      pkgs.gnome-maps # maps
-      pkgs.gnome-music # music
-      pkgs.gnome-photos # photos
-      pkgs.gnome-tour # tour app
-      pkgs.evince # document viewer
+      pkgs.epiphany
+      pkgs.gedit
+      pkgs.totem
+      pkgs.yelp
+      pkgs.geary
+      pkgs.gnome-calendar
+      pkgs.gnome-contacts
+      pkgs.gnome-maps
+      pkgs.gnome-music
+      pkgs.gnome-tour
+      pkgs.evince
+      pkgs.bubblewrap
     ];
   };
 
