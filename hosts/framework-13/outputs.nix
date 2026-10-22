@@ -20,6 +20,7 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           users.michael = self.lib.mkModule ./home.nix { };
+          backupFileExtension = "bak";
         };
       }
     ];
