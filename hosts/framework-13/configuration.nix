@@ -84,6 +84,7 @@
 
   users.users.michael = {
     isNormalUser = true;
+    shell = pkgs.brush;
     extraGroups = [
       "wheel"
       "docker"
