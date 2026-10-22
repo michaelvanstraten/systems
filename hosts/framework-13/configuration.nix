@@ -62,6 +62,8 @@
     nix-ld = {
       enable = true;
       libraries = with pkgs; [
+        # Needed for Firefox
+        glib
         gtk3
         alsa-lib
         libx11
@@ -73,7 +75,10 @@
         libxi
         libxext
         libxfixes
-        libz
+        at-spi2-atk
+        pango
+        cairo
+        gdk-pixbuf
       ];
     };
   };
