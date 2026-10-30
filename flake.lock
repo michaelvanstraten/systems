@@ -455,11 +455,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1790431924,
-        "narHash": "sha256-Jd91Jdepi8ouTdewCZ2cmRmN96Q4FcKzpgTbBu+/S4Y=",
+        "lastModified": 1793259073,
+        "narHash": "sha256-/Ii2gP+4IgZXRDEKtNY1L8Stj8LxrPHT8tUrJEvIlj4=",
         "owner": "michaelvanstraten",
         "repo": "nixpkgs",
-        "rev": "53c3dc440d0c242079ff03058f54d208875c7ef2",
+        "rev": "3afce66d9bef1b2bc0c3a24efb1c7875b8519fa4",
         "type": "github"
       },
       "original": {
@@ -529,11 +529,11 @@
     "private-patches": {
       "flake": false,
       "locked": {
-        "lastModified": 1782598339,
-        "narHash": "sha256-k/hw1o170H9qzArygYCk8Zz+T10EQs0DsKmTnHlNazQ=",
+        "lastModified": 1793259199,
+        "narHash": "sha256-qyGeAB9YVbQ9RF7igR9Xs+93ybbWjzDV8cg8UbyNNgk=",
         "owner": "michaelvanstraten",
         "repo": "private-patches",
-        "rev": "796ed0722844cf0ec3330fcf1100dadce028f353",
+        "rev": "a355c4847f7782a3906dfb1d19f7e617975dbcec",
         "type": "github"
       },
       "original": {

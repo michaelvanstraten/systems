@@ -77,7 +77,23 @@ in
           };
           package = pkgs.fosrl-pangolin.overrideAttrs (
             final: prev: {
+              version = "1.25.3";
+
+              src = pkgs.fetchFromGitHub {
+                owner = "fosrl";
+                repo = "pangolin";
+                tag = final.version;
+                hash = "sha256-dhOnxuRW1DXji3TmgyrqR8dO4NAHJucd8EMVF2Ymu1k=";
+              };
+
               patches = [ "${private-patches}/pangolin.patch" ];
+
+              npmDeps = pkgs.fetchNpmDeps {
+                name = "${final.pname}-${final.version}-npm-deps";
+                inherit (final) src patches;
+                hash = "sha256-hPPnBHrzdxh7mjImqQ2Ij1twN6n/I/Tiv5o74ELTHqo=";
+                fetcherVersion = final.npmDepsFetcherVersion;
+              };
 
               env = (prev.env or { }) // {
                 NODE_OPTIONS = "--max-old-space-size=6144";
