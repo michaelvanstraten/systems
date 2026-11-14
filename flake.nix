@@ -15,9 +15,7 @@
   };
 
   inputs = {
-    nixpkgs = {
-      url = "github:michaelvanstraten/nixpkgs?ref=nixos-qbittorrent-add-config-file-option";
-    };
+    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
@@ -83,6 +81,8 @@
       url = "github:mozilla/enterprise-firefox?ref=enterprise-release";
       flake = false;
     };
+
+    anki-mcp.url = "github:ankimcp/anki-mcp-server-addon";
   };
 
   outputs =

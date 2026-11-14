@@ -32,7 +32,6 @@
 
   homebrew.casks = [
     "alacritty"
-    "anki"
     "bambu-studio"
     "freecad"
     "nextcloud"

@@ -1,4 +1,9 @@
-{ self, home-manager, ... }:
+{
+  self,
+  home-manager,
+  anki-mcp,
+  ...
+}:
 { config, pkgs, ... }:
 let
   primaryUser = "michael";
@@ -34,6 +39,24 @@ in
     pkgs.pangolin-cli
     pkgs.ripgrep
     pkgs.opencode
+    (pkgs.anki.withAddons [
+      anki-mcp.packages.${pkgs.stdenv.system}.addon
+    ])
+  ];
+
+  # nixpkgs' pyprojectVersionPatchHook fails when the version already matches
+  nixpkgs.overlays = [
+    (final: prev: {
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (pyFinal: pyPrev: {
+          anki-mac-helper = pyPrev.anki-mac-helper.overridePythonAttrs (old: {
+            nativeBuildInputs = builtins.filter (
+              p: p != pyPrev.pyprojectVersionPatchHook
+            ) old.nativeBuildInputs;
+          });
+        })
+      ];
+    })
   ];
 
   home-manager = {
