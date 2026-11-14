@@ -24,6 +24,7 @@
     ./services/paperless
     ./services/samba.nix
     ./services/sanoid.nix
+    ./services/vaultwarden
   ];
 
   system.stateVersion = "25.11";
