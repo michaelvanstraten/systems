@@ -25,6 +25,7 @@
     ./services/samba.nix
     ./services/sanoid.nix
     ./services/vaultwarden
+    ./services/immich.nix
   ];
 
   system.stateVersion = "25.11";

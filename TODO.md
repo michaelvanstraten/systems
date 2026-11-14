@@ -3,7 +3,6 @@
 - [ ] zfs backups and monitoring
 - [ ] grafana allerts
 - [ ] monero node
-- [ ] immich
 - [ ] onlyoffice
 - [ ] giteamirror (https://giteamirror.com)
 - [ ] gitea (https://docs.gitea.com)
