@@ -13,6 +13,7 @@
     (self.lib.mkModule ./services/authentik { })
     (self.lib.mkModule ./services/newt.nix { })
     (self.lib.mkModule ./services/pangolin.nix { })
+    ./services/tor-relay.nix
   ];
 
   system.stateVersion = "25.11";
