@@ -19,7 +19,7 @@
     (self.lib.mkModule ./services/newt.nix { })
     ./services/proxy-sidecar.nix
     ./services/servarr.nix
-    ./services/monitoring.nix
+    ./services/monitoring
     ./services/disk-monitoring.nix
     ./services/nextcloud
     ./services/paperless

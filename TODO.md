@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] zfs backups and monitoring
+- [ ] zfs backups
 - [ ] grafana allerts
 - [ ] onlyoffice
 - [ ] giteamirror (https://giteamirror.com)
