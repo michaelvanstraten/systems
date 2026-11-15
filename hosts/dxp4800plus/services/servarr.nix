@@ -7,8 +7,11 @@ let
   mediaDir = "/srv/media";
   downloadDir = "${mediaDir}/downloads";
   mediaGid = 1500;
+  torrentPort = 50475;
 in
 {
+  networking.airvpn.clients.servarr.forwardedPort = torrentPort;
+
   sops.secrets."qbittorrent/api-key" = { };
 
   sops.templates."qBittorrent.conf" = {
@@ -18,7 +21,7 @@ in
       Session\DefaultSavePath=${downloadDir}
       Session\TempPath=${downloadDir}/incomplete
       Session\TempPathEnabled=true
-      Session\Port=${toString vpn.forwardedPort}
+      Session\Port=${toString torrentPort}
       Session\UseRandomPort=false
       Session\QueueingSystemEnabled=true
       Session\MaxActiveDownloads=5
@@ -242,8 +245,8 @@ in
           };
 
           firewall = {
-            allowedTCPPorts = [ vpn.forwardedPort ];
-            allowedUDPPorts = [ vpn.forwardedPort ];
+            allowedTCPPorts = [ torrentPort ];
+            allowedUDPPorts = [ torrentPort ];
           };
         };
 

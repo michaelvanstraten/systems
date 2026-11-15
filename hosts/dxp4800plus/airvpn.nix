@@ -4,8 +4,11 @@ let
 
   cfg = config.networking.airvpn;
 
-  servarrIp = head (splitString "/" config.containers.servarr.localAddress);
+  containerIp = name: head (splitString "/" config.containers.${name}.localAddress);
   containersSubnet = "10.100.0.0/24";
+
+  # Renders a list of nftables rules per client, indented to sit inside a chain.
+  clientRules = f: lib.concatStringsSep "\n  " (lib.concatLists (lib.mapAttrsToList f cfg.clients));
 in
 {
   options.networking.airvpn = {
@@ -21,12 +24,32 @@ in
       description = "Resolver that is only reachable through the tunnel.";
     };
 
-    forwardedPort = lib.mkOption {
-      type = lib.types.port;
-      default = 50475;
+    clients = lib.mkOption {
+      type = lib.types.attrsOf (
+        lib.types.submodule {
+          options = {
+            forwardedPort = lib.mkOption {
+              type = lib.types.port;
+              description = ''
+                Port AirVPN forwards to this account. Arriving traffic is DNATed
+                to the container, which listens on the same port.
+              '';
+            };
+
+            extraEgressRules = lib.mkOption {
+              type = lib.types.listOf lib.types.str;
+              default = [ ];
+              description = ''
+                nftables rules accepting traffic from the container to
+                destinations other than the tunnel. Everything else is dropped.
+              '';
+            };
+          };
+        }
+      );
+      default = { };
       description = ''
-        Port AirVPN forwards to this account. Arriving traffic is DNATed to
-        qBittorrent, which listens on the same port.
+        Containers, by name, whose traffic may only leave through the tunnel.
       '';
     };
 
@@ -38,6 +61,13 @@ in
   };
 
   config = {
+    assertions = [
+      {
+        assertion = lib.allUnique (lib.mapAttrsToList (_: client: client.forwardedPort) cfg.clients);
+        message = "networking.airvpn.clients must not share a forwardedPort";
+      }
+    ];
+
     sops.secrets."airvpn/private-key" = { };
     sops.secrets."airvpn/preshared-key" = { };
 
@@ -74,18 +104,18 @@ in
     };
 
     systemd.network.networks."20-br-containers" = {
-      routingPolicyRules = [
+      routingPolicyRules = lib.concatMap (name: [
         {
-          From = servarrIp;
+          From = containerIp name;
           Table = cfg.routingTable;
           Priority = 1000;
         }
         {
-          From = servarrIp;
+          From = containerIp name;
           Type = "unreachable";
           Priority = 1001;
         }
-      ];
+      ]) (lib.attrNames cfg.clients);
       routes = [
         {
           Destination = containersSubnet;
@@ -119,14 +149,20 @@ in
         chain prerouting {
           type nat hook prerouting priority dstnat; policy accept;
 
-          iifname "${cfg.interface}" tcp dport ${toString cfg.forwardedPort} dnat to ${servarrIp}
-          iifname "${cfg.interface}" udp dport ${toString cfg.forwardedPort} dnat to ${servarrIp}
+          ${clientRules (
+            name: client: [
+              ''iifname "${cfg.interface}" tcp dport ${toString client.forwardedPort} dnat to ${containerIp name}''
+              ''iifname "${cfg.interface}" udp dport ${toString client.forwardedPort} dnat to ${containerIp name}''
+            ]
+          )}
         }
 
         chain postrouting {
           type nat hook postrouting priority srcnat; policy accept;
 
-          oifname "${cfg.interface}" ip saddr ${servarrIp} masquerade
+          ${clientRules (
+            name: _: [ ''oifname "${cfg.interface}" ip saddr ${containerIp name} masquerade'' ]
+          )}
         }
       '';
     };
