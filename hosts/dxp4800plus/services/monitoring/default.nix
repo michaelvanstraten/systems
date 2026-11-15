@@ -8,6 +8,8 @@ let
   loki_http_port = 3100;
   prometheus_domain = "prometheus.monitoring.vanstraten.cloud";
   prometheus_port = 3200;
+
+  collectors = [ "prickly-plethobasus-cyphyus" ];
 in
 {
   sops.secrets."grafana/env" = { };
@@ -31,6 +33,7 @@ in
         full-domain = loki_domain;
         ssl = true;
         scheme = "http";
+        machines = collectors;
       };
       prometheus = {
         name = "Prometheus";
@@ -40,6 +43,7 @@ in
         full-domain = prometheus_domain;
         ssl = true;
         scheme = "http";
+        machines = collectors;
       };
     };
   };
@@ -114,6 +118,12 @@ in
                 uid = "loki";
                 access = "proxy";
                 url = "http://localhost:${toString loki_http_port}";
+              }
+            ];
+            dashboards.settings.providers = [
+              {
+                name = "default";
+                options.path = ./dashboards;
               }
             ];
           };

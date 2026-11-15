@@ -13,6 +13,7 @@
     (self.lib.mkModule ./services/authentik { })
     (self.lib.mkModule ./services/newt.nix { })
     (self.lib.mkModule ./services/pangolin.nix { })
+    ./services/monitoring.nix
     ./services/tor-relay.nix
   ];
 
@@ -56,6 +57,7 @@
     tailscale = {
       enable = true;
       useRoutingFeatures = "both";
+      extraSetFlags = [ "--accept-dns=false" ];
       extraUpFlags = [
         "--advertise-exit-node"
         "--advertise-tags=tag:server"
