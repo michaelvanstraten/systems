@@ -48,7 +48,12 @@ in
     };
 
     config =
-      { config, pkgs, ... }:
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
       {
         networking.firewall.allowedTCPPorts = [ nextcloudPort ];
 
@@ -68,7 +73,13 @@ in
           database.createLocally = true;
           configureRedis = true;
           https = true;
-          # notify_push.enable = true;
+          notify_push = {
+            enable = true;
+            bendDomainToLocalhost = true;
+            # TLS is terminated at Pangolin; nginx in here only speaks plain
+            # HTTP, so the daemon and the setup self-test have to use http.
+            nextcloudUrl = "http://${fqdn}";
+          };
           settings = {
             overwriteprotocol = "https";
             maintenance_window_start = 1;
@@ -97,11 +108,17 @@ in
           phpExtraExtensions = all: [ all.smbclient ];
         };
 
-        services.nginx.virtualHosts.${fqdn}.extraConfig = ''
-          add_header Strict-Transport-Security "max-age=15552000; includeSubDomains" always;
-        '';
+        # notify_push:setup stores the URL it tested (http) as the endpoint
+        # advertised to clients; replace it with the public https one.
+        systemd.services.nextcloud-notify_push_setup.serviceConfig.ExecStartPost =
+          "${lib.getExe config.services.nextcloud.occ} config:app:set notify_push base_endpoint --value=https://${fqdn}/push";
 
-        services.postgresql.package = pkgs.postgresql_16;
+        services.postgresql = {
+          package = pkgs.postgresql_16;
+          # oc_filecache makes up nearly the whole database (~1.8 GB); the
+          # 128MB default cannot hold it.
+          settings.shared_buffers = "2GB";
+        };
       };
   };
 }
