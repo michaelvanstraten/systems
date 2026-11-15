@@ -24,6 +24,7 @@
   networking = {
     hostId = "178054be";
     hostName = "netcup-vps-1000-arm-1";
+    firewall.interfaces.tailscale0.allowedTCPPorts = [ 22 ];
   };
 
   time.timeZone = "Europe/Berlin";
@@ -53,6 +54,7 @@
 
   services = {
     openssh.enable = true;
+    openssh.openFirewall = false;
 
     tailscale = {
       enable = true;
