@@ -159,6 +159,8 @@
             icon = "firefox-enterprise";
             wmClass = "firefoxenterprise";
           };
+
+          mcp-bugzilla = pkgs.callPackage ./packages/mcp-bugzilla { };
         }
       );
     }

@@ -38,7 +38,6 @@ in
     pkgs.iina
     pkgs.pangolin-cli
     pkgs.ripgrep
-    pkgs.opencode
     (pkgs.anki.withAddons [
       anki-mcp.packages.${pkgs.stdenv.system}.addon
     ])

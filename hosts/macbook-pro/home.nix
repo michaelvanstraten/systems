@@ -1,5 +1,10 @@
 { self, ... }:
-{ config, pkgs, ... }:
+{
+  config,
+  osConfig,
+  pkgs,
+  ...
+}:
 {
   imports = [ self.homeModules.all ];
 
@@ -38,6 +43,9 @@
     tmux.enable = true;
     fish.enable = true;
     starship.enable = true;
+    opencode.enable = true;
+    mcp.servers.bugzilla-mozilla-org.env.BUGZILLA_API_KEY.file =
+      osConfig.sops.secrets."bugzilla/api-key".path;
   };
 
   targets.darwin = {
