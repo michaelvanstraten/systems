@@ -33,6 +33,8 @@
 
         # Clipboard integration
         set -g set-clipboard on
+        # opencode wraps its OSC 52 copy in a tmux passthrough sequence
+        set -g allow-passthrough on
 
         # Status bar customization
         set -g status-right ""
