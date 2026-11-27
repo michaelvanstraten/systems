@@ -136,16 +136,16 @@
     "firefox-enterprise-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1794332693,
-        "narHash": "sha256-PeyY9bfeEr5x5LHEQk7J9eAAf9egU/v+AE0mNK9qVy8=",
+        "lastModified": 1795619024,
+        "narHash": "sha256-rGS4Bsdt/OPsD8uxZw9jEC+/Esy39oJcc1pBznoHSOI=",
         "owner": "mozilla",
         "repo": "enterprise-firefox",
-        "rev": "eb096686749e65a841bed6f51eb13e0603c2514a",
+        "rev": "1db0b113a779d7a7c0043eaca4b1d005f0d4ba88",
         "type": "github"
       },
       "original": {
         "owner": "mozilla",
-        "ref": "enterprise-release",
+        "ref": "1db0b113a779d7a7c0043eaca4b1d005f0d4ba88",
         "repo": "enterprise-firefox",
         "type": "github"
       }

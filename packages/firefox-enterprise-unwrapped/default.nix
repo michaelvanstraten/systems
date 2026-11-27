@@ -19,19 +19,13 @@
 
 let
   nss = nss_latest.overrideAttrs (previousAttrs: rec {
-    version = "3.130";
+    version = "3.134";
     src = fetchFromGitHub {
       owner = "mozilla";
       repo = "nss";
       rev = "NSS_${lib.replaceStrings [ "." ] [ "_" ] version}_RTM";
-      hash = "sha256-+VONkBLHqJzIufh7VCvZfGUJflOAzBemhS3z3aB8cqY=";
+      hash = "sha256-xTAKUzXyPcuLiDZxIixd0/WOaH785MAS6CaypZonM08=";
     };
-
-    postPatch = previousAttrs.postPatch + ''
-      substituteInPlace build.sh \
-        --replace-fail '"$obj_dir/lib/pkgconfig/nspr.pc" 2>/dev/null)' \
-                       '"$obj_dir/lib/pkgconfig/nspr.pc" 2>/dev/null || true)'
-    '';
   });
 
   version = lib.trim (builtins.readFile "${firefox-enterprise-src}/browser/config/version.txt");
@@ -49,10 +43,6 @@ in
 
     extraConfigureFlags = [
       "--enable-enterprise"
-    ];
-
-    extraPatches = [
-      ./patches/nsAppRunner-IsLaunchingBrowserDevtools-without-updater.patch
     ];
 
     meta = {
@@ -78,6 +68,12 @@ in
         "--disable-ffmpeg"
       ])
     ) previousAttrs.configureFlags;
+
+    preBuild = previousAttrs.preBuild + ''
+      date -u -d @${toString (firefox-enterprise-src.lastModified or 0)} +%Y%m%d%H%M%S > buildid.txt
+      printf '%s\n%s\n' '${firefox-enterprise-src.rev or ""}' \
+        'https://github.com/mozilla/enterprise-firefox' > source-repo.txt
+    '';
 
     postInstall = previousAttrs.postInstall + ''
       install -Dvm644 "${distributionINIFile}" "$resourceDir/distribution/distribution.ini"

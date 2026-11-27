@@ -78,7 +78,7 @@
     nixvim.url = "github:nix-community/nixvim";
 
     firefox-enterprise-src = {
-      url = "github:mozilla/enterprise-firefox?ref=enterprise-release";
+      url = "github:mozilla/enterprise-firefox?ref=1db0b113a779d7a7c0043eaca4b1d005f0d4ba88";
       flake = false;
     };
 
