@@ -3,6 +3,7 @@
 {
   imports = [
     ./services/postgres.nix
+    (self.lib.mkModule ./secrets.nix { })
   ];
 
   boot.loader = {
